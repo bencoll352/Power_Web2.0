@@ -1,0 +1,6 @@
+node_modules/
+*.log
+cloudflared.exe
+extracted_strings.txt
+filtered_highlights.txt
+live_bundle.js

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | Power-Up Talent</title>
+  <meta name="description" content="Start a confidential conversation. Client hiring enquiries and candidate registrations for UK technical, electrical and engineering sectors." />
+  
+  <meta name="keywords" content="Contact Power-Up Talent, Client Enquiry Headhunting, Candidate Registration UK, Executive Hiring Enquiry" />
+  <meta name="author" content="Power-Up Talent" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://power-uptalent.co.uk/contact.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Power-Up Talent" />
+  <meta property="og:title" content="Contact Us | Power-Up Talent" />
+  <meta property="og:description" content="Start a confidential conversation. Client hiring enquiries and candidate registrations for UK technical, electrical and engineering sectors." />
+  <meta property="og:url" content="https://power-uptalent.co.uk/contact.html" />
+  <meta property="og:image" content="https://power-uptalent.co.uk/assets/logo.png" />
+  <meta property="og:locale" content="en_GB" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Contact Us | Power-Up Talent" />
+  <meta name="twitter:description" content="Start a confidential conversation for client hiring or candidate registration." />
+  <meta name="twitter:image" content="https://power-uptalent.co.uk/assets/logo.png" />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%239e4a12'/><path d='M16 6v10M10.5 9.5a8 8 0 1 0 11 0' stroke='%23ffffff' stroke-width='3' stroke-linecap='round' fill='none'/></svg>" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- JSON-LD ContactPage & AEO Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ContactPage",
+        "name": "Contact Power-Up Talent",
+        "url": "https://power-uptalent.co.uk/contact.html",
+        "description": "Confidential contact channel for UK client headhunting enquiries and candidate registrations."
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .contact-tab-nav {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      border-bottom: 2px solid var(--border-subtle);
+      padding-bottom: 0.5rem;
+    }
+    .contact-tab-btn {
+      background: none;
+      border: none;
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      padding: 0.75rem 1.5rem;
+      cursor: pointer;
+      border-radius: 6px 6px 0 0;
+      transition: all 0.2s ease;
+    }
+    .contact-tab-btn.active {
+      color: var(--accent);
+      border-bottom: 3px solid var(--accent);
+      background: rgba(158, 74, 18, 0.04);
+    }
+    .contact-form-panel {
+      display: block;
+    }
+    .contact-form-panel.hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header class="site-header" id="navbar">
+    <div class="header-container">
+      <a href="index.html" class="brand-logo" aria-label="Power-Up Talent Home">
+        <img src="assets/logo.png" alt="Power-Up Talent Logo" class="brand-logo-img" />
+      </a>
+
+      <nav class="desktop-nav" aria-label="Primary Navigation">
+        <ul class="nav-links">
+          <li><a href="talent.html" class="nav-link">Elite Talent</a></li>
+          <li><a href="coaching.html" class="nav-link">Coaching & Academy</a></li>
+          <li><a href="platform.html" class="nav-link">AI & Intelligence</a></li>
+          <li><a href="about.html" class="nav-link">About us</a></li>
+          <li><a href="contact.html" class="nav-link active">Contact</a></li>
+          <li><a href="info.html" class="nav-link">Information</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="contact.html" class="btn btn-primary btn-sm">
+          Claim Your Territory
+        </a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open mobile menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+      <nav class="mobile-nav">
+        <a href="talent.html" class="mobile-nav-link">Elite Talent</a>
+        <a href="coaching.html" class="mobile-nav-link">Coaching & Academy</a>
+        <a href="platform.html" class="mobile-nav-link">AI & Intelligence</a>
+        <a href="about.html" class="mobile-nav-link">About us</a>
+        <a href="contact.html" class="mobile-nav-link active">Contact</a>
+        <a href="info.html" class="mobile-nav-link">Information</a>
+        <a href="contact.html" class="btn btn-primary w-full mt-4">Claim Your Territory</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- PAGE HERO -->
+    <section class="page-hero" style="overflow: hidden; position: relative;">
+      <video autoplay loop muted playsinline preload="auto" class="hero-video-bg">
+        <source src="assets/videos/contact-video.mp4" type="video/mp4">
+      </video>
+      <div class="video-overlay"></div>
+      
+      <div class="container" style="position: relative; z-index: 2;">
+        <div class="page-hero-content">
+          <div class="eyebrow-tag">
+            <span class="dash">—</span> CONFIDENTIAL INQUIRIES
+          </div>
+          <h1 class="page-hero-title">
+            Start with a confidential conversation.
+          </h1>
+          <p class="page-hero-subtext">
+            Whether you are planning a strategic executive search, building sales team performance, or exploring your own next leadership move, we operate with complete discretion.
+          </p>
+        </div>
+
+        <div class="check-page-layout">
+          <!-- Form Left Column -->
+          <div class="check-form-card">
+            <!-- 2-Path Tab Switcher -->
+            <div class="contact-tab-nav" role="tablist">
+              <button class="contact-tab-btn active" id="tabClientBtn" onclick="switchContactTab('client')">
+                PATH 1: I am hiring or planning for growth
+              </button>
+              <button class="contact-tab-btn" id="tabCandidateBtn" onclick="switchContactTab('candidate')">
+                PATH 2: I am exploring my next opportunity
+              </button>
+            </div>
+
+            <!-- PATH 1: CLIENT ENQUIRY FORM -->
+            <div id="panelClient" class="contact-form-panel">
+              <form id="clientEnquiryForm">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="clientName">YOUR NAME</label>
+                    <input type="text" id="clientName" placeholder="e.g. David Miller" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="clientTitle">JOB TITLE</label>
+                    <input type="text" id="clientTitle" placeholder="e.g. Managing Director" required />
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="clientCompany">COMPANY NAME</label>
+                    <input type="text" id="clientCompany" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="clientEmail">WORK EMAIL</label>
+                    <input type="email" id="clientEmail" required />
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="clientPhone">PHONE NUMBER</label>
+                    <input type="tel" id="clientPhone" placeholder="07... or 020..." />
+                  </div>
+                  <div class="form-group">
+                    <label for="clientRequirement">REQUIREMENT TYPE</label>
+                    <select id="clientRequirement">
+                      <option value="Executive Headhunting Mandate">Elite Executive Search Mandate</option>
+                      <option value="Strategic Recruitment Mandate">Strategic Recruitment Mandate</option>
+                      <option value="Sales & Branch Performance Coaching">Sales / Branch Performance Coaching</option>
+                      <option value="Market Intelligence Review">Market Intelligence Review</option>
+                      <option value="Integrated Growth Partnership">Full Growth Partnership (RPO)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="clientBrief">GROWTH OR HIRING BRIEF SUMMARY</label>
+                  <textarea id="clientBrief" rows="4" placeholder="Target roles, regional territory, key challenges or growth targets..."></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-lg w-full mt-2">
+                  Request a market review
+                </button>
+
+                <p class="form-legal-note">
+                  Confidential. We confirm availability inside 24 working hours and will gladly execute an NDA prior to detailed discussion.
+                </p>
+              </form>
+            </div>
+
+            <!-- PATH 2: CANDIDATE REGISTRATION FORM -->
+            <div id="panelCandidate" class="contact-form-panel hidden">
+              <form id="candidateRegisterForm">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="candidateName">FULL NAME</label>
+                    <input type="text" id="candidateName" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="candidateEmail">PERSONAL EMAIL</label>
+                    <input type="email" id="candidateEmail" required />
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="candidatePhone">PHONE NUMBER</label>
+                    <input type="tel" id="candidatePhone" required />
+                  </div>
+                  <div class="form-group">
+                    <label for="candidateRole">CURRENT ROLE & SECTOR</label>
+                    <input type="text" id="candidateRole" placeholder="e.g. Branch Manager – Electrical Wholesale" required />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="candidateLocation">TARGET REGION / LOCATION PREFERENCE</label>
+                  <input type="text" id="candidateLocation" placeholder="e.g. Midlands, M4 Corridor, London & Home Counties" />
+                </div>
+
+                <div class="form-group">
+                  <label for="candidateBrief">CAREER SUMMARY & IDEAL NEXT MOVE</label>
+                  <textarea id="candidateBrief" rows="4" placeholder="Summarize your track record, salary expectations and target position..."></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label for="candidateCV">CV / PROFILE LINK (CONFIDENTIAL)</label>
+                  <input type="text" id="candidateCV" placeholder="Paste LinkedIn profile URL or document link" />
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-lg w-full mt-2">
+                  Register confidentially
+                </button>
+
+                <p class="form-legal-note">
+                  100% Confidential. Your details and CV are handled under strict UK GDPR standards and will never be shared with any employer without your explicit prior permission.
+                </p>
+              </form>
+            </div>
+          </div>
+
+          <!-- Sidebar Right Column -->
+          <div class="check-sidebar">
+            <div class="sidebar-card">
+              <div class="eyebrow-tag"><span class="dash">—</span> RESPONSE TIMELINE</div>
+              <ul class="sidebar-card-list">
+                <li>
+                  <strong>Inside 24 working hours</strong> — direct response from a senior consultant.
+                </li>
+                <li>
+                  <strong>Confidential review</strong> — initial 30-minute call to understand requirements or career goals.
+                </li>
+                <li>
+                  <strong>Diagnostic & mapping</strong> — tailored market analysis prior to formal engagement.
+                </li>
+                <li>
+                  <strong>NDA available</strong> — non-disclosure agreement available upon request before sharing sensitive details.
+                </li>
+              </ul>
+            </div>
+
+            <div class="sidebar-card">
+              <div class="eyebrow-tag"><span class="dash">—</span> DIRECT CONTACT</div>
+              <div style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6;">
+                <p style="margin-bottom: 0.75rem;">
+                  <strong>Email:</strong><br />
+                  <a href="mailto:info@power-uptalent.co.uk" style="color: var(--accent); text-decoration: none; font-weight: 600;">info@power-uptalent.co.uk</a>
+                </p>
+                <p style="margin-bottom: 0.75rem;">
+                  <strong>Coverage:</strong><br />
+                  Nationwide UK (England, Scotland, Wales, Northern Ireland)
+                </p>
+                <p style="margin-bottom: 0;">
+                  <strong>Hours:</strong><br />
+                  Monday – Friday: 08:00 – 18:30 GMT
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function switchContactTab(path) {
+      const btnClient = document.getElementById('tabClientBtn');
+      const btnCandidate = document.getElementById('tabCandidateBtn');
+      const panelClient = document.getElementById('panelClient');
+      const panelCandidate = document.getElementById('panelCandidate');
+
+      if (path === 'client') {
+        btnClient.classList.add('active');
+        btnCandidate.classList.remove('active');
+        panelClient.classList.remove('hidden');
+        panelCandidate.classList.add('hidden');
+      } else {
+        btnCandidate.classList.add('active');
+        btnClient.classList.remove('active');
+        panelCandidate.classList.remove('hidden');
+        panelClient.classList.add('hidden');
+      }
+    }
+  </script>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand-col">
+          <a href="index.html" class="brand-logo footer-logo">
+            <img src="assets/logo.png" alt="Power-Up Talent Logo" class="footer-logo-img" />
+          </a>
+          <p class="footer-tagline">
+            Specialist headhunters and recruitment partners across electrical, engineering and construction sectors — combining headhunting, commercial coaching and market intelligence.
+          </p>
+        </div>
+
+        <div class="footer-links-col">
+          <h4><span class="dash">—</span> STRATEGIC PILLARS</h4>
+          <ul>
+            <li><a href="talent.html">Headhunters</a></li>
+            <li><a href="talent.html">Strategic Recruitment</a></li>
+            <li><a href="talent.html">Growth Partnerships (RPO)</a></li>
+            <li><a href="about.html#what-we-do">Our Process</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <h4><span class="dash">—</span> SPECIALISMS</h4>
+          <ul>
+            <li><a href="about.html">Construction</a></li>
+            <li><a href="about.html">Engineering</a></li>
+            <li><a href="about.html">Electrical</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <h4><span class="dash">—</span> COMPANY</h4>
+          <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="info.html">Information</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="contact.html">Register Your CV</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <h4><span class="dash">—</span> GET IN TOUCH</h4>
+          <ul class="footer-contact-list">
+            <li>
+              <a href="mailto:info@power-uptalent.co.uk" style="display: flex; align-items: center; gap: 0.5rem;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="color: var(--accent-gold); flex-shrink: 0;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                info@power-uptalent.co.uk
+              </a>
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-muted); font-size: 0.875rem; margin-top: 0.75rem;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="color: var(--accent-gold); flex-shrink: 0;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Response inside 24h
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-muted); font-size: 0.875rem; margin-top: 0.75rem;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="color: var(--accent-gold); flex-shrink: 0;"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+              Nationwide UK Coverage
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom" style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-subtle); padding-top: 1.5rem; margin-top: 2.5rem; font-size: 0.85rem; color: var(--text-muted);">
+        <div>&copy; 2026 Power-Up Talent. All rights reserved.</div>
+        <div style="display: flex; gap: 1rem;">
+          <a href="info.html" style="color: var(--text-muted); text-decoration: none;">Privacy Policy</a> | 
+          <a href="info.html" style="color: var(--text-muted); text-decoration: none;">Terms & Conditions</a> | 
+          <a href="info.html" style="color: var(--text-muted); text-decoration: none;">Cookies Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toastContainer" class="toast-container"></div>
+  <script src="main.js"></script>
+</body>
+</html>

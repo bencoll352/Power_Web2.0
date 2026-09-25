@@ -1,0 +1,40 @@
+{
+  "hosting": {
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "/academy",
+        "destination": "/coaching.html"
+      },
+      {
+        "source": "/coaching",
+        "destination": "/coaching.html"
+      },
+      {
+        "source": "/exclusivity",
+        "destination": "/exclusivity.html"
+      },
+      {
+        "source": "/why-us",
+        "destination": "/why-us.html"
+      },
+      {
+        "source": "/platform",
+        "destination": "/platform.html"
+      },
+      {
+        "source": "/claim",
+        "destination": "/check.html"
+      },
+      {
+        "source": "/check",
+        "destination": "/check.html"
+      }
+    ]
+  }
+}
