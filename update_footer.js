@@ -14,12 +14,12 @@ const newFooter = `<footer class="site-footer">
         </div>
 
         <div class="footer-links-col">
-          <h4><span class="dash">—</span> STRATEGIC PILLARS</h4>
+          <h4><span class="dash">—</span> SERVICES</h4>
           <ul>
-            <li><a href="talent.html">Headhunters</a></li>
-            <li><a href="talent.html">Strategic Recruitment</a></li>
-            <li><a href="talent.html">Growth Partnerships (RPO)</a></li>
-            <li><a href="about.html#what-we-do">Our Process</a></li>
+            <li><a href="talent.html">Headhunting & Recruitment</a></li>
+            <li><a href="coaching.html">Sales & Leadership Development</a></li>
+            <li><a href="platform.html">Commercial Growth & Intelligence</a></li>
+            <li><a href="about.html">About Us</a></li>
           </ul>
         </div>
 
