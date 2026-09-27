@@ -297,21 +297,35 @@ ul {
 }
 
 .brand-logo-img {
-  height: 38px;
-  max-height: 40px;
+  height: 42px;
+  max-height: 44px;
   width: auto;
   object-fit: contain;
   display: block;
-  border-radius: 4px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.brand-logo:hover .brand-logo-img {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
 }
 
 .footer-logo-img {
-  height: 48px;
-  max-height: 50px;
+  height: 52px;
+  max-height: 56px;
   width: auto;
   object-fit: contain;
   display: block;
-  border-radius: 4px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.brand-logo.footer-logo:hover .footer-logo-img {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
 }
 
 /* ==========================================================================
