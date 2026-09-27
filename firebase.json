@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "power-up-talent",
     "public": ".",
     "ignore": [
       "firebase.json",
