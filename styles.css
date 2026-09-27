@@ -2704,6 +2704,24 @@ button, .btn, input, select, textarea, .nav-link, .mobile-nav-link {
   }
 }
 
+/* ==========================================================================
+   FEATURE SHOWCASE BANNERS (COACHING & HEADHUNTING)
+   ========================================================================== */
+@media (max-width: 900px) {
+  .coaching-feature-banner,
+  .talent-feature-banner {
+    grid-template-columns: 1fr !important;
+  }
+  .coaching-momentum-banner div[style*="position: absolute"] {
+    position: relative !important;
+    background: #0b1120 !important;
+    padding: 2rem 1.5rem !important;
+  }
+  .coaching-momentum-banner img {
+    max-height: 240px !important;
+  }
+}
+
 
 
 
