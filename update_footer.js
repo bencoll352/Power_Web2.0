@@ -16,9 +16,9 @@ const newFooter = `<footer class="site-footer">
         <div class="footer-links-col">
           <h4><span class="dash">—</span> SERVICES</h4>
           <ul>
-            <li><a href="talent.html">Headhunting & Recruitment</a></li>
-            <li><a href="coaching.html">Sales & Leadership Development</a></li>
-            <li><a href="platform.html">Commercial Growth & Intelligence</a></li>
+            <li><a href="talent.html">Headhunting</a></li>
+            <li><a href="coaching.html">Coaching</a></li>
+            <li><a href="platform.html">Intelligence</a></li>
             <li><a href="about.html">About Us</a></li>
           </ul>
         </div>

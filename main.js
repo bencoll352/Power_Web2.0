@@ -185,7 +185,7 @@ function closeModal(modal) {
    -------------------------------------------------------------------------- */
 const CAPABILITY_DETAILS = {
   talent: {
-    title: 'Headhunting & Recruitment',
+    title: 'Headhunting',
     subtitle: 'Precision search for top 1% non-active candidates.',
     content: `
       <p style="margin-bottom: 1.25rem; color: var(--text-secondary); line-height: 1.65;">
@@ -206,7 +206,7 @@ const CAPABILITY_DETAILS = {
     `
   },
   coaching: {
-    title: 'Sales & Leadership Development',
+    title: 'Coaching',
     subtitle: 'Elevating existing teams to match elite new hires.',
     content: `
       <p style="margin-bottom: 1.25rem; color: var(--text-secondary); line-height: 1.65;">
@@ -227,7 +227,7 @@ const CAPABILITY_DETAILS = {
     `
   },
   platform: {
-    title: 'Commercial Growth & Intelligence',
+    title: 'Intelligence',
     subtitle: 'The governed commercial operating system.',
     content: `
       <p style="margin-bottom: 1.25rem; color: var(--text-secondary); line-height: 1.65;">
