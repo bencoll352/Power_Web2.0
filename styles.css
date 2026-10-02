@@ -2722,7 +2722,769 @@ button, .btn, input, select, textarea, .nav-link, .mobile-nav-link {
   }
 }
 
+/* ==========================================================================
+   INTERACTIVE COMMERCIAL TOOLS (MAP, ROI CALCULATOR, SALARY BENCHMARK)
+   ========================================================================== */
 
+/* Tools Page Navigation Tabs */
+.tools-nav-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3.5rem;
+}
 
+.tools-tab-switcher {
+  display: inline-flex;
+  background: var(--bg-surface-subtle);
+  padding: 0.4rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-card);
+  gap: 0.35rem;
+}
 
+.tools-tab-btn {
+  background: none;
+  border: none;
+  padding: 0.75rem 1.6rem;
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
 
+.tools-tab-btn:hover {
+  color: var(--text-primary);
+}
+
+.tools-tab-btn.active {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-card);
+}
+
+[data-theme="dark"] .tools-tab-btn.active {
+  background: #1e1e1e;
+  color: #fff;
+  border-color: #333;
+}
+
+/* Tool Sections Container */
+.tool-section-panel {
+  display: none;
+  animation: fadeInTool 0.3s ease;
+}
+
+.tool-section-panel.active {
+  display: block;
+}
+
+@keyframes fadeInTool {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --------------------------------------------------------------------------
+   1. UK TERRITORY INTERACTIVE MAP
+   -------------------------------------------------------------------------- */
+.map-tool-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 2.5rem;
+  align-items: stretch;
+}
+
+.map-control-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.map-sector-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.map-sector-btn {
+  background: var(--bg-surface-subtle);
+  border: 1px solid var(--border-card);
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius-full);
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.map-sector-btn:hover {
+  border-color: var(--accent-primary);
+  color: var(--text-primary);
+}
+
+.map-sector-btn.active {
+  background: #000;
+  color: #FFC107;
+  border-color: #FFC107;
+}
+
+[data-theme="dark"] .map-sector-btn.active {
+  background: #FFC107;
+  color: #000;
+  border-color: #FFC107;
+}
+
+.map-canvas-container {
+  background: #050505;
+  border: 1px solid #222;
+  border-radius: var(--radius-md);
+  position: relative;
+  overflow: hidden;
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.uk-interactive-svg {
+  width: 100%;
+  max-width: 440px;
+  height: auto;
+  filter: drop-shadow(0 0 16px rgba(255, 193, 7, 0.25));
+}
+
+.uk-region-group {
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.uk-region-path {
+  fill: #161b26;
+  stroke: #2e384d;
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  transition: all 0.25s ease;
+}
+
+.uk-region-group:hover .uk-region-path {
+  fill: #242f44;
+  stroke: #FFC107;
+  stroke-width: 2;
+  filter: drop-shadow(0 0 8px rgba(255, 193, 7, 0.7));
+}
+
+.uk-region-group.selected .uk-region-path {
+  fill: #2c2816;
+  stroke: #FFC107;
+  stroke-width: 2.5;
+  filter: drop-shadow(0 0 12px rgba(255, 193, 7, 0.9));
+}
+
+.uk-region-group.status-locked .uk-region-path {
+  fill: #221415;
+  stroke: #ef4444;
+}
+
+.uk-region-group.status-locked:hover .uk-region-path {
+  fill: #3b171a;
+  stroke: #f87171;
+  filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.7));
+}
+
+.uk-region-text {
+  font-family: var(--font-heading);
+  font-size: 10px;
+  font-weight: 700;
+  fill: #cbd5e1;
+  pointer-events: none;
+  text-anchor: middle;
+  transition: fill 0.2s ease;
+}
+
+.uk-region-group:hover .uk-region-text,
+.uk-region-group.selected .uk-region-text {
+  fill: #FFC107;
+}
+
+.uk-region-dot {
+  fill: #FFC107;
+  transition: all 0.2s ease;
+}
+
+.map-legend {
+  display: flex;
+  gap: 1.25rem;
+  justify-content: center;
+  margin-top: 1rem;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.legend-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.legend-dot.open {
+  background: #10b981;
+  box-shadow: 0 0 6px #10b981;
+}
+
+.legend-dot.locked {
+  background: #ef4444;
+  box-shadow: 0 0 6px #ef4444;
+}
+
+.legend-dot.review {
+  background: #f59e0b;
+  box-shadow: 0 0 6px #f59e0b;
+}
+
+/* Region Inspector Card */
+.region-detail-panel {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem 2rem;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.inspector-header {
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.inspector-eyebrow {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  margin-bottom: 0.4rem;
+}
+
+.inspector-title {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.inspector-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-full);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  font-family: var(--font-heading);
+  margin-top: 0.75rem;
+}
+
+.inspector-status-badge.open {
+  background: rgba(16, 185, 129, 0.12);
+  color: #059669;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.inspector-status-badge.locked {
+  background: rgba(239, 68, 68, 0.12);
+  color: #dc2626;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.inspector-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin: 1.5rem 0;
+}
+
+.inspector-metric-card {
+  background: var(--bg-surface-subtle);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+}
+
+.inspector-metric-val {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 0.2rem;
+}
+
+.inspector-metric-label {
+  font-size: 0.78125rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.inspector-body {
+  font-size: 0.925rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.inspector-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* --------------------------------------------------------------------------
+   2. EXECUTIVE SEARCH ROI CALCULATOR
+   -------------------------------------------------------------------------- */
+.roi-calc-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 3rem;
+  align-items: flex-start;
+}
+
+.roi-controls-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem 2rem;
+  box-shadow: var(--shadow-md);
+}
+
+.roi-control-group {
+  margin-bottom: 1.75rem;
+}
+
+.roi-control-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.6rem;
+}
+
+.roi-control-label {
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.roi-control-value {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--accent-primary);
+}
+
+.roi-slider {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--border-card);
+  outline: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.roi-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #FFC107;
+  border: 2px solid #000;
+  box-shadow: 0 0 10px rgba(255, 193, 7, 0.6);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.roi-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+.roi-select {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-card);
+  background: var(--bg-surface-subtle);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  font-weight: 500;
+  outline: none;
+}
+
+.roi-results-card {
+  background: #050505;
+  color: #fff;
+  border: 1px solid #222;
+  border-radius: var(--radius-lg);
+  padding: 2.5rem 2rem;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.roi-results-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(255, 193, 7, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.roi-summary-header {
+  border-bottom: 1px solid #222;
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.75rem;
+}
+
+.roi-headline-val {
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 3.5vw, 3rem);
+  font-weight: 800;
+  color: #FFC107;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.roi-headline-sub {
+  font-size: 0.875rem;
+  color: #94a3b8;
+  margin-top: 0.35rem;
+}
+
+.roi-kpi-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.roi-kpi-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.85rem 1rem;
+  background: #0d121c;
+  border-radius: var(--radius-sm);
+  border: 1px solid #1e293b;
+}
+
+.roi-kpi-title {
+  font-size: 0.875rem;
+  color: #94a3b8;
+}
+
+.roi-kpi-number {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.roi-kpi-number.negative {
+  color: #f87171;
+}
+
+.roi-kpi-number.positive {
+  color: #34d399;
+}
+
+.roi-compare-chart {
+  background: #0d121c;
+  border: 1px solid #1e293b;
+  border-radius: var(--radius-sm);
+  padding: 1.25rem;
+  margin-bottom: 1.75rem;
+}
+
+.chart-bar-row {
+  margin-bottom: 1rem;
+}
+
+.chart-bar-row:last-child {
+  margin-bottom: 0;
+}
+
+.chart-bar-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78125rem;
+  color: #94a3b8;
+  margin-bottom: 0.4rem;
+}
+
+.chart-bar-track {
+  height: 10px;
+  background: #1e293b;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.chart-bar-fill {
+  height: 100%;
+  border-radius: 5px;
+  transition: width 0.5s ease;
+}
+
+.chart-bar-fill.agency {
+  background: #64748b;
+}
+
+.chart-bar-fill.powerup {
+  background: linear-gradient(90deg, #d97706, #FFC107);
+  box-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+}
+
+/* --------------------------------------------------------------------------
+   3. SALARY & COMPENSATION BENCHMARK TOOL
+   -------------------------------------------------------------------------- */
+.salary-tool-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.salary-filter-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.salary-filter-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.salary-output-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 2.5rem;
+  align-items: stretch;
+}
+
+.salary-display-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem 2rem;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.salary-tiers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin: 1.75rem 0;
+}
+
+.salary-tier-box {
+  background: var(--bg-surface-subtle);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1rem;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.salary-tier-box.highlight {
+  border-color: #FFC107;
+  background: rgba(255, 193, 7, 0.05);
+  box-shadow: 0 0 16px rgba(255, 193, 7, 0.15);
+}
+
+.salary-tier-badge {
+  font-family: var(--font-heading);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.salary-tier-val {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.salary-tier-box.highlight .salary-tier-val {
+  color: var(--accent-primary);
+}
+
+.salary-context-notes {
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.salary-context-title {
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.6rem;
+}
+
+.salary-context-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.salary-scarcity-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem 2rem;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.scarcity-meter-wrap {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.scarcity-score-large {
+  font-family: var(--font-heading);
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: var(--accent-primary);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+
+.scarcity-score-label {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.scarcity-bar-track {
+  height: 12px;
+  background: var(--bg-surface-subtle);
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 1.25rem 0;
+  border: 1px solid var(--border-card);
+}
+
+.scarcity-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981, #f59e0b, #ef4444);
+  border-radius: 6px;
+  transition: width 0.4s ease;
+}
+
+.scarcity-stat-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+}
+
+.scarcity-stat-row:last-child {
+  border-bottom: none;
+}
+
+/* Modal Boardroom Print Styles */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .print-report-container, .print-report-container * {
+    visibility: visible;
+  }
+  .print-report-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+}
+
+/* Responsive adjustments for tools */
+@media (max-width: 1024px) {
+  .map-tool-layout,
+  .roi-calc-grid,
+  .salary-output-layout {
+    grid-template-columns: 1fr;
+  }
+  .salary-filter-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .tools-tab-switcher {
+    flex-direction: column;
+    border-radius: var(--radius-md);
+    width: 100%;
+  }
+  .tools-tab-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .salary-tiers-grid {
+    grid-template-columns: 1fr;
+  }
+  .salary-filter-grid {
+    grid-template-columns: 1fr;
+  }
+  .inspector-metrics {
+    grid-template-columns: 1fr;
+  }
+}
