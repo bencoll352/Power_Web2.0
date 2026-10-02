@@ -43,7 +43,7 @@
   --radius-md: 12px;
   --radius-lg: 16px;
   --radius-full: 9999px;
-  --header-height: 78px;
+  --header-height: 90px;
 }
 
 /* Dark Theme Variables (Exact Live Site Match: #050505 background & #0B1120 deep navy) */
@@ -297,8 +297,8 @@ ul {
 }
 
 .brand-logo-img {
-  height: 38px;
-  max-height: 40px;
+  height: 58px;
+  max-height: 64px;
   width: auto;
   object-fit: contain;
   display: block;
@@ -306,8 +306,8 @@ ul {
 }
 
 .footer-logo-img {
-  height: 48px;
-  max-height: 50px;
+  height: 60px;
+  max-height: 64px;
   width: auto;
   object-fit: contain;
   display: block;
@@ -2460,7 +2460,8 @@ button, .btn, input, select, textarea, .nav-link, .mobile-nav-link {
   }
 
   .brand-logo-img {
-    height: 36px;
+    height: 48px;
+    max-height: 52px;
   }
 
   .mobile-drawer {
