@@ -17,10 +17,6 @@
         "destination": "/coaching.html"
       },
       {
-        "source": "/exclusivity",
-        "destination": "/exclusivity.html"
-      },
-      {
         "source": "/why-us",
         "destination": "/why-us.html"
       },
@@ -35,10 +31,6 @@
       {
         "source": "/check",
         "destination": "/check.html"
-      },
-      {
-        "source": "/tools",
-        "destination": "/tools.html"
       }
     ]
   }

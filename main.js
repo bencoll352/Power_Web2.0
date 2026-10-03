@@ -12,10 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initScarcityCalculator();
   initCounters();
   initCurrentYear();
-  initToolsPageTabs();
-  initInteractiveUKMap();
-  initRoiCalculator();
-  initSalaryBenchmark();
 });
 
 /* --------------------------------------------------------------------------
