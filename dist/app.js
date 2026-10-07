@@ -113,3 +113,43 @@ function initSimulator(){
   update();
 }
 initSimulator();
+
+// Accordion handler
+document.querySelectorAll('.acc-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const exp=btn.getAttribute('aria-expanded')==='true';
+    btn.setAttribute('aria-expanded',String(!exp));
+    const panel=btn.nextElementSibling;
+    if(panel)panel.classList.toggle('open',!exp);
+  });
+});
+
+// Dual-path tab switcher
+document.querySelectorAll('[data-path-tab]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('[data-path-tab]').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const target=btn.dataset.pathTab;
+    document.querySelectorAll('.path-panel').forEach(p=>{
+      p.classList.toggle('active',p.id===target);
+    });
+  });
+});
+
+// Territory Exclusivity Form
+const checkForm=document.querySelector('#territory-check-form');
+if(checkForm){
+  checkForm.addEventListener('submit',e=>{
+    e.preventDefault();
+    const d=new FormData(checkForm);
+    const resultBox=document.querySelector('#territory-result');
+    if(resultBox){
+      resultBox.hidden=false;
+      const st=document.querySelector('#territory-status-text');
+      if(st)st.textContent=`Exclusivity audit registered for ${d.get('company')} (${d.get('region')} - ${d.get('industry')}). Formal written verification dispatched.`;
+    }
+    const body=`Territory Exclusivity Check Request\n\nName: ${d.get('name')}\nJob Title: ${d.get('title')||'Director'}\nCompany: ${d.get('company')}\nEmail: ${d.get('email')}\nIndustry: ${d.get('industry')}\nRegion/Territory: ${d.get('region')}\nPriority: ${d.get('priority')}\n\nGrowth Plan:\n${d.get('plan')}`;
+    location.href=`mailto:info@power-uptalent.co.uk?subject=${encodeURIComponent('Territory Exclusivity Audit — '+d.get('company'))}&body=${encodeURIComponent(body)}`;
+  });
+}
+
