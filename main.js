@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCounters();
   initCurrentYear();
   initUrlParamsHandler();
+  initChallengeFinder();
 });
 
 /* --------------------------------------------------------------------------
@@ -1215,5 +1216,51 @@ function initUrlParamsHandler() {
     }
   }
 }
+
+const challenges = {
+  hire: [
+    'A focused search. A clearer hiring brief.',
+    'Start with the commercial need behind the vacancy. We’ll define the role, map relevant talent and agree a discreet search approach.',
+    'talent.html',
+    'Explore headhunting'
+  ],
+  team: [
+    'Practical coaching. Stronger everyday habits.',
+    'Identify where your people need support, then build a programme around sales, branch performance or leadership.',
+    'coaching.html',
+    'Explore coaching'
+  ],
+  market: [
+    'Relevant research. A more focused plan.',
+    'Explore the talent, accounts and market signals that matter to your business, with human judgement guiding the next step.',
+    'platform.html',
+    'Explore intelligence'
+  ],
+  growth: [
+    'Connected support. A lasting partnership.',
+    'Bring recurring hiring, development and intelligence together around your priorities, with clear responsibilities and regular reviews.',
+    'check.html',
+    'Claim territory exclusivity'
+  ]
+};
+
+function initChallengeFinder() {
+  document.querySelectorAll('[data-challenge]').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('[data-challenge]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+      const [title, text, url, label] = challenges[b.dataset.challenge];
+      const tEl = document.querySelector('#finder-title');
+      const dEl = document.querySelector('#finder-text');
+      const lEl = document.querySelector('#finder-link');
+      if (tEl) tEl.innerHTML = title;
+      if (dEl) dEl.textContent = text;
+      if (lEl) {
+        lEl.href = url;
+        lEl.textContent = label + ' ↗';
+      }
+    });
+  });
+}
+
 
 
