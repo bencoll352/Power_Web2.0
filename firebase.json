@@ -31,6 +31,10 @@
       {
         "source": "/check",
         "destination": "/check.html"
+      },
+      {
+        "source": "/simulator",
+        "destination": "/simulator.html"
       }
     ]
   }

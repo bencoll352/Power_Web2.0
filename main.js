@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScarcityCalculator();
   initCounters();
   initCurrentYear();
+  initUrlParamsHandler();
 });
 
 /* --------------------------------------------------------------------------
@@ -1191,6 +1192,28 @@ function openBoardroomReportModal() {
   }
 
   openModal(modal);
+}
+
+function initUrlParamsHandler() {
+  const params = new URLSearchParams(window.location.search);
+  const msg = params.get('message');
+  const interest = params.get('interest');
+
+  const clientBrief = document.getElementById('clientBrief');
+  if (clientBrief && msg) {
+    clientBrief.value = decodeURIComponent(msg);
+  }
+
+  const clientRequirement = document.getElementById('clientRequirement');
+  if (clientRequirement && interest) {
+    const searchTarget = interest.toLowerCase();
+    for (let opt of clientRequirement.options) {
+      if (opt.value.toLowerCase().includes(searchTarget) || searchTarget.includes(opt.value.toLowerCase())) {
+        opt.selected = true;
+        break;
+      }
+    }
+  }
 }
 
 

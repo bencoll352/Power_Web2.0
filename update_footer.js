@@ -6,10 +6,10 @@ const newFooter = `<footer class="site-footer">
       <div class="footer-top">
         <div class="footer-brand-col">
           <a href="index.html" class="brand-logo footer-logo">
-            <img src="assets/logo.png" alt="Power-Up Talent Logo" class="footer-logo-img" />
+            <img src="assets/logo-brand.png?v=4.0" alt="Power-Up Talent Logo" class="footer-logo-img" />
           </a>
           <p class="footer-tagline">
-            The UK's #1 Headhunters and recruitment specialists for the electrical industry — spanning manufacturing, distribution, design, and installation.
+            Specialist headhunters, commercial development programmes, and market intelligence for UK technical, engineering, distribution, manufacturing, and construction enterprises.
           </p>
         </div>
 
@@ -26,9 +26,11 @@ const newFooter = `<footer class="site-footer">
         <div class="footer-links-col">
           <h4><span class="dash">—</span> SPECIALISMS</h4>
           <ul>
-            <li><a href="about.html">Construction</a></li>
-            <li><a href="about.html">Engineering</a></li>
-            <li><a href="about.html">Electrical</a></li>
+            <li><a href="about.html">Technical Distribution</a></li>
+            <li><a href="about.html">Engineering & Manufacturing</a></li>
+            <li><a href="about.html">Construction & Building Services</a></li>
+            <li><a href="about.html">Electrical & Industrial Wholesale</a></li>
+            <li><a href="about.html">Facilities & Commercial Contracting</a></li>
           </ul>
         </div>
 

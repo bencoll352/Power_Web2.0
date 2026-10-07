@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en-GB" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Commercial ROI Engine & Territory Simulator | Power-Up Talent</title>
+  <meta name="description" content="Simulate the financial impact of eliminating vacant branch seats, upskilling sales teams, and deploying live territory intelligence across UK technical distribution and contracting." />
+  
+  <meta name="keywords" content="Commercial ROI Simulator, Branch Revenue Calculator, Margin Leakage Analysis, Territory Growth Engine, Headhunting ROI UK" />
+  <meta name="author" content="Power-Up Talent" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://power-uptalent.co.uk/simulator.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Power-Up Talent" />
+  <meta property="og:title" content="Commercial ROI Engine & Territory Simulator | Power-Up Talent" />
+  <meta property="og:description" content="Quantify the cost of vacant branch seats and unworked territory accounts. Model your projected 12-month net EBITDA uplift." />
+  <meta property="og:url" content="https://power-uptalent.co.uk/simulator.html" />
+  <meta property="og:image" content="https://power-uptalent.co.uk/assets/logo-brand.png?v=4.0" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23000000'/><path d='M16 6v7M11 9.5a8 8 0 1 0 10 0' stroke='%23facc15' stroke-width='3' stroke-linecap='round' fill='none'/></svg>" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css?v=4.1" />
+
+  <style>
+    .sim-page-wrap { padding: 4rem 0 6rem; }
+    .sim-panel-grid { display: grid; grid-template-columns: 1.05fr 1.15fr; gap: 2.5rem; align-items: start; margin-top: 2.5rem; }
+    .sim-card { background: var(--bg-surface); border: 1px solid var(--border-card); border-radius: var(--radius-md); padding: 2.5rem; box-shadow: var(--shadow-sm); }
+    .sim-card.dark-theme { background: #0c120e; color: #fff; border-color: rgba(255,255,255,0.14); box-shadow: 0 16px 40px rgba(0,0,0,0.35); }
+    .sim-presets-bar { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2rem; }
+    .sim-preset-tag { background: var(--bg-surface-subtle); border: 1px solid var(--border-subtle); color: var(--text-secondary); font-size: 0.82rem; font-weight: 600; padding: 0.5rem 1rem; border-radius: 9999px; cursor: pointer; transition: all 0.2s; }
+    .sim-preset-tag:hover, .sim-preset-tag.active { background: #0c120e; color: #facc15; border-color: #0c120e; }
+    .sim-input-row { margin-bottom: 1.75rem; }
+    .sim-label-flex { display: flex; justify-content: space-between; align-items: baseline; font-weight: 700; font-size: 0.92rem; margin-bottom: 0.4rem; color: var(--text-primary); }
+    .sim-val-pill { font-size: 1.05rem; font-weight: 800; color: var(--accent-primary); font-family: var(--font-heading); }
+    .sim-range-slider { width: 100%; -webkit-appearance: none; appearance: none; height: 6px; border-radius: 3px; background: var(--border-card); outline: none; margin: 0.5rem 0; }
+    .sim-range-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 22px; height: 22px; border-radius: 50%; background: #0c120e; cursor: pointer; border: 2px solid #facc15; transition: transform 0.15s; }
+    .sim-range-slider::-webkit-slider-thumb:hover { transform: scale(1.15); }
+    .sim-hint-text { font-size: 0.78rem; color: var(--text-muted); }
+    
+    .sim-kpi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; }
+    .sim-kpi-box { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-sm); padding: 1.25rem; }
+    .sim-kpi-box.highlight { background: rgba(250,204,21,0.1); border-color: rgba(250,204,21,0.35); }
+    .sim-kpi-label { font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; color: #94a3b8; margin-bottom: 0.4rem; }
+    .sim-kpi-box.highlight .sim-kpi-label { color: #facc15; font-weight: 700; }
+    .sim-kpi-num { font-size: clamp(1.6rem, 2.8vw, 2.3rem); font-weight: 800; font-family: var(--font-heading); line-height: 1.1; color: #fff; }
+    .sim-kpi-box.highlight .sim-kpi-num { color: #fef08a; }
+    .sim-kpi-sub { font-size: 0.76rem; color: #64748b; margin-top: 0.35rem; }
+    
+    .sim-breakdown-table { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.25rem; margin-bottom: 2rem; }
+    .sim-breakdown-row { display: flex; justify-content: space-between; align-items: center; padding: 0.65rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 0.88rem; color: #cbd5e1; }
+    .sim-breakdown-row strong { color: #fff; font-family: var(--font-heading); font-size: 0.95rem; }
+    
+    .sim-action-box { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius-sm); padding: 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    
+    @media (max-width: 960px) {
+      .sim-panel-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header class="site-header" id="navbar">
+    <div class="header-container">
+      <a href="index.html" class="brand-logo" aria-label="Power-Up Talent Home">
+        <img src="assets/logo-brand.png?v=4.0" alt="Power-Up Talent Logo" class="brand-logo-img" />
+      </a>
+
+      <nav class="desktop-nav" aria-label="Primary Navigation">
+        <ul class="nav-links">
+          <li>
+            <a href="talent.html" class="nav-link">
+              <svg class="nav-tab-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><circle cx="18" cy="11" r="3"/><line x1="20" y1="13" x2="22" y2="15"/></svg>
+              <span class="nav-tab-label">Headhunting</span>
+            </a>
+          </li>
+          <li>
+            <a href="coaching.html" class="nav-link">
+              <svg class="nav-tab-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+              <span class="nav-tab-label">Coaching</span>
+            </a>
+          </li>
+          <li>
+            <a href="platform.html" class="nav-link">
+              <svg class="nav-tab-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+              <span class="nav-tab-label">Intelligence</span>
+            </a>
+          </li>
+          <li>
+            <a href="simulator.html" class="nav-link active">
+              <svg class="nav-tab-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/><path d="M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M8 18h.01M12 18h.01"/></svg>
+              <span class="nav-tab-label">ROI Simulator</span>
+            </a>
+          </li>
+          <li>
+            <a href="about.html" class="nav-link">
+              <svg class="nav-tab-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <span class="nav-tab-label">About us</span>
+            </a>
+          </li>
+          <li>
+            <a href="contact.html" class="nav-link">
+              <svg class="nav-tab-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <span class="nav-tab-label">Contact</span>
+            </a>
+          </li>
+          <li>
+            <a href="info.html" class="nav-link">
+              <svg class="nav-tab-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
+              <span class="nav-tab-label">Information</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="check.html" class="btn btn-primary btn-sm">Claim Your Territory</a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open mobile menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+      <nav class="mobile-nav">
+        <a href="talent.html" class="mobile-nav-link">
+          <span>Headhunting</span>
+        </a>
+        <a href="coaching.html" class="mobile-nav-link">
+          <span>Coaching</span>
+        </a>
+        <a href="platform.html" class="mobile-nav-link">
+          <span>Intelligence</span>
+        </a>
+        <a href="simulator.html" class="mobile-nav-link active">
+          <span>ROI Simulator</span>
+        </a>
+        <a href="about.html" class="mobile-nav-link">
+          <span>About us</span>
+        </a>
+        <a href="contact.html" class="mobile-nav-link">
+          <span>Contact</span>
+        </a>
+        <a href="info.html" class="mobile-nav-link">
+          <span>Information</span>
+        </a>
+        <a href="check.html" class="btn btn-primary w-full mt-4">Claim Your Territory</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- PAGE HERO WITH VIDEO -->
+    <section class="page-hero" style="overflow: hidden; position: relative;">
+      <video preload="auto" autoplay loop muted playsinline class="hero-video-bg">
+        <source src="assets/videos/promo-video.mp4" type="video/mp4">
+      </video>
+      <div class="video-overlay"></div>
+      
+      <div class="container" style="position: relative; z-index: 2;">
+        <div class="page-hero-content">
+          <div class="eyebrow-tag">
+            <span class="dash">—</span> COMMERCIAL ROI ENGINE
+          </div>
+          <h1 class="page-hero-title">
+            Model the upside. Quantify the return.
+          </h1>
+          <p class="page-hero-subtext">
+            What is vacant branch talent, sub-par conversion, and unworked territory costing your business? Model your revenue leakage and projected EBITDA uplift from a connected Power-Up partnership.
+          </p>
+          <div class="page-hero-actions">
+            <a href="#simulator" class="btn btn-primary btn-lg">Run the Simulator</a>
+            <a href="contact.html?interest=Growth%20partnership" class="btn btn-secondary btn-lg" style="background: rgba(255,255,255,0.85); backdrop-filter: blur(4px); color: #000;">Discuss Partnership</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SIMULATOR SECTION -->
+    <section class="section sim-page-wrap" id="simulator">
+      <div class="container">
+        <div class="section-split-header">
+          <div class="section-header-left">
+            <div class="eyebrow-tag">
+              <span class="dash">—</span> INTERACTIVE FINANCIAL MODEL
+            </div>
+            <h2 class="section-title">
+              Territory & Branch Growth Calculator
+            </h2>
+          </div>
+          <div class="section-header-right">
+            <p class="lead-narrative">
+              Select an industry preset or adjust the baseline levers below to calculate your hidden leakage and projected upside across Headhunting, Coaching, and AI Intelligence.
+            </p>
+          </div>
+        </div>
+
+        <!-- Presets -->
+        <div class="sim-presets-bar">
+          <span style="align-self:center; font-size:0.8rem; letter-spacing:1px; text-transform:uppercase; color:var(--text-muted); margin-right:0.5rem;">Industry Presets:</span>
+          <button type="button" class="sim-preset-tag active" data-preset="electrical">⚡ Technical Distribution</button>
+          <button type="button" class="sim-preset-tag" data-preset="engineering">⚙️ Engineering & Manufacturing</button>
+          <button type="button" class="sim-preset-tag" data-preset="construction">🏗️ Construction & M&E</button>
+          <button type="button" class="sim-preset-tag" data-preset="facilities">🏢 Facilities & Building Services</button>
+          <button type="button" class="sim-preset-tag" data-preset="distribution">📦 Industrial Supplies</button>
+        </div>
+
+        <div class="sim-panel-grid">
+          <!-- Input Controls -->
+          <div class="sim-card">
+            <h3 style="font-size:1.25rem; font-weight:700; margin-bottom:1.5rem; border-bottom:1px solid var(--border-subtle); padding-bottom:0.75rem;">Your Commercial Baseline</h3>
+            
+            <div class="sim-input-row">
+              <div class="sim-label-flex">
+                <span>Operating Branches / Regional Units</span>
+                <span class="sim-val-pill" id="val-branches">4 branches</span>
+              </div>
+              <input type="range" class="sim-range-slider" id="input-branches" min="1" max="25" step="1" value="4">
+              <p class="sim-hint-text">Number of physical trading locations or regional sales teams</p>
+            </div>
+
+            <div class="sim-input-row">
+              <div class="sim-label-flex">
+                <span>Average Annual Turnover per Branch</span>
+                <span class="sim-val-pill" id="val-turnover">£3.5M</span>
+              </div>
+              <input type="range" class="sim-range-slider" id="input-turnover" min="0.5" max="15.0" step="0.5" value="3.5">
+              <p class="sim-hint-text">Typical annual trading turnover per branch</p>
+            </div>
+
+            <div class="sim-input-row">
+              <div class="sim-label-flex">
+                <span>Average Gross Margin %</span>
+                <span class="sim-val-pill" id="val-margin">23%</span>
+              </div>
+              <input type="range" class="sim-range-slider" id="input-margin" min="12" max="45" step="1" value="23">
+              <p class="sim-hint-text">Average product & service trading gross margin</p>
+            </div>
+
+            <div class="sim-input-row">
+              <div class="sim-label-flex">
+                <span>Commercial Team Size per Branch</span>
+                <span class="sim-val-pill" id="val-team">4 people</span>
+              </div>
+              <input type="range" class="sim-range-slider" id="input-team" min="1" max="15" step="1" value="4">
+              <p class="sim-hint-text">Branch manager, external sales and internal sales staff</p>
+            </div>
+
+            <div class="sim-input-row">
+              <div class="sim-label-flex">
+                <span>Vacant or Sub-Par Commercial Seats</span>
+                <span class="sim-val-pill" id="val-vacant" style="color:#dc2626;">1 seat</span>
+              </div>
+              <input type="range" class="sim-range-slider" id="input-vacant" min="0" max="8" step="1" value="1">
+              <p class="sim-hint-text">Unfilled critical positions or underperforming seats leaking territory</p>
+            </div>
+          </div>
+
+          <!-- Dynamic Output Card -->
+          <div class="sim-card dark-theme">
+            <div class="eyebrow-tag" style="color:#facc15; margin-bottom:0.75rem;">
+              <span class="dash" style="background:#facc15;">—</span> PROJECTED IMPACT MODEL
+            </div>
+            <h3 style="font-size:1.45rem; font-weight:800; margin-bottom:1.5rem; color:#fff;">12-Month Financial Projections</h3>
+
+            <div class="sim-kpi-grid">
+              <div class="sim-kpi-box">
+                <div class="sim-kpi-label">Annual Margin Leakage</div>
+                <div class="sim-kpi-num" id="out-leakage" style="color:#f87171;">£96,600</div>
+                <div class="sim-kpi-sub" id="out-sub-leak">from £420k unserviced turnover</div>
+              </div>
+
+              <div class="sim-kpi-box highlight">
+                <div class="sim-kpi-label">Net Gross Profit Uplift</div>
+                <div class="sim-kpi-num" id="out-profit">£354,800</div>
+                <div class="sim-kpi-sub" id="out-sub-profit">from £1.54M added revenue</div>
+              </div>
+
+              <div class="sim-kpi-box">
+                <div class="sim-kpi-label">Territory Whitespace</div>
+                <div class="sim-kpi-num" id="out-whitespace">£2.52M</div>
+                <div class="sim-kpi-sub">5.2M+ UK registry targets</div>
+              </div>
+
+              <div class="sim-kpi-box highlight">
+                <div class="sim-kpi-label">Estimated ROI Multiple</div>
+                <div class="sim-kpi-num" id="out-roi">9.8x</div>
+                <div class="sim-kpi-sub">Typical 45–60 day payback</div>
+              </div>
+            </div>
+
+            <div class="sim-breakdown-table">
+              <div class="sim-breakdown-row">
+                <span>01 / Headhunting: Recovered Seat Margin</span>
+                <strong id="out-break-headhunting">£82,110</strong>
+              </div>
+              <div class="sim-breakdown-row">
+                <span>02 / Coaching: Sales Conversion Uplift (+8%)</span>
+                <strong id="out-break-coaching">£257,600</strong>
+              </div>
+              <div class="sim-breakdown-row">
+                <span>03 / Intelligence: New Target Accounts Acquired</span>
+                <strong id="out-break-intel">£128,800</strong>
+              </div>
+            </div>
+
+            <div class="sim-action-box">
+              <div>
+                <strong style="display:block; font-size:0.92rem; color:#fff; margin-bottom:0.25rem;">Ready to capture this upside?</strong>
+                <span style="font-size:0.78rem; color:#94a3b8;">Export this modeling directly to your growth brief.</span>
+              </div>
+              <a class="btn btn-primary btn-sm" id="btn-export-sim" href="contact.html?interest=Growth%20partnership">
+                Discuss This ROI Model →
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTOR BREADTH STRIP -->
+    <section class="section" style="background:var(--bg-surface-subtle); border-top:1px solid var(--border-subtle); border-bottom:1px solid var(--border-subtle); padding: 3rem 0;">
+      <div class="container text-center">
+        <p style="font-size:0.85rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-muted); font-weight:700; margin-bottom:1rem;">
+          Specialist Capability Across UK Technical Industry
+        </p>
+        <div style="display:flex; justify-content:center; gap:2.5rem; flex-wrap:wrap; font-weight:700; font-size:1.05rem; color:var(--text-primary);">
+          <span>Technical Wholesale & Distribution</span>
+          <span>•</span>
+          <span>Engineering & Manufacturing</span>
+          <span>•</span>
+          <span>Construction & M&E</span>
+          <span>•</span>
+          <span>Facilities Management</span>
+          <span>•</span>
+          <span>Commercial Contracting</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <a href="index.html" class="brand-logo footer-logo">
+          <img src="assets/logo-brand.png?v=4.0" alt="Power-Up Talent Logo" class="footer-logo-img" />
+        </a>
+        <p class="footer-tagline">People. Performance. Partnership.</p>
+        <p class="footer-statement">
+          Specialist talent, performance coaching and AI intelligence for UK technical distribution, engineering, construction & industry.
+        </p>
+        <div class="footer-social-icons">
+          <a href="https://linkedin.com" target="_blank" rel="noopener" class="social-icon" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <div class="footer-column">
+          <h4 class="footer-heading">Services</h4>
+          <ul>
+            <li><a href="talent.html">Specialist Headhunting</a></li>
+            <li><a href="coaching.html">Commercial Coaching</a></li>
+            <li><a href="platform.html">Commercial Intelligence</a></li>
+            <li><a href="simulator.html">ROI Simulator</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4 class="footer-heading">Partnership</h4>
+          <ul>
+            <li><a href="about.html">About Power-Up Talent</a></li>
+            <li><a href="why-us.html">Why Choose Us</a></li>
+            <li><a href="check.html">Claim Your Territory</a></li>
+            <li><a href="contact.html">Start a Conversation</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4 class="footer-heading">Contact</h4>
+          <ul>
+            <li><a href="mailto:info@power-uptalent.co.uk">info@power-uptalent.co.uk</a></li>
+            <li><a href="contact.html?interest=Career%20conversation">For Candidates</a></li>
+            <li><span>Serving clients nationwide</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>&copy; 2026 Power-Up Talent. All rights reserved.</p>
+        <div class="footer-legal-links">
+          <a href="https://power-uptalent.co.uk/privacy">Privacy Policy</a>
+          <a href="https://power-uptalent.co.uk/terms">Terms of Service</a>
+          <a href="https://power-uptalent.co.uk/cookies">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+  <script>
+    // Simulator Script for Power_Web2.0
+    (function(){
+      const inBranches = document.getElementById('input-branches');
+      const inTurnover = document.getElementById('input-turnover');
+      const inMargin = document.getElementById('input-margin');
+      const inTeam = document.getElementById('input-team');
+      const inVacant = document.getElementById('input-vacant');
+
+      const presets = {
+        electrical: { branches: 4, turnover: 3.5, margin: 23, team: 4, vacant: 1 },
+        engineering: { branches: 2, turnover: 5.5, margin: 32, team: 5, vacant: 1 },
+        construction: { branches: 3, turnover: 7.0, margin: 19, team: 6, vacant: 2 },
+        facilities: { branches: 5, turnover: 4.2, margin: 26, team: 5, vacant: 1 },
+        distribution: { branches: 6, turnover: 4.8, margin: 21, team: 4, vacant: 2 }
+      };
+
+      function fmt(val) {
+        if (val >= 1000000) return '£' + (val / 1000000).toFixed(2) + 'M';
+        if (val >= 1000) return '£' + Math.round(val / 1000).toLocaleString('en-GB') + 'k';
+        return '£' + Math.round(val).toLocaleString('en-GB');
+      }
+
+      function update() {
+        const branches = parseFloat(inBranches.value);
+        const turnover = parseFloat(inTurnover.value) * 1000000;
+        const margin = parseFloat(inMargin.value) / 100;
+        const team = parseFloat(inTeam.value);
+        const vacant = parseFloat(inVacant.value);
+
+        document.getElementById('val-branches').textContent = branches + (branches === 1 ? ' branch' : ' branches');
+        document.getElementById('val-turnover').textContent = '£' + parseFloat(inTurnover.value).toFixed(1) + 'M';
+        document.getElementById('val-margin').textContent = parseFloat(inMargin.value) + '%';
+        document.getElementById('val-team').textContent = team + ' people';
+        document.getElementById('val-vacant').textContent = vacant + (vacant === 1 ? ' seat' : ' seats');
+
+        const totalTurnover = turnover * branches;
+        const perRepTurnover = turnover / (team || 1);
+        const annualLeakage = vacant * perRepTurnover * 0.48;
+        const grossMarginLeakage = annualLeakage * margin;
+        const territoryWhitespace = totalTurnover * 0.18;
+
+        const recoveredTurnover = annualLeakage * 0.85;
+        const coachingTurnover = totalTurnover * 0.08;
+        const intelligenceTurnover = totalTurnover * 0.04;
+        const totalNewTurnover = recoveredTurnover + coachingTurnover + intelligenceTurnover;
+        const grossProfitUplift = totalNewTurnover * margin;
+
+        const estInvestment = Math.min(85000, Math.max(18000, totalTurnover * 0.012));
+        const roiMultiple = Math.max(3.5, grossProfitUplift / estInvestment).toFixed(1);
+
+        document.getElementById('out-leakage').textContent = fmt(grossMarginLeakage);
+        document.getElementById('out-profit').textContent = fmt(grossProfitUplift);
+        document.getElementById('out-roi').textContent = roiMultiple + 'x';
+        document.getElementById('out-whitespace').textContent = fmt(territoryWhitespace);
+
+        document.getElementById('out-sub-leak').textContent = 'from ' + fmt(annualLeakage) + ' unserviced turnover';
+        document.getElementById('out-sub-profit').textContent = 'from ' + fmt(totalNewTurnover) + ' added revenue';
+
+        document.getElementById('out-break-headhunting').textContent = fmt(recoveredTurnover * margin);
+        document.getElementById('out-break-coaching').textContent = fmt(coachingTurnover * margin);
+        document.getElementById('out-break-intel').textContent = fmt(intelligenceTurnover * margin);
+
+        const exportBtn = document.getElementById('btn-export-sim');
+        if (exportBtn) {
+          const summary = `ROI Modeling: ${branches} branches @ £${(turnover/1000000).toFixed(1)}M (${margin*100}% margin). Vacant seats: ${vacant}. Projected gross profit upside: ${fmt(grossProfitUplift)} (${roiMultiple}x ROI).`;
+          exportBtn.href = `contact.html?interest=Comprehensive%20growth%20partnership%20(RPO)&message=${encodeURIComponent(summary)}`;
+        }
+      }
+
+      [inBranches, inTurnover, inMargin, inTeam, inVacant].forEach(inp => {
+        inp.addEventListener('input', update);
+      });
+
+      document.querySelectorAll('[data-preset]').forEach(btn => {
+        btn.addEventListener('click', function(){
+          document.querySelectorAll('[data-preset]').forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          const p = presets[this.dataset.preset];
+          if (p) {
+            inBranches.value = p.branches;
+            inTurnover.value = p.turnover;
+            inMargin.value = p.margin;
+            inTeam.value = p.team;
+            inVacant.value = p.vacant;
+            update();
+          }
+        });
+      });
+
+      update();
+    })();
+  </script>
+</body>
+</html>
