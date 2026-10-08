@@ -199,7 +199,7 @@ const CAPABILITY_DETAILS = {
           <li>• <strong>Executive Search:</strong> C-suite, VP, and Director-level placements with technical and cultural alignment testing.</li>
           <li>• <strong>Passive Talent Mapping:</strong> Comprehensive ecosystem maps of all senior talent in your industry and region.</li>
           <li>• <strong>Technical DNA Vetting:</strong> Rigorous competency benchmarking before any candidate introduction.</li>
-          <li>• <strong>Guaranteed Exclusivity:</strong> Candidate introductions are locked solely to your organization.</li>
+          <li>• <strong>Guaranteed Exclusivity:</strong> Candidate introductions are locked solely to your organisation.</li>
         </ul>
       </div>
       <a class="btn btn-primary w-full" href="check.html">
@@ -233,7 +233,7 @@ const CAPABILITY_DETAILS = {
     subtitle: 'The governed commercial operating system.',
     content: `
       <p style="margin-bottom: 1.25rem; color: var(--text-secondary); line-height: 1.65;">
-        CorePlatform gives your organization automated inbound qualification, AI-powered outbound outreach, 24/7 intelligent voice response, and weighted predictive forecasting without risking data privacy.
+        CorePlatform gives your organisation automated inbound qualification, AI-powered outbound outreach, 24/7 intelligent voice response, and weighted predictive forecasting without risking data privacy.
       </p>
       <div style="background: var(--bg-surface-subtle); padding: 1.25rem; border-radius: 8px; margin-bottom: 1.5rem;">
         <h4 style="font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">CorePlatform Features:</h4>
@@ -710,7 +710,7 @@ const UK_TERRITORIES_DATA = {
     name: 'South West',
     sectors: {
       'electrical': { status: 'open', pool: '650+ wholesale leaders', speed: '18 days', note: 'Open across Bristol, Exeter, Plymouth, Gloucester, and Swindon.' },
-      'me': { status: 'open', pool: '530+ M&E specialists', speed: '19 days', note: 'Open for defense, aerospace, and commercial building contractors.' },
+      'me': { status: 'open', pool: '530+ M&E specialists', speed: '19 days', note: 'Open for defence, aerospace, and commercial building contractors.' },
       'switchgear': { status: 'open', pool: '410+ power systems leads', speed: '21 days', note: 'Open for grid connection and industrial automation.' },
       'renewables': { status: 'open', pool: '740+ solar & marine engineers', speed: '16 days', note: 'Open across UK solar heartland and floating offshore wind.' },
       'hvac': { status: 'open', pool: '380+ building services leads', speed: '20 days', note: 'Open for regional distributors and installers.' },
@@ -1025,7 +1025,7 @@ const SALARY_BENCHMARK_DB = {
     perks: 'Premium car allowance, Executive healthcare, Senior pension',
     scarcity: 9.5,
     passivePct: '94% passive / retained search required',
-    certifications: '10+ branch network oversight, logistics & margin optimization'
+    certifications: '10+ branch network oversight, logistics & margin optimisation'
   },
   'estimator': {
     title: 'Senior M&E Estimator / Quantity Surveyor',

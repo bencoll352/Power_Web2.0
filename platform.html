@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en-GB" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -32,41 +32,89 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="styles.css?v=4.0" />
+  <link rel="stylesheet" href="styles.css?v=7.0" />
 
   <!-- JSON-LD Software & AEO Schema -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "SoftwareApplication",
-        "name": "Power-Up AI Growth Operating System",
-        "applicationCategory": "BusinessApplication",
-        "operatingSystem": "Web-Based",
-        "provider": {
-          "@type": "ProfessionalService",
-          "name": "Power-Up Talent",
-          "url": "https://power-uptalent.co.uk"
-        },
-        "description": "Governed growth intelligence OS providing unified CRM, automated campaign execution, lead intelligence, and AI receptionist features with mandatory human verification safeguards."
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Power-Up Talent",
+      "url": "https://power-uptalent.co.uk",
+      "logo": "https://power-uptalent.co.uk/assets/logo-brand.png",
+      "image": "https://power-uptalent.co.uk/assets/logo-brand.png",
+      "description": "Specialist executive headhunting, outcome-led commercial performance coaching, and AI market intelligence for UK technical distribution, engineering, manufacturing, construction and facilities management.",
+      "email": "info@power-uptalent.co.uk",
+      "telephone": "+44-20-8000-0000",
+      "priceRange": "£££",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "GB"
       },
-      {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "What is human-governed AI at Power-Up Talent?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Human-governed AI means no automated AI action touches your client database, candidates, or outreach without prior approval from a trained human specialist."
-            }
+      "areaServed": {
+        "@type": "Country",
+        "name": "United Kingdom"
+      },
+      "knowsAbout": [
+        "Electrical Wholesale Recruitment",
+        "Technical Distribution Headhunting",
+        "Branch Manager Recruitment",
+        "Commercial Sales Coaching",
+        "Gross Margin Defence Clinics",
+        "UK Companies House Market Intelligence",
+        "Single-Client Territory Exclusivity"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is human-governed AI in the Power-Up Intelligence platform?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Human-governed AI ensures that technology assists research, but human judgement drives every action. No automated AI routine mutates client databases, contacts leads, or approaches candidates without explicit human review and approval."
           }
-        ]
-      }
-    ]
-  }
+        },
+        {
+          "@type": "Question",
+          "name": "What fiduciary guardrails does the platform enforce?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The platform enforces the Zero-Fabrication Data Standard (live Companies House verification), the Fiduciary Margin Floor (blocking proposals below a CFO 35% margin threshold), and Tenant Row-Level Security (complete memory and data isolation between client accounts)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What data does the UK Lead Engine query?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It cross-references live data across 5.2M+ UK corporate entities, matching Companies House CRNs, active director appointments, registered office postcodes, SIC codes, and verified direct dials."
+          }
+        }
+      ]
+    }
+  ]
+}
   </script>
+<style>
+.outcome-engine-wrap{background:#0d1410!important;border:1px solid rgba(228,196,91,.3)!important;border-radius:14px!important;overflow:hidden!important;box-shadow:0 20px 50px rgba(0,0,0,.5)!important;margin-top:2rem!important}
+.outcome-stepper-nav{display:grid!important;grid-template-columns:repeat(4,1fr)!important;background:rgba(0,0,0,.4)!important;border-bottom:1px solid rgba(255,255,255,.12)!important}
+.outcome-step-btn{background:transparent!important;border:none!important;border-right:1px solid rgba(255,255,255,.08)!important;padding:1.25rem 1.5rem!important;text-align:left!important;cursor:pointer!important;transition:all .25s ease!important;position:relative!important;display:block!important;width:100%!important}
+.outcome-step-btn:last-child{border-right:none!important}
+.outcome-step-btn:hover{background:rgba(228,196,91,.06)!important}
+.outcome-step-btn.active{background:rgba(228,196,91,.14)!important}
+.outcome-step-btn.active::after{content:''!important;position:absolute!important;bottom:0!important;left:0!important;right:0!important;height:3px!important;background:#facc15!important;box-shadow:0 0 12px #facc15!important}
+.outcome-step-num{font-family:var(--font-heading)!important;font-size:.75rem!important;font-weight:800!important;color:#facc15!important;letter-spacing:.08em!important;margin-bottom:.35rem!important;display:block!important}
+.outcome-step-name{font-family:var(--font-heading)!important;font-size:.95rem!important;font-weight:700!important;color:#fff!important;line-height:1.3!important;display:block!important}
+.page-hero{min-height:520px!important;padding:8rem 0 7rem!important;display:flex!important;align-items:center!important}
+.page-hero-title{color:#fff!important;text-shadow:0 2px 30px rgba(0,0,0,.8)!important}
+.page-hero-subtext{color:#f1f5f9!important;text-shadow:0 1px 16px rgba(0,0,0,.7)!important}
+.eyebrow-tag{color:#facc15!important}
+</style>
 </head>
 <body>
 
@@ -168,13 +216,13 @@
       
       <div class="container" style="position: relative; z-index: 2;">
         <div class="page-hero-content">
-          <div class="eyebrow-tag">
+          <div class="eyebrow-tag" style="color: #facc15 !important;">
             <span class="dash">—</span> INTELLIGENCE
           </div>
-          <h1 class="page-hero-title">
+          <h1 class="page-hero-title" style="color: #ffffff !important; text-shadow: 0 2px 30px rgba(0,0,0,0.85);">
             A governed growth operating system, configured around your business.
           </h1>
-          <p class="page-hero-subtext">
+          <p class="page-hero-subtext" style="color: #f1f5f9 !important; font-size: 1.15rem; text-shadow: 0 1px 16px rgba(0,0,0,0.7);">
             One login, one dashboard, one source of truth for every relationship, lead and conversation. CRM, lead generation, campaigns, social and an AI receptionist — with human approval required before any AI action touches your data.
           </p>
         </div>
@@ -241,7 +289,7 @@
           </div>
           <div class="section-header-right">
             <p class="lead-narrative">
-              We combine specialized sector intelligence with human research to give leaders early visibility of talent movements, competitor reorganisations and commercial opportunities before the rest of the market reacts.
+              We combine specialised sector intelligence with human research to give leaders early visibility of talent movements, competitor reorganisations and commercial opportunities before the rest of the market reacts.
             </p>
           </div>
         </div>
@@ -304,7 +352,7 @@
               </svg>
             </div>
             <h3 class="sprint-title">Competitor movement &amp; structure insights</h3>
-            <p class="sprint-tagline">Monitoring organizational changes, executive transitions and team expansion across rival firms in your sector.</p>
+            <p class="sprint-tagline">Monitoring organisational changes, executive transitions and team expansion across rival firms in your sector.</p>
             <ul class="sprint-bullets">
               <li>Leadership movement tracking</li>
               <li>Team restructuring alerts</li>
@@ -491,7 +539,7 @@
             <div class="outcome-stage-left">
               <div class="fiduciary-badge" style="margin-bottom: 0.75rem;">STAGE 03: COMMERCIAL EXECUTION</div>
               <h3>Turn Intelligence Into Action</h3>
-              <p>Insights are translated into executive headhunting campaigns, account outreach plans or strategic headcount decisions with human expert direction and automated margin defense.</p>
+              <p>Insights are translated into executive headhunting campaigns, account outreach plans or strategic headcount decisions with human expert direction and automated margin defence.</p>
               <ul class="outcome-stage-points">
                 <li>Enforce CFO 35% margin floor across all customer proposals</li>
                 <li>Equip branch teams with pre-call director dossiers and WhatsApp routes</li>
@@ -513,7 +561,7 @@
             <div class="outcome-stage-left">
               <div class="fiduciary-badge" style="margin-bottom: 0.75rem;">STAGE 04: GOVERNANCE &amp; SOVEREIGNTY</div>
               <h3>Maintain Governance</h3>
-              <p>Human validation, strict client data isolation and UK GDPR compliance govern every step of data processing and candidate engagement. No automated mutation touches client CRM data without human authorization.</p>
+              <p>Human validation, strict client data isolation and UK GDPR compliance govern every step of data processing and candidate engagement. No automated mutation touches client CRM data without human authorisation.</p>
               <ul class="outcome-stage-points">
                 <li>Tenant row-level security isolates all bot memories and client records</li>
                 <li>Human supervisor gate with one-click 'Take Control' override</li>
@@ -791,7 +839,7 @@
 
               <div class="modal-section-card">
                 <h5>Operational Value</h5>
-                <p>Ensures 100% UK GDPR data sovereignty, strict human authorization before canonical CRM updates, and multi-tenant isolation.</p>
+                <p>Ensures 100% UK GDPR data sovereignty, strict human authorisation before canonical CRM updates, and multi-tenant isolation.</p>
               </div>
 
               <a href="contact.html?interest=Intelligence%20walkthrough" class="btn btn-primary w-full text-center">Request Voice Walkthrough ↗</a>

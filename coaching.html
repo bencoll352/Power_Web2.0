@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en-GB" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -32,39 +32,65 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="styles.css?v=4.0" />
+  <link rel="stylesheet" href="styles.css?v=7.0" />
 
   <!-- JSON-LD Service & Educational Program Schema -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Service",
-        "name": "Power-Up Commercial Coaching Sprints",
-        "serviceType": "Commercial Training & Leadership Coaching",
-        "provider": {
-          "@type": "ProfessionalService",
-          "name": "Power-Up Talent",
-          "url": "https://power-uptalent.co.uk"
-        },
-        "description": "Tailored commercial development sprint programmes linked directly to measurable financial metrics including sales activity, margin retention, and branch leadership."
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Power-Up Talent",
+      "url": "https://power-uptalent.co.uk",
+      "logo": "https://power-uptalent.co.uk/assets/logo-brand.png",
+      "image": "https://power-uptalent.co.uk/assets/logo-brand.png",
+      "description": "Specialist executive headhunting, outcome-led commercial performance coaching, and AI market intelligence for UK technical distribution, engineering, manufacturing, construction and facilities management.",
+      "email": "info@power-uptalent.co.uk",
+      "telephone": "+44-20-8000-0000",
+      "priceRange": "£££",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "GB"
       },
-      {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "How is Power-Up Talent commercial coaching delivered?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Every programme is outcome-led and configured around your specific commercial objectives, operating model, and team diagnostic — never generic off-the-shelf syllabus modules."
-            }
+      "areaServed": {
+        "@type": "Country",
+        "name": "United Kingdom"
+      },
+      "knowsAbout": [
+        "Electrical Wholesale Recruitment",
+        "Technical Distribution Headhunting",
+        "Branch Manager Recruitment",
+        "Commercial Sales Coaching",
+        "Gross Margin Defence Clinics",
+        "UK Companies House Market Intelligence",
+        "Single-Client Territory Exclusivity"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the focus of the Power-Up Talent coaching curriculum?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our coaching sprints focus on high-velocity technical prospecting, opportunity qualification, gross margin defence clinics, rebate negotiation, branch operating cadence, and practical AI adoption for commercial teams."
           }
-        ]
-      }
-    ]
-  }
+        },
+        {
+          "@type": "Question",
+          "name": "Who is the coaching curriculum designed for?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is built specifically for branch managers, external technical sales representatives, key account managers, and commercial directors in technical distribution and engineering."
+          }
+        }
+      ]
+    }
+  ]
+}
   </script>
 </head>
 <body>
@@ -167,13 +193,13 @@
       
       <div class="container" style="position: relative; z-index: 2;">
         <div class="page-hero-content">
-          <div class="eyebrow-tag">
+          <div class="eyebrow-tag" style="color: #facc15 !important;">
             <span class="dash">—</span> COACHING
           </div>
-          <h1 class="page-hero-title">
+          <h1 class="page-hero-title" style="color: #ffffff !important; text-shadow: 0 2px 30px rgba(0,0,0,0.85);">
             Outcome-led coaching configured around your people
           </h1>
-          <p class="page-hero-subtext">
+          <p class="page-hero-subtext" style="color: #f1f5f9 !important; font-size: 1.15rem; text-shadow: 0 1px 16px rgba(0,0,0,0.7);">
             Your growth plan and your operating model. Every programme links to a commercial measure: stronger sales activity, better branch performance, sharper leadership, faster hiring, higher retention and clearer commercial visibility.
           </p>
           

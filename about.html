@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en-GB" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -35,21 +35,65 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="styles.css?v=4.0" />
+  <link rel="stylesheet" href="styles.css?v=7.0" />
 
   <!-- JSON-LD AboutPage & AEO Schema -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "AboutPage",
-        "name": "About Power-Up Talent",
-        "url": "https://power-uptalent.co.uk/about.html",
-        "description": "Information about Power-Up Talent's operating principles, sector specialization, single-client commitment, and business transformation methodology."
-      }
-    ]
-  }
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Power-Up Talent",
+      "url": "https://power-uptalent.co.uk",
+      "logo": "https://power-uptalent.co.uk/assets/logo-brand.png",
+      "image": "https://power-uptalent.co.uk/assets/logo-brand.png",
+      "description": "Specialist executive headhunting, outcome-led commercial performance coaching, and AI market intelligence for UK technical distribution, engineering, manufacturing, construction and facilities management.",
+      "email": "info@power-uptalent.co.uk",
+      "telephone": "+44-20-8000-0000",
+      "priceRange": "£££",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "GB"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "United Kingdom"
+      },
+      "knowsAbout": [
+        "Electrical Wholesale Recruitment",
+        "Technical Distribution Headhunting",
+        "Branch Manager Recruitment",
+        "Commercial Sales Coaching",
+        "Gross Margin Defence Clinics",
+        "UK Companies House Market Intelligence",
+        "Single-Client Territory Exclusivity"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why did Power-Up Talent start?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Power-Up Talent was founded to challenge the transactional recruitment model. Technical and engineering businesses deserve a commercial growth partner who understands trade counter dynamics, regional rebate pressures, gross margin protection, and branch leadership culture."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does Power-Up Talent operate its culture and values?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our culture is anchored in three commitments: Uncompromising Honesty (direct commercial guidance without placement bias), Trade Counter Respect (deep appreciation of branch margin realities), and Long-Term Partnership (measuring success by client EBITDA growth and retention)."
+          }
+        }
+      ]
+    }
+  ]
+}
   </script>
 
   <style>
@@ -309,13 +353,13 @@
       
       <div class="container" style="position: relative; z-index: 2;">
         <div class="page-hero-content">
-          <div class="eyebrow-tag">
-            <span class="dash">—</span> ABOUT POWER-UP TALENT
+          <div class="eyebrow-tag" style="color: #facc15 !important;">
+            <span class="dash" style="background: #facc15 !important;">—</span> ABOUT POWER-UP TALENT
           </div>
-          <h1 class="page-hero-title">
+          <h1 class="page-hero-title" style="color: #ffffff !important; text-shadow: 0 2px 30px rgba(0,0,0,0.85);">
             Specialist Knowledge. Commercial Focus. Better Hiring.
           </h1>
-          <p class="page-hero-subtext">
+          <p class="page-hero-subtext" style="color: #f1f5f9 !important; font-size: 1.15rem; text-shadow: 0 1px 16px rgba(0,0,0,0.7);">
             Combining headhunting, team development and market intelligence to build sustainable commercial advantage for UK technical and engineering businesses.
           </p>
           

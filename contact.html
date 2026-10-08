@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en-GB" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -32,21 +32,44 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="styles.css?v=4.0" />
+  <link rel="stylesheet" href="styles.css?v=7.0" />
 
   <!-- JSON-LD ContactPage & AEO Schema -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "ContactPage",
-        "name": "Contact Power-Up Talent",
-        "url": "https://power-uptalent.co.uk/contact.html",
-        "description": "Confidential contact channel for UK client headhunting enquiries and candidate registrations."
-      }
-    ]
-  }
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Power-Up Talent",
+      "url": "https://power-uptalent.co.uk",
+      "logo": "https://power-uptalent.co.uk/assets/logo-brand.png",
+      "image": "https://power-uptalent.co.uk/assets/logo-brand.png",
+      "description": "Specialist executive headhunting, outcome-led commercial performance coaching, and AI market intelligence for UK technical distribution, engineering, manufacturing, construction and facilities management.",
+      "email": "info@power-uptalent.co.uk",
+      "telephone": "+44-20-8000-0000",
+      "priceRange": "£££",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "GB"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "United Kingdom"
+      },
+      "knowsAbout": [
+        "Electrical Wholesale Recruitment",
+        "Technical Distribution Headhunting",
+        "Branch Manager Recruitment",
+        "Commercial Sales Coaching",
+        "Gross Margin Defence Clinics",
+        "UK Companies House Market Intelligence",
+        "Single-Client Territory Exclusivity"
+      ]
+    }
+  ]
+}
   </script>
 
   <style>
