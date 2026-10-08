@@ -3525,3 +3525,415 @@ button, .btn, input, select, textarea, .nav-link, .mobile-nav-link {
   .home-roi-inner { grid-template-columns: 1fr; }
 }
 
+
+
+/* ==========================================================================
+   INTELLIGENCE SUITE UPGRADES (FIDUCIARY CHARTER, TELEMETRY, OUTCOME ENGINE)
+   ========================================================================== */
+.fiduciary-charter-wrap {
+  background: #090e0b;
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(228, 196, 91, 0.2);
+  border-bottom: 1px solid rgba(228, 196, 91, 0.2);
+  padding: 3.5rem 0;
+}
+.fiduciary-charter-wrap::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: 20%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(228, 196, 91, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.fiduciary-charter-card {
+  background: rgba(18, 25, 20, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(228, 196, 91, 0.35);
+  border-radius: 14px;
+  padding: 2.75rem 3rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  z-index: 1;
+}
+.fiduciary-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(228, 196, 91, 0.12);
+  border: 1px solid rgba(228, 196, 91, 0.4);
+  color: #facc15;
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 999px;
+  margin-bottom: 1.25rem;
+}
+.fiduciary-badge .pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #facc15;
+  box-shadow: 0 0 10px #facc15;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0% { opacity: 0.6; transform: scale(0.95); }
+  50% { opacity: 1; transform: scale(1.15); }
+  100% { opacity: 0.6; transform: scale(0.95); }
+}
+.fiduciary-quote-lead {
+  font-family: var(--font-heading);
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  font-weight: 700;
+  line-height: 1.45;
+  color: #ffffff;
+  margin: 0 0 2rem 0;
+}
+.fiduciary-quote-lead strong {
+  color: #facc15;
+  font-weight: 800;
+  display: block;
+  font-size: 0.8em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.fiduciary-pillars {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 1.75rem;
+}
+.fiduciary-pillar-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.fiduciary-pillar-item svg {
+  color: #facc15;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.fiduciary-pillar-item strong {
+  display: block;
+  font-size: 0.85rem;
+  color: #ffffff;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+.fiduciary-pillar-item span {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  line-height: 1.4;
+}
+
+/* Telemetry Ribbon & Cockpit Styling */
+.telemetry-ribbon {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  background: #0f1612;
+  border: 1px solid rgba(228, 196, 91, 0.25);
+  border-radius: 12px;
+  padding: 1.75rem 2rem;
+  margin-bottom: 3.5rem;
+}
+.telemetry-metric {
+  text-align: center;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0 1rem;
+}
+.telemetry-metric:last-child {
+  border-right: none;
+}
+.telemetry-val {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #facc15;
+  line-height: 1.1;
+  margin-bottom: 0.35rem;
+  text-shadow: 0 0 20px rgba(250, 204, 21, 0.2);
+}
+.telemetry-lbl {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.2rem;
+}
+.telemetry-sub {
+  font-size: 0.72rem;
+  color: #889988;
+}
+
+/* Capability Cards Elevation */
+.capability-wow-card {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.capability-wow-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(228, 196, 91, 0.45);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+.capability-transform-badge {
+  margin-top: auto;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.8rem;
+  color: var(--accent-gold-dark, #b48316);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Interactive Commercial Outcomes Engine */
+.outcome-engine-wrap {
+  background: #0d1410;
+  border: 1px solid rgba(228, 196, 91, 0.25);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+  margin-top: 2rem;
+}
+.outcome-stepper-nav {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: rgba(0, 0, 0, 0.35);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.outcome-step-btn {
+  background: transparent;
+  border: none;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1.25rem 1.5rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+}
+.outcome-step-btn:last-child {
+  border-right: none;
+}
+.outcome-step-btn.active {
+  background: rgba(228, 196, 91, 0.12);
+}
+.outcome-step-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #facc15;
+  box-shadow: 0 0 10px #facc15;
+}
+.outcome-step-num {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #facc15;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.35rem;
+  display: block;
+}
+.outcome-step-name {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  line-height: 1.3;
+}
+.outcome-stage-body {
+  padding: 3rem;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 3rem;
+  align-items: center;
+}
+.outcome-stage-left h3 {
+  font-family: var(--font-heading);
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+.outcome-stage-left p {
+  font-size: 1.05rem;
+  color: #cbd5e1;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+.outcome-stage-points {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+}
+.outcome-stage-points li {
+  font-size: 0.92rem;
+  color: #94a3b8;
+  padding: 6px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.outcome-stage-points li::before {
+  content: '✓';
+  color: #facc15;
+  font-weight: bold;
+}
+.outcome-metric-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(228, 196, 91, 0.3);
+  border-radius: 12px;
+  padding: 2.25rem;
+  text-align: center;
+}
+.outcome-metric-lead {
+  font-family: var(--font-heading);
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #facc15;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 25px rgba(250, 204, 21, 0.25);
+}
+.outcome-metric-title {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.outcome-metric-desc {
+  font-size: 0.875rem;
+  color: #94a3b8;
+  line-height: 1.6;
+}
+
+/* MAIN FEATURE: Explainer Cards with EXACT MODAL WORDING */
+.module-explainer-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 2.5rem;
+  background: #0f1612;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 2rem;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+}
+.module-img-col {
+  display: flex;
+  flex-direction: column;
+}
+.module-screen-img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  display: block;
+}
+.module-info-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.module-header-tag {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.module-permission-pill {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #94a3b8;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 4px 10px;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+}
+.module-title {
+  font-family: var(--font-heading);
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+}
+.modal-section-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 1.1rem 1.25rem;
+}
+.modal-section-card.highlight {
+  background: rgba(228, 196, 91, 0.08);
+  border-color: rgba(228, 196, 91, 0.35);
+}
+.modal-section-card h5 {
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #facc15;
+  margin: 0 0 0.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.modal-section-card p {
+  font-size: 0.88rem;
+  color: #e2e8f0;
+  line-height: 1.6;
+  margin: 0;
+}
+.modal-section-card ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  font-size: 0.85rem;
+  color: #cbd5e1;
+  line-height: 1.65;
+}
+.modal-section-card li {
+  margin-bottom: 0.35rem;
+}
+.modal-section-card li strong {
+  color: #facc15;
+}
+
+@media (max-width: 1024px) {
+  .fiduciary-pillars { grid-template-columns: 1fr 1fr; }
+  .telemetry-ribbon { grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .telemetry-metric { border-right: none; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 1rem; }
+  .telemetry-metric:nth-child(3), .telemetry-metric:nth-child(4) { border-bottom: none; }
+  .outcome-stepper-nav { grid-template-columns: 1fr 1fr; }
+  .outcome-stage-body { grid-template-columns: 1fr; gap: 2rem; }
+  .module-explainer-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .fiduciary-pillars { grid-template-columns: 1fr; }
+  .fiduciary-charter-card { padding: 1.75rem 1.5rem; }
+  .outcome-stepper-nav { grid-template-columns: 1fr; }
+}
