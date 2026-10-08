@@ -136,3 +136,12 @@
   .outcome-stepper-nav { grid-template-columns: 1fr 1fr; }
   .outcome-stage-body { grid-template-columns: 1fr; gap: 25px; padding: 25px; }
 }
+
+
+/* Enhanced Cinematic Video Hero Headers */
+.page-hero { min-height: 520px !important; padding: 130px 0 110px !important; display: flex !important; align-items: center !important; }
+.page-hero h1 { color: #ffffff !important; text-shadow: 0 2px 30px rgba(0, 0, 0, 0.8) !important; }
+.page-hero .wrap > p:not(.eyebrow) { color: #f1f5f9 !important; font-size: 19px !important; max-width: 680px !important; text-shadow: 0 1px 16px rgba(0, 0, 0, 0.7) !important; }
+.page-hero .eyebrow { color: var(--gold) !important; }
+.page-hero .hero-video-bg { opacity: 0.55 !important; }
+.page-hero .video-overlay { background: linear-gradient(180deg, rgba(8, 12, 9, 0.72) 0%, rgba(8, 12, 9, 0.9) 100%) !important; opacity: 0.85 !important; }
