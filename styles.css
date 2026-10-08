@@ -4075,3 +4075,130 @@ button, .btn, input, select, textarea, .nav-link, .mobile-nav-link {
 @media (max-width: 600px) {
   .outcome-stepper-nav { grid-template-columns: 1fr !important; }
 }
+
+
+/* ==========================================================================
+   LARGER VIDEO HEROES, WHITE HEADLINE & VISIBLE OUTCOME BUTTONS (V8.0)
+   ========================================================================== */
+/* Request 2: Make all hero videos larger */
+.page-hero,
+.hero,
+.hero-section {
+  min-height: 640px !important;
+  min-height: 68vh !important;
+  padding: 10.5rem 0 9.5rem !important;
+  display: flex !important;
+  align-items: center !important;
+  position: relative !important;
+  overflow: hidden !important;
+  background: #080c09 !important;
+}
+.hero-video-bg {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  z-index: 0 !important;
+  opacity: 0.72 !important; /* Larger, more vibrant video presence */
+}
+.video-overlay,
+.hero-bg-overlay {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: linear-gradient(180deg, rgba(8, 12, 9, 0.62) 0%, rgba(8, 12, 9, 0.85) 100%) !important;
+  opacity: 0.82 !important;
+  z-index: 1 !important;
+}
+
+/* Request 4: Homepage hero text to be pure white */
+.hero-title,
+.hero-title span,
+.page-hero-title,
+.page-hero h1 {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  text-shadow: 0 2px 35px rgba(0, 0, 0, 0.85) !important;
+}
+.hero-copy,
+.hero-subtext,
+.page-hero-subtext {
+  color: #f1f5f9 !important;
+  text-shadow: 0 1px 18px rgba(0, 0, 0, 0.75) !important;
+}
+
+/* Request 1: Visible outcome stepper buttons */
+.outcome-stage-left .btn,
+.outcome-stage-left button {
+  background: #facc15 !important;
+  color: #000000 !important;
+  font-weight: 800 !important;
+  font-size: 0.95rem !important;
+  border: none !important;
+  border-radius: 6px !important;
+  padding: 0.85rem 1.6rem !important;
+  box-shadow: 0 4px 20px rgba(250, 204, 21, 0.45) !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  transition: all 0.2s ease !important;
+}
+.outcome-stage-left .btn:hover,
+.outcome-stage-left button:hover {
+  background: #eab308 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 24px rgba(250, 204, 21, 0.6) !important;
+}
+
+/* Request 6: Brand logo sizing */
+.brand-logo-img,
+.footer-logo-img {
+  height: 52px !important;
+  max-height: 56px !important;
+  width: auto !important;
+  max-width: 240px !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+
+/* Request 5: Better space usage on intelligence module */
+.module-explainer-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 2.25rem !important;
+  background: #0f1612 !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border-radius: 14px !important;
+  padding: 2.25rem !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45) !important;
+  align-items: start !important;
+}
+.module-img-col {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1.25rem !important;
+}
+.module-info-col {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1.25rem !important;
+}
+.module-screen-img {
+  width: 100% !important;
+  height: auto !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.55) !important;
+  display: block !important;
+}
+
+@media (max-width: 1024px) {
+  .module-explainer-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
