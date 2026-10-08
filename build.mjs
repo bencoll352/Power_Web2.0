@@ -21,7 +21,7 @@ const cta = () =>
 const shell = (id, title, description, body) => `<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title} | Power-Up Talent</title><meta name="description" content="${description}"><meta name="theme-color" content="#151815"><meta property="og:title" content="${title} | Power-Up Talent"><meta property="og:description" content="${description}"><meta property="og:type" content="website"><link rel="icon" href="assets/favicon.svg"><link rel="stylesheet" href="styles.css"><script src="app.js" defer></script></head><body><a class="skip" href="#main">Skip to content</a><header class="header"><div class="nav-wrap"><a class="brand" href="index.html" aria-label="Power-Up Talent home"><img class="brand-logo-img" src="assets/logo-brand.png" alt="Power-Up Talent"><span>POWER-UP<span class="brand-sub">T A L E N T</span></span></a><button class="menu-toggle" aria-expanded="false" aria-controls="navigation">Menu <span>☰</span></button><nav id="navigation" aria-label="Main navigation">${nav.map(([link, label]) => `<a ${id === link ? 'aria-current="page"' : ''} href="${link}.html">${label}</a>`).join('')}<a class="nav-contact" ${id === 'check' ? 'aria-current="page"' : ''} href="check.html">Claim territory ${arrow}</a></nav></div></header><main id="main">${body}</main><footer><div class="wrap footer-grid"><div><a class="brand" href="index.html"><img class="brand-logo-img" src="assets/logo-brand.png" alt="Power-Up Talent"><span>POWER-UP<span class="brand-sub">T A L E N T</span></span></a><p>People. Performance. Partnership.</p><p class="footer-note">Specialist talent, performance coaching and AI intelligence<br>for UK technical distribution, engineering, construction & industry.</p></div><div><h3>Explore</h3>${nav.map(([l, t]) => `<a href="${l}.html">${t}</a>`).join('')}</div><div><h3>Start a conversation</h3><a href="mailto:info@power-uptalent.co.uk">info@power-uptalent.co.uk ${arrow}</a><a href="contact.html?interest=Career%20conversation">For candidates ${arrow}</a><p>Strict single-client territory exclusivity across the UK.</p></div></div><div class="wrap footer-bottom"><span>© ${new Date().getFullYear()} Power-Up Talent.</span><a href="https://power-uptalent.co.uk/privacy">Privacy</a><a href="https://power-uptalent.co.uk/terms">Terms</a><a href="https://power-uptalent.co.uk/cookies">Cookies</a><span class="footer-end">Human judgement. Better intelligence.</span></div></footer></body></html>`;
 
 function pageHero(label, title, desc, video = 'about-hero.mp4') {
-  return `<section class="page-hero"><video autoplay loop muted playsinline preload="auto" class="hero-video-bg"><source src="assets/videos/${video}" type="video/mp4"></video><div class="video-overlay"></div><div class="wrap">${tag(label)}<h1>${title}</h1><p>${desc}</p>${button('Start a conversation', 'contact.html')}</div></section>`;
+  return `<section class="page-hero"><video autoplay loop muted playsinline preload="auto" class="hero-video-bg"><source src="assets/videos/${video}" type="video/mp4"></video><div class="video-overlay"></div><div class="wrap">${tag(label)}<h1>${title}</h1><p>${desc}</p></div></section>`;
 }
 
 function faq(q, a) {
@@ -36,8 +36,525 @@ const orbit = `<div class="orbit-art" role="img" aria-label="Headhunting, coachi
 
 const services = `<div class="service-list"><a href="talent.html" class="service-row"><span class="service-no">01 / PEOPLE</span><div><h3>Secure the right talent.</h3><p>Discreet headhunting for the leaders, commercial performers and technical specialists your business needs across wholesale, engineering and industry.</p></div><span class="round-arrow">↗</span></a><a href="coaching.html" class="service-row"><span class="service-no">02 / PERFORMANCE</span><div><h3>Develop a stronger team.</h3><p>Practical coaching for technical sales, branch management and commercial leadership. Built around the work your people do every day.</p></div><span class="round-arrow">↗</span></a><a href="intelligence.html" class="service-row"><span class="service-no">03 / INTELLIGENCE</span><div><h3>See your next opportunity.</h3><p>Live AI-enabled intelligence: verified UK directors, Companies House CRN matching, and territory whitespace mapping.</p></div><span class="round-arrow">↗</span></a></div>`;
 
-// 5-Tab Live Intelligence Suite Component
-const intelShowcase = `<section class="wrap section">${sectionHead('LIVE INTELLIGENCE SUITE', 'Governed software.<br>Actionable territory data.', 'Inspect the five core modules of the Power-Up Intelligence platform. Real live software with human oversight at every decision gate.')}<div class="intel-showcase"><div class="intel-tabs" role="tablist" aria-label="Intelligence modules"><button data-intel-tab="tab-exec" aria-pressed="true">01 Executive Dashboard</button><button data-intel-tab="tab-crm" aria-pressed="false">02 Decision-Maker CRM</button><button data-intel-tab="tab-lead" aria-pressed="false">03 UK Lead Engine</button><button data-intel-tab="tab-bot" aria-pressed="false">04 CoreBot Studio</button><button data-intel-tab="tab-voice" aria-pressed="false">05 AI Voice Receptionist</button></div><div id="tab-exec" class="intel-panel"><div class="intel-panel-copy"><span class="eyebrow"><span></span>EXECUTIVE WORKSPACE</span><h3>Real-Time Revenue Forecasting & Pipeline</h3><p>Live visibility of open commercial pipelines (£6.8M+ tracked in real-time), weighted win probabilities, deal velocity, and priority agendas. Eliminates stale offline spreadsheets.</p><ul><li>Interactive quarterly revenue forecasts</li><li>Live deal stage tracking & margin analysis</li><li>Immediate executive action agendas</li><li>Account whitespace identification</li></ul><a class="button" href="contact.html?interest=Intelligence%20walkthrough">Request a live walkthrough ${arrow}</a></div><img src="assets/intel-executive-dashboard.png" alt="Executive Dashboard preview" loading="lazy"></div><div id="tab-crm" class="intel-panel" hidden><div class="intel-panel-copy"><span class="eyebrow"><span></span>DECISION-MAKER CRM</span><h3>Verified UK Directors & Commercial Contacts</h3><p>Direct mobile numbers, corporate emails, and communication logs for managing directors, procurement heads, and branch decision-makers across the UK.</p><ul><li>Verified direct dial and mobile contacts</li><li>One-click WhatsApp, SMS and email routing</li><li>AI meeting prep & commercial advice notes</li><li>Complete chronological touchpoint history</li></ul><a class="button" href="contact.html?interest=Intelligence%20walkthrough">Request a live walkthrough ${arrow}</a></div><img src="assets/intel-crm-contacts.png" alt="CRM Decision-Maker Contacts preview" loading="lazy"></div><div id="tab-lead" class="intel-panel" hidden><div class="intel-panel-copy"><span class="eyebrow"><span></span>UK COMPANY REGISTRY</span><h3>Companies House Lead Discovery Engine</h3><p>Instant multi-source verification across 5.2M+ UK corporate entities. Live CRN matching, active director filings, SIC classification, and territory filtering.</p><ul><li>Live Companies House CRN verification</li><li>Active director appointments & filings</li><li>Regional SIC code filtering for industry sectors</li><li>Competitor customer whitespace mapping</li></ul><a class="button" href="contact.html?interest=Intelligence%20walkthrough">Request a live walkthrough ${arrow}</a></div><img src="assets/intel-lead-engine.png" alt="UK Lead Discovery Engine preview" loading="lazy"></div><div id="tab-bot" class="intel-panel" hidden><div class="intel-panel-copy"><span class="eyebrow"><span></span>GOVERNED AUTOMATION</span><h3>CoreBot Studio & Managing Director AI</h3><p>Autonomous virtual machines and specialist bots governed by an executive approval gate. Human operators can inspect reasoning and 'Take Control' at any moment.</p><ul><li>Managing Director AI orchestrator & specialist dispatch</li><li>Governed approval gate before data mutation</li><li>One-click 'Take Control' operator override</li><li>Real-time telemetry and audit logging</li></ul><a class="button" href="contact.html?interest=Intelligence%20walkthrough">Request a live walkthrough ${arrow}</a></div><img src="assets/intel-corebot-studio.png" alt="CoreBot Studio preview" loading="lazy"></div><div id="tab-voice" class="intel-panel" hidden><div class="intel-panel-copy"><span class="eyebrow"><span></span>VOICE INTELLIGENCE</span><h3>Sub-Second AI Voice Receptionist</h3><p>Neural UK voice agent that answers inbound trade counter, branch, and contractor calls 24/7. Transcribes, qualifies intent, and logs actions straight into your CRM.</p><ul><li>Natural UK accent & conversational turn detection</li><li>1-click presets for technical distributors & contractors</li><li>Emergency escalation & direct call transfer</li><li>Instant structured action notes delivered to branch</li></ul><a class="button" href="contact.html?interest=Intelligence%20walkthrough">Request a live walkthrough ${arrow}</a></div><img src="assets/intel-voice-receptionist.png" alt="Voice Receptionist preview" loading="lazy"></div></div></section>`;
+// Upgraded Components
+const fiduciaryBanner = `
+<section class="fiduciary-charter-wrap">
+  <div class="wrap">
+    <div class="fiduciary-charter-card">
+      <div class="fiduciary-badge">
+        <span class="pulse-dot"></span>
+        FIDUCIARY &amp; UK GDPR GOVERNANCE STANDARD
+      </div>
+      <p class="fiduciary-quote-lead">
+        <strong>Human-led, technology-supported:</strong>
+        Technology supports the research. Human judgement drives the action. Power-Up Intelligence provides market clarity across candidate availability, competitor movements and account whitespace — governed under strict UK GDPR compliance.
+      </p>
+      <div class="fiduciary-pillars">
+        <div class="fiduciary-pillar-item">
+          <div>
+            <strong>UK GDPR Sovereignty</strong>
+            <span>100% compliant data residency &amp; consent protocols.</span>
+          </div>
+        </div>
+        <div class="fiduciary-pillar-item">
+          <div>
+            <strong>Human-in-the-Loop</strong>
+            <span>Zero automated database mutations without human review.</span>
+          </div>
+        </div>
+        <div class="fiduciary-pillar-item">
+          <div>
+            <strong>Zero-Fabrication Data Standard</strong>
+            <span>Live Companies House CRN, SIC &amp; active director validation.</span>
+          </div>
+        </div>
+        <div class="fiduciary-pillar-item">
+          <div>
+            <strong>Tenant Row-Level Security</strong>
+            <span>Total memory and data isolation between client accounts.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+`;
+const marketVisibilitySection = `
+<section class="wrap section">
+  <div class="section-head">
+    <div>
+      ${tag('MARKET VISIBILITY &amp; SECTOR TELEMETRY')}
+      <h2>Clearer market visibility<br>across hiring and growth.</h2>
+    </div>
+    <p>We combine specialized sector intelligence with human research to give leaders early visibility of talent movements, competitor reorganisations and commercial opportunities before the rest of the market reacts.</p>
+  </div>
+
+  <div class="telemetry-ribbon">
+    <div class="telemetry-metric">
+      <div class="telemetry-val">5.2M+</div>
+      <div class="telemetry-lbl">UK Entities Mapped</div>
+      <div class="telemetry-sub">Live Companies House CRN matching</div>
+    </div>
+    <div class="telemetry-metric">
+      <div class="telemetry-val">100%</div>
+      <div class="telemetry-lbl">Human-Governed</div>
+      <div class="telemetry-sub">Mandatory human approval gate</div>
+    </div>
+    <div class="telemetry-metric">
+      <div class="telemetry-val">35%</div>
+      <div class="telemetry-lbl">Fiduciary Margin Floor</div>
+      <div class="telemetry-sub">Enforces CFO profitability floor</div>
+    </div>
+    <div class="telemetry-metric">
+      <div class="telemetry-val">&lt; 1s</div>
+      <div class="telemetry-lbl">Voice &amp; Search Velocity</div>
+      <div class="telemetry-sub">Sub-second neural UK voice routing</div>
+    </div>
+  </div>
+
+  <div class="cards" style="margin-bottom: 30px;">
+    <article>
+      <span class="card-num">01 / TALENT MAPPING</span>
+      <h3>Market mapping &amp; talent availability</h3>
+      <p>Real-time identification of active and passive candidate pools across UK technical, commercial and leadership tiers.</p>
+      <ul>
+        <li>Comprehensive candidate pool mapping</li>
+        <li>Regional availability indicators</li>
+        <li>Passive candidate tracking</li>
+        <li>Specialist skill availability insights</li>
+      </ul>
+      <div class="capability-transform-badge">
+        <span>↗</span> <strong>Transformative Outcome:</strong> Accelerates hiring velocity by up to 45% with pre-mapped target talent.
+      </div>
+    </article>
+
+    <article>
+      <span class="card-num">02 / COMPETITOR RADAR</span>
+      <h3>Competitor movement &amp; structure insights</h3>
+      <p>Monitoring organizational changes, executive transitions and team expansion across rival firms in your sector.</p>
+      <ul>
+        <li>Leadership movement tracking</li>
+        <li>Team restructuring alerts</li>
+        <li>Competitor headcount expansion</li>
+        <li>Whitespace talent opportunities</li>
+      </ul>
+      <div class="capability-transform-badge">
+        <span>↗</span> <strong>Transformative Outcome:</strong> Instant alert when competing branches restructure or senior fee-earners become vulnerable.
+      </div>
+    </article>
+
+    <article>
+      <span class="card-num">03 / WHITESPACE DISCOVERY</span>
+      <h3>Account whitespace &amp; target identification</h3>
+      <p>Highlighting underserved regional accounts and sector opportunities for commercial business development.</p>
+      <ul>
+        <li>Regional target account discovery</li>
+        <li>Underserved customer segment identification</li>
+        <li>Commercial opportunity scoring</li>
+        <li>Key decision-maker mapping</li>
+      </ul>
+      <div class="capability-transform-badge">
+        <span>↗</span> <strong>Transformative Outcome:</strong> Identifies uncaptured regional wholesale and contracting accounts in your territory.
+      </div>
+    </article>
+
+    <article>
+      <span class="card-num">04 / ENGAGEMENT SIGNALS</span>
+      <h3>Candidate interest signals &amp; timing</h3>
+      <p>Detecting optimal engagement windows when high-performing leaders are open to confidential career discussions.</p>
+      <ul>
+        <li>Career transition indicator tracking</li>
+        <li>Optimal engagement window timing</li>
+        <li>Discreet contact protocols</li>
+        <li>High-intent candidate matching</li>
+      </ul>
+      <div class="capability-transform-badge">
+        <span>↗</span> <strong>Transformative Outcome:</strong> Engages proven performers months before they appear on the open market.
+      </div>
+    </article>
+
+    <article>
+      <span class="card-num">05 / BENCHMARKING</span>
+      <h3>Benchmarking &amp; compensation context</h3>
+      <p>Authoritative UK salary, bonus structure and benefits benchmarks across wholesale, engineering and manufacturing.</p>
+      <ul>
+        <li>Realistic base salary benchmarks</li>
+        <li>Commission &amp; bonus package norms</li>
+        <li>Regional remuneration variances</li>
+        <li>Retention incentive benchmarking</li>
+      </ul>
+      <div class="capability-transform-badge">
+        <span>↗</span> <strong>Transformative Outcome:</strong> Eliminates offer rejections and avoids overpaying while defending internal pay equity.
+      </div>
+    </article>
+
+    <article style="border-top-color: var(--gold); background: #fdfbf7;">
+      <span class="card-num">06 / GROWTH DESK</span>
+      <h3>Power-Up Growth Desk</h3>
+      <p>Outsourced lead generation, target account research and campaign execution for commercial teams.</p>
+      <ul>
+        <li>Target decision-maker research</li>
+        <li>Account data enrichment &amp; validation</li>
+        <li>Structured outbound campaign support</li>
+        <li>Lead qualification before handoff</li>
+      </ul>
+      <div class="capability-transform-badge">
+        <span>↗</span> <strong>Transformative Outcome:</strong> Supplies branch sales reps with pre-verified director meetings and actionable pipeline.
+      </div>
+    </article>
+  </div>
+</section>
+`;
+const interactiveOutcomeEngine = `
+<section class="wrap section">
+  <div class="section-head">
+    <div>
+      ${tag('INTERACTIVE TRANSFORMATION ENGINE')}
+      <h2>How we turn intelligence<br>into commercial outcomes.</h2>
+    </div>
+    <p>Step through our interactive four-stage commercial methodology to see how raw market data transforms into protected margin, higher conversion, and predictable EBITDA growth.</p>
+  </div>
+
+  <div class="outcome-engine-wrap">
+    <div class="outcome-stepper-nav" role="tablist" aria-label="Commercial outcome stages">
+      <button class="outcome-step-btn active" data-step-btn="1">
+        <span class="outcome-step-num">STAGE 01</span>
+        <span class="outcome-step-name">Define Objective</span>
+      </button>
+      <button class="outcome-step-btn" data-step-btn="2">
+        <span class="outcome-step-num">STAGE 02</span>
+        <span class="outcome-step-name">Configure Market View</span>
+      </button>
+      <button class="outcome-step-btn" data-step-btn="3">
+        <span class="outcome-step-num">STAGE 03</span>
+        <span class="outcome-step-name">Turn Intelligence Into Action</span>
+      </button>
+      <button class="outcome-step-btn" data-step-btn="4">
+        <span class="outcome-step-num">STAGE 04</span>
+        <span class="outcome-step-name">Maintain Governance</span>
+      </button>
+    </div>
+
+    <!-- Step 1 Content -->
+    <div id="outcome-step-1" class="outcome-stage-body">
+      <div class="outcome-stage-left">
+        <div class="fiduciary-badge" style="margin-bottom: 12px;">STAGE 01: COMMERCIAL SCOPING</div>
+        <h3>Define Objective</h3>
+        <p>We clarify the specific commercial, geographic or talent challenge requiring market visibility — whether expanding a regional branch, filling a critical leadership gap, or conquering competitor whitespace.</p>
+        <ul class="outcome-stage-points">
+          <li>Identify exact target territory postcodes &amp; commercial SIC codes</li>
+          <li>Audit competitive threats and margin pressure points</li>
+          <li>Set quantifiable EBITDA targets and hiring timelines</li>
+        </ul>
+        <button class="button secondary" data-goto-step="2">Next: Configure Market View ${arrow}</button>
+      </div>
+      <div class="outcome-stage-right">
+        <div class="outcome-metric-card">
+          <div class="outcome-metric-lead">£450k+</div>
+          <div class="outcome-metric-title">Territory Whitespace Identified</div>
+          <p class="outcome-metric-desc">Average uncaptured commercial account potential unlocked per defined regional branch territory.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2 Content -->
+    <div id="outcome-step-2" class="outcome-stage-body" hidden>
+      <div class="outcome-stage-left">
+        <div class="fiduciary-badge" style="margin-bottom: 12px;">STAGE 02: REGISTRY &amp; TARGET MAPPING</div>
+        <h3>Configure Market View</h3>
+        <p>Intelligence workflows filter competitor data, candidate signals and whitespace targets strictly to your agreed parameters, sector and territory under the Zero-Fake Data policy.</p>
+        <ul class="outcome-stage-points">
+          <li>Live cross-referencing against 5.2M+ UK Companies House entities</li>
+          <li>Verified direct dials and active director appointment matching</li>
+          <li>Exclusion of out-of-territory records to keep reps laser-focused</li>
+        </ul>
+        <button class="button secondary" data-goto-step="3">Next: Turn Into Action ${arrow}</button>
+      </div>
+      <div class="outcome-stage-right">
+        <div class="outcome-metric-card">
+          <div class="outcome-metric-lead">5.2M+</div>
+          <div class="outcome-metric-title">Live Companies House Records</div>
+          <p class="outcome-metric-desc">Continuous CRN, SIC classification, and active director filing verification across Britain.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3 Content -->
+    <div id="outcome-step-3" class="outcome-stage-body" hidden>
+      <div class="outcome-stage-left">
+        <div class="fiduciary-badge" style="margin-bottom: 12px;">STAGE 03: COMMERCIAL EXECUTION</div>
+        <h3>Turn Intelligence Into Action</h3>
+        <p>Insights are translated into executive headhunting campaigns, account outreach plans or strategic headcount decisions with human expert direction and automated margin defense.</p>
+        <ul class="outcome-stage-points">
+          <li>Enforce CFO 35% margin floor across all customer proposals</li>
+          <li>Equip branch teams with pre-call director dossiers and WhatsApp routes</li>
+          <li>Launch discreet headhunting outreach targeting proven performers</li>
+        </ul>
+        <button class="button secondary" data-goto-step="4">Next: Maintain Governance ${arrow}</button>
+      </div>
+      <div class="outcome-stage-right">
+        <div class="outcome-metric-card">
+          <div class="outcome-metric-lead">68%</div>
+          <div class="outcome-metric-title">Faster Deal Velocity</div>
+          <p class="outcome-metric-desc">Dramatic reduction in lead discovery and pre-qualification time per high-margin opportunity.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4 Content -->
+    <div id="outcome-step-4" class="outcome-stage-body" hidden>
+      <div class="outcome-stage-left">
+        <div class="fiduciary-badge" style="margin-bottom: 12px;">STAGE 04: GOVERNANCE &amp; SOVEREIGNTY</div>
+        <h3>Maintain Governance</h3>
+        <p>Human validation, strict client data isolation and UK GDPR compliance govern every step of data processing and candidate engagement. No automated mutation touches client CRM data without human authorization.</p>
+        <ul class="outcome-stage-points">
+          <li>Tenant row-level security isolates all bot memories and client records</li>
+          <li>Human supervisor gate with one-click 'Take Control' override</li>
+          <li>Strict single-client non-compete guarantees in your territory</li>
+        </ul>
+        <button class="button" data-goto-step="1">↺ Restart Transformation Journey</button>
+      </div>
+      <div class="outcome-stage-right">
+        <div class="outcome-metric-card">
+          <div class="outcome-metric-lead">100%</div>
+          <div class="outcome-metric-title">Fiduciary Compliance</div>
+          <p class="outcome-metric-desc">Complete UK GDPR sovereignty with human sign-off on every outbound action and hire.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+`;
+const intelShowcase = `
+<section class="wrap section">
+  <div class="section-head">
+    <div>
+      ${tag('PRODUCTION INTELLIGENCE SUITE')}
+      <h2>Governed software.<br>Actionable territory data.</h2>
+    </div>
+    <p>Inspect the five core modules of the Power-Up Intelligence platform. Below are the exact operational explainers, commercial ROI metrics, and fiduciary guardrails derived directly from our live system.</p>
+  </div>
+
+  <div class="intel-showcase">
+    <div class="intel-tabs" role="tablist" aria-label="Intelligence modules">
+      <button data-intel-tab="tab-exec" aria-pressed="true">01 Executive Dashboard</button>
+      <button data-intel-tab="tab-crm" aria-pressed="false">02 Contacts (CRM)</button>
+      <button data-intel-tab="tab-lead" aria-pressed="false">03 Lead Discovery Guide</button>
+      <button data-intel-tab="tab-bot" aria-pressed="false">04 CoreBot Studio</button>
+      <button data-intel-tab="tab-voice" aria-pressed="false">05 Voice &amp; AI Receptionist</button>
+    </div>
+
+    <!-- Tab 01: Executive Dashboard (NEW EXECUTIVE DASHBOARD IMAGE) -->
+    <div id="tab-exec" class="intel-panel">
+      <div class="intel-panel-copy">
+        <div class="module-header-tag">
+          <span class="eyebrow" style="color:var(--gold);"><span></span>EXECUTIVE WORKSPACE</span>
+          <span class="module-permission-pill">Access: Executive / Managing Director / Board Level</span>
+        </div>
+        <h3>Executive Dashboard Outcomes &amp; Commercial ROI</h3>
+        
+        <div class="modal-section-card">
+          <h5>Operational Purpose / What It Does</h5>
+          <p>Live visibility of open commercial pipeline (£6.8M+ tracked in real-time), weighted win probabilities, deal velocity, and priority agendas. Eliminates stale offline spreadsheets.</p>
+        </div>
+
+        <div class="modal-section-card highlight">
+          <h5>Commercial outcomes you will get</h5>
+          <p>Real-time revenue forecasting, pipeline velocity, weighted deal conversion &amp; priority agendas. Eliminates stale offline spreadsheets.</p>
+        </div>
+
+        <div class="modal-section-card">
+          <h5>Key business benefits</h5>
+          <ul>
+            <li>Interactive quarterly revenue forecasts</li>
+            <li>Live deal stage tracking &amp; margin analysis</li>
+            <li>Immediate executive action agendas</li>
+            <li>Account whitespace identification</li>
+          </ul>
+        </div>
+
+        <div class="modal-section-card">
+          <h5>Operational Value</h5>
+          <p>Provides managing directors and commercial leaders with instant board-level revenue predictability, live deal tracking, and whitespace account expansion.</p>
+        </div>
+
+        ${button('Request executive walkthrough', 'contact.html?interest=Intelligence%20walkthrough')}
+      </div>
+      <div>
+        <img src="assets/intel-executive-dashboard.png" alt="Executive Dashboard preview" loading="lazy">
+        <div style="text-align:center; margin-top:12px;">
+          <span class="fiduciary-badge" style="font-size:10px; margin:0;">● LIVE COMMERCIAL WORKSPACE</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 02: Contacts (CRM) (EXACT COPY FROM MODAL SCREENSHOT) -->
+    <div id="tab-crm" class="intel-panel" hidden>
+      <div class="intel-panel-copy">
+        <div class="module-header-tag">
+          <span class="eyebrow" style="color:var(--gold);"><span></span>DECISION-MAKER CRM</span>
+          <span class="module-permission-pill">Access: Standard User / Tenant Admin</span>
+        </div>
+        <h3>Contacts Outcomes &amp; Commercial ROI</h3>
+        
+        <div class="modal-section-card">
+          <h5>Operational Purpose / What Contacts Does</h5>
+          <p>People, key decision makers, and communication logs.</p>
+        </div>
+
+        <div class="modal-section-card highlight">
+          <h5>Commercial outcomes you will get</h5>
+          <p>Track time to find and update a customer record. Compare overdue follow-ups, duplicate records and opportunity conversion.</p>
+        </div>
+
+        <div class="modal-section-card">
+          <h5>Key business benefits</h5>
+          <p>Clear steps for completing work in this section. Review results before moving to the next action.</p>
+        </div>
+
+        <div class="modal-section-card">
+          <h5>Operational Value</h5>
+          <p>Maintains accurate stakeholder profiles, communication channels, and interaction histories, ensuring sales and account teams always reach the right person.</p>
+        </div>
+
+        ${button('Request contacts walkthrough', 'contact.html?interest=Intelligence%20walkthrough')}
+      </div>
+      <div>
+        <img src="assets/intel-crm-contacts.png" alt="CRM Decision-Maker Contacts preview" loading="lazy">
+        <div style="text-align:center; margin-top:12px;">
+          <span class="fiduciary-badge" style="font-size:10px; margin:0;">● DECISION-MAKER CRM LEDGER</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 03: Lead Discovery Guide (EXACT COPY FROM MODAL SCREENSHOT) -->
+    <div id="tab-lead" class="intel-panel" hidden>
+      <div class="intel-panel-copy">
+        <div class="module-header-tag">
+          <span class="eyebrow" style="color:var(--gold);"><span></span>UK COMPANY REGISTRY</span>
+          <span class="module-permission-pill">Access: Consultant / Sales Rep Access • Human Review Authority</span>
+        </div>
+        <h3>Lead Discovery Guide Outcomes &amp; Commercial ROI</h3>
+        
+        <div class="modal-section-card">
+          <h5>Operational Purpose / What Lead Discovery Guide Does</h5>
+          <p>Unified multi-source lead discovery, UK registry explorer, competitor dossiers &amp; outcome reporting.</p>
+        </div>
+
+        <div class="modal-section-card highlight">
+          <h5>Commercial outcomes you will get</h5>
+          <p>Track research time per qualified opportunity. Measure verified contact coverage and qualified leads becoming deals.</p>
+        </div>
+
+        <div class="modal-section-card">
+          <h5>Key business benefits</h5>
+          <p>Clear steps for completing work in this section. Review results before moving to the next action.</p>
+        </div>
+
+        <div class="modal-section-card">
+          <h5>Operational Value</h5>
+          <p>Accelerates outbound pipeline generation by automating lead discovery while strictly enforcing the Zero-Fake Data policy, consent checks, and human-in-the-loop validation.</p>
+        </div>
+
+        ${button('Request lead engine walkthrough', 'contact.html?interest=Intelligence%20walkthrough')}
+      </div>
+      <div>
+        <img src="assets/intel-lead-engine.png" alt="UK Lead Discovery Engine preview" loading="lazy">
+        <div style="text-align:center; margin-top:12px;">
+          <span class="fiduciary-badge" style="font-size:10px; margin:0;">● UK REGISTRY EXPLORER</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 04: CoreBot Studio (EXACT COPY FROM MODAL SCREENSHOT) -->
+    <div id="tab-bot" class="intel-panel" hidden>
+      <div class="intel-panel-copy">
+        <div class="module-header-tag">
+          <span class="eyebrow" style="color:var(--gold);"><span></span>GOVERNED AUTOMATION</span>
+          <span class="module-permission-pill">Access: Standard User / Tenant Admin</span>
+        </div>
+        <h3>CoreBot Studio — Autonomous Teammates Guide Outcomes &amp; Commercial ROI</h3>
+        
+        <div class="modal-section-card">
+          <h5>Operational Purpose / What CoreBot Studio Does</h5>
+          <p>AI teammates with business tools, live research and governed routines.</p>
+        </div>
+
+        <div class="modal-section-card highlight">
+          <h5>Commercial outcomes you will get</h5>
+          <p>Measure time per successfully completed task, including review. Track failed runs, corrections, response time and provider cost.</p>
+        </div>
+
+        <div class="modal-section-card">
+          <h5>Key business benefits</h5>
+          <p>Clear steps for completing work in this section. Review results before moving to the next action.</p>
+        </div>
+
+        <div class="modal-section-card">
+          <h5>Fiduciary &amp; Compliance Rules</h5>
+          <ul>
+            <li><strong>Zero-Fabrication Data Standard:</strong> Bot must verify via live search before citing Company House SIC codes or director appointments.</li>
+            <li><strong>Fiduciary Margin Floor:</strong> Quote Drafter and Margin Auditor enforce CFO 35% margin floor. Blocks quotes with lower margin unless executive override provided.</li>
+            <li><strong>Tenant Row-Level Security:</strong> CoreBot execution contexts are strictly isolated by tenant ID. Bots cannot read memory across tenants.</li>
+          </ul>
+        </div>
+
+        <div class="modal-section-card">
+          <h5>Operational Value</h5>
+          <p>Accelerates team execution velocity, operational transparency, and revenue predictability.</p>
+        </div>
+
+        ${button('Request CoreBot walkthrough', 'contact.html?interest=Intelligence%20walkthrough')}
+      </div>
+      <div>
+        <img src="assets/intel-corebot-studio.png" alt="CoreBot Studio preview" loading="lazy">
+        <div style="text-align:center; margin-top:12px;">
+          <span class="fiduciary-badge" style="font-size:10px; margin:0;">● GOVERNED AUTONOMOUS TEAMMATES</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 05: Voice & AI Receptionist Guide (EXACT COPY FROM MODAL SCREENSHOT) -->
+    <div id="tab-voice" class="intel-panel" hidden>
+      <div class="intel-panel-copy">
+        <div class="module-header-tag">
+          <span class="eyebrow" style="color:var(--gold);"><span></span>VOICE INTELLIGENCE</span>
+          <span class="module-permission-pill">Access: Voice Administrator / Admin Role Required to Authorise Proposals</span>
+        </div>
+        <h3>Voice &amp; AI Receptionist Guide Outcomes &amp; Commercial ROI</h3>
+        
+        <div class="modal-section-card">
+          <h5>Operational Purpose / What Voice &amp; AI Receptionist Does</h5>
+          <p>Configure inbound AI receptionist, voice numbers, and call logs.</p>
+        </div>
+
+        <div class="modal-section-card highlight">
+          <h5>Commercial outcomes you will get</h5>
+          <p>Measure time per successfully completed task, including review. Track failed runs, corrections, response time and provider cost.</p>
+        </div>
+
+        <div class="modal-section-card">
+          <h5>Key business benefits</h5>
+          <p>Clear steps for completing work in this section. Review results before moving to the next action.</p>
+        </div>
+
+        <div class="modal-section-card">
+          <h5>Operational Value</h5>
+          <p>Ensures 100% UK GDPR data sovereignty, strict human authorization before canonical CRM updates, and multi-tenant isolation.</p>
+        </div>
+
+        ${button('Request voice walkthrough', 'contact.html?interest=Intelligence%20walkthrough')}
+      </div>
+      <div>
+        <img src="assets/intel-voice-receptionist.png" alt="Voice Receptionist preview" loading="lazy">
+        <div style="text-align:center; margin-top:12px;">
+          <span class="fiduciary-badge" style="font-size:10px; margin:0;">● 24/7 NEURAL UK VOICE AGENT</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+`;
 
 const home = `<section class="hero"><video autoplay loop muted playsinline preload="auto" class="hero-video-bg"><source src="assets/videos/home-hero.mp4" type="video/mp4"></video><div class="video-overlay"></div><div class="wrap hero-grid"><div>${tag('SPECIALIST TALENT & GROWTH PARTNER')}<h1>Great people.<br>Stronger teams.<br><em>Lasting growth.</em></h1><p class="hero-copy">Headhunting, performance coaching and AI commercial intelligence.<br>Connected around your business across technical distribution, engineering, construction & industry.</p><p class="hero-foot">Technical Distribution <span>/</span> Engineering & Manufacturing <span>/</span> Construction & M&E <span>/</span> Facilities Management</p></div>${orbit}</div></section><div class="sector-strip"><div class="wrap"><span>BUILT FOR UK TECHNICAL INDUSTRY</span><strong>Technical Distribution</strong><strong>Engineering & Manufacturing</strong><strong>Construction & M&E</strong><strong>Facilities & Building Services</strong><strong>Commercial Contracting</strong></div></div><section class="wrap section">${sectionHead('YOUR AMBITION. OUR STARTING POINT.', 'Growth starts with people.<br>Progress takes partnership.', 'A critical branch vacancy. A sales team ready for higher conversion. A new territory to conquer. We bring the right support together around the challenge in front of you.')}${services}</section><section class="partnership-section"><div class="wrap partnership-grid"><div>${tag('A RELATIONSHIP THAT BUILDS')}<h2>Your next hire.<br>Your next chapter.</h2><p>Specialist recruitment is where many relationships begin. An ongoing partnership brings hiring, team development and market intelligence into one practical plan.</p>${button('How partnerships work', 'partnerships.html')}</div><div class="pathway"><div><span>01</span><h3>Understand the ambition</h3><p>Your priorities, your market and the cost of standing still.</p></div><div><span>02</span><h3>Build the right plan</h3><p>Agree the people, development and intelligence support you need.</p></div><div><span>03</span><h3>Stay close to progress</h3><p>Review what is working and adapt as your business moves forward.</p></div></div></div></section><section class="wrap section">${sectionHead('FIND YOUR STARTING POINT', 'What’s on your agenda?', 'Choose the challenge closest to yours. We’ll show you a useful place to begin.')}<div class="finder"><div class="finder-options" role="group" aria-label="Business challenge"><button data-challenge="hire" aria-pressed="true">I need a critical hire <span>↗</span></button><button data-challenge="team" aria-pressed="false">I want a stronger team <span>↗</span></button><button data-challenge="market" aria-pressed="false">I need a clearer market view <span>↗</span></button><button data-challenge="growth" aria-pressed="false">I’m planning sustained growth <span>↗</span></button></div><div class="finder-result" aria-live="polite"><span class="eyebrow" id="finder-label">YOUR STARTING POINT</span><h3 id="finder-title">A focused search.<br>A clearer hiring brief.</h3><p id="finder-text">Start with the commercial need behind the vacancy. We’ll define the role, map relevant talent and agree a discreet search approach.</p><a id="finder-link" class="text-link" href="talent.html">Explore headhunting ↗</a></div></div></section>${intelShowcase}<section class="wrap section faq-section">${sectionHead('A FEW THINGS WORTH KNOWING', 'Clarity from the start.')}<div class="faqs">${faq('Can we start with a single hire?', 'Yes. A focused search or specialist recruitment assignment can be the right starting point. Longer-term support is shaped around your needs, with the scope agreed before work begins.')}${faq('How do coaching and intelligence fit together?', 'Coaching helps your people act more effectively. Intelligence helps them focus on relevant talent, accounts and market opportunities. A partnership connects these activities to agreed business priorities.')}${faq('Is exclusivity available?', 'Selected strategic partnerships can include exclusivity. Sector, territory, competitor boundaries, duration and service scope are agreed in writing for the engagement.')}${faq('Do we need to buy the portal separately?', 'Portal access is included within selected partnerships and configured around the agreed work. We will explain the relevant capabilities and access as part of your proposal.')}</div></section>${cta()}`;
 

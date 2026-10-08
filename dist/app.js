@@ -153,3 +153,23 @@ if(checkForm){
   });
 }
 
+
+
+// Interactive Commercial Outcome Stepper
+document.querySelectorAll('[data-step-btn]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const stepNum = btn.dataset.stepBtn;
+    document.querySelectorAll('[data-step-btn]').forEach(b => b.classList.toggle('active', b === btn));
+    for (let i = 1; i <= 4; i++) {
+      const panel = document.querySelector('#outcome-step-' + i);
+      if (panel) panel.hidden = (String(i) !== String(stepNum));
+    }
+  });
+});
+document.querySelectorAll('[data-goto-step]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const targetStep = btn.dataset.gotoStep;
+    const targetBtn = document.querySelector(`[data-step-btn="${targetStep}"]`);
+    targetBtn?.click();
+  });
+});

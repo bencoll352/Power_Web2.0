@@ -75,3 +75,64 @@
 }
 
 
+
+
+/* Fiduciary Charter Callout */
+.fiduciary-charter-wrap { background: #0c120e; border-top: 1px solid rgba(228, 196, 91, 0.25); border-bottom: 1px solid rgba(228, 196, 91, 0.25); padding: 50px 0; margin-bottom: 40px; }
+.fiduciary-charter-card { background: rgba(22, 28, 23, 0.9); border: 1px solid rgba(228, 196, 91, 0.35); border-radius: 8px; padding: 40px; box-shadow: 0 16px 45px rgba(0, 0, 0, 0.35); }
+.fiduciary-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(228, 196, 91, 0.12); border: 1px solid rgba(228, 196, 91, 0.4); color: var(--gold); font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 6px 14px; border-radius: 999px; margin-bottom: 18px; }
+.fiduciary-badge .pulse-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); display: inline-block; box-shadow: 0 0 8px var(--gold); }
+.fiduciary-quote-lead { font-size: 21px; font-weight: 650; line-height: 1.5; color: #fff; margin: 0 0 28px 0; }
+.fiduciary-quote-lead strong { color: var(--gold); display: block; font-size: 14px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+.fiduciary-pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; border-top: 1px solid rgba(255, 255, 255, 0.12); padding-top: 24px; }
+.fiduciary-pillar-item strong { display: block; font-size: 13px; color: #fff; margin-bottom: 4px; }
+.fiduciary-pillar-item span { font-size: 11px; color: #a3ada0; line-height: 1.4; }
+
+/* Telemetry Ribbon & Metrics */
+.telemetry-ribbon { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; background: #161c18; border: 1px solid rgba(228, 196, 91, 0.25); border-radius: 6px; padding: 25px 30px; margin-bottom: 40px; text-align: center; }
+.telemetry-metric { border-right: 1px solid rgba(255, 255, 255, 0.1); padding: 0 15px; }
+.telemetry-metric:last-child { border-right: none; }
+.telemetry-val { font-size: 32px; font-weight: 800; color: var(--gold); margin-bottom: 6px; }
+.telemetry-lbl { font-size: 12px; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+.telemetry-sub { font-size: 11px; color: #9aa894; }
+
+.capability-transform-badge { margin-top: 20px; padding-top: 16px; border-top: 1px solid #d4dbc9; font-size: 12px; color: #62501a; font-weight: 600; line-height: 1.5; }
+
+/* Interactive Outcome Engine */
+.outcome-engine-wrap { background: #161c18; border: 1px solid rgba(228, 196, 91, 0.25); border-radius: 8px; overflow: hidden; margin-top: 30px; color: #fff; }
+.outcome-stepper-nav { display: grid; grid-template-columns: repeat(4, 1fr); background: rgba(0, 0, 0, 0.35); border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+.outcome-step-btn { background: transparent; border: none; border-right: 1px solid rgba(255, 255, 255, 0.08); padding: 20px 24px; text-align: left; cursor: pointer; transition: all 0.2s; position: relative; }
+.outcome-step-btn:last-child { border-right: none; }
+.outcome-step-btn.active { background: rgba(228, 196, 91, 0.12); }
+.outcome-step-btn.active::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--gold); }
+.outcome-step-num { font-size: 10px; font-weight: 800; color: var(--gold); letter-spacing: 1px; display: block; margin-bottom: 6px; }
+.outcome-step-name { font-size: 14px; font-weight: 700; color: #e3e8dc; }
+.outcome-stage-body { padding: 40px; display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 40px; align-items: center; }
+.outcome-stage-body[hidden] { display: none !important; }
+.outcome-stage-left h3 { font-size: 26px; color: #fff; margin-bottom: 14px; }
+.outcome-stage-left p { font-size: 14px; color: #b8c4b2; line-height: 1.7; margin-bottom: 20px; }
+.outcome-stage-points { list-style: none; padding: 0; margin: 0 0 25px 0; }
+.outcome-stage-points li { font-size: 13px; color: #d6ddd0; padding: 6px 0; }
+.outcome-stage-points li::before { content: '✓ '; color: var(--gold); font-weight: bold; }
+.outcome-metric-card { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(228, 196, 91, 0.3); border-radius: 6px; padding: 30px; text-align: center; }
+.outcome-metric-lead { font-size: 42px; font-weight: 800; color: var(--gold); margin-bottom: 8px; }
+.outcome-metric-title { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 10px; text-transform: uppercase; }
+.outcome-metric-desc { font-size: 12px; color: #a3ada0; line-height: 1.6; margin: 0; }
+
+/* Main Feature: Explainer Dossier Cards */
+.module-header-tag { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+.module-permission-pill { font-size: 10px; font-weight: 700; color: #b8c4b2; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); padding: 4px 10px; border-radius: 4px; }
+.modal-section-card { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 6px; padding: 14px 18px; margin-bottom: 12px; }
+.modal-section-card.highlight { background: rgba(228, 196, 91, 0.08); border-color: rgba(228, 196, 91, 0.35); }
+.modal-section-card h5 { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--gold); margin: 0 0 6px 0; }
+.modal-section-card p { font-size: 13px; color: #d6ddd0; line-height: 1.6; margin: 0; }
+.modal-section-card ul { margin: 0; padding-left: 18px; font-size: 12px; color: #c3cdc0; line-height: 1.65; }
+.modal-section-card li strong { color: var(--gold); }
+
+@media (max-width: 900px) {
+  .fiduciary-pillars { grid-template-columns: 1fr 1fr; }
+  .telemetry-ribbon { grid-template-columns: 1fr 1fr; gap: 15px; }
+  .telemetry-metric { border-right: none; }
+  .outcome-stepper-nav { grid-template-columns: 1fr 1fr; }
+  .outcome-stage-body { grid-template-columns: 1fr; gap: 25px; padding: 25px; }
+}
