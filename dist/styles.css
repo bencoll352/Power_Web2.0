@@ -27,37 +27,7 @@
   .intel-panel { grid-template-columns: 1fr; gap: 24px; padding: 22px; }
 }
 
-/* Commercial ROI Simulator Styles */
-.simulator-wrap { margin-top: 40px; margin-bottom: 70px; }
-.sim-grid { display: grid; grid-template-columns: 1.05fr 1.15fr; gap: 40px; align-items: start; }
-.sim-card { background: #ffffff; border: 1px solid var(--line); border-radius: 8px; padding: 36px; box-shadow: 0 8px 30px rgba(0,0,0,0.04); }
-.sim-card.dark { background: #161c18; color: #fff; border-color: rgba(255,255,255,0.12); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
-.sim-presets { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 28px; }
-.sim-preset-btn { background: #edf0e7; border: 1px solid var(--line); color: #364237; font-size: 12px; font-weight: 600; padding: 8px 14px; border-radius: 20px; transition: all 0.2s; }
-.sim-preset-btn:hover, .sim-preset-btn.active { background: #161c18; color: var(--gold); border-color: #161c18; }
-.sim-group { margin-bottom: 24px; }
-.sim-label-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; font-weight: 600; font-size: 14px; }
-.sim-val { font-size: 16px; font-weight: 750; color: #161c18; font-family: Manrope, sans-serif; }
-.sim-card.dark .sim-val { color: var(--gold); }
-.sim-slider { width: 100%; -webkit-appearance: none; appearance: none; height: 6px; border-radius: 3px; background: #d9ddd2; outline: none; margin: 6px 0; }
-.sim-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; border-radius: 50%; background: #161c18; cursor: pointer; border: 2px solid var(--gold); transition: transform 0.15s; }
-.sim-slider::-webkit-slider-thumb:hover { transform: scale(1.15); }
-.sim-hint { font-size: 11px; color: var(--muted); margin-top: 4px; }
-.sim-results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
-.sim-metric { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 20px; }
-.sim-metric.highlight { background: rgba(228,196,91,0.12); border-color: rgba(228,196,91,0.35); }
-.sim-metric-label { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: #a4b29e; margin-bottom: 8px; }
-.sim-metric.highlight .sim-metric-label { color: var(--gold); font-weight: 600; }
-.sim-metric-num { font-size: clamp(24px, 3vw, 36px); font-weight: 800; font-family: Manrope, sans-serif; line-height: 1.1; color: #fff; }
-.sim-metric.highlight .sim-metric-num { color: #fced98; }
-.sim-metric-sub { font-size: 11px; color: #8e9b89; margin-top: 6px; }
-.sim-breakdown-list { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; margin-bottom: 28px; }
-.sim-breakdown-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 13px; color: #c4d0be; }
-.sim-breakdown-item strong { color: #fff; font-family: Manrope, sans-serif; }
-.sim-cta-band { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 6px; padding: 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-@media (max-width: 980px) {
-  .sim-grid { grid-template-columns: 1fr; gap: 30px; }
-}
+
 
 /* Floating HUD & Live Badges */
 .hud-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
