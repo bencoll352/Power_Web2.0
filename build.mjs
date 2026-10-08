@@ -61,7 +61,81 @@ const simulator = pageHero('COMMERCIAL ROI ENGINE', 'Model the upside.<br><em>Qu
 // Territory Exclusivity Checker Page
 const check = pageHero('TERRITORY EXCLUSIVITY AUDIT', 'One client per sector.<br><em>One partner per territory.</em>', 'Check if your UK industry and geographic territory are open under Power-Up Talent’s strict single-client exclusivity policy.', 'platform-video.mp4') + `<section class="wrap section">${sectionHead('CHECK AVAILABILITY IN CONFIDENCE', 'Tell us your industry and area.<br>We will verify if it’s open.', 'We confirm availability in confidence within one working day. If we already hold the mandate for your sector and territory, we will say so immediately.')}<div class="check-grid"><div class="check-form"><form id="territory-check-form"><div class="form-grid"><label>Your Name<input name="name" required placeholder="e.g. David Miller"></label><label>Job Title<input name="title" required placeholder="e.g. Managing Director"></label></div><div class="form-grid"><label>Company Name<input name="company" required placeholder="e.g. Apex Technical Group"></label><label>Work Email<input name="email" type="email" required placeholder="d.miller@company.co.uk"></label></div><div class="form-grid"><label>Industry Sector<input name="industry" required placeholder="e.g. Technical Distribution, HVAC, M&E"></label><label>Geographic Region / Postcode<input name="region" required placeholder="e.g. Midlands, South East, North West"></label></div><label>Primary Priority<select name="priority"><option>Elite Executive Search & Leadership</option><option>Branch & Sales Performance Coaching</option><option>CorePlatform Intelligence & CRM</option><option>Comprehensive Growth Partnership (RPO)</option></select></label><label>Growth Objectives in Brief<textarea name="plan" rows="4" placeholder="Roles you need, margin you want to defend, or territory expansion plan..."></textarea></label><button class="button" type="submit">Audit My Territory ${arrow}</button><div id="territory-result" hidden style="margin-top:20px; padding:18px; background:#e2f3e8; border:1px solid #7bc698; border-radius:4px;"><h3 style="font-size:16px; color:#18532c; margin-bottom:6px;">Exclusivity Check Dispatched</h3><p id="territory-status-text" style="font-size:13px; color:#236137; margin:0;"></p></div><p class="form-small">Strictly confidential. Verified within one business day. We routinely sign bilateral NDAs before discussing commercial details. <a href="https://power-uptalent.co.uk/privacy">Privacy policy</a>.</p></form></div><div class="check-sidebar"><div class="check-card"><span class="eyebrow" style="color:var(--gold);"><span></span>WHAT HAPPENS NEXT</span><h3 style="font-size:20px; color:#fff; margin-bottom:12px;">The Verification Journey</h3><ul class="check-steps"><li><strong>Within 1 working day</strong> — we confirm whether your region and industry sector are open.</li><li><strong>45-Minute Discovery</strong> — confidential session on your commercial roadmap, margin targets, and talent gaps.</li><li><strong>Diagnostic Review</strong> — talent scarcity mapping and territory whitespace review before any proposal.</li><li><strong>Written Mandate</strong> — defined sector boundary, territory exclusivity, agreed deliverables, and metrics in writing.</li></ul></div><div class="check-card subtle"><span class="eyebrow"><span></span>THE EXCLUSIVITY RULE</span><h3 style="font-size:18px; margin-bottom:10px;">Why Single-Client Exclusivity?</h3><p style="font-size:13px; color:var(--muted); line-height:1.6;">We never represent your direct local competitors. When we partner with your business in a territory, our headhunting and intelligence assets are dedicated exclusively to your market leadership.</p></div></div></div></section>${cta()}`;
 
-const about = pageHero('ABOUT POWER-UP TALENT', 'People at the heart.<br><em>Progress in mind.</em>', 'A specialist talent, development and commercial intelligence partner for businesses across technical distribution, engineering, manufacturing, construction and facilities management.', 'about-hero.mp4') + `<section class="wrap section split"><div>${tag('OUR PURPOSE')}<h2>Build capability<br>that stays.</h2></div><div><p class="large-copy">Strong businesses need capable people, confident leaders and a clear understanding of their market.</p><p>Power-Up Talent brings specialist recruitment together with coaching and commercial intelligence. Our purpose is to help clients address immediate needs while building a stronger foundation for the future.</p><p>We work from the commercial context: the branch that needs leadership, the team that needs support and the territory that needs a plan.</p></div></section><section class="wrap section">${sectionHead('HOW WE WORK', 'Close to your business.<br>Clear about our role.')}${cards([['01', 'Sector understanding', 'Relevant questions, informed research and an appreciation of the pressures on technical commercial teams.'], ['02', 'Discretion & respect', 'Professional conversations that respect both client priorities and candidate aspirations.'], ['03', 'Human judgement', 'Technology supports research and visibility. People remain responsible for advice, shortlists and decisions.']])}</section>${cta()}`;
+const about = pageHero('ABOUT POWER-UP TALENT', 'People at the heart.<br><em>Progress in mind.</em>', 'A specialist talent, development and commercial intelligence partner for businesses across technical distribution, engineering, manufacturing, construction and facilities management.', 'about-hero.mp4') + `
+<section class="wrap section split">
+  <div>
+    ${tag('WHY WE DO WHAT WE DO')}
+    <h2>Built for the businesses<br>that keep Britain moving.</h2>
+  </div>
+  <div>
+    <p class="large-copy">Technical distribution, wholesale, engineering and contracting form the vital backbone of the UK economy. Yet for years, these sectors have been treated by generic recruitment agencies as transactional volume feeds.</p>
+    <p>We created Power-Up Talent to fundamentally challenge and change that model. We do what we do because we believe high-consequence technical businesses deserve a commercial growth partner who truly understands trade counter dynamics, regional rebate pressures, and the critical importance of branch-level leadership.</p>
+    <p>We do not treat talent as commodities or trade away your margins. Our mission is to build lasting team capability, protect gross margins, and empower the people who drive British industrial commerce.</p>
+  </div>
+</section>
+
+<section class="wrap section">
+  ${sectionHead('WHY WE MAKE A DIFFERENCE', 'A fundamentally different<br>commercial standard.', 'Three structural commitments that set Power-Up Talent apart from conventional transactional recruitment agencies.')}
+  ${cards([
+    ['01', 'Radical Single-Client Loyalty', 'We never play both sides of the street. Traditional recruiters place someone with you today, then recruit for your direct competitor down the road tomorrow. Under our strict single-client territory policy, our search and intelligence assets are dedicated exclusively to your market leadership.', ['Guaranteed non-compete in your sector & region', 'Zero conflict of interest across client accounts', 'Strict protection of your existing workforce']],
+    ['02', 'Commercial Context Over Keywords', 'A successful appointment requires far more than matching keywords on a CV. We evaluate candidates against commercial track record, gross margin awareness, trade rebate pressure, and cultural grit within your territory.', ['In-depth candidate DNA profiling', 'Track record of margin defense and price discipline', 'Cultural and leadership fit assessment']],
+    ['03', 'One Connected Growth Engine', 'Recruitment in isolation leaves long-term value on the table. We fuse executive headhunting with 12-month performance coaching and live Companies House market intelligence, ensuring talent stays, integrates, and delivers measurable ROI.', ['12-month commercial coaching sprints', 'Trade desk routine reinforcement', 'Live Companies House market whitespace mapping']]
+  ])}
+</section>
+
+<section class="partnership-section">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        ${tag('OUR CULTURE & CORE VALUES')}
+        <h2>What we stand for.<br>How we operate.</h2>
+      </div>
+      <p>The operating creed that guides every executive conversation, client partnership, and candidate engagement.</p>
+    </div>
+    <div class="cards">
+      <article>
+        <span class="card-num">01 / INTEGRITY</span>
+        <h3>Uncompromising Honesty</h3>
+        <p>We provide direct, unvarnished commercial advice. If a candidate is not the right fit, or if your territory plan has blind spots, we tell you the truth rather than chasing a quick fee.</p>
+        <ul>
+          <li>Zero placement-driven bias</li>
+          <li>Transparent communication at every stage</li>
+          <li>Strict bilateral NDA confidentiality</li>
+        </ul>
+      </article>
+      <article>
+        <span class="card-num">02 / GRIT</span>
+        <h3>Trade Counter Respect</h3>
+        <p>We respect the hard-working reality of trade counters, manufacturing plants, and engineering sites. We speak your language and operate without corporate jargon or empty buzzwords.</p>
+        <ul>
+          <li>Decades of genuine sector immersion</li>
+          <li>Real appreciation of branch margin pressures</li>
+          <li>Practical solutions built for the day job</li>
+        </ul>
+      </article>
+      <article>
+        <span class="card-num">03 / PARTNERSHIP</span>
+        <h3>Long-Term Capability</h3>
+        <p>We measure our success not by placement volume, but by your EBITDA expansion, team retention, and market share growth over years of collaboration.</p>
+        <ul>
+          <li>Single-client territory dedication</li>
+          <li>Post-placement coaching support</li>
+          <li>Aligned commercial outcomes</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="wrap section">
+  ${sectionHead('HUMAN JUDGEMENT FIRST', 'Technology informs.<br>People decide.', 'In an era of automated recruitment algorithms, we believe the highest-consequence decisions demand seasoned human insight.')}
+  ${cards([
+    ['01', 'Deep Sector Understanding', 'Informed research, relevant commercial questioning, and deep respect for the daily pressures on technical commercial teams.', ['Specialist industry immersion', 'Regional territory awareness', 'Commercial context mapping']],
+    ['02', 'Discretion & Dignity', 'Professional, respectful conversations that protect client strategy and candidate career confidentiality at every step.', ['Confidential candidate representation', 'Brand protection for hiring clients', 'Discreet search execution']],
+    ['03', 'Human-Governed Intelligence', 'Live Companies House data and AI platforms provide visibility across 5.2M+ UK entities, but experienced human directors lead every interview, evaluation, and recommendation.', ['AI-assisted market mapping', 'Human-led candidate assessment', 'Bespoke executive onboarding plans']]
+  ])}
+</section>
+${cta()}`;
 
 // Dual-Path Contact Page
 const contact = `<section class="wrap contact-layout"><div>${tag('LET’S START WITH YOU')}<h1>What’s your<br><em>next chapter?</em></h1><p class="large-copy">A critical vacancy. A stronger team.<br>A long-term commercial partnership.</p><p>Tell us what you have in mind and we will start a confidential conversation about the right support.</p><a class="email-link" href="mailto:info@power-uptalent.co.uk">info@power-uptalent.co.uk ↗</a><div class="contact-note"><h3>Single-Client Exclusivity</h3><p>We confirm availability within one working day and routinely sign non-disclosure agreements before reviewing details.</p></div></div><div><div class="path-tabs" role="tablist"><button type="button" class="path-tab-btn active" data-path-tab="client-path">PATH 1: I am hiring or planning growth</button><button type="button" class="path-tab-btn" data-path-tab="candidate-path">PATH 2: I am exploring my next move</button></div><div id="client-path" class="path-panel active"><form id="enquiry-form"><h2>Client Commercial Brief</h2><p>Prepares an email in your mail app for you to review and send.</p><div class="form-grid"><label>Your name<input name="name" autocomplete="name" required placeholder="Full name"></label><label>Company<input name="company" autocomplete="organization" placeholder="Business name"></label></div><label>Email address<input name="email" type="email" autocomplete="email" required placeholder="you@company.co.uk"></label><label>Requirement Type<select name="interest"><option>Growth partnership</option><option>Critical hire</option><option>Embedded hiring</option><option>Coaching</option><option>Intelligence walkthrough</option><option>Territory exclusivity audit</option></select></label><label>Growth or Hiring Brief<textarea name="message" rows="5" required placeholder="Target roles, regional territory, key challenges or growth targets..."></textarea></label><button class="button" type="submit">Prepare my email ${arrow}</button><p class="form-small">Prepared in your browser. Nothing stored without consent. <a href="https://power-uptalent.co.uk/privacy">Privacy policy</a>.</p><div id="email-result" hidden aria-live="polite"><h3>Your brief is ready</h3><p>Review and send it in your email app. If it hasn’t opened, copy below and email to info@power-uptalent.co.uk.</p><textarea id="email-copy" readonly aria-label="Prepared brief"></textarea><button id="copy-brief" type="button" class="button secondary">Copy brief</button><p id="copy-status" role="status"></p></div></form></div><div id="candidate-path" class="path-panel"><form id="candidate-form"><h2>Confidential Candidate Inquiry</h2><p>Strictly private career conversation with our executive headhunting team.</p><div class="form-grid"><label>Your name<input name="cand_name" required placeholder="Full name"></label><label>Current / Target Role<input name="cand_role" placeholder="e.g. Regional Director, Branch Manager"></label></div><label>Confidential Email<input name="cand_email" type="email" required placeholder="personal@email.com"></label><label>Phone Number (Mobile preferred)<input name="cand_phone" placeholder="07..."></label><label>Current Sector & Target Locations<textarea name="cand_notes" rows="4" placeholder="Wholesale, engineering, construction, target salary, preferred region..."></textarea></label><a class="button" href="mailto:info@power-uptalent.co.uk?subject=Confidential%20Candidate%20Career%20Conversation">Start Private Discussion ${arrow}</a><p class="form-small">100% confidential. No employer contact without your express written authorization.</p></form></div></div></section>`;
