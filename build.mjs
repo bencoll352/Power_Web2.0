@@ -1,11 +1,11 @@
 import fs from 'node:fs';
+import { partnershipHome, aiServicesPage, refreshPage, refreshShared } from './site-offer.mjs';
 
 const nav = [
   ['partnerships', 'Partnerships'],
   ['talent', 'Headhunting'],
   ['coaching', 'Coaching'],
-  ['intelligence', 'Intelligence'],
-  ['check', 'Territory Check'],
+  ['intelligence', 'AI Business Services'],
   ['about', 'About']
 ];
 
@@ -663,6 +663,11 @@ const pages = [
 ];
 
 fs.mkdirSync('dist', { recursive: true });
-for (const [id, t, d, b] of pages) fs.writeFileSync(`dist/${id}.html`, shell(id, t, d, b));
+for (const [id, t, d, b] of pages) {
+  const content = id === 'index' ? partnershipHome : id === 'intelligence' ? aiServicesPage : refreshPage(id, b);
+  const title = id === 'intelligence' ? 'AI Business Services' : t;
+  const description = id === 'index' ? 'Elite recruitment and headhunting, coaching and AI business services. A partnership configured around your UK business.' : id === 'intelligence' ? 'CRM, communications, sales intelligence, business delivery and automation within a tailored Power-Up partnership.' : d;
+  fs.writeFileSync(`dist/${id}.html`, refreshShared(shell(id, title, description, content)));
+}
 fs.writeFileSync('dist/404.html', shell('404', 'Page not found', 'Find your next step with Power-Up Talent.', pageHero('PAGE NOT FOUND', 'Let’s find your<br><em>next step.</em>', 'The page you’re looking for isn’t here. Use the navigation to explore our services.', 'about-hero.mp4')));
 console.log(`Built ${pages.length} pages and 404 page.`);
