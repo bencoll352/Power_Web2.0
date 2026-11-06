@@ -1,0 +1,57 @@
+{
+  "hosting": {
+    "site": "power-up-talent",
+    "public": "dist",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "/partnerships",
+        "destination": "/partnerships.html"
+      },
+      {
+        "source": "/talent",
+        "destination": "/talent.html"
+      },
+      {
+        "source": "/academy",
+        "destination": "/coaching.html"
+      },
+      {
+        "source": "/coaching",
+        "destination": "/coaching.html"
+      },
+      {
+        "source": "/intelligence",
+        "destination": "/intelligence.html"
+      },
+      {
+        "source": "/platform",
+        "destination": "/intelligence.html"
+      },
+      {
+        "source": "/why-us",
+        "destination": "/partnerships.html"
+      },
+      {
+        "source": "/claim",
+        "destination": "/check.html"
+      },
+      {
+        "source": "/check",
+        "destination": "/check.html"
+      },
+      {
+        "source": "/about",
+        "destination": "/about.html"
+      },
+      {
+        "source": "/contact",
+        "destination": "/contact.html"
+      }
+    ]
+  }
+}
