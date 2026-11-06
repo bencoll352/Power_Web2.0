@@ -1,5 +1,13 @@
 # Power-Up Talent — partnership website
 
+## Professional service pages and dashboard previews
+
+Seven service pages (`crm`, `communications`, `sales-intelligence`, `business-delivery`, `automation`, `ai-team`, `marketing-social-media`) share a Power-Up corporate design. The directory is at `intelligence.html` and the interactive sample workspace is at `dashboard.html`. Dashboard tabs, search and status filters run locally with illustrative data; they do not connect to or mutate the service apps.
+
+Templates are in `professional-site.mjs`, with styles in `dist/professional.css` and preview interactions in `dist/dashboard-preview.js`. See `docs/DASHBOARD-DESIGN-ADOPTION.md` for the supplied ngx-admin design reference, licence and service repository review.
+
+Run `npm run build` and `npm run check`. With the preview server running, `node tests/site-browser.mjs` runs responsive and interaction checks using an installed Playwright and Chromium. Optional `PLAYWRIGHT_MODULE`, `CHROMIUM_PATH`, `TEST_URL` and `SCREENSHOT_DIR` environment variables support an external QA installation without adding browser binaries to this repository.
+
 ## November 2026 service update
 
 The homepage now presents Elite Recruitment & Headhunting, Coaching & Development, and AI Business Services. Seven connected service cards link to CRM, Communications, Sales & Intelligence, Business Delivery, Automation, AI Team and Marketing & Social Media on `intelligence.html`, using branded service icons in `dist/assets/services-v2/`. Service enquiry links preselect the relevant option on the contact page.
