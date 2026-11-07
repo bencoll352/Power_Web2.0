@@ -14,6 +14,7 @@
       { "source": "/academy", "destination": "/coaching.html" },
       { "source": "/coaching", "destination": "/coaching.html" },
       { "source": "/intelligence", "destination": "/intelligence.html" },
+      { "source": "/platforms", "destination": "/intelligence.html" },
       { "source": "/platform", "destination": "/intelligence.html" },
       { "source": "/why-us", "destination": "/partnerships.html" },
       { "source": "/claim", "destination": "/check.html" },

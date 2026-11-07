@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://power-up-talent.web.app/sitemap.xml

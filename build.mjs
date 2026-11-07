@@ -1,4 +1,4 @@
-﻿import fs from 'node:fs';
+import fs from 'node:fs';
 import { partnershipHome, aiServicesPage, refreshPage, refreshShared } from './site-offer.mjs';
 import { servicePages, dashboardPage, professionalPage, professionalShell } from './professional-site.mjs';
 
@@ -668,9 +668,33 @@ const pages = [
 fs.mkdirSync('dist', { recursive: true });
 for (const [id, t, d, b] of pages) {
   const content = id === 'index' ? partnershipHome : id === 'intelligence' ? aiServicesPage : refreshPage(id, b);
-  const title = id === 'intelligence' ? 'AI Business Services' : t;
-  const description = id === 'index' ? 'Elite recruitment and headhunting, coaching and AI business services. A partnership configured around your UK business.' : id === 'intelligence' ? 'CRM, communications, sales intelligence, business delivery, automation, AI team and marketing within a tailored Power-Up partnership.' : d;
+  const title = id === 'index' ? 'Your business. Connected.' : id === 'intelligence' ? 'AI & Business Platforms' : t;
+  const description = id === 'index' ? 'Seven platforms for managing relationships, winning work and delivering it — alongside elite recruitment and coaching.' : id === 'intelligence' ? 'CRM, Communications, Sales & Intelligence, Business Delivery, Automation, AI Team and Marketing & Social Media platforms.' : d;
   fs.writeFileSync(`dist/${id}.html`, professionalShell(refreshShared(shell(id, title, description, professionalPage(id, content))), id));
 }
-fs.writeFileSync('dist/404.html', refreshShared(shell('404', 'Page not found', 'Find your next step with Power-Up Talent.', pageHero('PAGE NOT FOUND', 'Let’s find your<br><em>next step.</em>', 'The page you’re looking for isn’t here. Use the navigation to explore our services.', 'about-hero.mp4'))));
-console.log(`Built ${pages.length} pages and 404 page.`);
+fs.writeFileSync('dist/404.html', professionalShell(refreshShared(shell('404', 'Page not found', 'Find your next step with Power-Up Talent.', pageHero('PAGE NOT FOUND', 'Let’s find your<br><em>next step.</em>', 'The page you’re looking for isn’t here. Use the navigation to explore our services.', 'about-hero.mp4'))), '404'));
+
+const siteBaseUrl = 'https://power-up-talent.web.app';
+const sitemapRoutes = [
+  '/',
+  '/partnerships',
+  '/talent',
+  '/coaching',
+  '/intelligence',
+  '/platforms',
+  '/check',
+  '/about',
+  '/contact',
+  '/dashboard',
+  '/crm',
+  '/communications',
+  '/sales-intelligence',
+  '/business-delivery',
+  '/automation',
+  '/ai-team',
+  '/marketing-social-media'
+];
+const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemapRoutes.map(r => `  <url><loc>${siteBaseUrl}${r}</loc></url>`).join('\n')}\n</urlset>\n`;
+fs.writeFileSync('dist/sitemap.xml', sitemapXml);
+fs.writeFileSync('dist/robots.txt', `User-agent: *\nAllow: /\nSitemap: ${siteBaseUrl}/sitemap.xml\n`);
+console.log(`Built ${pages.length} pages, 404 page, sitemap.xml and robots.txt.`);
