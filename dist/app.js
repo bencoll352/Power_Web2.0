@@ -1,168 +1,434 @@
-const toggle=document.querySelector('.menu-toggle');const nav=document.querySelector('#navigation');
-toggle?.addEventListener('click',()=>{const open=toggle.getAttribute('aria-expanded')!=='true';toggle.setAttribute('aria-expanded',String(open));nav.classList.toggle('open',open)});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){nav.classList.remove('open');toggle?.setAttribute('aria-expanded','false')}});
-const challenges={hire:['A focused search.<br>A clearer hiring brief.','Start with the commercial need behind the vacancy. We’ll define the role, map relevant talent and agree a discreet search approach.','talent.html','Explore headhunting'],team:['Practical coaching.<br>Stronger everyday habits.','Identify where your people need support, then build a programme around sales, branch performance or leadership.','coaching.html','Explore coaching'],market:['Relevant research.<br>A more focused plan.','Explore the talent, accounts and market signals that matter to your business, with human judgement guiding the next step.','intelligence.html','Explore intelligence'],growth:['Connected support.<br>A lasting partnership.','Bring recurring hiring, development and intelligence together around your priorities, with clear responsibilities and regular reviews.','partnerships.html','Explore partnerships']};
-document.querySelectorAll('[data-challenge]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-challenge]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));const [title,text,url,label]=challenges[b.dataset.challenge];document.querySelector('#finder-title').innerHTML=title;document.querySelector('#finder-text').textContent=text;const a=document.querySelector('#finder-link');a.href=url;a.textContent=label+' ↗'}));
-const form=document.querySelector('#enquiry-form');if(form){const sp=new URLSearchParams(location.search);const interest=sp.get('interest');if(interest&&Array.from(form.elements.interest.options).some(o=>o.value===interest))form.elements.interest.value=interest;const msg=sp.get('message');if(msg&&form.elements.message)form.elements.message.value=msg;form.addEventListener('submit',e=>{e.preventDefault();if(!form.reportValidity())return;const d=new FormData(form);const body=`Hello Power-Up Talent,\n\nI’d like to discuss: ${d.get('interest')}\n\nName: ${d.get('name')}\nCompany: ${d.get('company')||'Not specified'}\nEmail: ${d.get('email')}\n\n${d.get('message')}\n\nKind regards,\n${d.get('name')}`;document.querySelector('#email-copy').value=body;document.querySelector('#email-result').hidden=false;location.href=`mailto:info@power-uptalent.co.uk?subject=${encodeURIComponent('Website enquiry — '+d.get('interest'))}&body=${encodeURIComponent(body)}`});document.querySelector('#copy-brief').addEventListener('click',async()=>{const text=document.querySelector('#email-copy');try{await navigator.clipboard.writeText(text.value);document.querySelector('#copy-status').textContent='Brief copied. Paste it into your email.'}catch{text.focus();text.select();document.querySelector('#copy-status').textContent='Select and copy the brief above.'}})}
+const toggle = document.querySelector('.menu-toggle');
+const nav = document.querySelector('#navigation');
+const serviceMenu = document.querySelector('.service-menu');
 
-document.querySelectorAll('[data-intel-tab]').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('[data-intel-tab]').forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));const targetId=btn.dataset.intelTab;document.querySelectorAll('.intel-panel').forEach(p=>{p.hidden=(p.id!==targetId)})})});
+toggle?.addEventListener('click', () => {
+  const open = toggle.getAttribute('aria-expanded') !== 'true';
+  toggle.setAttribute('aria-expanded', String(open));
+  nav?.classList.toggle('open', open);
+});
 
-// Interactive Commercial Growth & Territory ROI Engine / Simulator
-function initSimulator(){
-  const branchCountEl=document.querySelector('#sim-branches');
-  const turnoverEl=document.querySelector('#sim-turnover');
-  const marginEl=document.querySelector('#sim-margin');
-  const teamSizeEl=document.querySelector('#sim-team');
-  const vacantSeatsEl=document.querySelector('#sim-vacant');
-  if(!branchCountEl||!turnoverEl)return;
-
-  const presets={
-    electrical:{branches:4,turnover:3.5,margin:23,team:4,vacant:1},
-    engineering:{branches:2,turnover:5.5,margin:32,team:5,vacant:1},
-    construction:{branches:3,turnover:7.0,margin:19,team:6,vacant:2},
-    facilities:{branches:5,turnover:4.2,margin:26,team:5,vacant:1},
-    distribution:{branches:6,turnover:4.8,margin:21,team:4,vacant:2}
-  };
-
-  function fmt(val){
-    if(val>=1000000)return '£'+(val/1000000).toFixed(2)+'M';
-    if(val>=1000)return '£'+Math.round(val/1000).toLocaleString('en-GB')+'k';
-    return '£'+Math.round(val).toLocaleString('en-GB');
-  }
-
-  function update(){
-    const branches=parseFloat(branchCountEl.value);
-    const turnover=parseFloat(turnoverEl.value)*1000000;
-    const margin=parseFloat(marginEl.value)/100;
-    const teamSize=parseFloat(teamSizeEl.value);
-    const vacant=parseFloat(vacantSeatsEl.value);
-
-    document.querySelector('#disp-branches').textContent=branches+(branches===1?' branch':' branches');
-    document.querySelector('#disp-turnover').textContent='£'+parseFloat(turnoverEl.value).toFixed(1)+'M';
-    document.querySelector('#disp-margin').textContent=parseFloat(marginEl.value)+'%';
-    document.querySelector('#disp-team').textContent=teamSize+' people';
-    document.querySelector('#disp-vacant').textContent=vacant+(vacant===1?' seat':' seats');
-
-    const totalTurnover=turnover*branches;
-    const perRepTurnover=turnover/(teamSize||1);
-    const annualLeakage=vacant*perRepTurnover*0.48;
-    const grossMarginLeakage=annualLeakage*margin;
-    const territoryWhitespace=totalTurnover*0.18;
-
-    const recoveredTurnover=annualLeakage*0.85;
-    const coachingTurnover=totalTurnover*0.08;
-    const intelligenceTurnover=totalTurnover*0.04;
-    const totalNewTurnover=recoveredTurnover+coachingTurnover+intelligenceTurnover;
-    const grossProfitUplift=totalNewTurnover*margin;
-
-    const estInvestment=Math.min(85000,Math.max(18000,totalTurnover*0.012));
-    const roiMultiple=Math.max(3.5,grossProfitUplift/estInvestment).toFixed(1);
-
-    const elLeakage=document.querySelector('#metric-leakage');
-    const elProfit=document.querySelector('#metric-profit');
-    const elRoi=document.querySelector('#metric-roi');
-    const elWhitespace=document.querySelector('#metric-whitespace');
-
-    if(elLeakage)elLeakage.textContent=fmt(grossMarginLeakage);
-    if(elProfit)elProfit.textContent=fmt(grossProfitUplift);
-    if(elRoi)elRoi.textContent=roiMultiple+'x';
-    if(elWhitespace)elWhitespace.textContent=fmt(territoryWhitespace);
-
-    const elSubLeak=document.querySelector('#sub-leakage');
-    if(elSubLeak)elSubLeak.textContent=`from ${fmt(annualLeakage)} unserviced turnover`;
-
-    const elSubProfit=document.querySelector('#sub-profit');
-    if(elSubProfit)elSubProfit.textContent=`from ${fmt(totalNewTurnover)} added commercial revenue`;
-
-    const elBreakRecovered=document.querySelector('#break-recovered');
-    if(elBreakRecovered)elBreakRecovered.textContent=fmt(recoveredTurnover*margin);
-
-    const elBreakCoaching=document.querySelector('#break-coaching');
-    if(elBreakCoaching)elBreakCoaching.textContent=fmt(coachingTurnover*margin);
-
-    const elBreakIntel=document.querySelector('#break-intel');
-    if(elBreakIntel)elBreakIntel.textContent=fmt(intelligenceTurnover*margin);
-
-    const briefBtn=document.querySelector('#sim-export-btn');
-    if(briefBtn){
-      const summary=`ROI Modeling: ${branches} branches @ £${(turnover/1000000).toFixed(1)}M (${margin*100}% margin). Vacant seats: ${vacant}. Projected gross profit upside: ${fmt(grossProfitUplift)} (${roiMultiple}x ROI multiple).`;
-      briefBtn.href=`contact.html?interest=Growth%20partnership&message=${encodeURIComponent(summary)}`;
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    nav?.classList.remove('open');
+    toggle?.setAttribute('aria-expanded', 'false');
+    if (serviceMenu?.hasAttribute('open')) {
+      serviceMenu.removeAttribute('open');
+      serviceMenu.querySelector('summary')?.focus();
     }
   }
+});
 
-  [branchCountEl,turnoverEl,marginEl,teamSizeEl,vacantSeatsEl].forEach(inp=>{
-    inp?.addEventListener('input',update);
+document.addEventListener('click', e => {
+  if (serviceMenu?.hasAttribute('open') && !serviceMenu.contains(e.target)) {
+    serviceMenu.removeAttribute('open');
+  }
+});
+
+// Challenge finder on legacy/interactive blocks
+const challenges = {
+  hire: [
+    'A focused search.<br>A clearer hiring brief.',
+    'Start with the commercial need behind the vacancy. We’ll define the role, map relevant talent and agree a discreet search approach.',
+    'talent.html',
+    'Explore headhunting'
+  ],
+  team: [
+    'Practical coaching.<br>Stronger everyday habits.',
+    'Identify where your people need support, then build a programme around sales, branch performance or leadership.',
+    'coaching.html',
+    'Explore coaching'
+  ],
+  market: [
+    'Seven platforms.<br>Practical workflows.',
+    'Start with the platform you need most across CRM, Communications, Sales & Intelligence, Delivery, Automation, AI Team and Marketing.',
+    'platforms.html',
+    'Explore the platforms'
+  ],
+  growth: [
+    'Connected support.<br>A lasting partnership.',
+    'Bring recurring hiring, development and business platforms together around your priorities, with clear responsibilities and regular reviews.',
+    'partnerships.html',
+    'Explore partnerships'
+  ]
+};
+
+document.querySelectorAll('[data-challenge]').forEach(b =>
+  b.addEventListener('click', () => {
+    document.querySelectorAll('[data-challenge]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    const item = challenges[b.dataset.challenge];
+    if (!item) return;
+    const [title, text, url, label] = item;
+    const titleEl = document.querySelector('#finder-title');
+    const textEl = document.querySelector('#finder-text');
+    const linkEl = document.querySelector('#finder-link');
+    if (titleEl) titleEl.innerHTML = title;
+    if (textEl) textEl.textContent = text;
+    if (linkEl) {
+      linkEl.href = url;
+      linkEl.textContent = label + ' ↗';
+    }
+  })
+);
+
+// Helper for field-level validation without discarding user input
+function setFieldError(input, message) {
+  if (!input) return;
+  const label = input.closest('label') || input.parentElement;
+  let err = label?.querySelector('.field-error');
+  if (!message) {
+    input.removeAttribute('aria-invalid');
+    if (err) err.remove();
+    return;
+  }
+  input.setAttribute('aria-invalid', 'true');
+  if (!err && label) {
+    err = document.createElement('span');
+    err.className = 'field-error';
+    err.setAttribute('role', 'alert');
+    label.appendChild(err);
+  }
+  if (err) err.textContent = message;
+}
+
+function validateField(input) {
+  if (!input) return true;
+  const val = (input.value || '').trim();
+  if (input.hasAttribute('required') && !val) {
+    setFieldError(input, 'Please complete this field.');
+    return false;
+  }
+  if (input.type === 'email' && val && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+    setFieldError(input, 'Please enter a valid email address (for example, name@company.co.uk).');
+    return false;
+  }
+  if (input.name === 'message' && val && val.length < 10) {
+    setFieldError(input, 'Please add a short summary (at least 10 characters) so we can direct your enquiry.');
+    return false;
+  }
+  setFieldError(input, '');
+  return true;
+}
+
+function bindCopyButton(btnSelector, textareaSelector, statusSelector) {
+  const btn = document.querySelector(btnSelector);
+  const text = document.querySelector(textareaSelector);
+  const status = document.querySelector(statusSelector);
+  if (!btn || !text) return;
+  btn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(text.value);
+      if (status) status.textContent = 'Copied to clipboard. Paste it into an email to info@power-uptalent.co.uk.';
+    } catch {
+      text.focus();
+      text.select();
+      if (status) status.textContent = 'Text selected above — press Ctrl+C (or Cmd+C) to copy.';
+    }
   });
+}
 
-  document.querySelectorAll('[data-sim-preset]').forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      document.querySelectorAll('[data-sim-preset]').forEach(b=>b.classList.remove('active'));
-      btn.classList.add('active');
-      const p=presets[btn.dataset.simPreset];
-      if(p){
-        branchCountEl.value=p.branches;
-        turnoverEl.value=p.turnover;
-        marginEl.value=p.margin;
-        teamSizeEl.value=p.team;
-        vacantSeatsEl.value=p.vacant;
-        update();
+// Dual-path tab switcher on Contact page
+function activateContactPath(targetId) {
+  const buttons = document.querySelectorAll('[data-path-tab]');
+  const panels = document.querySelectorAll('.path-panel');
+  if (!buttons.length || !panels.length) return;
+  buttons.forEach(b => {
+    const isMatch = b.dataset.pathTab === targetId;
+    b.classList.toggle('active', isMatch);
+    b.setAttribute('aria-selected', String(isMatch));
+  });
+  panels.forEach(p => {
+    const isMatch = p.id === targetId;
+    p.classList.toggle('active', isMatch);
+    p.hidden = !isMatch;
+  });
+}
+
+document.querySelectorAll('[data-path-tab]').forEach(btn => {
+  btn.addEventListener('click', () => activateContactPath(btn.dataset.pathTab));
+});
+
+// Interest normalization map for incoming product/service CTAs
+const interestAliases = {
+  crm: 'AI services: CRM',
+  communications: 'AI services: Communications',
+  sales: 'AI services: Sales & Intelligence',
+  'sales-intelligence': 'AI services: Sales & Intelligence',
+  delivery: 'AI services: Business Delivery',
+  'business-delivery': 'AI services: Business Delivery',
+  automation: 'AI services: Automation',
+  'ai-team': 'AI services: AI Team',
+  marketing: 'AI services: Marketing & Social Media',
+  'marketing-social-media': 'AI services: Marketing & Social Media',
+  platforms: 'AI services walkthrough',
+  walkthrough: 'AI services walkthrough',
+  pilot: 'Platform pilot discussion',
+  talent: 'Critical hire',
+  headhunting: 'Critical hire',
+  hire: 'Critical hire',
+  embedded: 'Embedded hiring',
+  coaching: 'Coaching',
+  partnership: 'Growth partnership',
+  partnerships: 'Growth partnership',
+  territory: 'Territory exclusivity audit',
+  exclusivity: 'Territory exclusivity audit'
+};
+
+// 1. Client Commercial Brief Form
+const form = document.querySelector('#enquiry-form');
+if (form) {
+  const sp = new URLSearchParams(location.search);
+  const rawInterest = (sp.get('interest') || sp.get('service') || sp.get('platform') || '').trim();
+  const pathParam = (sp.get('path') || '').trim().toLowerCase();
+
+  if (
+    pathParam === 'candidate' ||
+    rawInterest.toLowerCase() === 'career conversation' ||
+    rawInterest.toLowerCase() === 'candidate' ||
+    location.hash === '#candidate-path'
+  ) {
+    activateContactPath('candidate-path');
+  } else {
+    activateContactPath('client-path');
+  }
+
+  const interestSelect = form.elements.interest;
+  const fallbackNote = document.querySelector('#interest-fallback-note');
+  if (rawInterest && interestSelect && rawInterest.toLowerCase() !== 'career conversation') {
+    const options = Array.from(interestSelect.options);
+    const aliasTarget = interestAliases[rawInterest.toLowerCase()] || rawInterest;
+    const exactMatch = options.find(o => o.value.toLowerCase() === aliasTarget.toLowerCase());
+    if (exactMatch) {
+      interestSelect.value = exactMatch.value;
+      if (fallbackNote) fallbackNote.hidden = true;
+    } else {
+      interestSelect.value = 'Growth partnership';
+      if (fallbackNote) {
+        fallbackNote.textContent = `We selected "Growth partnership" as a starting point because "${rawInterest}" was not recognised. You can change the requirement type below.`;
+        fallbackNote.hidden = false;
       }
-    });
-  });
-
-  update();
-}
-initSimulator();
-
-// Accordion handler
-document.querySelectorAll('.acc-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    const exp=btn.getAttribute('aria-expanded')==='true';
-    btn.setAttribute('aria-expanded',String(!exp));
-    const panel=btn.nextElementSibling;
-    if(panel)panel.classList.toggle('open',!exp);
-  });
-});
-
-// Dual-path tab switcher
-document.querySelectorAll('[data-path-tab]').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('[data-path-tab]').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    const target=btn.dataset.pathTab;
-    document.querySelectorAll('.path-panel').forEach(p=>{
-      p.classList.toggle('active',p.id===target);
-    });
-  });
-});
-
-// Territory Exclusivity Form
-const checkForm=document.querySelector('#territory-check-form');
-if(checkForm){
-  checkForm.addEventListener('submit',e=>{
-    e.preventDefault();
-    const d=new FormData(checkForm);
-    const resultBox=document.querySelector('#territory-result');
-    if(resultBox){
-      resultBox.hidden=false;
-      const st=document.querySelector('#territory-status-text');
-      if(st)st.textContent=`Exclusivity audit registered for ${d.get('company')} (${d.get('region')} - ${d.get('industry')}). Formal written verification dispatched.`;
     }
-    const body=`Territory Exclusivity Check Request\n\nName: ${d.get('name')}\nJob Title: ${d.get('title')||'Director'}\nCompany: ${d.get('company')}\nEmail: ${d.get('email')}\nIndustry: ${d.get('industry')}\nRegion/Territory: ${d.get('region')}\nPriority: ${d.get('priority')}\n\nGrowth Plan:\n${d.get('plan')}`;
-    location.href=`mailto:info@power-uptalent.co.uk?subject=${encodeURIComponent('Territory Exclusivity Audit — '+d.get('company'))}&body=${encodeURIComponent(body)}`;
+  }
+
+  const inputs = Array.from(form.querySelectorAll('input, select, textarea'));
+  inputs.forEach(inp => inp.addEventListener('input', () => validateField(inp)));
+
+  let isSubmitting = false;
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    if (isSubmitting) return;
+
+    let allValid = true;
+    inputs.forEach(inp => {
+      if (!validateField(inp)) allValid = false;
+    });
+    if (!allValid) {
+      const firstInvalid = inputs.find(inp => inp.getAttribute('aria-invalid') === 'true');
+      firstInvalid?.focus();
+      return;
+    }
+
+    isSubmitting = true;
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalBtnHtml = submitBtn?.innerHTML;
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Preparing email draft…';
+    }
+
+    const d = new FormData(form);
+    const body =
+      `Hello Power-Up Talent,\n\n` +
+      `I would like to discuss: ${d.get('interest')}\n\n` +
+      `Name: ${(d.get('name') || '').toString().trim()}\n` +
+      `Business: ${(d.get('company') || '').toString().trim() || 'Not specified'}\n` +
+      `Email: ${(d.get('email') || '').toString().trim()}\n\n` +
+      `Summary of need:\n${(d.get('message') || '').toString().trim()}\n\n` +
+      `Kind regards,\n${(d.get('name') || '').toString().trim()}`;
+
+    const copyEl = document.querySelector('#email-copy');
+    const resultEl = document.querySelector('#email-result');
+    if (copyEl) copyEl.value = body;
+    if (resultEl) {
+      resultEl.hidden = false;
+      resultEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    setTimeout(() => {
+      isSubmitting = false;
+      if (submitBtn && originalBtnHtml) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnHtml;
+      }
+    }, 800);
+
+    location.href = `mailto:info@power-uptalent.co.uk?subject=${encodeURIComponent('Website enquiry — ' + d.get('interest'))}&body=${encodeURIComponent(body)}`;
   });
+
+  bindCopyButton('#copy-brief', '#email-copy', '#copy-status');
 }
 
+// 2. Confidential Candidate Enquiry Form
+const candForm = document.querySelector('#candidate-form');
+if (candForm) {
+  const inputs = Array.from(candForm.querySelectorAll('input, textarea'));
+  inputs.forEach(inp => inp.addEventListener('input', () => validateField(inp)));
 
+  let isSubmittingCand = false;
+  candForm.addEventListener('submit', e => {
+    e.preventDefault();
+    if (isSubmittingCand) return;
 
-// Interactive Commercial Outcome Stepper
+    let allValid = true;
+    inputs.forEach(inp => {
+      if (!validateField(inp)) allValid = false;
+    });
+    if (!allValid) {
+      const firstInvalid = inputs.find(inp => inp.getAttribute('aria-invalid') === 'true');
+      firstInvalid?.focus();
+      return;
+    }
+
+    isSubmittingCand = true;
+    const submitBtn = candForm.querySelector('button[type="submit"]');
+    const originalHtml = submitBtn?.innerHTML;
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Opening email draft…';
+    }
+
+    const d = new FormData(candForm);
+    const name = (d.get('cand_name') || '').toString().trim();
+    const role = (d.get('cand_role') || '').toString().trim() || 'Not specified';
+    const contact = (d.get('cand_email') || '').toString().trim();
+    const notes = (d.get('cand_notes') || '').toString().trim() || 'Confidential career discussion requested.';
+
+    const body =
+      `Hello Power-Up Talent Search Team,\n\n` +
+      `I would like to arrange a confidential candidate conversation.\n\n` +
+      `Name: ${name}\n` +
+      `Current / target role: ${role}\n` +
+      `Preferred confidential contact: ${contact}\n\n` +
+      `Sector, region & notes:\n${notes}\n\n` +
+      `Please do not contact my current employer without my express written consent.\n\n` +
+      `Kind regards,\n${name}`;
+
+    const copyEl = document.querySelector('#candidate-email-copy');
+    const resultEl = document.querySelector('#candidate-email-result');
+    if (copyEl) copyEl.value = body;
+    if (resultEl) {
+      resultEl.hidden = false;
+      resultEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    setTimeout(() => {
+      isSubmittingCand = false;
+      if (submitBtn && originalHtml) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalHtml;
+      }
+    }, 800);
+
+    location.href = `mailto:info@power-uptalent.co.uk?subject=${encodeURIComponent('Confidential Candidate Enquiry — ' + name)}&body=${encodeURIComponent(body)}`;
+  });
+
+  bindCopyButton('#copy-candidate-brief', '#candidate-email-copy', '#copy-candidate-status');
+}
+
+// 3. Territory Exclusivity Review Request Form
+const checkForm = document.querySelector('#territory-check-form');
+if (checkForm) {
+  const inputs = Array.from(checkForm.querySelectorAll('input, select, textarea'));
+  inputs.forEach(inp => inp.addEventListener('input', () => validateField(inp)));
+
+  let isSubmittingCheck = false;
+  checkForm.addEventListener('submit', e => {
+    e.preventDefault();
+    if (isSubmittingCheck) return;
+
+    let allValid = true;
+    inputs.forEach(inp => {
+      if (!validateField(inp)) allValid = false;
+    });
+    if (!allValid) {
+      const firstInvalid = inputs.find(inp => inp.getAttribute('aria-invalid') === 'true');
+      firstInvalid?.focus();
+      return;
+    }
+
+    isSubmittingCheck = true;
+    const submitBtn = checkForm.querySelector('button[type="submit"]');
+    const originalHtml = submitBtn?.innerHTML;
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Preparing review email…';
+    }
+
+    const d = new FormData(checkForm);
+    const company = (d.get('company') || '').toString().trim();
+    const region = (d.get('region') || '').toString().trim();
+    const industry = (d.get('industry') || '').toString().trim();
+    const name = (d.get('name') || '').toString().trim();
+    const title = (d.get('title') || '').toString().trim() || 'Director';
+    const email = (d.get('email') || '').toString().trim();
+    const priority = (d.get('priority') || '').toString().trim();
+    const plan = (d.get('plan') || '').toString().trim() || 'Please review sector and territory availability.';
+
+    const body =
+      `Territory Exclusivity Review Request\n\n` +
+      `Name: ${name}\n` +
+      `Job Title: ${title}\n` +
+      `Company: ${company}\n` +
+      `Email: ${email}\n` +
+      `Industry Sector: ${industry}\n` +
+      `Geographic Territory: ${region}\n` +
+      `Primary Scope: ${priority}\n\n` +
+      `Commercial Context:\n${plan}`;
+
+    const resultBox = document.querySelector('#territory-result');
+    const st = document.querySelector('#territory-status-text');
+    const copyEl = document.querySelector('#territory-email-copy');
+    if (copyEl) copyEl.value = body;
+    if (st) {
+      st.textContent = `Review request prepared for ${company} (${region} · ${industry}). This page does not confirm live territory availability automatically — please send the draft in your email app (or copy the request below and email info@power-uptalent.co.uk) so a director can check active client mandates and reply within one working day.`;
+    }
+    if (resultBox) {
+      resultBox.hidden = false;
+      resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    setTimeout(() => {
+      isSubmittingCheck = false;
+      if (submitBtn && originalHtml) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalHtml;
+      }
+    }, 800);
+
+    location.href = `mailto:info@power-uptalent.co.uk?subject=${encodeURIComponent('Territory Exclusivity Review Request — ' + company)}&body=${encodeURIComponent(body)}`;
+  });
+
+  bindCopyButton('#copy-territory-brief', '#territory-email-copy', '#copy-territory-status');
+}
+
+// Intelligence tabs & outcome stepper (where present)
+document.querySelectorAll('[data-intel-tab]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('[data-intel-tab]').forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
+    const targetId = btn.dataset.intelTab;
+    document.querySelectorAll('.intel-panel').forEach(p => {
+      p.hidden = p.id !== targetId;
+    });
+  });
+});
+
 document.querySelectorAll('[data-step-btn]').forEach(btn => {
   btn.addEventListener('click', () => {
     const stepNum = btn.dataset.stepBtn;
     document.querySelectorAll('[data-step-btn]').forEach(b => b.classList.toggle('active', b === btn));
     for (let i = 1; i <= 4; i++) {
       const panel = document.querySelector('#outcome-step-' + i);
-      if (panel) panel.hidden = (String(i) !== String(stepNum));
+      if (panel) panel.hidden = String(i) !== String(stepNum);
     }
   });
 });
