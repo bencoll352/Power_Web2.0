@@ -112,6 +112,68 @@ export const aiGroups = [
   }
 ];
 
+// Benefit-first detail used by the dedicated service pages. Outcomes describe
+// what a configured service is designed to support, not measured results.
+const serviceDetail = {
+  crm: {
+    roles: 'Managing directors, sales leaders, branch managers and account teams.',
+    outcomes: [
+      ['Clear account ownership', 'Everyone can see who owns each customer relationship and what was last agreed.'],
+      ['Consistent follow-up', 'Tasks, renewals and next actions stay visible, so opportunities are less likely to go quiet.'],
+      ['Better pipeline visibility', 'Leaders gain a clearer view of open opportunities and where support is needed.']
+    ]
+  },
+  communications: {
+    roles: 'Branch teams, customer service, reception and operations managers.',
+    outcomes: [
+      ['Enquiries captured properly', 'Calls, chat and messages are recorded with the details your team needs to respond.'],
+      ['An owner for every conversation', 'Callbacks, bookings and handovers are assigned rather than left in shared inboxes.'],
+      ['Approved, consistent answers', 'Customers receive information your business has reviewed, with people stepping in when needed.']
+    ]
+  },
+  sales: {
+    roles: 'Commercial directors, business development managers and external sales teams.',
+    outcomes: [
+      ['A focused target list', 'Concentrate effort on relevant companies with an evidenced reason to start a conversation.'],
+      ['Research before outreach', 'Account context, market signals and qualification notes are gathered in one place.'],
+      ['Reviewed follow-up', 'Outreach and follow-up are prepared for your team to check before anything is sent.']
+    ]
+  },
+  delivery: {
+    roles: 'Operations leaders, project managers and client-facing delivery teams.',
+    outcomes: [
+      ['Smoother onboarding', 'Forms, documents and first steps are organised from the moment work is agreed.'],
+      ['Visible responsibilities', 'Owners, milestones and outstanding actions are clear to the whole team.'],
+      ['Fewer loose ends', 'Quotes, invoices and payment status sit alongside the delivery plan.']
+    ]
+  },
+  automation: {
+    roles: 'Operations, finance and administration leads, and the owners of repeatable processes.',
+    outcomes: [
+      ['Less manual coordination', 'Routine hand-offs, reminders and updates follow defined, agreed steps.'],
+      ['Control built in', 'Permissions, approvals and spending limits are agreed before any workflow is introduced.'],
+      ['Visible outcomes', 'Execution history shows what happened, and exceptions are flagged for a person to review.']
+    ]
+  },
+  'ai-team': {
+    roles: 'Business owners, managers and teams with recurring research or preparation work.',
+    outcomes: [
+      ['Extra capacity for preparation', 'Hand over defined research, briefing and preparation assignments.'],
+      ['Grounded in your knowledge', 'Assistants work from approved company information and scoped sources.'],
+      ['Human review before acceptance', 'Your team checks the work, requests revisions and keeps responsibility for decisions.']
+    ]
+  },
+  marketing: {
+    roles: 'Marketing leads, business owners and teams managing campaigns and social media.',
+    outcomes: [
+      ['Campaigns with a clear plan', 'Briefs, audiences and timings are agreed before content is produced.'],
+      ['Consistent branded content', 'Content is prepared around your brand guidance and approved asset library.'],
+      ['Approvals and reporting in view', 'Review decisions and campaign reporting stay visible to the people responsible.']
+    ]
+  }
+};
+aiGroups.forEach(g => Object.assign(g, serviceDetail[g.id]));
+
 const aiCards = () => `<div class="ai-service-grid">${aiGroups.map(g => `<a class="ai-service-card" href="intelligence.html#${g.id}"><span class="ai-icon">${icon(g.id, g.title)}</span><h3>${g.title}</h3><p class="ai-card-headline">${g.short}</p><p>${g.description}</p><span class="ai-card-link">Discuss ${g.title} ${arrow}</span></a>`).join('')}</div>`;
 
 const aiOverview = () => `<section class="ai-overview" aria-labelledby="ai-overview-heading"><div class="wrap"><div class="ai-centred">${eyebrow('AI BUSINESS SERVICES')}<h2 id="ai-overview-heading">Practical AI.<br class="mobile-break"> <em>Built around your business.</em></h2><p>Keep relationships organised, respond to enquiries, find opportunities and deliver the work. Choose from seven connected service areas, configured around your team, your priorities and the tools you use.</p></div>${aiCards()}<p class="ai-scope">We agree the features, channels, connections and review points included in your partnership before implementation.</p></div></section>`;
