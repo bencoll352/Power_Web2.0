@@ -42,8 +42,71 @@ try {
     }
   }
 
-  // 2. Interactive product demo checks (tabs, status filter, search, empty state, reset, enquiry preselection, keyboard)
+  // 2. Verify all 7 product pages have early signature visuals (.sig-visual-card) readable on phone (390px)
+  await page.setViewportSize({ width: 390, height: 844 });
+  const productPages = [
+    'crm.html',
+    'communications.html',
+    'sales-intelligence.html',
+    'business-delivery.html',
+    'automation.html',
+    'ai-team.html',
+    'marketing-social-media.html'
+  ];
+  for (const prod of productPages) {
+    await page.goto(origin + '/' + prod);
+    if (!(await page.locator('.sig-visual-card').isVisible())) {
+      throw Error('Missing early signature visual on ' + prod);
+    }
+  }
+
+  // 3. Verify both homepage routes are visible and usable on a phone (390px)
+  await page.goto(origin + '/');
+  if (!(await page.locator('a:has-text("Explore Recruitment & Coaching")').first().isVisible())) {
+    throw Error('Explore Recruitment & Coaching CTA not visible on mobile homepage');
+  }
+  if (!(await page.locator('a:has-text("Explore AI & Business Platforms")').first().isVisible())) {
+    throw Error('Explore AI & Business Platforms CTA not visible on mobile homepage');
+  }
+
+  // 4. Verify Guided 3-Scenario Product Demo (complete, live feedback, reset, and Contact preselection)
   await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto(origin + '/platforms.html');
+  const guided = page.locator('[data-guided-demo]');
+  const scenarios = [
+    ['enquiry', 'AI services: Communications'],
+    ['quote', 'AI services: Sales & Intelligence'],
+    ['handover', 'AI services: Business Delivery']
+  ];
+  for (const [scenId, expectedInterest] of scenarios) {
+    await guided.locator(`[data-scenario-tab="${scenId}"]`).click();
+    const sPanel = guided.locator(`[data-scenario-panel="${scenId}"]`);
+    if (!(await sPanel.isVisible())) throw Error('Guided scenario panel not visible: ' + scenId);
+    if (!(await sPanel.locator('[data-scenario-before]').isVisible())) {
+      throw Error('Guided scenario initial state not visible: ' + scenId);
+    }
+    await sPanel.locator('[data-scenario-action]').click();
+    if (!(await sPanel.locator('[data-scenario-after]').isVisible())) {
+      throw Error('Guided scenario completed state did not appear: ' + scenId);
+    }
+    const liveMsg = await sPanel.locator('[data-scenario-live]').textContent();
+    if (!liveMsg || liveMsg.length < 10) {
+      throw Error('Guided scenario live region did not announce state update: ' + scenId);
+    }
+    await sPanel.locator('[data-scenario-reset]').click();
+    if (!(await sPanel.locator('[data-scenario-before]').isVisible())) {
+      throw Error('Guided scenario reset did not restore initial state: ' + scenId);
+    }
+    // Check walkthrough link carries product into Contact
+    const href = await sPanel.locator('.scenario-links a.button').getAttribute('href');
+    await page.goto(origin + '/' + href);
+    if ((await page.locator('select[name="interest"]').inputValue()) !== expectedInterest) {
+      throw Error(`Guided scenario ${scenId} did not preselect ${expectedInterest}`);
+    }
+    await page.goto(origin + '/platforms.html');
+  }
+
+  // 5. Interactive product demo checks (7 tabs, status filter, search, empty state, reset, enquiry preselection, keyboard)
   await page.goto(origin + '/dashboard.html');
   const workspace = page.locator('[data-workspace]');
   const ids = ['crm', 'communications', 'sales', 'delivery', 'automation', 'ai-team', 'marketing'];
@@ -76,8 +139,7 @@ try {
   if (!(await page.locator('.service-menu-panel').isVisible())) throw Error('Services dropdown');
   await page.keyboard.press('Escape');
 
-  // 3. Enquiry flow verification (Client Commercial Brief, Candidate Enquiry, Territory Review)
-  // Prevent mailto navigation from interrupting headless Chromium during synthetic submission tests
+  // 6. Enquiry flow verification (Client Commercial Brief, Candidate Enquiry, Territory Review)
   await page.addInitScript(() => {
     window.addEventListener(
       'click',
@@ -89,7 +151,6 @@ try {
     );
   });
 
-  // 3a. Client brief: alias mapping & unknown fallback
   await page.goto(origin + '/contact.html?service=crm');
   if ((await page.locator('select[name="interest"]').inputValue()) !== 'AI services: CRM') {
     throw Error('Service alias mapping failed');
@@ -102,7 +163,6 @@ try {
     throw Error('Fallback notice not shown for unknown interest');
   }
 
-  // 3b. Client brief: validation keeps entered values, valid synthetic submit prepares draft
   await page.locator('#enquiry-form input[name="name"]').fill('Synthetic Tester');
   await page.locator('#enquiry-form button[type="submit"]').click();
   if ((await page.locator('#enquiry-form .field-error').count()) < 1) {
@@ -112,30 +172,6 @@ try {
     throw Error('Client brief discarded entered value on validation failure');
   }
 
-  // Override location.href setter for mailto in page context so we can inspect DOM state after submit
-  await page.goto(origin + '/contact.html?interest=AI%20services%3A%20Sales%20%26%20Intelligence');
-  await page.locator('#enquiry-form input[name="name"]').fill('Synthetic Employer');
-  await page.locator('#enquiry-form input[name="company"]').fill('Synthetic Wholesale Ltd');
-  await page.locator('#enquiry-form input[name="email"]').fill('synthetic@example.co.uk');
-  await page.locator('#enquiry-form textarea[name="message"]').fill('We want a walkthrough of the Sales Action Queue and quote tracking.');
-  await page.evaluate(() => {
-    const form = document.querySelector('#enquiry-form');
-    form.addEventListener('submit', e => e.stopImmediatePropagation(), { capture: false });
-  });
-  // Trigger validation + draft generation directly without navigation
-  await page.locator('#enquiry-form input[name="name"]').dispatchEvent('input');
-  await page.evaluate(() => {
-    const d = new FormData(document.querySelector('#enquiry-form'));
-    const body = `Hello Power-Up Talent,\n\nI would like to discuss: ${d.get('interest')}\n\nName: ${d.get('name')}\nBusiness: ${d.get('company')}\nEmail: ${d.get('email')}\n\nSummary of need:\n${d.get('message')}`;
-    document.querySelector('#email-copy').value = body;
-    document.querySelector('#email-result').hidden = false;
-  });
-  if (!(await page.locator('#email-result').isVisible())) throw Error('Client brief result panel not visible');
-  if (!(await page.locator('#email-copy').inputValue()).includes('Synthetic Wholesale Ltd')) {
-    throw Error('Client brief copy text missing company');
-  }
-
-  // 3c. Confidential candidate enquiry: route activation & field composition
   await page.goto(origin + '/contact.html?path=candidate#candidate-path');
   if (!(await page.locator('#candidate-path').isVisible())) {
     throw Error('Candidate tab did not activate via ?path=candidate');
@@ -149,7 +185,6 @@ try {
     throw Error('Candidate form lost name on validation error');
   }
 
-  // 3d. Territory review form validation
   await page.goto(origin + '/check.html');
   await page.locator('#territory-check-form input[name="name"]').fill('Synthetic Director');
   await page.locator('#territory-check-form button[type="submit"]').click();
@@ -160,7 +195,7 @@ try {
     throw Error('Territory form lost input on validation failure');
   }
 
-  // 4. Mobile menu & service navigation
+  // 7. Mobile menu & service navigation
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto(origin + '/');
   await page.locator('.menu-toggle').click();
@@ -171,7 +206,7 @@ try {
 
   if (errors.length) throw Error(errors.join('\n'));
   console.log(
-    `PASS: ${checked} responsive page checks; 7 demo tabs, search/status/empty states, enquiry preselection/fallbacks, client/candidate/territory validation, keyboard tabs and mobile menu. No browser errors.`
+    `PASS: ${checked} responsive page checks; 7 signature visuals; 3 guided scenarios (complete/feedback/reset/CTA); 7 demo tabs; client/candidate/territory enquiry checks; keyboard & mobile menu. No browser errors.`
   );
 
   if (process.env.SCREENSHOT_DIR) {
@@ -181,6 +216,10 @@ try {
     await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/index_html-1440.png' });
     await page.goto(origin + '/platforms.html');
     await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/platforms-hub.png' });
+    await page.goto(origin + '/sales-intelligence.html');
+    await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/sales-intelligence-final.png' });
+    await page.goto(origin + '/contact.html');
+    await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/contact-final.png' });
     await page.goto(origin + '/dashboard.html');
     await page.locator('[data-workspace]').screenshot({ path: process.env.SCREENSHOT_DIR + '/dashboard-final.png' });
     await page.goto(origin + '/crm.html');
