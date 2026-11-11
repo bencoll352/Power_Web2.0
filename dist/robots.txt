@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /dashboard
+Disallow: /intelligence
+Sitemap: https://power-up-talent.web.app/sitemap.xml

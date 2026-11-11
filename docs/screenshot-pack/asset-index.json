@@ -1,0 +1,482 @@
+[
+  {
+    "service": "CRM",
+    "slug": "crm",
+    "screen": "overview",
+    "repo": "https://github.com/bencoll352/CRM-Power-Up-Business-Person-",
+    "commit": "9408c8bcde642648d2b0ac2282caa3e9e8283460",
+    "master": "crm-overview.png",
+    "website": "assets/product-screens/crm-overview.webp",
+    "size": [
+      1440,
+      1000
+    ],
+    "caption": "Review business accounts, owners and follow-ups; inspect the upcoming renewal review.",
+    "alt": "CRM overview: Review business accounts, owners and follow-ups; inspect the upcoming renewal review.",
+    "readiness": "Sample data",
+    "data": "Synthetic sample data only",
+    "reproduce": "CRM-Power-Up-Business-Person-/scripts/capture-suite.mjs; see REPRODUCE.md",
+    "sha256": "0a916f48ca88aac997af171a68e846489c57b7e7f7601d800461b1555812326f",
+    "webpBytes": 48978
+  },
+  {
+    "service": "CRM",
+    "slug": "crm",
+    "screen": "detail",
+    "repo": "https://github.com/bencoll352/CRM-Power-Up-Business-Person-",
+    "commit": "9408c8bcde642648d2b0ac2282caa3e9e8283460",
+    "master": "crm-detail.png",
+    "website": "assets/product-screens/crm-detail.webp",
+    "size": [
+      1440,
+      1000
+    ],
+    "caption": "Review business accounts, owners and follow-ups; inspect the upcoming renewal review.",
+    "alt": "CRM detail: Review business accounts, owners and follow-ups; inspect the upcoming renewal review.",
+    "readiness": "Sample data",
+    "data": "Synthetic sample data only",
+    "reproduce": "CRM-Power-Up-Business-Person-/scripts/capture-suite.mjs; see REPRODUCE.md",
+    "sha256": "c4604f0b4d2d0f865f22a05060fec13a4f82a9d277f736d278c5d25b6c89a971",
+    "webpBytes": 38416
+  },
+  {
+    "service": "CRM",
+    "slug": "crm",
+    "screen": "mobile",
+    "repo": "https://github.com/bencoll352/CRM-Power-Up-Business-Person-",
+    "commit": "9408c8bcde642648d2b0ac2282caa3e9e8283460",
+    "master": "crm-mobile.png",
+    "website": "assets/product-screens/crm-mobile.webp",
+    "size": [
+      390,
+      844
+    ],
+    "caption": "Review business accounts, owners and follow-ups; inspect the upcoming renewal review.",
+    "alt": "CRM mobile: Review business accounts, owners and follow-ups; inspect the upcoming renewal review.",
+    "readiness": "Sample data",
+    "data": "Synthetic sample data only",
+    "reproduce": "CRM-Power-Up-Business-Person-/scripts/capture-suite.mjs; see REPRODUCE.md",
+    "sha256": "bf643c27d8961d9bedf89faf4ee5e40e0c0052671eda2474b84f2d3c9737f01d",
+    "webpBytes": 16856
+  },
+  {
+    "service": "Communications",
+    "slug": "communications",
+    "screen": "overview",
+    "repo": "https://github.com/bencoll352/Power-Up-communication-",
+    "commit": "05150c8c99d672caada95ae19eb0192b00e2d1cc",
+    "master": "communications-overview.png",
+    "website": "assets/product-screens/communications-overview.webp",
+    "size": [
+      1440,
+      1000
+    ],
+    "caption": "Turn an unassigned sandbox enquiry into an owned callback with a due date. External providers were not exercised.",
+    "alt": "Communications overview: Turn an unassigned sandbox enquiry into an owned callback with a due date. External providers were not exercised.",
+    "readiness": "Sample data",
+    "data": "Synthetic sample data only",
+    "reproduce": "Power-Up-communication-/scripts/capture-suite.mjs; see REPRODUCE.md",
+    "sha256": "1a276aae74f12c7f564f8a2ff44d814c96aa04052f64da510dc6244eec95a734",
+    "webpBytes": 63870
+  },
+  {
+    "service": "Communications",
+    "slug": "communications",
+    "screen": "detail",
+    "repo": "https://github.com/bencoll352/Power-Up-communication-",
+    "commit": "05150c8c99d672caada95ae19eb0192b00e2d1cc",
+    "master": "communications-detail.png",
+    "website": "assets/product-screens/communications-detail.webp",
+    "size": [
+      560,
+      822
+    ],
+    "caption": "Turn an unassigned sandbox enquiry into an owned callback with a due date. External providers were not exercised.",
+    "alt": "Communications detail: Turn an unassigned sandbox enquiry into an owned callback with a due date. External providers were not exercised.",
+    "readiness": "Sample data",
+    "data": "Synthetic sample data only",
+    "reproduce": "Power-Up-communication-/scripts/capture-suite.mjs; see REPRODUCE.md",
+    "sha256": "c01dbaefc2b111a999656114660dd8cd35e82e2bff61fbf943ea380fa8d62c57",
+    "webpBytes": 22656
+  },
+  {
+    "service": "Communications",
+    "slug": "communications",
+    "screen": "mobile",
+    "repo": "https://github.com/bencoll352/Power-Up-communication-",
+    "commit": "05150c8c99d672caada95ae19eb0192b00e2d1cc",
+    "master": "communications-mobile.png",
+    "website": "assets/product-screens/communications-mobile.webp",
+    "size": [
+      390,
+      844
+    ],
+    "caption": "Turn an unassigned sandbox enquiry into an owned callback with a due date. External providers were not exercised.",
+    "alt": "Communications mobile: Turn an unassigned sandbox enquiry into an owned callback with a due date. External providers were not exercised.",
+    "readiness": "Sample data",
+    "data": "Synthetic sample data only",
+    "reproduce": "Power-Up-communication-/scripts/capture-suite.mjs; see REPRODUCE.md",
+    "sha256": "b2f276bce6456108f794cceb12c7747fed1010735092ae5b8f78ec493acdaf55",
+    "webpBytes": 20366
+  },
+  {
+    "service": "Sales & Intelligence",
+    "slug": "sales-intelligence",
+    "screen": "overview",
+    "repo": "https://github.com/bencoll352/Sales-Intelligence---Sales-Growth",
+    "commit": "0f238356edd83d2be81f422b73ed77affffe9b2e",
+    "master": "sales-intelligence-overview.png",
+    "website": "assets/product-screens/sales-intelligence-overview.webp",
+    "size": [
+      1440,
+      1000
+    ],
+    "caption": "Review overdue quotes and account ownership, then record an outcome that updates the Sales Action Queue.",
+    "alt": "Sales & Intelligence overview: Review overdue quotes and account ownership, then record an outcome that updates the Sales Action Queue.",
+    "readiness": "Sample data",
+    "data": "Synthetic sample data only",
+    "reproduce": "Sales-Intelligence---Sales-Growth/scripts/capture-suite.mjs; see REPRODUCE.md",
+    "sha256": "749b20070de7b0343d6aa63ce734e8bc7ad2113060b889dd4d1b0ba21afa8b25",
+    "webpBytes": 58014
+  },
+  {
+    "service": "Sales & Intelligence",
+    "slug": "sales-intelligence",
+    "screen": "detail",
+    "repo": "https://github.com/bencoll352/Sales-Intelligence---Sales-Growth",
+    "commit": "0f238356edd83d2be81f422b73ed77affffe9b2e",
+    "master": "sales-intelligence-detail.png",
+    "website": "assets/product-screens/sales-intelligence-detail.webp",
+    "size": [
+      740,
+      900
+    ],
+    "caption": "Review overdue quotes and account ownership, then record an outcome that updates the Sales Action Queue.",
+    "alt": "Sales & Intelligence detail: Review overdue quotes and account ownership, then record an outcome that updates the Sales Action Queue.",
+    "readiness": "Sample data",
+    "data": "Synthetic sample data only",
+    "reproduce": "Sales-Intelligence---Sales-Growth/scripts/capture-suite.mjs; see REPRODUCE.md",
+    "sha256": "18ddbb6e8a8be73537c354bc7df85d26ec8a963aa47be858e3564e2e9b35f7f6",
+    "webpBytes": 26906
+  },
+  {
+    "service": "Sales & Intelligence",
+    "slug": "sales-intelligence",
+    "screen": "mobile",
+    "repo": "https://github.com/bencoll352/Sales-Intelligence---Sales-Growth",
+    "commit": "0f238356edd83d2be81f422b73ed77affffe9b2e",
+    "master": "sales-intelligence-mobile.png",
+    "website": "assets/product-screens/sales-intelligence-mobile.webp",
+    "size": [
+      390,
+      844
+    ],
+    "caption": "Review overdue quotes and account ownership, then record an outcome that updates the Sales Action Queue.",
+    "alt": "Sales & Intelligence mobile: Review overdue quotes and account ownership, then record an outcome that updates the Sales Action Queue.",
+    "readiness": "Sample data",
+    "data": "Synthetic sample data only",
+    "reproduce": "Sales-Intelligence---Sales-Growth/scripts/capture-suite.mjs; see REPRODUCE.md",
+    "sha256": "e1e74ec58d3e3628af356fd91214d8ef229879be9991ff29a73dbcdab15c30db",
+    "webpBytes": 21786
+  },
+  {
+    "service": "Business Delivery",
+    "slug": "business-delivery",
+    "screen": "overview",
+    "repo": "https://github.com/bencoll352/Business-Delivery-Power-Up-Talent",
+    "commit": "106c422c0055754913d990f6b9cc7b6c5b6cb9f2",
+    "master": "business-delivery-overview.png",
+    "website": "assets/product-screens/business-delivery-overview.webp",
+    "size": [
+      1440,
+      1000
+    ],
+    "caption": "Inspect the reviewed won-deal handover, agreed scope, delivery owner and start date. Local single-operator pilot.",
+    "alt": "Business Delivery overview: Inspect the reviewed won-deal handover, agreed scope, delivery owner and start date. Local single-operator pilot.",
+    "readiness": "Pilot workflow",
+    "data": "Synthetic sample data only",
+    "reproduce": "Business-Delivery-Power-Up-Talent/scripts/capture-suite.mjs; see REPRODUCE.md",
+    "sha256": "edda4d70eb8fcfb17a077d07e1744d7cf41b11def50267454abdc2eb3d0ef21f",
+    "webpBytes": 44564
+  },
+  {
+    "service": "Business Delivery",
+    "slug": "business-delivery",
+    "screen": "detail",
+    "repo": "https://github.com/bencoll352/Business-Delivery-Power-Up-Talent",
+    "commit": "106c422c0055754913d990f6b9cc7b6c5b6cb9f2",
+    "master": "business-delivery-detail.png",
+    "website": "assets/product-screens/business-delivery-detail.webp",
+    "size": [
+      760,
+      544
+    ],
+    "caption": "Inspect the reviewed won-deal handover, agreed scope, delivery owner and start date. Local single-operator pilot.",
+    "alt": "Business Delivery detail: Inspect the reviewed won-deal handover, agreed scope, delivery owner and start date. Local single-operator pilot.",
+    "readiness": "Pilot workflow",
+    "data": "Synthetic sample data only",
+    "reproduce": "Business-Delivery-Power-Up-Talent/scripts/capture-suite.mjs; see REPRODUCE.md",
+    "sha256": "12e7c2e6b9e8dcdd06fa197018f85365903113982fc66ab07903a175a4c37755",
+    "webpBytes": 26836
+  },
+  {
+    "service": "Business Delivery",
+    "slug": "business-delivery",
+    "screen": "mobile",
+    "repo": "https://github.com/bencoll352/Business-Delivery-Power-Up-Talent",
+    "commit": "106c422c0055754913d990f6b9cc7b6c5b6cb9f2",
+    "master": "business-delivery-mobile.png",
+    "website": "assets/product-screens/business-delivery-mobile.webp",
+    "size": [
+      390,
+      844
+    ],
+    "caption": "Inspect the reviewed won-deal handover, agreed scope, delivery owner and start date. Local single-operator pilot.",
+    "alt": "Business Delivery mobile: Inspect the reviewed won-deal handover, agreed scope, delivery owner and start date. Local single-operator pilot.",
+    "readiness": "Pilot workflow",
+    "data": "Synthetic sample data only",
+    "reproduce": "Business-Delivery-Power-Up-Talent/scripts/capture-suite.mjs; see REPRODUCE.md",
+    "sha256": "e13940f9124257fd1a2f47879bbed3fd4335c90b6fc3aa1db8e28876d2084ea5",
+    "webpBytes": 27304
+  },
+  {
+    "service": "Automation",
+    "slug": "automation",
+    "screen": "overview",
+    "repo": "https://github.com/bencoll352/Automation---Power-Up-Talent",
+    "commit": "298576d23a1a600808266d6fa5ffea16439678af",
+    "master": "automation-overview.png",
+    "website": "assets/product-screens/automation-overview.webp",
+    "size": [
+      1440,
+      1000
+    ],
+    "caption": "Inspect actual local pilot run receipts, including confirmed results and an unconfirmed handover requiring reconciliation.",
+    "alt": "Automation overview: Inspect actual local pilot run receipts, including confirmed results and an unconfirmed handover requiring reconciliation.",
+    "readiness": "Pilot workflow",
+    "data": "Synthetic sample data only",
+    "reproduce": "Automation---Power-Up-Talent/scripts/capture-suite.mjs; see REPRODUCE.md",
+    "sha256": "0b9a70426aaa302f858ce295a543512f03ce561f1615b0f758b9be45cdc7f2ae",
+    "webpBytes": 46760
+  },
+  {
+    "service": "Automation",
+    "slug": "automation",
+    "screen": "detail",
+    "repo": "https://github.com/bencoll352/Automation---Power-Up-Talent",
+    "commit": "298576d23a1a600808266d6fa5ffea16439678af",
+    "master": "automation-detail.png",
+    "website": "assets/product-screens/automation-detail.webp",
+    "size": [
+      760,
+      560
+    ],
+    "caption": "Inspect actual local pilot run receipts, including confirmed results and an unconfirmed handover requiring reconciliation.",
+    "alt": "Automation detail: Inspect actual local pilot run receipts, including confirmed results and an unconfirmed handover requiring reconciliation.",
+    "readiness": "Pilot workflow",
+    "data": "Synthetic sample data only",
+    "reproduce": "Automation---Power-Up-Talent/scripts/capture-suite.mjs; see REPRODUCE.md",
+    "sha256": "e7862ce0fb8558493c71fc82da0081a2796c1e38a61f2a6ce93e15353005c9e5",
+    "webpBytes": 23094
+  },
+  {
+    "service": "Automation",
+    "slug": "automation",
+    "screen": "mobile",
+    "repo": "https://github.com/bencoll352/Automation---Power-Up-Talent",
+    "commit": "298576d23a1a600808266d6fa5ffea16439678af",
+    "master": "automation-mobile.png",
+    "website": "assets/product-screens/automation-mobile.webp",
+    "size": [
+      390,
+      844
+    ],
+    "caption": "Inspect actual local pilot run receipts, including confirmed results and an unconfirmed handover requiring reconciliation.",
+    "alt": "Automation mobile: Inspect actual local pilot run receipts, including confirmed results and an unconfirmed handover requiring reconciliation.",
+    "readiness": "Pilot workflow",
+    "data": "Synthetic sample data only",
+    "reproduce": "Automation---Power-Up-Talent/scripts/capture-suite.mjs; see REPRODUCE.md",
+    "sha256": "aa7aa381387e417535021fc3684a60e338bdbfa652547db056c3de8344250d2c",
+    "webpBytes": 24520
+  },
+  {
+    "service": "AI Team",
+    "slug": "ai-team",
+    "screen": "overview",
+    "repo": "https://github.com/bencoll352/AI-Employee",
+    "commit": "866a06c2a1712b9753095d48d84b6ec83d890e03",
+    "master": "ai-team-overview.png",
+    "website": "assets/product-screens/ai-team-overview.webp",
+    "size": [
+      1440,
+      1000
+    ],
+    "caption": "Review an assignment grounded in approved synthetic evidence, inspect the citation and request revision or accept the brief. Local extractive adapter.",
+    "alt": "AI Team overview: Review an assignment grounded in approved synthetic evidence, inspect the citation and request revision or accept the brief. Local extractive adapter.",
+    "readiness": "Pilot workflow",
+    "data": "Synthetic sample data only",
+    "reproduce": "AI-Employee/scripts/capture-suite.mjs; see REPRODUCE.md",
+    "sha256": "fbbe8020b86346c6dc9747efd1f075617f733dac490a10e6812375207dee004d",
+    "webpBytes": 36668
+  },
+  {
+    "service": "AI Team",
+    "slug": "ai-team",
+    "screen": "detail",
+    "repo": "https://github.com/bencoll352/AI-Employee",
+    "commit": "866a06c2a1712b9753095d48d84b6ec83d890e03",
+    "master": "ai-team-detail.png",
+    "website": "assets/product-screens/ai-team-detail.webp",
+    "size": [
+      1440,
+      1000
+    ],
+    "caption": "Review an assignment grounded in approved synthetic evidence, inspect the citation and request revision or accept the brief. Local extractive adapter.",
+    "alt": "AI Team detail: Review an assignment grounded in approved synthetic evidence, inspect the citation and request revision or accept the brief. Local extractive adapter.",
+    "readiness": "Pilot workflow",
+    "data": "Synthetic sample data only",
+    "reproduce": "AI-Employee/scripts/capture-suite.mjs; see REPRODUCE.md",
+    "sha256": "0051754126f57be037a195a4ba2c3ce3b7683b1651f5652e2d650d34841cb04c",
+    "webpBytes": 46210
+  },
+  {
+    "service": "AI Team",
+    "slug": "ai-team",
+    "screen": "mobile",
+    "repo": "https://github.com/bencoll352/AI-Employee",
+    "commit": "866a06c2a1712b9753095d48d84b6ec83d890e03",
+    "master": "ai-team-mobile.png",
+    "website": "assets/product-screens/ai-team-mobile.webp",
+    "size": [
+      390,
+      844
+    ],
+    "caption": "Review an assignment grounded in approved synthetic evidence, inspect the citation and request revision or accept the brief. Local extractive adapter.",
+    "alt": "AI Team mobile: Review an assignment grounded in approved synthetic evidence, inspect the citation and request revision or accept the brief. Local extractive adapter.",
+    "readiness": "Pilot workflow",
+    "data": "Synthetic sample data only",
+    "reproduce": "AI-Employee/scripts/capture-suite.mjs; see REPRODUCE.md",
+    "sha256": "954a57652079aeef1fbdd61a722b15cadbb1d176d9a9d665e113b17ae9fea958",
+    "webpBytes": 21166
+  },
+  {
+    "service": "Marketing & Social Media",
+    "slug": "marketing-social-media",
+    "screen": "overview",
+    "repo": "https://github.com/bencoll352/Marketing-Social-Media",
+    "commit": "c7f92de1c0d6a9393bb1203fedbe1b22904e6bbe",
+    "master": "marketing-social-media-overview.png",
+    "website": "assets/product-screens/marketing-social-media-overview.webp",
+    "size": [
+      1440,
+      1000
+    ],
+    "caption": "Compare qualified leads, attended meetings and recorded wins from a sample Sales export, retaining unattributed leads.",
+    "alt": "Marketing & Social Media overview: Compare qualified leads, attended meetings and recorded wins from a sample Sales export, retaining unattributed leads.",
+    "readiness": "Sample data",
+    "data": "Synthetic sample data only",
+    "reproduce": "Marketing-Social-Media/scripts/capture-suite.mjs; see REPRODUCE.md",
+    "sha256": "d628e0985c9a5f9f7075b1d45f15a506ffdfa534d40b8631087881b1619b617b",
+    "webpBytes": 44106
+  },
+  {
+    "service": "Marketing & Social Media",
+    "slug": "marketing-social-media",
+    "screen": "detail",
+    "repo": "https://github.com/bencoll352/Marketing-Social-Media",
+    "commit": "c7f92de1c0d6a9393bb1203fedbe1b22904e6bbe",
+    "master": "marketing-social-media-detail.png",
+    "website": "assets/product-screens/marketing-social-media-detail.webp",
+    "size": [
+      760,
+      518
+    ],
+    "caption": "Compare qualified leads, attended meetings and recorded wins from a sample Sales export, retaining unattributed leads.",
+    "alt": "Marketing & Social Media detail: Compare qualified leads, attended meetings and recorded wins from a sample Sales export, retaining unattributed leads.",
+    "readiness": "Sample data",
+    "data": "Synthetic sample data only",
+    "reproduce": "Marketing-Social-Media/scripts/capture-suite.mjs; see REPRODUCE.md",
+    "sha256": "a6a442a633e40a4344bd8f9f09cec32c2f07da00cb2fd1406110e8bd2f6821c8",
+    "webpBytes": 14708
+  },
+  {
+    "service": "Marketing & Social Media",
+    "slug": "marketing-social-media",
+    "screen": "mobile",
+    "repo": "https://github.com/bencoll352/Marketing-Social-Media",
+    "commit": "c7f92de1c0d6a9393bb1203fedbe1b22904e6bbe",
+    "master": "marketing-social-media-mobile.png",
+    "website": "assets/product-screens/marketing-social-media-mobile.webp",
+    "size": [
+      390,
+      844
+    ],
+    "caption": "Compare qualified leads, attended meetings and recorded wins from a sample Sales export, retaining unattributed leads.",
+    "alt": "Marketing & Social Media mobile: Compare qualified leads, attended meetings and recorded wins from a sample Sales export, retaining unattributed leads.",
+    "readiness": "Sample data",
+    "data": "Synthetic sample data only",
+    "reproduce": "Marketing-Social-Media/scripts/capture-suite.mjs; see REPRODUCE.md",
+    "sha256": "a511a0301b147569685e8783b6bc98892f26b8ba9bb0cfe6c04d67c36b90d30b",
+    "webpBytes": 16014
+  },
+  {
+    "service": "Personal CRM",
+    "slug": "crm-personal",
+    "screen": "overview",
+    "repo": "https://github.com/bencoll352/CRM-Power-Up-Business-Person-",
+    "commit": "9408c8bcde642648d2b0ac2282caa3e9e8283460",
+    "master": "crm-personal-overview.png",
+    "website": "assets/product-screens/crm-personal-overview.webp",
+    "size": [
+      1440,
+      1000
+    ],
+    "caption": "Review private people, reconnect reminders and remembered details in a workspace separate from Business CRM.",
+    "alt": "Personal CRM overview: Review private people, reconnect reminders and remembered details in a workspace separate from Business CRM.",
+    "readiness": "Sample data",
+    "data": "Synthetic sample data only",
+    "reproduce": "CRM-Power-Up-Business-Person-/scripts/capture-suite.mjs; see REPRODUCE.md",
+    "sha256": "6284ece75ad511269b631dd9f9e5b0de2345ed78105b9c8b10544e224b5b9732",
+    "webpBytes": 50168
+  },
+  {
+    "service": "Personal CRM",
+    "slug": "crm-personal",
+    "screen": "detail",
+    "repo": "https://github.com/bencoll352/CRM-Power-Up-Business-Person-",
+    "commit": "9408c8bcde642648d2b0ac2282caa3e9e8283460",
+    "master": "crm-personal-detail.png",
+    "website": "assets/product-screens/crm-personal-detail.webp",
+    "size": [
+      1440,
+      1000
+    ],
+    "caption": "Review private people, reconnect reminders and remembered details in a workspace separate from Business CRM.",
+    "alt": "Personal CRM detail: Review private people, reconnect reminders and remembered details in a workspace separate from Business CRM.",
+    "readiness": "Sample data",
+    "data": "Synthetic sample data only",
+    "reproduce": "CRM-Power-Up-Business-Person-/scripts/capture-suite.mjs; see REPRODUCE.md",
+    "sha256": "175fa3afdc65b4381eb023cdd874043aaa8ea4639841b47f130befedcd1878f4",
+    "webpBytes": 15454
+  },
+  {
+    "service": "Personal CRM",
+    "slug": "crm-personal",
+    "screen": "mobile",
+    "repo": "https://github.com/bencoll352/CRM-Power-Up-Business-Person-",
+    "commit": "9408c8bcde642648d2b0ac2282caa3e9e8283460",
+    "master": "crm-personal-mobile.png",
+    "website": "assets/product-screens/crm-personal-mobile.webp",
+    "size": [
+      390,
+      844
+    ],
+    "caption": "Review private people, reconnect reminders and remembered details in a workspace separate from Business CRM.",
+    "alt": "Personal CRM mobile: Review private people, reconnect reminders and remembered details in a workspace separate from Business CRM.",
+    "readiness": "Sample data",
+    "data": "Synthetic sample data only",
+    "reproduce": "CRM-Power-Up-Business-Person-/scripts/capture-suite.mjs; see REPRODUCE.md",
+    "sha256": "4a90a2908b74da76e066612f4049de07776a9e278090d69a50b4d94208190e42",
+    "webpBytes": 18372
+  }
+]

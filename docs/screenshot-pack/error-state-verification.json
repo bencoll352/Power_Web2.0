@@ -1,0 +1,6 @@
+[
+  "Sales: failed save is visible and notes are retained; Escape restores dialog exit.",
+  "Communications: callback save failure appears inside the dialog; entered details remain.",
+  "Delivery: malformed handover is rejected before submission; visible dialog error and inputs retained.",
+  "Automation: refresh announces loading and then a recoverable error; no execution route exists."
+]
