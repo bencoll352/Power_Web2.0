@@ -1,0 +1,54 @@
+[
+  {
+    "name": "Sales action queue",
+    "violations": []
+  },
+  {
+    "name": "Sales detail",
+    "violations": []
+  },
+  {
+    "name": "Communications inbox",
+    "violations": []
+  },
+  {
+    "name": "Communications callback",
+    "violations": []
+  },
+  {
+    "name": "Delivery overview",
+    "violations": []
+  },
+  {
+    "name": "Delivery detail",
+    "violations": []
+  },
+  {
+    "name": "Automation overview",
+    "violations": []
+  },
+  {
+    "name": "Automation detail",
+    "violations": []
+  },
+  {
+    "name": "Marketing report",
+    "violations": []
+  },
+  {
+    "name": "Marketing detail",
+    "violations": []
+  },
+  {
+    "name": "AI Team assignments",
+    "violations": []
+  },
+  {
+    "name": "AI Team cited review",
+    "violations": []
+  },
+  {
+    "name": "Website product capture",
+    "violations": []
+  }
+]

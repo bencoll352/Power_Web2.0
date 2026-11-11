@@ -1,63 +1,21 @@
-# Power-Up Talent Website 2.0 (`Power_Web2.0`)
+# Power-Up Talent — partnership website
 
-> Official website for **Power-Up Talent Ltd** with high-performance responsive styling, mobile optimization, SEO/AEO metadata, and video streaming support.
+## Professional service pages and dashboard previews
 
----
+Seven service pages (`crm`, `communications`, `sales-intelligence`, `business-delivery`, `automation`, `ai-team`, `marketing-social-media`) share a Power-Up corporate design. The directory is at `intelligence.html` and the interactive sample workspace is at `dashboard.html`. Dashboard tabs, search and status filters run locally with illustrative data; they do not connect to or mutate the service apps.
 
-## 🚀 Quick Start
+Templates are in `professional-site.mjs`, with styles in `dist/professional.css` and preview interactions in `dist/dashboard-preview.js`. See `docs/DASHBOARD-DESIGN-ADOPTION.md` for the supplied ngx-admin design reference, licence and service repository review.
 
-### Prerequisites
-- Node.js (v18+)
+Run `npm run build` and `npm run check`. With the preview server running, `node tests/site-browser.mjs` runs responsive and interaction checks using an installed Playwright and Chromium. Optional `PLAYWRIGHT_MODULE`, `CHROMIUM_PATH`, `TEST_URL` and `SCREENSHOT_DIR` environment variables support an external QA installation without adding browser binaries to this repository.
 
-### Running Locally
-To launch the built-in HTTP server with instant HTTP 206 video range request support:
-```bash
-node server.js
-```
-The server will be available at: [http://localhost:3000](http://localhost:3000)
+## November 2026 service update
 
-Alternatively, using npm:
-```bash
-npm start
-```
+The homepage now presents Elite Recruitment & Headhunting, Coaching & Development, and AI Business Services. Seven connected service cards link to CRM, Communications, Sales & Intelligence, Business Delivery, Automation, AI Team and Marketing & Social Media on `intelligence.html`, using branded service icons in `dist/assets/services-v2/`. Service enquiry links preselect the relevant option on the contact page.
 
----
+The revised offer and shared copy are in `site-offer.mjs`; its branding and responsive layouts are in `dist/ai-services.css`. `build.mjs` integrates them with the existing page templates. Run `npm run build` after editing the templates or offer module, then `npm run check`.
 
-## 📁 Project Structure
+Eight-page, responsive static website. Source content and templates are in `build.mjs`; styles and browser interactions are in `dist/styles.css` and `dist/app.js`.
 
-```text
-Power_Web2.0/
-├── assets/                  # Media assets (images, video references, icons)
-├── about.html               # About Power-Up Talent & mission
-├── coaching.html            # Commercial Academy & Coaching programmes
-├── contact.html             # Contact & inquiry form
-├── index.html               # Main homepage / landing experience
-├── info.html                # Platform specifications & deep-dive information
-├── platform.html            # CorePlatform technology & agent architecture
-├── talent.html              # Headhunting, talent acquisition & search
-├── why-us.html              # Differentiators, guarantees & client outcomes
-├── main.js                  # Client-side interactive behaviors & navigations
-├── styles.css               # Global responsive design system & typography
-├── server.js                # Node.js zero-dependency HTTP server with range streaming
-├── firebase.json            # Google Firebase Hosting configuration
-└── package.json             # Project metadata & deployment scripts
-```
+Run `npm run build`, `npm run check`, then `npm start` for http://127.0.0.1:4173.
 
----
-
-## 🌐 Deployment
-
-### Firebase Hosting
-```bash
-npm run deploy:firebase
-```
-
-### Vercel
-```bash
-npm run deploy:vercel
-```
-
-### Netlify
-```bash
-npm run deploy:netlify
-```
+The enquiry builder prepares a mailto message and provides a copy fallback. It does not submit or store enquiries. Review and send from an email app. Existing public policy pages are linked. No fabricated customer evidence or performance statistics are included.

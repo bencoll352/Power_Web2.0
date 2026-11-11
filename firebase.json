@@ -1,37 +1,42 @@
 {
   "hosting": {
     "site": "power-up-talent",
-    "public": ".",
+    "public": "dist",
+    "cleanUrls": true,
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
     ],
+    "redirects": [
+      { "source": "/intelligence", "destination": "/platforms", "type": 301 },
+      { "source": "/intelligence.html", "destination": "/platforms", "type": 301 },
+      { "source": "/platform", "destination": "/platforms", "type": 301 },
+      { "source": "/platform.html", "destination": "/platforms", "type": 301 },
+      { "source": "/info", "destination": "/platforms", "type": 301 },
+      { "source": "/info.html", "destination": "/platforms", "type": 301 },
+      { "source": "/academy", "destination": "/coaching", "type": 301 },
+      { "source": "/why-us", "destination": "/partnerships", "type": 301 },
+      { "source": "/why-us.html", "destination": "/partnerships", "type": 301 },
+      { "source": "/claim", "destination": "/check", "type": 301 },
+      { "source": "/demo", "destination": "/dashboard", "type": 301 }
+    ],
     "rewrites": [
-      {
-        "source": "/academy",
-        "destination": "/coaching.html"
-      },
-      {
-        "source": "/coaching",
-        "destination": "/coaching.html"
-      },
-      {
-        "source": "/why-us",
-        "destination": "/why-us.html"
-      },
-      {
-        "source": "/platform",
-        "destination": "/platform.html"
-      },
-      {
-        "source": "/claim",
-        "destination": "/check.html"
-      },
-      {
-        "source": "/check",
-        "destination": "/check.html"
-      }
+      { "source": "/partnerships", "destination": "/partnerships.html" },
+      { "source": "/talent", "destination": "/talent.html" },
+      { "source": "/coaching", "destination": "/coaching.html" },
+      { "source": "/platforms", "destination": "/platforms.html" },
+      { "source": "/check", "destination": "/check.html" },
+      { "source": "/about", "destination": "/about.html" },
+      { "source": "/contact", "destination": "/contact.html" },
+      { "source": "/dashboard", "destination": "/dashboard.html" },
+      { "source": "/crm", "destination": "/crm.html" },
+      { "source": "/communications", "destination": "/communications.html" },
+      { "source": "/sales-intelligence", "destination": "/sales-intelligence.html" },
+      { "source": "/business-delivery", "destination": "/business-delivery.html" },
+      { "source": "/automation", "destination": "/automation.html" },
+      { "source": "/ai-team", "destination": "/ai-team.html" },
+      { "source": "/marketing-social-media", "destination": "/marketing-social-media.html" }
     ]
   }
 }

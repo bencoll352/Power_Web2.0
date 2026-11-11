@@ -1,7 +1,5 @@
 node_modules/
+.sites-local/
 .firebase/
+*.tar.gz
 *.log
-cloudflared.exe
-extracted_strings.txt
-filtered_highlights.txt
-live_bundle.js

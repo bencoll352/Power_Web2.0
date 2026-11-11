@@ -1,0 +1,47 @@
+[
+  {
+    "path": "/",
+    "result": "200 https://power-up-talent.web.app/",
+    "error": ""
+  },
+  {
+    "path": "/platforms",
+    "result": "404 https://power-up-talent.web.app/platforms",
+    "error": ""
+  },
+  {
+    "path": "/crm",
+    "result": "404 https://power-up-talent.web.app/crm",
+    "error": ""
+  },
+  {
+    "path": "/communications",
+    "result": "404 https://power-up-talent.web.app/communications",
+    "error": ""
+  },
+  {
+    "path": "/sales-intelligence",
+    "result": "404 https://power-up-talent.web.app/sales-intelligence",
+    "error": ""
+  },
+  {
+    "path": "/business-delivery",
+    "result": "404 https://power-up-talent.web.app/business-delivery",
+    "error": ""
+  },
+  {
+    "path": "/automation",
+    "result": "404 https://power-up-talent.web.app/automation",
+    "error": ""
+  },
+  {
+    "path": "/ai-team",
+    "result": "404 https://power-up-talent.web.app/ai-team",
+    "error": ""
+  },
+  {
+    "path": "/marketing-social-media",
+    "result": "404 https://power-up-talent.web.app/marketing-social-media",
+    "error": ""
+  }
+]
