@@ -110,3 +110,44 @@ input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="tr
   .editorial-centrepiece{padding:24px}
   .scenario-panel{padding:20px}
 }
+
+@media (max-width: 1150px) {
+  .nav-wrap { position: relative; }
+  .menu-toggle { display: flex; align-items: center; }
+  .header nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 30;
+    background: #111a20;
+    padding: 20px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    border-bottom: 1px solid #ffffff30;
+  }
+  .header nav.open { display: flex; }
+  .header nav a { padding: 12px; font-size: 15px; }
+  .service-menu-panel { position: static; width: 100%; box-shadow: none; }
+}
+
+@media (max-width: 600px) {
+  .cards { grid-template-columns: minmax(0, 1fr) !important; }
+  .nav-wrap .brand { min-width: 0; flex: 1 1 auto; }
+  .header .brand-logo-img {
+    width: 100% !important;
+    max-width: 220px !important;
+    height: auto !important;
+    max-height: 56px !important;
+  }
+  .menu-toggle { flex: 0 0 auto; }
+  .footer-grid { grid-template-columns: minmax(0, 1fr); }
+  .footer-grid > div { min-width: 0; }
+  footer .brand-logo-img {
+    width: 100% !important;
+    max-width: 300px !important;
+    height: auto !important;
+  }
+}

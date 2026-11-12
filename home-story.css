@@ -1,0 +1,198 @@
+/* Homepage: aligned offer cards and the restored partnership story. */
+.home-offer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+}
+.home-offer-grid > article {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.home-offer-grid .actions {
+  margin-top: auto !important;
+  padding-top: 26px;
+}
+.home-offer-grid .button {
+  min-width: 230px;
+  justify-content: center;
+}
+
+.home-story-section .section-head,
+.home-transformation .section-head,
+.home-faq .section-head {
+  margin-bottom: 34px;
+}
+.home-pillar-grid,
+.transformation-grid,
+.difference-grid {
+  display: grid;
+  gap: 20px;
+}
+.home-pillar-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.home-pillar-grid article {
+  background: #fff;
+  border: 1px solid #d9ddd2;
+  border-top: 3px solid #d9b92e;
+  border-radius: 8px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+}
+.pillar-number {
+  display: block;
+  color: #8b6a0c;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .09em;
+  margin-bottom: 18px;
+}
+.home-pillar-grid h3,
+.difference-grid h3 {
+  font-size: clamp(1.35rem, 2vw, 1.8rem);
+  line-height: 1.25;
+  margin: 0 0 14px;
+}
+.home-pillar-grid p,
+.difference-grid p {
+  color: #536052;
+  line-height: 1.65;
+}
+.home-pillar-grid ul {
+  list-style: none;
+  padding: 0;
+  margin: 18px 0 24px;
+}
+.home-pillar-grid li {
+  border-top: 1px solid #e2e5dc;
+  padding: 10px 0 10px 20px;
+  position: relative;
+  font-size: 13px;
+}
+.home-pillar-grid li::before {
+  content: '✓';
+  color: #9b780e;
+  position: absolute;
+  left: 0;
+}
+.home-pillar-grid .text-link {
+  margin-top: auto;
+}
+
+.home-transformation {
+  background: #151a20;
+  color: #fff;
+}
+.home-transformation h2,
+.home-transformation .eyebrow {
+  color: #fff;
+}
+.home-transformation .section-head p,
+.home-transformation .transformation-grid p {
+  color: #c4cbd1;
+}
+.home-transformation h2 em {
+  color: #f1ca31;
+}
+.transformation-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.transformation-grid article {
+  border: 1px solid #3c434a;
+  border-radius: 8px;
+  padding: 26px;
+}
+.transformation-grid article span {
+  display: inline-grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #616262;
+  border-radius: 6px;
+  color: #f1ca31;
+  font-size: 11px;
+  font-weight: 800;
+}
+.transformation-grid h3 {
+  font-size: 1.2rem;
+  margin: 18px 0 8px;
+  color: #fff;
+}
+.transformation-grid p {
+  font-size: 14px;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.difference-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.difference-grid article {
+  border: 1px solid #d9ddd2;
+  border-radius: 8px;
+  background: #fff;
+  padding: 28px;
+}
+.difference-grid .difference-feature {
+  background: #f8f3dd;
+  border-color: #d7b936;
+}
+.difference-feature .text-link {
+  display: inline-block;
+  margin-top: 12px;
+}
+
+.home-faq {
+  background: #f4f5ef;
+}
+.faq-list {
+  border-top: 1px solid #cdd4c5;
+  margin-bottom: 24px;
+}
+.faq-list details {
+  border-bottom: 1px solid #cdd4c5;
+  padding: 18px 0;
+}
+.faq-list summary {
+  cursor: pointer;
+  font-size: clamp(1rem, 1.7vw, 1.25rem);
+  font-weight: 700;
+  padding-right: 32px;
+}
+.faq-list summary:focus-visible {
+  outline: 3px solid #d9b92e;
+  outline-offset: 4px;
+}
+.faq-list details p {
+  max-width: 760px;
+  color: #536052;
+  line-height: 1.65;
+  margin: 14px 0 0;
+}
+
+@media (max-width: 950px) {
+  .home-offer-grid,
+  .home-pillar-grid,
+  .transformation-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 700px) {
+  .home-offer-grid,
+  .home-pillar-grid,
+  .transformation-grid,
+  .difference-grid {
+    grid-template-columns: 1fr;
+  }
+  .home-offer-grid .actions,
+  .home-offer-grid .button {
+    width: 100%;
+  }
+  .home-pillar-grid article,
+  .difference-grid article,
+  .transformation-grid article {
+    padding: 24px;
+  }
+}

@@ -68,13 +68,12 @@ try {
     if(!detailResponse.ok() || !detailResponse.headers()['content-type'].includes('image/webp')) throw Error('Broken workflow detail image on '+prod);
   }
 
-  // 3. Verify both homepage routes are visible and usable on a phone (390px)
+  // 3. Verify the three current homepage routes are visible and usable on a phone (390px)
   await page.goto(origin + '/');
-  if (!(await page.locator('a:has-text("Explore Recruitment & Coaching")').first().isVisible())) {
-    throw Error('Explore Recruitment & Coaching CTA not visible on mobile homepage');
-  }
-  if (!(await page.locator('a:has-text("Explore AI & Business Platforms")').first().isVisible())) {
-    throw Error('Explore AI & Business Platforms CTA not visible on mobile homepage');
+  for (const label of ['Discuss a hire', 'Explore coaching', 'Explore AI services']) {
+    if (!(await page.locator(`a:has-text("${label}")`).first().isVisible())) {
+      throw Error(`${label} CTA not visible on mobile homepage`);
+    }
   }
 
   // 4. Verify Guided 3-Scenario Product Demo (complete, live feedback, reset, and Contact preselection)
