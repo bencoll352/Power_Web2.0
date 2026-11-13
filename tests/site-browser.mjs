@@ -42,7 +42,7 @@ try {
     }
   }
 
-  // 2. Verify all 7 product pages have early signature visuals (.sig-visual-card) readable on phone (390px)
+  // 2. Verify all seven product pages load real captured screens responsively.
   await page.setViewportSize({ width: 390, height: 844 });
   const productPages = [
     'crm.html',
@@ -55,18 +55,35 @@ try {
   ];
   for (const prod of productPages) {
     await page.goto(origin + '/' + prod);
-    if (!(await page.locator('.sig-visual-card').isVisible())) {
-      throw Error('Missing early signature visual on ' + prod);
-    }
+    const capture=page.locator('.signature-visual-wrap .product-capture');
+    if (!(await capture.isVisible())) throw Error('Missing product capture on ' + prod);
+    const img=capture.locator('img');
+    await img.scrollIntoViewIfNeeded();
+    await img.evaluate(el=>el.decode());
+    if(!await img.evaluate(el=>el.naturalWidth>0 && el.currentSrc.endsWith('-mobile.webp'))) throw Error('Missing responsive mobile capture on '+prod);
+    if(!await img.getAttribute('alt')) throw Error('Missing capture alt text on '+prod);
+    if(!await capture.locator('figcaption').textContent()) throw Error('Missing action caption on '+prod);
+    const detail=await capture.locator('figcaption a').getAttribute('href');
+    const detailResponse=await page.request.get(origin+'/'+detail);
+    if(!detailResponse.ok() || !detailResponse.headers()['content-type'].includes('image/webp')) throw Error('Broken workflow detail image on '+prod);
   }
 
-  // 3. Verify both homepage routes are visible and usable on a phone (390px)
+  // 3. Verify B2B homepage hero CTAs and core sections are visible on mobile (390px)
   await page.goto(origin + '/');
-  if (!(await page.locator('a:has-text("Explore Recruitment & Coaching")').first().isVisible())) {
-    throw Error('Explore Recruitment & Coaching CTA not visible on mobile homepage');
+  if (!(await page.locator('a:has-text("Request a demo")').first().isVisible())) {
+    throw Error('Request a demo CTA not visible on mobile homepage');
   }
-  if (!(await page.locator('a:has-text("Explore AI & Business Platforms")').first().isVisible())) {
-    throw Error('Explore AI & Business Platforms CTA not visible on mobile homepage');
+  if (!(await page.locator('a:has-text("Explore the seven services")').first().isVisible())) {
+    throw Error('Explore the seven services CTA not visible on mobile homepage');
+  }
+  if ((await page.locator('#how-intelligence-works').count()) !== 1) {
+    throw Error('Missing How the intelligence works section on homepage');
+  }
+  if ((await page.locator('#connected-journey').count()) !== 1) {
+    throw Error('Missing From opportunity to delivery section on homepage');
+  }
+  if ((await page.locator('#home-faq').count()) !== 1) {
+    throw Error('Missing FAQ section on homepage');
   }
 
   // 4. Verify Guided 3-Scenario Product Demo (complete, live feedback, reset, and Contact preselection)
@@ -206,7 +223,7 @@ try {
 
   if (errors.length) throw Error(errors.join('\n'));
   console.log(
-    `PASS: ${checked} responsive page checks; 7 signature visuals; 3 guided scenarios (complete/feedback/reset/CTA); 7 demo tabs; client/candidate/territory enquiry checks; keyboard & mobile menu. No browser errors.`
+    `PASS: ${checked} responsive page checks; 7 responsive product captures; 3 guided scenarios (complete/feedback/reset/CTA); 7 demo tabs; client/candidate/territory enquiry checks; keyboard & mobile menu. No browser errors.`
   );
 
   if (process.env.SCREENSHOT_DIR) {

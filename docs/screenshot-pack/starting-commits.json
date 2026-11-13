@@ -1,0 +1,52 @@
+[
+  {
+    "repo": "Power_Web2.0",
+    "commit": "b5282805eb2fc8de4490b6f46229c9f66466da71",
+    "branch": "main"
+  },
+  {
+    "repo": "Powerweb3.0",
+    "commit": "8916bcab1e1f43249826ae62951c36d0e8e814b1",
+    "branch": "main"
+  },
+  {
+    "repo": "AI-Employee",
+    "commit": "d205944666958234fd58b52a31208f182035de7e",
+    "branch": "main"
+  },
+  {
+    "repo": "Power-Up-communication-",
+    "commit": "722c906b38f5eaf3c7a2113b096db8a4032e719d",
+    "branch": "main"
+  },
+  {
+    "repo": "Power-Up--AI-Team",
+    "commit": "3ba157cdd90a8d6d406f91849c2beae21de91d0c",
+    "branch": "main"
+  },
+  {
+    "repo": "Automation---Power-Up-Talent",
+    "commit": "9aa6169cb8ecea487d9c723a2641b7092ed0afb9",
+    "branch": "main"
+  },
+  {
+    "repo": "Business-Delivery-Power-Up-Talent",
+    "commit": "c892657efaca30b7deb430c8b49016ade4a84ce2",
+    "branch": "main"
+  },
+  {
+    "repo": "Sales-Intelligence---Sales-Growth",
+    "commit": "c5e7786f5f59a549a8ffc68a1643b30e14d31076",
+    "branch": "main"
+  },
+  {
+    "repo": "Marketing-Social-Media",
+    "commit": "a765ddd4cc14d70f3995a8caa3292a2eefe6a8c7",
+    "branch": "main"
+  },
+  {
+    "repo": "CRM-Power-Up-Business-Person-",
+    "commit": "eb2e39ae70c5fce20428d15633a80dcf50987a27",
+    "branch": "main"
+  }
+]

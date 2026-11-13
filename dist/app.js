@@ -162,6 +162,8 @@ const interestAliases = {
   'marketing-social-media': 'AI services: Marketing & Social Media',
   platforms: 'AI services walkthrough',
   walkthrough: 'AI services walkthrough',
+  demo: 'AI services walkthrough',
+  'request-a-demo': 'AI services walkthrough',
   pilot: 'Platform pilot discussion',
   talent: 'Critical hire',
   headhunting: 'Critical hire',
@@ -208,6 +210,11 @@ if (form) {
         fallbackNote.hidden = false;
       }
     }
+  }
+
+  const programme = (sp.get('programme') || '').trim();
+  if (programme && form.elements.message && !form.elements.message.value) {
+    form.elements.message.value = `I would like to discuss the ${programme} coaching programme for our team.`;
   }
 
   const inputs = Array.from(form.querySelectorAll('input, select, textarea'));

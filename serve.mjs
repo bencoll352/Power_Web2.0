@@ -8,6 +8,7 @@ const mimeTypes = {
   '.css': 'text/css',
   '.js': 'text/javascript',
   '.png': 'image/png',
+  '.webp': 'image/webp',
   '.jpg': 'image/jpeg',
   '.jpeg': 'image/jpeg',
   '.svg': 'image/svg+xml',
@@ -24,10 +25,13 @@ http.createServer((req, res) => {
     res.writeHead(400);
     return res.end();
   }
-  const target = path.resolve(root, '.' + (url === '/' ? '/index.html' : url));
+  let target = path.resolve(root, '.' + (url === '/' ? '/index.html' : url));
   if (!target.startsWith(root + path.sep)) {
     res.writeHead(403);
     return res.end();
+  }
+  if (!fs.existsSync(target) && fs.existsSync(target + '.html')) {
+    target = target + '.html';
   }
 
   fs.stat(target, (err, stats) => {
