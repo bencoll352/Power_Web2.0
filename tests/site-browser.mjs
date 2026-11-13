@@ -68,22 +68,29 @@ try {
     if(!detailResponse.ok() || !detailResponse.headers()['content-type'].includes('image/webp')) throw Error('Broken workflow detail image on '+prod);
   }
 
-  // 3. Verify B2B homepage hero CTAs and core sections are visible on mobile (390px)
+  // 3. Verify restored B2B homepage hero CTAs and core sections are visible on mobile (390px)
   await page.goto(origin + '/');
+  if (!(await page.locator('a:has-text("Hire Top Talent")').first().isVisible())) {
+    throw Error('Hire Top Talent CTA not visible on mobile homepage');
+  }
   if (!(await page.locator('a:has-text("Request a demo")').first().isVisible())) {
     throw Error('Request a demo CTA not visible on mobile homepage');
   }
   if (!(await page.locator('a:has-text("Explore the seven services")').first().isVisible())) {
     throw Error('Explore the seven services CTA not visible on mobile homepage');
   }
-  if ((await page.locator('#how-intelligence-works').count()) !== 1) {
-    throw Error('Missing How the intelligence works section on homepage');
-  }
-  if ((await page.locator('#connected-journey').count()) !== 1) {
-    throw Error('Missing From opportunity to delivery section on homepage');
-  }
-  if ((await page.locator('#home-faq').count()) !== 1) {
-    throw Error('Missing FAQ section on homepage');
+  for (const sec of [
+    '#strategic-pillars',
+    '#seven-services',
+    '#value-creation',
+    '#how-intelligence-works',
+    '#strategic-difference',
+    '#connected-journey',
+    '#home-faq'
+  ]) {
+    if ((await page.locator(sec).count()) !== 1) {
+      throw Error('Missing homepage section: ' + sec);
+    }
   }
 
   // 4. Verify Guided 3-Scenario Product Demo (complete, live feedback, reset, and Contact preselection)
@@ -229,8 +236,15 @@ try {
   if (process.env.SCREENSHOT_DIR) {
     fs.mkdirSync(process.env.SCREENSHOT_DIR, { recursive: true });
     await page.setViewportSize({ width: 1440, height: 1000 });
-    await page.goto(origin + '/');
+    await page.goto(origin + '/', { waitUntil: 'networkidle' });
+    await page.locator('.hero-screenshot-panel img').evaluate(el => el.decode()).catch(() => {});
     await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/index_html-1440.png' });
+    await page.locator('#strategic-pillars').scrollIntoViewIfNeeded();
+    await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/index-pillars.png' });
+    await page.locator('#value-creation').scrollIntoViewIfNeeded();
+    await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/index-value.png' });
+    await page.locator('#strategic-difference').scrollIntoViewIfNeeded();
+    await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/index-difference.png' });
     await page.goto(origin + '/platforms.html');
     await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/platforms-hub.png' });
     await page.goto(origin + '/sales-intelligence.html');
@@ -241,6 +255,10 @@ try {
     await page.locator('[data-workspace]').screenshot({ path: process.env.SCREENSHOT_DIR + '/dashboard-final.png' });
     await page.goto(origin + '/crm.html');
     await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/crm-final.png' });
+    await page.goto(origin + '/information.html');
+    await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/information-final.png' });
+    await page.goto(origin + '/about.html');
+    await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/about-final.png' });
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto(origin + '/');
     await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/index_html-390.png' });
