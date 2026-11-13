@@ -68,12 +68,22 @@ try {
     if(!detailResponse.ok() || !detailResponse.headers()['content-type'].includes('image/webp')) throw Error('Broken workflow detail image on '+prod);
   }
 
-  // 3. Verify the three current homepage routes are visible and usable on a phone (390px)
+  // 3. Verify B2B homepage hero CTAs and core sections are visible on mobile (390px)
   await page.goto(origin + '/');
-  for (const label of ['Discuss a hire', 'Explore coaching', 'Explore AI services']) {
-    if (!(await page.locator(`a:has-text("${label}")`).first().isVisible())) {
-      throw Error(`${label} CTA not visible on mobile homepage`);
-    }
+  if (!(await page.locator('a:has-text("Request a demo")').first().isVisible())) {
+    throw Error('Request a demo CTA not visible on mobile homepage');
+  }
+  if (!(await page.locator('a:has-text("Explore the seven services")').first().isVisible())) {
+    throw Error('Explore the seven services CTA not visible on mobile homepage');
+  }
+  if ((await page.locator('#how-intelligence-works').count()) !== 1) {
+    throw Error('Missing How the intelligence works section on homepage');
+  }
+  if ((await page.locator('#connected-journey').count()) !== 1) {
+    throw Error('Missing From opportunity to delivery section on homepage');
+  }
+  if ((await page.locator('#home-faq').count()) !== 1) {
+    throw Error('Missing FAQ section on homepage');
   }
 
   // 4. Verify Guided 3-Scenario Product Demo (complete, live feedback, reset, and Contact preselection)

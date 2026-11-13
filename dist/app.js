@@ -162,6 +162,8 @@ const interestAliases = {
   'marketing-social-media': 'AI services: Marketing & Social Media',
   platforms: 'AI services walkthrough',
   walkthrough: 'AI services walkthrough',
+  demo: 'AI services walkthrough',
+  'request-a-demo': 'AI services walkthrough',
   pilot: 'Platform pilot discussion',
   talent: 'Critical hire',
   headhunting: 'Critical hire',
