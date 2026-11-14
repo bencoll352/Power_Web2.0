@@ -68,16 +68,13 @@ try {
     if(!detailResponse.ok() || !detailResponse.headers()['content-type'].includes('image/webp')) throw Error('Broken workflow detail image on '+prod);
   }
 
-  // 3. Verify restored B2B homepage hero CTAs and core sections are visible on mobile (390px)
+  // 3. Verify the industry-led mobile hero and core sections are visible (390px)
   await page.goto(origin + '/');
   if (!(await page.locator('a:has-text("Hire Top Talent")').first().isVisible())) {
     throw Error('Hire Top Talent CTA not visible on mobile homepage');
   }
-  if (!(await page.locator('a:has-text("Request a demo")').first().isVisible())) {
-    throw Error('Request a demo CTA not visible on mobile homepage');
-  }
-  if (!(await page.locator('a:has-text("Explore the seven services")').first().isVisible())) {
-    throw Error('Explore the seven services CTA not visible on mobile homepage');
+  if (!(await page.locator('.hero a:has-text("Explore our approach")').isVisible())) {
+    throw Error('Explore our approach CTA not visible on mobile homepage');
   }
   for (const sec of [
     '#strategic-pillars',

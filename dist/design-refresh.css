@@ -1,0 +1,29 @@
+/* Recruitment-first presentation for the homepage. */
+.hero-handshake .hero-grid.hero-industry {
+  grid-template-columns: minmax(0, 790px);
+  min-height: 690px;
+  align-content: center;
+  align-items: center;
+  padding-top: 76px;
+  padding-bottom: 76px;
+}
+.hero-industry > div:first-child { max-width: 790px; }
+.hero-industry .eyebrow { color: #f4ca36; font-size: 11px; letter-spacing: .17em; }
+.hero-handshake .hero-industry h1 { max-width: 900px; font-size: clamp(3.5rem, 5vw, 4.6rem) !important; line-height: 1.03; margin-bottom: 24px; }
+.hero-industry .hero-copy { max-width: 640px; color: #f2f3f3; font-size: 19px; line-height: 1.55; }
+.hero-industry .strategic-hero-box { max-width: 650px; margin-top: 28px; }
+.hero-industry .actions { margin-top: 30px; }
+.hero-industry .button { min-width: 190px; justify-content: space-between; }
+.hero-handshake .handshake-overlay { background: linear-gradient(90deg, rgba(7,10,20,.95) 0%, rgba(7,10,20,.87) 37%, rgba(7,10,20,.48) 76%, rgba(7,10,20,.27) 100%) !important; }
+.hero-handshake .hero-photo-bg { filter: brightness(.58); }
+.hero-handshake .hero-grid-lines { opacity: .3; }
+@media (max-width: 780px) {
+  .hero-handshake .hero-grid.hero-industry { min-height: 0; padding-top: 56px; padding-bottom: 62px; }
+  .hero-industry .eyebrow { font-size: 10px; line-height: 1.55; margin-bottom: 21px; }
+  .hero-handshake .hero-industry h1 { font-size: clamp(2.75rem, 12vw, 4.4rem) !important; line-height: 1.04; margin-bottom: 20px; }
+  .hero-industry .hero-copy { font-size: 16px; line-height: 1.55; }
+  .hero-industry .strategic-hero-box { margin-top: 22px; }
+  .hero-industry .actions { margin-top: 24px; }
+  .hero-industry .button { min-width: 0; }
+  .hero-handshake .handshake-overlay { background: linear-gradient(90deg, rgba(7,10,20,.9), rgba(7,10,20,.62)) !important; }
+}
