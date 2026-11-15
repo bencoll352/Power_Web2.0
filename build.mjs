@@ -1,12 +1,14 @@
 import fs from 'node:fs';
 import { partnershipHome, aiServicesPage, refreshPage, refreshShared } from './site-offer.mjs';
 import { servicePages, dashboardPage, professionalPage, professionalShell } from './professional-site.mjs';
+import { iconBadge } from './icons.mjs';
 
 const nav = [
   ['partnerships', 'Partnerships'],
-  ['talent', 'Headhunting'],
+  ['talent', 'Recruitment &amp; Headhunting'],
   ['coaching', 'Coaching'],
-  ['platforms', 'AI &amp; Business Platforms'],
+  ['platforms', 'AI Business Services'],
+  ['information', 'Information'],
   ['about', 'About']
 ];
 
@@ -41,8 +43,18 @@ function pageHero(label, title, desc, video = 'about-hero.mp4', actionsHtml = ''
   return `<section class="page-hero"><video autoplay loop muted playsinline preload="metadata" class="hero-video-bg"><source src="assets/videos/${video}" type="video/mp4"></video><div class="video-overlay"></div><div class="wrap">${tag(label)}<h1>${title}</h1><p>${desc}</p>${actionsHtml ? `<div class="actions" style="margin-top:22px">${actionsHtml}</div>` : ''}</div></section>`;
 }
 
+// Pick a relevant signature icon from the card label/title so every card carries a visual anchor.
+const iconRules = [
+  [/headhunt|search|mapping|people|right people/i, 'target'], [/coach|habit|behaviour|develop|leader/i, 'users'],
+  [/ai |ai&|platform|ownership|visibility|crm|system/i, 'cpu'], [/partner|engagement|conversation/i, 'handshake'],
+  [/exclusiv|confiden|standard|written/i, 'shield'], [/measur|progress|indicator|track/i, 'chart'],
+  [/enquir|callback|communicat/i, 'chat'], [/quote|sales|pipeline|intelligence/i, 'trend'],
+  [/brief|handover|deliver/i, 'file'], [/time|day|week|onboard/i, 'clock'], [/who|role|commercial/i, 'building']
+];
+const pickIcon = (...txt) => (iconRules.find(([re]) => re.test(txt.join(' '))) || [null, 'check'])[1];
+
 function cards(items) {
-  return `<div class="cards">${items.map(([n, t, d, list]) => `<article><span class="card-num">${n}</span><h3>${t}</h3><p>${d}</p>${list ? `<ul>${list.map(x => `<li>${x}</li>`).join('')}</ul>` : ''}</article>`).join('')}</div>`;
+  return `<div class="cards">${items.map(([n, t, d, list]) => `<article>${iconBadge(pickIcon(n, t), 'ink')}<span class="card-num">${n}</span><h3>${t}</h3><p>${d}</p>${list ? `<ul>${list.map(x => `<li>${x}</li>`).join('')}</ul>` : ''}</article>`).join('')}</div>`;
 }
 
 // Partnerships Page (Section 6)
@@ -96,13 +108,13 @@ const partnership =
 // Talent / Headhunting Page (Section 6)
 const talent =
   pageHero(
-    'ELITE RECRUITMENT &amp; HEADHUNTING',
+    'SPECIALIST RECRUITMENT &amp; HEADHUNTING',
     'The right person.<br><em>For what comes next.</em>',
-    'Discreet search for leadership, commercial and technical appointments across electrical wholesale, technical distribution, engineering, construction and facilities management.',
+    'Permanent recruitment and targeted headhunting with sector expertise in electrical wholesale and trade distribution, plus engineering, construction and technical services.',
     'talent-video.mp4',
-    `${button('Discuss a hire', 'contact.html?interest=Critical%20hire')}${button('Confidential candidate enquiry', 'contact.html?path=candidate#candidate-path', true)}`
+    `${button('Discuss a vacancy', 'contact.html?interest=Critical%20hire')}${button('Confidential candidate enquiry', 'contact.html?path=candidate#candidate-path', true)}`
   ) +
-  `<section class="wrap section"><div class="crm-split-grid"><article class="crm-workspace-card"><span class="platform-status-pill">For Employers</span><h3>Hiring a leader, commercial performer or specialist</h3><p>We start with the commercial problem behind the vacancy — what the person must achieve, the team they are joining and the regional market they will operate in.</p><p style="margin-top:14px"><a class="text-link" href="#employer-journey">See the 5-step employer search journey ↓</a></p></article><article class="crm-workspace-card"><span class="platform-status-pill">For Candidates</span><h3>Exploring your next career move in confidence</h3><p>Speak privately with our headhunting team before any approach is made to an employer. We never share your details without your express written permission.</p><p style="margin-top:14px"><a class="text-link" href="contact.html?path=candidate#candidate-path">Email us confidentially ↗</a></p></article></div></section>` +
+  `<section class="wrap section"><div class="crm-split-grid"><article class="crm-workspace-card" id="recruitment-problems"><span class="platform-status-pill">Problems we solve</span><h3>Why critical searches stall</h3><ul class="workspace-feature-list"><li>Critical vacancies stay open for months while branch or commercial performance stalls.</li><li>Job-board applicants lack sector depth across electrical wholesale, trade distribution or engineering.</li><li>The strongest managers and sales performers are not actively browsing job boards.</li></ul></article><article class="crm-workspace-card" id="recruitment-offer"><span class="platform-status-pill">What we offer</span><h3>Structured, confidential search</h3><ul class="workspace-feature-list"><li>Permanent recruitment and targeted headhunting under strict single-client sector exclusivity.</li><li>Full 7-stage process: search brief, market mapping, direct approach, assessment, shortlist, interviews and offer management.</li><li>Dedicated confidential candidate route for passive professionals considering their next move.</li></ul></article></div><div class="crm-split-grid" style="margin-top:24px"><figure class="crm-workspace-card" style="padding:14px"><img src="assets/headhunting-talent.jpg" alt="Power-Up Talent specialist headhunting consultation" width="800" height="533" loading="lazy" style="width:100%;height:260px;object-fit:cover;border-radius:6px"><figcaption style="margin-top:10px;font-size:13px;color:var(--muted)">Sector-specialist headhunting for electrical wholesale, trade distribution, construction and engineering.</figcaption></figure><figure class="crm-workspace-card" style="padding:14px"><img src="assets/handshake-hero.jpg" alt="Employer and leader agreement after a specialist headhunting appointment" width="800" height="533" loading="lazy" style="width:100%;height:260px;object-fit:cover;border-radius:6px"><figcaption style="margin-top:10px;font-size:13px;color:var(--muted)">Discreet direct approach, structured assessment and offer management through to start date.</figcaption></figure></div></section>` +
   `<section class="wrap section">${sectionHead(
     'HOW WE RECRUIT FOR EMPLOYERS',
     'Three ways to engage<br>our search team.',
@@ -128,14 +140,14 @@ const talent =
     ]
   ])}</section>` +
   `<section class="wrap process-section" id="employer-journey">${sectionHead(
-    'THE EMPLOYER EXPERIENCE',
-    'From briefing through<br>shortlist and appointment.'
+    'THE EMPLOYER SEARCH PROCESS',
+    'From search brief through<br>shortlist, interviews and offer management.'
   )}<ol class="process-list">${[
-    ['Briefing', 'Agree the role blueprint, commercial objectives, territory context and what good evidence looks like.'],
-    ['Search & mapping', 'Identify relevant target companies and proven performers across your sector and region.'],
-    ['Discreet approach', 'Engage potential candidates confidentially and qualify their track record, motivation and expectations.'],
-    ['Shortlist & assessment', 'Present a focused shortlist with structured interview notes against the agreed brief.'],
-    ['Appointment & handover', 'Manage offer negotiation, notice-period communication and optional post-appointment coaching.']
+    ['Search brief', 'Agree the role blueprint, commercial objectives, territory context and what good evidence looks like.'],
+    ['Market mapping', 'Identify relevant target companies and proven performers across your sector and region.'],
+    ['Direct approach', 'Engage potential passive candidates confidentially and qualify their track record, motivation and expectations.'],
+    ['Assessment & shortlist', 'Assess candidates rigorously and present a focused shortlist with structured interview notes.'],
+    ['Interviews & offer management', 'Coordinate structured interviews, manage offer negotiation, notice-period communication and post-hire onboarding.']
   ].map(([t, d], i) => `<li><span>0${i + 1}</span><h3>${t}</h3><p>${d}</p></li>`).join('')}</ol></section>` +
   `<section class="wrap section" id="post-hire-support">${sectionHead(
     'SUPPORT YOUR NEW HIRE AFTER APPOINTMENT',
@@ -169,10 +181,11 @@ const coaching =
   pageHero(
     'COACHING &amp; DEVELOPMENT',
     'Better habits.<br><em>Stronger commercial execution.</em>',
-    'Practical coaching for sales teams, branch managers and leaders across UK electrical wholesale, technical distribution, construction and engineering.',
+    '1-to-1 and team coaching for sales teams, branch managers and leaders across UK electrical wholesale, technical distribution, construction and engineering.',
     'coaching-video.mp4',
-    `${button('Discuss a coaching programme', 'contact.html?interest=Coaching')}${button('Explore partnerships', 'partnerships.html', true)}`
+    `${button('Discuss your coaching needs', 'contact.html?interest=Coaching')}${button('Explore partnerships', 'partnerships.html', true)}`
   ) +
+  `<section class="wrap section"><div class="crm-split-grid"><article class="crm-workspace-card" id="coaching-problems"><span class="platform-status-pill">Problems we solve</span><h3>Where team performance slips</h3><ul class="workspace-feature-list"><li>Managers promote into leadership without structured support on giving feedback and managing performance.</li><li>Customer conversations default to price discounts instead of uncovering commercial value.</li><li>Teams agree targets in meetings, then lose momentum between weekly reviews.</li></ul></article><article class="crm-workspace-card" id="coaching-offer"><span class="platform-status-pill">What we offer</span><h3>Practical 1-to-1 and team coaching</h3><ul class="workspace-feature-list"><li>1-to-1 and team development focused on giving feedback, managing performance, improving customer conversations and following through on goals.</li><li>Six structured coaching programmes tailored to sales, branch leadership, AI adoption and hiring managers.</li><li>Clear weekly rhythms and operational indicators tracked over the programme.</li></ul></article></div><div class="crm-split-grid" style="margin-top:24px"><figure class="crm-workspace-card" style="padding:14px"><img src="assets/coaching-momentum.jpg" alt="1-to-1 and team commercial coaching session" width="800" height="533" loading="lazy" style="width:100%;height:260px;object-fit:cover;border-radius:6px"><figcaption style="margin-top:10px;font-size:13px;color:var(--muted)">1-to-1 and team coaching built around real branch, sales and leadership conversations.</figcaption></figure><figure class="crm-workspace-card" style="padding:14px"><img src="assets/coaching-notebook.jpg" alt="Structured coaching action plan and goal follow-through notes" width="800" height="533" loading="lazy" style="width:100%;height:260px;object-fit:cover;border-radius:6px"><figcaption style="margin-top:10px;font-size:13px;color:var(--muted)">Practical action plans for feedback, performance reviews and weekly quote follow-through.</figcaption></figure></div></section>` +
   `<section class="wrap section">${sectionHead(
     'HOW COACHING IS ORGANISED',
     'Who it helps, which behaviours it builds<br>and how progress is tracked.',
@@ -216,7 +229,7 @@ const coaching =
     'PUBLISHED COACHING PROGRAMMES',
     'Six structured programmes<br>built for commercial growth.',
     'Select the programme that matches your team’s priorities. Each programme can run standalone or form part of an integrated partnership.'
-  )}<div class="cards" style="grid-template-columns:repeat(3,minmax(0,1fr))">${[
+  )}<div class="cards cards-3col">${[
     [
       '01',
       'Sales Performance Sprint',
@@ -271,7 +284,7 @@ const coaching =
       'First-year new hire retention, probation completion rate and time-to-competence for new starters.',
       'Hiring%20Manager%20Academy'
     ]
-  ].map(([num, name, who, practise, takeaway, review, progSlug]) => `<article style="display:flex;flex-direction:column"><span class="card-num">${num} / PROGRAMME</span><h3>${name}</h3><p style="font-size:13.5px;color:var(--ink);font-weight:600;margin-bottom:8px">Who it helps: <span style="font-weight:400;color:var(--muted)">${who}</span></p><ul style="padding-left:18px;margin:10px 0;font-size:13px;color:var(--muted);flex:1"><li><strong>Practise:</strong> ${practise}</li><li><strong>Takeaway:</strong> ${takeaway}</li><li><strong>Review:</strong> ${review}</li></ul><div class="actions" style="margin-top:16px">${button('Discuss programme', `contact.html?interest=Coaching&programme=${progSlug}`)}</div></article>`).join('')}</div></section>${cta('Coaching')}`;
+  ].map(([num, name, who, practise, takeaway, review, progSlug], idx) => `<article style="display:flex;flex-direction:column">${iconBadge(['trend', 'building', 'award', 'cpu', 'radar', 'users'][idx], 'ink')}<span class="card-num">${num} / PROGRAMME</span><h3>${name}</h3><p style="font-size:13.5px;color:var(--ink);font-weight:600;margin-bottom:8px">Who it helps: <span style="font-weight:400;color:var(--muted)">${who}</span></p><ul style="padding-left:18px;margin:10px 0;font-size:13px;color:var(--muted);flex:1"><li><strong>Practise:</strong> ${practise}</li><li><strong>Takeaway:</strong> ${takeaway}</li><li><strong>Review:</strong> ${review}</li></ul><div class="actions" style="margin-top:16px">${button('Discuss programme', `contact.html?interest=Coaching&programme=${progSlug}`)}</div></article>`).join('')}</div></section>${cta('Coaching')}`;
 
 // Territory Exclusivity Review Page (Section 3)
 const check =
@@ -287,54 +300,125 @@ const check =
     'This page prepares a review request for our directors. It does not check a live database or confirm territory availability automatically online.'
   )}<div class="check-grid"><div class="check-form"><form id="territory-check-form" novalidate><h3 style="margin:0 0 8px;font-size:20px">1. Enter your sector and territory details</h3><p style="margin:0 0 18px;font-size:14px;color:var(--muted)">Submitting this form opens a formatted review request in your email app addressed to <strong>info@power-uptalent.co.uk</strong> (and provides a copyable text box below).</p><div class="form-grid"><label>Your Name<input name="name" autocomplete="name" required placeholder="e.g. David Miller"></label><label>Job Title<input name="title" autocomplete="organization-title" required placeholder="e.g. Managing Director"></label></div><div class="form-grid"><label>Company Name<input name="company" autocomplete="organization" required placeholder="e.g. Apex Technical Group"></label><label>Work Email<input name="email" type="email" autocomplete="email" required placeholder="d.miller@company.co.uk"></label></div><div class="form-grid"><label>Industry Sector<input name="industry" required placeholder="e.g. Electrical Wholesale, HVAC, M&E"></label><label>Geographic Region / Postcode Area<input name="region" required placeholder="e.g. West Midlands, North West"></label></div><label>Proposed Partnership Scope<select name="priority"><option>Retained Executive Search &amp; Headhunting</option><option>Growth Partnership (Recruitment + Coaching)</option><option>Recruitment, Coaching &amp; Business Platforms</option><option>Multi-Branch Embedded Hiring</option></select></label><label>Brief Summary of Your Requirement<textarea name="plan" rows="4" placeholder="Target roles, branch locations or competitor boundaries you want us to review..."></textarea></label><button class="button" type="submit">Prepare territory review email ${arrow}</button><p class="form-small">Opens your email client so you can review and send the request. Nothing is sent or stored until you send the email. <a href="https://power-uptalent.co.uk/privacy">Privacy policy</a>.</p><div id="territory-result" hidden aria-live="polite" style="margin-top:20px; padding:18px; background:#f8fafc; border:1px solid #cbd5e1; border-radius:8px;"><h3 style="font-size:16px; color:#0f172a; margin-bottom:6px;">Territory review email ready to send in your email app</h3><p id="territory-status-text" style="font-size:13.5px; color:#334155; margin:0 0 12px;"></p><label style="display:block;font-size:12px;font-weight:700;margin-bottom:6px">Prepared request (copy and email to info@power-uptalent.co.uk if your mail app did not open):<textarea id="territory-email-copy" rows="6" readonly style="width:100%;margin-top:6px;font-family:monospace;font-size:12px"></textarea></label><button id="copy-territory-brief" type="button" class="button secondary" style="margin-top:8px">Copy review request</button><p id="copy-territory-status" role="status" style="font-size:12.5px;margin-top:6px;color:#0f172a"></p></div></form></div><div class="check-sidebar"><div class="check-card"><span class="eyebrow" style="color:var(--gold);"><span></span>WHAT HAPPENS NEXT</span><h3 style="font-size:20px; color:#fff; margin-bottom:12px;">From Review Request to Written Agreement</h3><ul class="check-steps"><li><strong>Step 1: Send the review email</strong> — Review and send the prepared email from your mail app to <code>info@power-uptalent.co.uk</code>.</li><li><strong>Step 2: Manual mandate check (1 working day)</strong> — A director checks our current active client agreements in your sector and geographic region.</li><li><strong>Step 3: Scope &amp; boundary discussion</strong> — If the sector and region are open, we discuss the proposed roles, services and named competitor list.</li><li><strong>Step 4: Confirmed in writing</strong> — Exclusivity takes effect only when the sector, territory, named competitors, service scope and duration are signed in a written partnership agreement.</li></ul></div><div class="check-card subtle"><span class="eyebrow"><span></span>PARTNERSHIP EXCLUSIVITY POLICY</span><h3 style="font-size:18px; margin-bottom:10px;">What Exclusivity Covers</h3><p style="font-size:13px; color:var(--muted); line-height:1.6;">Where single-client exclusivity is agreed in writing for a partnership, Power-Up Talent commits not to headhunt for or represent the named direct competitors in that agreed sector and territory for the duration of the mandate.</p></div></div></div></section>${cta('Territory exclusivity audit')}`;
 
-// About Page (Section 6)
+// About Page (Restored What We Do + Hybrid Advantage + Standards)
 const about =
   pageHero(
-    'ABOUT POWER-UP TALENT',
-    'Great people. Stronger teams.<br><em>A more connected business.</em>',
-    'Power-Up Talent partners with UK electrical wholesale, technical distribution, construction, engineering and manufacturing businesses across recruitment, coaching and practical business platforms.',
+    'THE UK’S SPECIALIST PARTNER FOR CONSTRUCTION, ENGINEERING &amp; ELECTRICAL',
+    'About<br><em>Power-Up Talent.</em>',
+    'Our core service is headhunting — working with one organisation per sector at a time — reinforced by commercial coaching and seven practical AI &amp; business platforms.',
     'about-hero.mp4',
-    `${button('Discuss your priorities', 'contact.html')}${button('Explore partnerships', 'partnerships.html', true)}`
+    `${button('Explore Core Pillars', 'index.html#strategic-pillars')}${button('Hire Top Talent', 'contact.html?interest=Critical+hire', true)}`
   ) +
-  `<section class="wrap section split"><div>${tag('WHO WE SERVE &amp; WHAT WE BRING')}<h2>Built for UK technical<br>and commercial leaders.</h2></div><div><p class="large-copy">We work with business owners, managing directors, commercial directors, branch managers and hiring leaders across electrical wholesale, technical distribution, construction, M&amp;E contracting and engineering.</p><p>Generic recruitment agencies treat technical sectors as high-volume CV exercises, and generic software vendors sell complex tools without understanding how a branch or trade desk actually operates.</p><p>Power-Up Talent brings specialist executive and commercial search, practical workplace coaching and seven focused business platforms under one roof — so the people you hire have the habits and tools to succeed.</p></div></section>` +
+  `<section class="wrap section split"><div>${tag('WHAT WE DO')}<h2>A specialist partner,<br>never a CV agency.</h2></div><div><p class="large-copy">We know that every career move or leadership hire is more than a transaction. That is why we take the time to listen, map regional markets discreetly, and advise both clients and candidates in electrical wholesale, technical distribution, construction and engineering.</p><p>With deep networks across UK technical industry, we deliver the search rigour of an international executive firm alongside the personal accountability of a dedicated specialist working exclusively for one organisation per sector at a time.</p><p>Where agreed, we connect that appointment to workplace coaching and seven human-controlled business platforms so new hires and branch teams sustain margin, follow-up speed and clear customer ownership.</p></div></section>` +
+  `<section class="pillars-dark-section" aria-labelledby="hybrid-heading"><div class="wrap"><div class="pillars-head"><p class="eyebrow" style="justify-content:center;color:var(--gold)"><span></span>OUR METHODOLOGY<span></span></p><h2 id="hybrid-heading">Our Approach: <em>The Hybrid Advantage.</em></h2><p>We blend direct human headhunting judgement with transparent market research, coaching habits and seven practical software workflows.</p></div><div class="pillars-grid">${[
+    ['01 / DISCOVERY & STRATEGY', 'Commercial Role Blueprint', 'We partner with directors up front to define what the person must achieve in the branch or division before approaching passive competitor talent.', ['Clear scope & P&L objectives', 'Named competitor boundaries']],
+    ['02 / PASSIVE MAPPING', 'Discreet Direct Headhunting', 'Using structured market mapping and human networks, we identify and confidentially approach proven performers who do not apply to job boards.', ['NDA-protected outreach', 'One organisation per sector']],
+    ['03 / COACHING & 7 PLATFORMS', 'Commercial Habits & Tools', 'Reinforce appointments with six practical coaching programmes and our seven B2B platforms (Market/Prospect Intelligence, CRM, Comms, Delivery, Automation & Marketing).', ['Quote follow-up & margin discipline', 'Human-reviewed evidence & handovers']],
+    ['04 / WRITTEN EXCLUSIVITY', 'Zero Conflict of Interest', 'Where single-client exclusivity is agreed in writing for your mandate, we block out named direct competitors across the agreed territory and timeframe.', ['Written scope & competitors', 'Dedicated partner accountability']]
+  ].map(([num, title, desc, pts], idx) => `<article class="pillar-white-card">${iconBadge(['compass', 'radar', 'users', 'shield'][idx], 'gold')}<span class="card-num">${num}</span><h3>${title}</h3><p>${desc}</p><ul class="workspace-feature-list">${pts.map(p => `<li>${p}</li>`).join('')}</ul></article>`).join('')}</div></div></section>` +
   `<section class="wrap section">${sectionHead(
-    'WHY RECRUITMENT, COACHING &amp; TECHNOLOGY SIT TOGETHER',
+    'WHY HEADHUNTING, COACHING &amp; PLATFORMS SIT TOGETHER',
     'One joined-up approach<br>to commercial growth.',
-    'Each pillar solves a distinct problem, and they reinforce one another when connected around your business.'
+    'Each pillar solves a distinct commercial problem, and they reinforce one another when connected around your business.'
   )}${cards([
     [
-      '01 / RECRUITMENT & HEADHUNTING',
+      '01 / HEADHUNTING (CORE SERVICE)',
       'Secure the right people',
-      'A strong commercial plan starts with the right leadership, branch managers and sales specialists in post.',
-      ['Commercial brief agreed before search begins', 'Discreet approach to proven sector performers', 'Structured assessment against real job requirements']
+      'We work with one organisation per sector at a time to appoint leadership, branch managers and technical sales specialists.',
+      ['Commercial brief agreed before mapping starts', 'Discreet approach to proven passive performers', 'Structured assessment against real job requirements']
     ],
     [
       '02 / COACHING & DEVELOPMENT',
       'Build consistent everyday habits',
-      'Appointing a leader or sales rep is only step one. Practical coaching builds the discovery, quote follow-up and margin habits that turn talent into results.',
-      ['Workshops and coaching tied to live accounts and quotes', 'Clear weekly operating rhythms for branch managers', 'Trackable operational indicators agreed up front']
+      'Appointing a leader is only step one. Practical coaching builds discovery, quote follow-up and margin habits across the team.',
+      ['Workshops tied to live branch accounts and quotes', 'Clear weekly operating rhythms for branch managers', 'Trackable operational indicators agreed up front']
     ],
     [
-      '03 / AI & BUSINESS PLATFORMS',
-      'Give teams clear ownership and visibility',
-      'Our seven platforms give staff one place for customer enquiries, CRM renewals, sales action queues, delivery onboarding and campaign outcome reporting.',
-      ['Human-reviewed workflows and explicit operator handovers', 'Separate Business CRM and Personal CRM boundaries', 'Honest distinction between built features and expansion areas']
+      '03 / AI & BUSINESS SERVICES (7 PLATFORMS)',
+      'Give teams clear ownership & visibility',
+      'Seven platforms give staff public UK market intel, human-reviewed prospect evidence, CRM separation, enquiries, delivery handovers and campaign reporting.',
+      ['Human-reviewed workflows & operator handover.js runs', 'Separate Business CRM and Personal CRM boundaries', 'Honest distinction between pilots and planned tools']
     ]
   ])}</section>` +
-  `<section class="partnership-section"><div class="wrap"><div class="section-head"><div>${tag('HOW WE OPERATE')}<h2>Clear standards.<br>Human judgement first.</h2></div><p>The principles that govern every search mandate, coaching programme and platform walkthrough.</p></div><div class="cards"><article><span class="card-num">01 / COMMERCIAL CLARITY</span><h3>Direct, honest advice</h3><p>We state clearly what a candidate has delivered, what a coaching sprint will track, and which platform capabilities are ready to try now versus in development.</p></article><article><span class="card-num">02 / HUMAN IN CONTROL</span><h3>Technology supports; people decide</h3><p>Across our platforms, outreach drafts, AI Team briefs and Sales-to-Delivery handovers remain under explicit human review and operator confirmation.</p></article><article><span class="card-num">03 / WRITTEN COMMITMENTS</span><h3>Defined scope &amp; confidentiality</h3><p>We routinely sign non-disclosure agreements, protect candidate confidentiality and set out any agreed sector or territory exclusivity in writing.</p></article></div></div></section>${cta('Growth partnership')}`;
+  `<section class="partnership-section"><div class="wrap"><div class="section-head"><div>${tag('HOW WE OPERATE')}<h2>Clear standards.<br>Human judgement first.</h2></div><p>The principles governing every headhunting mandate, coaching sprint and platform walkthrough.</p></div><div class="cards"><article><span class="card-num">01 / COMMERCIAL CLARITY</span><h3>Direct, honest advice</h3><p>We state clearly what a candidate has delivered, what a coaching sprint tracks, and which software capabilities run in demos/pilots versus planned roadmaps.</p></article><article><span class="card-num">02 / HUMAN IN CONTROL</span><h3>Technology supports; people decide</h3><p>Prospect evidence acceptance, extractive AI Team briefs, and Sales-to-Delivery handovers remain under explicit human sign-off.</p></article><article><span class="card-num">03 / SECTOR EXCLUSIVITY</span><h3>Defined in writing</h3><p>We sign bilateral NDAs, protect candidate discretion and define single-client sector exclusivity in written agreements.</p></article></div></div></section>${cta('Growth partnership')}`;
 
-// Dual-Path Contact Page (Section 3)
-const contact = `<section class="wrap contact-layout"><div>${tag('CONTACT POWER-UP TALENT')}<h1>Let’s route your<br><em>enquiry properly.</em></h1><p class="large-copy">A critical vacancy. A stronger team.<br>A long-term commercial partnership.</p><p>Choose the business brief or the confidential candidate enquiry. Every form prepares a structured email to <strong>info@power-uptalent.co.uk</strong> in your email app and provides an instant copyable backup on screen.</p><a class="email-link" href="mailto:info@power-uptalent.co.uk">info@power-uptalent.co.uk ↗</a><div class="contact-note"><h3>How enquiries are handled</h3><p>This static website does not store your form input on a server. Submitting prepares an email in your mail app (with a copy-to-clipboard fallback) so you stay in control of what you send. Need to check sector exclusivity? <a href="check.html" style="text-decoration:underline;font-weight:700">Use our territory review page ↗</a>.</p></div></div><div><div class="path-tabs" role="tablist" aria-label="Enquiry type"><button type="button" role="tab" aria-selected="true" class="path-tab-btn active" data-path-tab="client-path">PATH 1: Business, Platform or Hiring Enquiry</button><button type="button" role="tab" aria-selected="false" class="path-tab-btn" data-path-tab="candidate-path">PATH 2: Confidential Candidate Enquiry</button></div><div id="client-path" class="path-panel active" role="tabpanel"><form id="enquiry-form" novalidate><h2>Client Commercial Brief</h2><p>Tell us what you want to explore or solve. Submitting opens your email app with a formatted brief addressed to <code>info@power-uptalent.co.uk</code>.</p><p id="interest-fallback-note" class="form-small" hidden role="status" style="padding:10px 12px;background:#fef9c3;border:1px solid #fde047;border-radius:6px;color:#1e293b;margin-bottom:12px"></p><div class="form-grid"><label>Your name<input name="name" autocomplete="name" required placeholder="Full name"></label><label>Business<input name="company" autocomplete="organization" placeholder="Company or branch name"></label></div><label>Email address<input name="email" type="email" autocomplete="email" required placeholder="you@company.co.uk"></label><label>Area of interest<select name="interest"><option>Growth partnership</option><option>Critical hire</option><option>Embedded hiring</option><option>Coaching</option><option>Intelligence walkthrough</option><option>Territory exclusivity audit</option></select></label><label>Short description of your need<textarea name="message" rows="5" required placeholder="Tell us the role, team challenge or platform workflow you would like to discuss (at least 10 characters)..."></textarea></label><button class="button" type="submit">Prepare email in your mail app ${arrow}</button><p class="form-small">Opens your email app so you can review and send. Nothing is sent or stored automatically by this page. <a href="https://power-uptalent.co.uk/privacy">Privacy policy</a>.</p><div id="email-result" hidden aria-live="polite"><h3>Your commercial brief is ready to send in your email app</h3><p>Please review and press <strong>Send</strong> in your email app. If your mail app did not open, copy the prepared brief below and email it to <strong>info@power-uptalent.co.uk</strong>.</p><textarea id="email-copy" readonly aria-label="Prepared commercial brief"></textarea><button id="copy-brief" type="button" class="button secondary">Copy brief to clipboard</button><p id="copy-status" role="status"></p></div></form></div><div id="candidate-path" class="path-panel" role="tabpanel" hidden><form id="candidate-form" novalidate><h2>Confidential Candidate Enquiry</h2><p>Start a private career conversation with our search team. The details you enter below are used to compose an email draft in your mail app to <code>info@power-uptalent.co.uk</code> — please do not attach sensitive identity documents at this initial stage.</p><div class="form-grid"><label>Your name<input name="cand_name" autocomplete="name" required placeholder="Full name"></label><label>Current or target role<input name="cand_role" placeholder="e.g. Branch Manager, Regional Director"></label></div><label>Preferred confidential email or mobile<input name="cand_email" required placeholder="personal@email.com or 07..."></label><label>Sector, region &amp; what you are looking for<textarea name="cand_notes" rows="4" placeholder="Current sector (e.g. electrical wholesale, engineering), preferred UK region and the type of move you are considering..."></textarea></label><button class="button" type="submit">Email us confidentially ${arrow}</button><p class="form-small">Opens your email app with a draft using the fields above. We never contact an employer without your express written permission.</p><div id="candidate-email-result" hidden aria-live="polite" style="margin-top:18px;padding:16px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px"><h3>Your confidential enquiry draft is ready in your email app</h3><p>Please press <strong>Send</strong> in your email app. If your email app did not open, copy the text below and send it to <strong>info@power-uptalent.co.uk</strong>.</p><textarea id="candidate-email-copy" rows="6" readonly aria-label="Prepared confidential candidate enquiry" style="width:100%;margin-top:8px;font-family:monospace;font-size:12px"></textarea><button id="copy-candidate-brief" type="button" class="button secondary" style="margin-top:8px">Copy candidate enquiry</button><p id="copy-candidate-status" role="status" style="font-size:12.5px;margin-top:6px"></p></div></form></div></div></section>`;
+// Information Hub Page (Restored Sector Briefings & Technical Guidance)
+const information =
+  pageHero(
+    'INFORMATION &amp; RESOURCE HUB',
+    'Industry intelligence.<br><em>Sector briefings.</em>',
+    'Specialised UK sector commentary covering headhunting, electrical wholesale leadership, branch margin discipline, and practical B2B workflow guides.',
+    'platform-video.mp4',
+    `${button('Request a tailored briefing', 'contact.html?interest=Growth%20partnership')}${button('Check Sector Exclusivity', 'check.html', true)}`
+  ) +
+  `<section class="wrap section">${sectionHead(
+    'FEATURED BRIEFINGS &amp; GUIDES',
+    'Sector intelligence across<br>headhunting, coaching &amp; platforms.',
+    'Explore practical perspectives prepared for managing directors, branch managers, commercial directors and technical hiring leads across UK industry.'
+  )}<div class="cards cards-3col">${[
+    [
+      'MARKET TRENDS · LEADERSHIP',
+      'UK Electrical Wholesale Leadership &amp; Margin Preservation',
+      'How independent and national wholesale groups protect gross margin by appointing commercially disciplined branch managers rather than price-cutters.',
+      ['Mapping passive branch &amp; profit-centre leaders', 'Protecting key trade contractor relationships', 'Quote follow-up and margin coaching habits'],
+      'talent.html',
+      'Explore Headhunting'
+    ],
+    [
+      'OPERATIONAL EXCELLENCE',
+      'Scaling Trade Counters: Branch Leadership &amp; Quote Discipline',
+      'Why trade counter performance depends on giving every inbound enquiry an owner and following up open project quotes on time.',
+      ['Owned callbacks in shared inbox Communications', 'One tracked quote per prospect in Action Queue', '90-day Branch Performance Accelerator'],
+      'coaching.html',
+      'Explore Coaching'
+    ],
+    [
+      'COMPLIANCE &amp; SECTOR GROWTH',
+      'Net-Zero, EV Infrastructure &amp; Design Skills Scarcity',
+      'Addressing specialist technical recruitment across switchgear, EV charging, commercial solar PV and M&amp;E contracting across UK regions.',
+      ['Headhunting passive specification &amp; design talent', 'Single-client sector exclusivity per mandate', 'Written competitor boundaries across regions'],
+      'check.html',
+      'Request Sector Exclusivity'
+    ],
+    [
+      'MARKET INTELLIGENCE',
+      'Public UK Data Without Paid APIs or AI Credits',
+      'How Market Intelligence checks England Planning Data and Find a Tender notices around a UK town or full NI postcode with direct official source links.',
+      ['30- or 90-day lookbacks and 5–100 mile radii', 'Up to 100 planning records &amp; 300 UK tenders', 'Clear coverage limits and outage reporting'],
+      'sales-intelligence.html#market-intelligence',
+      'Explore Market Intelligence'
+    ],
+    [
+      'PROSPECT INTELLIGENCE &amp; AI TEAM',
+      'Why Human Review Beats Automated Scraping &amp; Guessing',
+      'Separating customer fit, evidence strength and contactability in Prospect Intelligence, plus how AI Team drafts extractive briefs strictly from approved files.',
+      ['Dated Source fact → Interpretation → Next step', 'Accept, Research, Reject, or Revoke (stale guard)', 'Revision rounds and explicit human acceptance'],
+      'ai-team.html',
+      'Explore AI Team'
+    ],
+    [
+      'DATA GOVERNANCE · CRM',
+      'Business CRM vs Personal CRM: Separate Access Boundaries',
+      'Why commercial account dossiers and 30-day renewal flags must stay separate from an individual’s private personal relationships and reconnect reminders.',
+      ['Independent login and row-level data isolation', 'Personal notes never shared with Business CRM', 'Structured JSON exports &amp; manual Marketing upload'],
+      'crm.html',
+      'Explore CRM Boundaries'
+    ]
+  ].map(([num, title, desc, bullets, href, linkTxt], idx) => `<article class="info-card" style="display:flex;flex-direction:column">${iconBadge(['bolt', 'building', 'trend', 'globe', 'usercheck', 'lock'][idx], 'ink')}<span class="card-num">${num}</span><h3>${title}</h3><p>${desc}</p><ul style="flex:1">${bullets.map(b => `<li>${b}</li>`).join('')}</ul><p style="margin-top:16px"><a class="text-link" href="${href}">${linkTxt} ${arrow}</a></p></article>`).join('')}</div></section>${cta('Growth partnership')}`;
+
+// Dual-Path Contact Page (Section 3 + Restored Contact FAQs)
+const contact = `<section class="wrap contact-layout"><div>${tag('CONTACT POWER-UP TALENT')}<h1>Let’s start a<br><em>conversation.</em></h1><p class="large-copy">An exclusive headhunting mandate.<br>A stronger branch team. Seven connected platforms.</p><p>Choose the business brief or the confidential candidate enquiry. Every form prepares a structured email to <strong>info@power-uptalent.co.uk</strong> in your email app and provides an instant copyable backup on screen.</p><a class="email-link" href="mailto:info@power-uptalent.co.uk">info@power-uptalent.co.uk ↗</a><div class="contact-note"><h3>How enquiries are handled</h3><p>This static website does not store your form input on a server. Submitting prepares an email in your mail app (with a copy-to-clipboard fallback) so you stay in control of what you send. Need to check sector exclusivity? <a href="check.html" style="text-decoration:underline;font-weight:700">Use our territory review page ↗</a>.</p></div></div><div><div class="path-tabs" role="tablist" aria-label="Enquiry type"><button type="button" role="tab" aria-selected="true" class="path-tab-btn active" data-path-tab="client-path">PATH 1: Business, Hiring or Demo Enquiry</button><button type="button" role="tab" aria-selected="false" class="path-tab-btn" data-path-tab="candidate-path">PATH 2: Confidential Candidate Enquiry</button></div><div id="client-path" class="path-panel active" role="tabpanel"><form id="enquiry-form" novalidate><h2>Client Commercial Brief</h2><p>Tell us what you want to explore or solve. Submitting opens your email app with a formatted brief addressed to <code>info@power-uptalent.co.uk</code>.</p><p id="interest-fallback-note" class="form-small" hidden role="status" style="padding:10px 12px;background:#fef9c3;border:1px solid #fde047;border-radius:6px;color:#1e293b;margin-bottom:12px"></p><div class="form-grid"><label>Your name<input name="name" autocomplete="name" required placeholder="Full name"></label><label>Business<input name="company" autocomplete="organization" placeholder="Company or branch name"></label></div><label>Email address<input name="email" type="email" autocomplete="email" required placeholder="you@company.co.uk"></label><label>Area of interest<select name="interest"><option>Growth partnership</option><option>Critical hire</option><option>Embedded hiring</option><option>Coaching</option><option>Intelligence walkthrough</option><option>Territory exclusivity audit</option></select></label><label>Short description of your need<textarea name="message" rows="5" required placeholder="Tell us the role, sector, coaching goal or platform workflow you would like to discuss (at least 10 characters)..."></textarea></label><button class="button" type="submit">Prepare email in your mail app ${arrow}</button><p class="form-small">Opens your email app so you can review and send. Nothing is sent or stored automatically by this page. <a href="https://power-uptalent.co.uk/privacy">Privacy policy</a>.</p><div id="email-result" hidden aria-live="polite"><h3>Your commercial brief is ready to send in your email app</h3><p>Please review and press <strong>Send</strong> in your email app. If your mail app did not open, copy the prepared brief below and email it to <strong>info@power-uptalent.co.uk</strong>.</p><textarea id="email-copy" readonly aria-label="Prepared commercial brief"></textarea><button id="copy-brief" type="button" class="button secondary">Copy brief to clipboard</button><p id="copy-status" role="status"></p></div></form></div><div id="candidate-path" class="path-panel" role="tabpanel" hidden><form id="candidate-form" novalidate><h2>Confidential Candidate Enquiry</h2><p>Start a private career conversation with our headhunting team. The details you enter below are used to compose an email draft in your mail app to <code>info@power-uptalent.co.uk</code> — please do not attach sensitive identity documents at this initial stage.</p><div class="form-grid"><label>Your name<input name="cand_name" autocomplete="name" required placeholder="Full name"></label><label>Current or target role<input name="cand_role" placeholder="e.g. Branch Manager, Regional Director"></label></div><label>Preferred confidential email or mobile<input name="cand_email" required placeholder="personal@email.com or 07..."></label><label>Sector, region &amp; what you are looking for<textarea name="cand_notes" rows="4" placeholder="Current sector (e.g. electrical wholesale, engineering), preferred UK region and the type of move you are considering..."></textarea></label><button class="button" type="submit">Email us confidentially ${arrow}</button><p class="form-small">Opens your email app with a draft using the fields above. We never contact an employer without your express written permission.</p><div id="candidate-email-result" hidden aria-live="polite" style="margin-top:18px;padding:16px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px"><h3>Your confidential enquiry draft is ready in your email app</h3><p>Please press <strong>Send</strong> in your email app. If your email app did not open, copy the text below and send it to <strong>info@power-uptalent.co.uk</strong>.</p><textarea id="candidate-email-copy" rows="6" readonly aria-label="Prepared confidential candidate enquiry" style="width:100%;margin-top:8px;font-family:monospace;font-size:12px"></textarea><button id="copy-candidate-brief" type="button" class="button secondary" style="margin-top:8px">Copy candidate enquiry</button><p id="copy-candidate-status" role="status" style="font-size:12.5px;margin-top:6px"></p></div></form></div></div></section><section class="wrap faq-section" aria-labelledby="contact-faq-heading"><div>${tag('CONTACT FAQS')}<h2 id="contact-faq-heading">Before you<br><em>get in touch.</em></h2><p style="color:var(--muted);max-width:420px">Practical details on confidentiality, sector exclusivity checks and how search, coaching and platform demos are scoped.</p></div><div class="faqs"><details open><summary>How quickly do you begin a search or review sector exclusivity?</summary><p>Once we receive your brief, a director reviews current client commitments within one working day to confirm sector and territory availability before initiating confidential competitor mapping.</p></details><details><summary>Do you work on retained search, contingency or partnership models?</summary><p>We tailor the commercial agreement to the brief — retained search is recommended for confidential, senior and sector-exclusive mandates, while coaching and AI &amp; business platforms are scoped cleanly in writing.</p></details><details><summary>Is my client brief or candidate enquiry completely confidential?</summary><p>Yes. We work under bilateral NDAs for client searches and never approach a candidate’s employer or share details without express written permission.</p></details></div></section>`;
 
 const pages = [
-  ['index', 'Your business. Connected.', 'Specialist recruitment and coaching alongside seven AI & business platforms for UK electrical wholesale, distribution, construction and engineering.', partnershipHome],
+  ['index', 'Find the right people. Develop your leaders. Make everyday work easier to run. — Power-Up Talent', 'Power-Up Talent brings together specialist recruitment, practical coaching and seven AI business services.', partnershipHome],
   ['partnerships', 'Talent & Growth Partnerships', 'How initial conversations work, what a first engagement looks like, and how partnership scope and territory exclusivity are agreed in writing.', partnership],
-  ['talent', 'Elite Recruitment & Headhunting', 'Discreet employer search from briefing to appointment, plus a confidential career route for candidates across UK technical sectors.', talent],
-  ['coaching', 'Coaching & Development', 'Practical commercial, sales and branch management coaching built around observable workplace habits and trackable indicators.', coaching],
-  ['platforms', 'AI & Business Platforms Hub', 'Overview of all seven Power-Up platforms — CRM, Communications, Sales & Intelligence, Business Delivery, Automation, AI Team and Marketing & Social Media.', aiServicesPage],
-  ['intelligence', 'AI & Business Platforms Hub', 'Overview of all seven Power-Up platforms — CRM, Communications, Sales & Intelligence, Business Delivery, Automation, AI Team and Marketing & Social Media.', aiServicesPage],
-  ['check', 'Territory Exclusivity Review', 'Request a manual review of whether single-client partnership exclusivity is available in your UK industry sector and geographic territory.', check],
-  ['about', 'About Power-Up Talent', 'Who Power-Up Talent serves across UK technical industry, what we bring to an engagement, and why recruitment, coaching and platforms sit together.', about],
+  ['talent', 'Specialist Recruitment & Headhunting', 'Permanent recruitment and targeted headhunting from search brief to offer management, plus a confidential career route for candidates.', talent],
+  ['coaching', 'Coaching & Development', '1-to-1 and team coaching built around feedback, performance management, customer conversations and goal follow-through.', coaching],
+  ['platforms', 'AI Business Services Hub', 'Compare all seven Power-Up AI business services — CRM, Communications, Sales & Intelligence, Business Delivery, Automation, AI Team & Power Command Centre and Marketing & Social Media.', aiServicesPage],
+  ['intelligence', 'AI Business Services Hub', 'Compare all seven Power-Up AI business services — CRM, Communications, Sales & Intelligence, Business Delivery, Automation, AI Team & Power Command Centre and Marketing & Social Media.', aiServicesPage],
+  ['information', 'Information Hub & Sector Briefings', 'UK electrical wholesale, construction and engineering briefings across leadership headhunting, branch margin discipline, Market/Prospect Intelligence and CRM governance.', information],
+  ['check', 'Territory & Sector Exclusivity Review', 'Request a manual review of whether single-client partnership exclusivity is available in your UK industry sector and geographic territory.', check],
+  ['about', 'About Power-Up Talent', 'Who Power-Up Talent serves across UK technical industry, What We Do, Our Hybrid Advantage and why headhunting, coaching and platforms sit together.', about],
   ['contact', 'Contact & Confidential Enquiries', 'Send a client commercial brief, request a platform walkthrough or start a confidential candidate career enquiry.', contact],
   ['dashboard', 'Interactive Product Demo (Sample Data)', 'Explore interactive sample-data product demos for all seven Power-Up AI & business platforms.', dashboardPage],
   ...servicePages
@@ -354,6 +438,7 @@ const sitemapRoutes = [
   '/talent',
   '/coaching',
   '/platforms',
+  '/information',
   '/check',
   '/about',
   '/contact',

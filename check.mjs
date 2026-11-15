@@ -47,7 +47,7 @@ for (const [id, name] of [
   ['sales', 'Sales & Intelligence'],
   ['delivery', 'Business Delivery'],
   ['automation', 'Automation'],
-  ['ai-team', 'AI Team'],
+  ['ai-team', 'AI Team & Power Command Centre'],
   ['marketing', 'Marketing & Social Media']
 ]) {
   if (!platformsHub.includes(`id="${id}"`)) failures.push('Missing platform card on platforms.html: ' + id);
