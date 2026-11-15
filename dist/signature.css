@@ -13,8 +13,8 @@
 
 /* ---------- Icon system ---------- */
 .sig-ico{width:24px;height:24px;display:block;flex-shrink:0}
-.icon-badge{display:inline-grid;place-items:center;width:54px;height:54px;border-radius:14px;flex-shrink:0;position:relative;transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s}
-.icon-badge .sig-ico{width:26px;height:26px}
+.icon-badge{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:54px;height:54px;padding:0!important;border-radius:14px;flex-shrink:0;position:relative;margin-bottom:0;letter-spacing:normal;transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s}
+.icon-badge .sig-ico{width:26px;height:26px;display:block;margin:0!important}
 .icon-badge.gold{background:linear-gradient(140deg,var(--gold-2),var(--gold) 55%,var(--gold-3));color:var(--ink-900);box-shadow:0 10px 24px -8px var(--gold-glow),inset 0 1px 0 rgba(255,255,255,.55)}
 .icon-badge.gold .sig-ico{color:#070b14!important;stroke:#070b14!important}
 .icon-badge.ink{background:linear-gradient(150deg,var(--ink-600),var(--ink-900));color:var(--gold);box-shadow:0 10px 22px -10px rgba(7,11,20,.55),inset 0 0 0 1px rgba(237,199,82,.25)}
@@ -31,7 +31,9 @@ article:hover>.icon-badge,article:hover .value-card-top .icon-badge,.sector-tile
 .nav-contact{background:linear-gradient(135deg,var(--gold-2),var(--gold))!important;box-shadow:0 6px 18px -6px var(--gold-glow)}
 
 /* ---------- Buttons ---------- */
-.button{position:relative;overflow:hidden;border-radius:8px!important;transition:transform .25s,box-shadow .25s,background .25s}
+.actions{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.actions .button{margin-top:0!important;box-sizing:border-box}
+.button{position:relative;overflow:hidden;border-radius:8px!important;box-sizing:border-box;transition:transform .25s,box-shadow .25s,background .25s}
 .button:not(.secondary){background:linear-gradient(135deg,var(--gold-2),var(--gold) 60%,#e2b93f);box-shadow:0 10px 24px -10px var(--gold-glow)}
 .button:not(.secondary)::before{content:'';position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.45) 50%,transparent 70%);transform:translateX(-120%);transition:transform .7s}
 .button:not(.secondary):hover::before{transform:translateX(120%)}
@@ -136,8 +138,8 @@ article:hover>.icon-badge,article:hover .value-card-top .icon-badge,.sector-tile
 /* ---------- Connected journey icons ---------- */
 .connected-steps-list li{position:relative}
 .step-icon-wrap{margin-bottom:10px}
-.step-icon-wrap .icon-badge{width:42px;height:42px;border-radius:11px}
-.step-icon-wrap .sig-ico{width:22px;height:22px}
+.step-icon-wrap .icon-badge{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:42px;height:42px;border-radius:11px;margin:0!important;padding:0!important}
+.step-icon-wrap .sig-ico{width:22px;height:22px;display:block;margin:0!important}
 
 /* ---------- FAQ ---------- */
 .faqs details{border-radius:var(--radius-md);background:#fff;border:1px solid var(--line)!important;padding:4px 22px!important;margin-bottom:12px;transition:border-color .3s,box-shadow .3s}
@@ -149,7 +151,7 @@ article:hover>.icon-badge,article:hover .value-card-top .icon-badge,.sector-tile
 
 /* ---------- CTA ---------- */
 .cta{border-radius:22px!important}
-.cta-signature{position:relative;overflow:hidden;background:radial-gradient(600px 300px at 85% 20%,rgba(237,199,82,.22),transparent 60%),linear-gradient(130deg,var(--ink-900),#152030)!important;color:#fff!important;border:1px solid rgba(237,199,82,.25)}
+.cta-signature{position:relative;overflow:hidden;padding:52px 48px!important;margin-block:40px 64px;background:radial-gradient(600px 300px at 85% 20%,rgba(237,199,82,.22),transparent 60%),linear-gradient(130deg,var(--ink-900),#152030)!important;color:#fff!important;border:1px solid rgba(237,199,82,.25)}
 .cta-signature h2{color:#fff!important}
 .cta-signature p:not(.eyebrow){color:#c3cdd6!important}
 .cta-signature .eyebrow{color:var(--gold)!important}
@@ -181,4 +183,6 @@ article:hover>.icon-badge,article:hover .value-card-top .icon-badge,.sector-tile
   .diff-card{flex-direction:column;gap:14px}
   .pillars-dark-section,.value-dark-section{padding:64px 0!important}
   .cta-power .sig-ico{width:200px;height:200px}
+  .cta-signature{padding:32px 22px!important;margin-block:28px 44px}
+  .cta-signature .actions{margin-top:22px}
 }
