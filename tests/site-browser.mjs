@@ -68,19 +68,20 @@ try {
     if(!detailResponse.ok() || !detailResponse.headers()['content-type'].includes('image/webp')) throw Error('Broken workflow detail image on '+prod);
   }
 
-  // 3. Verify updated B2B homepage hero CTAs and core sections are visible on mobile (390px)
+  // 3. Verify updated B2B homepage hero CTAs, Sector Checker, Case Studies, and Concierge Chatbot (mobile 390px)
   await page.goto(origin + '/');
   const h1Text = await page.locator('h1').first().innerText();
-  if (!h1Text.includes('Find the right people.')) {
+  if (!h1Text.includes('Elite Headhunters.')) {
     throw Error('Unexpected homepage H1: ' + h1Text);
   }
-  if (!(await page.locator('a:has-text("Discuss your business needs")').first().isVisible())) {
-    throw Error('Discuss your business needs CTA not visible on mobile homepage');
+  if (!(await page.locator('a:has-text("Check Your Sector Availability")').first().isVisible())) {
+    throw Error('Check Your Sector Availability CTA not visible on mobile homepage');
   }
-  if (!(await page.locator('a:has-text("Explore our services")').first().isVisible())) {
-    throw Error('Explore our services CTA not visible on mobile homepage');
+  if (!(await page.locator('a:has-text("Explore Our 4-Pillar Model")').first().isVisible())) {
+    throw Error('Explore Our 4-Pillar Model CTA not visible on mobile homepage');
   }
   for (const sec of [
+    '#sector-checker',
     '#three-offers',
     '#strategic-pillars',
     '#seven-services',
@@ -88,11 +89,50 @@ try {
     '#how-intelligence-works',
     '#strategic-difference',
     '#connected-journey',
+    '#case-studies',
     '#home-faq'
   ]) {
     if ((await page.locator(sec).count()) !== 1) {
       throw Error('Missing homepage section: ' + sec);
     }
+  }
+
+  // Verify Sector Exclusivity Checker -> contact.html pre-fill
+  await page.selectOption('#sc-sector', 'Other UK Sector');
+  await page.fill('#sc-other-sector', 'Precision Robotics');
+  await page.selectOption('#sc-role', 'Managing Director / C-Suite');
+  await page.selectOption('#sc-territory', 'Midlands');
+  await page.click('#sc-check-btn');
+  if ((await page.locator('#sc-window').innerText()) !== '21–28 Days') {
+    throw Error('Sector checker C-Suite window mismatch');
+  }
+  await page.click('#sc-lock-cta');
+  if (!page.url().includes('contact.html') || !page.url().includes('Precision+Robotics')) {
+    throw Error('Sector checker CTA did not route parameters to contact.html');
+  }
+  const prefilledMsg = await page.locator('#enquiry-form textarea[name="message"]').inputValue();
+  if (!prefilledMsg.includes('Precision Robotics') || !prefilledMsg.includes('Midlands')) {
+    throw Error('Contact form did not pre-fill from Sector Checker');
+  }
+
+  // Verify Commercial Concierge Chatbot opens, runs Path 1, and routes to contact.html
+  await page.locator('[data-pu-concierge="launcher"]').click();
+  if (!(await page.locator('#pu-concierge-panel').isVisible())) {
+    throw Error('Concierge chatbot panel did not open');
+  }
+  await page.locator('.pu-chat-opt').first().click();
+  await page.locator('.pu-chat-input').fill('Energy & Facilities');
+  await page.locator('.pu-chat-send').click();
+  await page.locator('.pu-chat-input').fill('Commercial Director · Nationwide UK');
+  await page.locator('.pu-chat-send').click();
+  await page.locator('.pu-chat-input').fill('Alex Morgan · alex@example.co.uk');
+  await page.locator('.pu-chat-send').click();
+  if (!(await page.locator('.pu-chat-cta-btn.primary').isVisible())) {
+    throw Error('Concierge chatbot did not render Send to Power-Up Team CTA');
+  }
+  await page.keyboard.press('Escape');
+  if (await page.locator('#pu-concierge-panel').isVisible()) {
+    throw Error('Concierge chatbot did not close on Escape');
   }
 
   // 4. Verify Guided 3-Scenario Product Demo (complete, live feedback, reset, and Contact preselection)

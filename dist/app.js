@@ -188,6 +188,7 @@ if (form) {
   if (
     pathParam === 'candidate' ||
     rawInterest.toLowerCase() === 'career conversation' ||
+    rawInterest.toLowerCase() === 'confidential candidate' ||
     rawInterest.toLowerCase() === 'candidate' ||
     location.hash === '#candidate-path'
   ) {
@@ -215,8 +216,37 @@ if (form) {
   }
 
   const programme = (sp.get('programme') || '').trim();
+  const qSector = (sp.get('sector') || '').trim();
+  const qRole = (sp.get('role') || '').trim();
+  const qTerritory = (sp.get('territory') || '').trim();
+  const qName = (sp.get('name') || '').trim();
+  const qEmail = (sp.get('email') || '').trim();
+  const qCompany = (sp.get('company') || '').trim();
+  const qNote = (sp.get('note') || '').trim();
+
+  if (qName && form.elements.name && !form.elements.name.value) form.elements.name.value = qName;
+  if (qEmail && form.elements.email && !form.elements.email.value) form.elements.email.value = qEmail;
+  if (qCompany && form.elements.company && !form.elements.company.value) form.elements.company.value = qCompany;
+
   if (programme && form.elements.message && !form.elements.message.value) {
     form.elements.message.value = `I would like to discuss the ${programme} coaching programme for our team.`;
+  } else if ((qSector || qRole || qTerritory || qNote) && form.elements.message && !form.elements.message.value) {
+    const parts = [];
+    if (qSector) parts.push(`Industry Sector: ${qSector}`);
+    if (qRole) parts.push(`Role Level: ${qRole}`);
+    if (qTerritory) parts.push(`UK Territory: ${qTerritory}`);
+    if (qNote) parts.push(`Details: ${qNote}`);
+    form.elements.message.value = parts.join('\n');
+  }
+
+  const candFormEl = document.querySelector('#candidate-form');
+  if (candFormEl) {
+    if (qName && candFormEl.elements.cand_name && !candFormEl.elements.cand_name.value) candFormEl.elements.cand_name.value = qName;
+    if (qRole && candFormEl.elements.cand_role && !candFormEl.elements.cand_role.value) candFormEl.elements.cand_role.value = qRole;
+    if (qEmail && candFormEl.elements.cand_email && !candFormEl.elements.cand_email.value) candFormEl.elements.cand_email.value = qEmail;
+    if ((qSector || qNote) && candFormEl.elements.cand_notes && !candFormEl.elements.cand_notes.value) {
+      candFormEl.elements.cand_notes.value = [qSector ? `Sector: ${qSector}` : '', qNote].filter(Boolean).join('\n');
+    }
   }
 
   const inputs = Array.from(form.querySelectorAll('input, select, textarea'));
@@ -448,3 +478,76 @@ document.querySelectorAll('[data-goto-step]').forEach(btn => {
     targetBtn?.click();
   });
 });
+
+// Commercial Outcome Tabs (3 buckets across 7 services)
+document.querySelectorAll('[data-outcome-tabs]').forEach(group => {
+  const tabs = Array.from(group.querySelectorAll('[data-outcome-tab]'));
+  const panels = Array.from(group.querySelectorAll('[data-outcome-panel]'));
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.outcomeTab;
+      tabs.forEach(t => {
+        const active = t === tab;
+        t.classList.toggle('active', active);
+        t.setAttribute('aria-selected', String(active));
+      });
+      panels.forEach(p => {
+        p.hidden = target !== 'all' && p.dataset.outcomePanel !== target;
+      });
+    });
+  });
+});
+
+// Interactive Sector Exclusivity & Talent Checker (#sector-checker)
+const sectorChecker = document.querySelector('#sector-checker');
+if (sectorChecker) {
+  const sectorSel = sectorChecker.querySelector('#sc-sector');
+  const otherWrap = sectorChecker.querySelector('#sc-other-wrap');
+  const otherInp = sectorChecker.querySelector('#sc-other-sector');
+  const roleSel = sectorChecker.querySelector('#sc-role');
+  const territorySel = sectorChecker.querySelector('#sc-territory');
+  const checkBtn = sectorChecker.querySelector('#sc-check-btn');
+  const outputCard = sectorChecker.querySelector('#sc-output');
+  const statusEl = sectorChecker.querySelector('#sc-status');
+  const windowEl = sectorChecker.querySelector('#sc-window');
+  const scarcityEl = sectorChecker.querySelector('#sc-scarcity');
+  const summaryEl = sectorChecker.querySelector('#sc-summary');
+  const lockCta = sectorChecker.querySelector('#sc-lock-cta');
+
+  const updateSectorChecker = (focusResult = false) => {
+    const rawSector = sectorSel?.value || 'Electrical Wholesale';
+    const isOther = rawSector === 'Other UK Sector';
+    if (otherWrap) otherWrap.hidden = !isOther;
+    const chosenSector = isOther ? ((otherInp?.value || '').trim() || 'Other UK Sector') : rawSector;
+    const chosenRole = roleSel?.value || 'Commercial / Sales Director';
+    const chosenTerritory = territorySel?.value || 'Nationwide UK';
+    const isCSuite = chosenRole.includes('C-Suite') || chosenRole.includes('Managing Director');
+    const shortlistWindow = isCSuite ? '21–28 Days' : '14–21 Days';
+
+    if (statusEl) statusEl.textContent = 'Territory Check Ready — Provisional Slot Open (Subject to NDA Verification)';
+    if (windowEl) windowEl.textContent = shortlistWindow;
+    if (scarcityEl) scarcityEl.textContent = 'High — 82%+ Passive Market (Job Boards Ineffective)';
+    if (summaryEl) summaryEl.textContent = `${chosenSector} · ${chosenRole} · ${chosenTerritory}`;
+
+    if (lockCta) {
+      const qs = new URLSearchParams({
+        interest: 'Territory exclusivity audit',
+        sector: chosenSector,
+        role: chosenRole,
+        territory: chosenTerritory
+      });
+      lockCta.href = `contact.html?${qs.toString()}`;
+    }
+    if (outputCard) {
+      outputCard.hidden = false;
+      if (focusResult) outputCard.focus?.();
+    }
+  };
+
+  sectorSel?.addEventListener('change', () => updateSectorChecker(false));
+  otherInp?.addEventListener('input', () => updateSectorChecker(false));
+  roleSel?.addEventListener('change', () => updateSectorChecker(false));
+  territorySel?.addEventListener('change', () => updateSectorChecker(false));
+  checkBtn?.addEventListener('click', () => updateSectorChecker(true));
+  updateSectorChecker(false);
+}
