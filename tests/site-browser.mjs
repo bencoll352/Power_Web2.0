@@ -68,51 +68,27 @@ try {
     if(!detailResponse.ok() || !detailResponse.headers()['content-type'].includes('image/webp')) throw Error('Broken workflow detail image on '+prod);
   }
 
-  // 3. Verify updated B2B homepage hero CTAs, Sector Checker, Case Studies, and Concierge Chatbot (mobile 390px)
+  // 3. Verify B2B homepage opening copy, CTAs, 7 services, intelligence & journey sections on mobile (390px)
   await page.goto(origin + '/');
   const h1Text = await page.locator('h1').first().innerText();
-  if (!h1Text.includes('Elite Headhunters.')) {
+  if (!h1Text.includes('Find the right opportunities.')) {
     throw Error('Unexpected homepage H1: ' + h1Text);
   }
-  if (!(await page.locator('a:has-text("Check Your Sector Availability")').first().isVisible())) {
-    throw Error('Check Your Sector Availability CTA not visible on mobile homepage');
+  if (!(await page.locator('a:has-text("Request a demo")').first().isVisible())) {
+    throw Error('Request a demo CTA not visible on mobile homepage');
   }
-  if (!(await page.locator('a:has-text("Explore Our 4-Pillar Model")').first().isVisible())) {
-    throw Error('Explore Our 4-Pillar Model CTA not visible on mobile homepage');
+  if (!(await page.locator('a:has-text("Explore the seven services")').first().isVisible())) {
+    throw Error('Explore the seven services CTA not visible on mobile homepage');
   }
   for (const sec of [
-    '#sector-checker',
-    '#three-offers',
-    '#strategic-pillars',
     '#seven-services',
-    '#value-creation',
     '#how-intelligence-works',
-    '#strategic-difference',
     '#connected-journey',
-    '#case-studies',
     '#home-faq'
   ]) {
     if ((await page.locator(sec).count()) !== 1) {
       throw Error('Missing homepage section: ' + sec);
     }
-  }
-
-  // Verify Sector Exclusivity Checker -> contact.html pre-fill
-  await page.selectOption('#sc-sector', 'Other UK Sector');
-  await page.fill('#sc-other-sector', 'Precision Robotics');
-  await page.selectOption('#sc-role', 'Managing Director / C-Suite');
-  await page.selectOption('#sc-territory', 'Midlands');
-  await page.click('#sc-check-btn');
-  if ((await page.locator('#sc-window').innerText()) !== '21–28 Days') {
-    throw Error('Sector checker C-Suite window mismatch');
-  }
-  await page.click('#sc-lock-cta');
-  if (!page.url().includes('contact.html') || !page.url().includes('Precision+Robotics')) {
-    throw Error('Sector checker CTA did not route parameters to contact.html');
-  }
-  const prefilledMsg = await page.locator('#enquiry-form textarea[name="message"]').inputValue();
-  if (!prefilledMsg.includes('Precision Robotics') || !prefilledMsg.includes('Midlands')) {
-    throw Error('Contact form did not pre-fill from Sector Checker');
   }
 
   // Verify Commercial Concierge Chatbot opens, runs Path 1, and routes to contact.html
@@ -281,12 +257,12 @@ try {
     await page.goto(origin + '/', { waitUntil: 'networkidle' });
     await page.locator('.hero-screenshot-panel img').evaluate(el => el.decode()).catch(() => {});
     await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/index_html-1440.png' });
-    await page.locator('#strategic-pillars').scrollIntoViewIfNeeded();
-    await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/index-pillars.png' });
-    await page.locator('#value-creation').scrollIntoViewIfNeeded();
-    await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/index-value.png' });
-    await page.locator('#strategic-difference').scrollIntoViewIfNeeded();
-    await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/index-difference.png' });
+    await page.locator('#seven-services').scrollIntoViewIfNeeded();
+    await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/index-services.png' });
+    await page.locator('#how-intelligence-works').scrollIntoViewIfNeeded();
+    await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/index-intelligence.png' });
+    await page.locator('#connected-journey').scrollIntoViewIfNeeded();
+    await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/index-journey.png' });
     await page.goto(origin + '/platforms.html');
     await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/platforms-hub.png' });
     await page.goto(origin + '/sales-intelligence.html');
