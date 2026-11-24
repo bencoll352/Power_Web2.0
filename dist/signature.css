@@ -94,6 +94,9 @@ article:hover>.icon-badge,article:hover .value-card-top .icon-badge,.sector-tile
 .core-ribbon{position:absolute;top:22px;right:-38px;transform:rotate(38deg);background:var(--ink-900);color:var(--gold);font-size:9px;font-weight:800;letter-spacing:1.4px;padding:5px 44px}
 .pillar-white-card h3{font-size:18.5px!important;letter-spacing:-.02em}
 .pillar-link{display:inline-flex;align-items:center;gap:6px}
+.service-directory-grid .pillar-white-card{border:1px solid var(--line)}
+.service-directory-grid .pillar-white-card .actions{flex-direction:column;align-items:stretch;gap:10px}
+.service-directory-grid .pillar-white-card .actions .button{width:100%;justify-content:space-between}
 
 /* ---------- Value creation ---------- */
 .value-dark-section{position:relative;overflow:hidden;background:linear-gradient(180deg,#0c1424,#0a101d)!important;padding:100px 0!important}
@@ -159,6 +162,8 @@ article:hover>.icon-badge,article:hover .value-card-top .icon-badge,.sector-tile
 .cta-signature>div{position:relative;z-index:1}
 .cta-power{position:absolute;right:-40px;bottom:-60px;color:rgba(237,199,82,.10);pointer-events:none}
 .cta-power .sig-ico{width:320px;height:320px;stroke-width:1.2}
+.page-hero::after,.service-page-hero::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background-image:var(--blueprint);background-size:56px 56px;mask-image:radial-gradient(ellipse at 25% 50%,#000 15%,transparent 75%)}
+footer{padding-bottom:76px}
 
 /* ---------- Motion preference safety ---------- */
 @media (prefers-reduced-motion:reduce){
