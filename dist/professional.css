@@ -42,7 +42,9 @@ footer{background:#111a20}.footer-grid{grid-template-columns:1.35fr .9fr 1.15fr 
 .sc-metric-row dd{margin:0;font:700 16px/1.4 Manrope,sans-serif;color:#fff}
 .sc-metric-row dd.sc-status-ok{color:#edc752}
 
+.handover-steps-3col{grid-template-columns:repeat(3,minmax(0,1fr))}
 @media(max-width:780px){
+  .handover-steps-3col{grid-template-columns:1fr!important}
   .sector-checker-card{padding:22px}
   .sector-checker-grid{grid-template-columns:1fr;gap:20px}
   .sector-checker-output{padding:20px}
@@ -226,7 +228,9 @@ code{overflow-wrap:anywhere;word-break:break-word}
 .sc-metric-row dd{margin:0;font:700 16px/1.4 Manrope,sans-serif;color:#fff}
 .sc-metric-row dd.sc-status-ok{color:#edc752}
 
+.handover-steps-3col{grid-template-columns:repeat(3,minmax(0,1fr))}
 @media(max-width:780px){
+  .handover-steps-3col{grid-template-columns:1fr!important}
   .sector-checker-card{padding:22px}
   .sector-checker-grid{grid-template-columns:1fr;gap:20px}
   .sector-checker-output{padding:20px}

@@ -81,6 +81,8 @@ try {
     throw Error('Explore the seven services CTA not visible on mobile homepage');
   }
   for (const sec of [
+    '#what-you-can-do',
+    '#won-deal-handover',
     '#seven-services',
     '#how-intelligence-works',
     '#connected-journey',
@@ -89,6 +91,15 @@ try {
     if ((await page.locator(sec).count()) !== 1) {
       throw Error('Missing homepage section: ' + sec);
     }
+  }
+  const handoverOrder = await page.locator('#won-deal-handover ol li').allInnerTexts();
+  if (
+    handoverOrder.length !== 3 ||
+    !handoverOrder[0].includes('Prepare the handover') ||
+    !handoverOrder[1].includes('Review and approve') ||
+    !handoverOrder[2].includes('Confirm onboarding')
+  ) {
+    throw Error('Won deal handover steps order mismatch');
   }
 
   // Verify Commercial Concierge Chatbot opens, runs Path 1, and routes to contact.html

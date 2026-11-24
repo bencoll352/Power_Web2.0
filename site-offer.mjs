@@ -16,25 +16,25 @@ export const aiGroups = [
     bestFor: 'Branch Managers & Account Directors',
     outcomeLine: 'Keep team account history, follow-ups, and 30-day renewals visible while keeping personal networks private.',
     short: 'Know who needs your attention.',
-    plainBenefit: 'Separate Business CRM and Personal CRM workspaces keep commercial account history, follow-ups and 30-day renewal checks visible for teams without exposing private contacts.',
-    cardCopy: 'Keep company account history, follow-ups and 30-day renewal reviews visible for teams, while Personal CRM stays private.',
-    actionSummary: 'Accept a reviewed Sales account into Business CRM, assign an account owner and flag a renewal within 30 days.',
-    description: 'Business CRM gives teams one place for accounts, contacts, opportunities and next steps. Personal CRM gives individuals a separate private workspace for personal relationships.',
-    benefit: 'Keep account history, follow-ups and 30-day renewals visible across your team, with a separate private workspace for personal relationships.',
-    statusBadge: 'Available in a demo · Separate Business & Personal workspaces',
-    whatYouCanTry: 'Available in a demo: walk through Business CRM (accounts, stage-gated pipeline, overdue tasks and 30-day renewal flags) and Personal CRM (private relationship circles, reconnect cadence and portable exports). Handover from Sales uses a structured export unless a working authenticated connection is verified.',
+    plainBenefit: 'Show commitments due today and overdue in a follow-up briefing, open the original task with its saved notes, and keep Business and Personal CRM workspaces separate.',
+    cardCopy: 'Show commitments due today and overdue in a follow-up briefing, and open the original task with saved notes across Business and Personal workspaces.',
+    actionSummary: 'Review commitments due today and overdue in the follow-up briefing and open the original task with its saved notes.',
+    description: 'Business CRM gives teams one place for accounts, contacts, commitments due today and overdue, and saved task notes. Personal CRM gives individuals a separate private workspace for personal relationships.',
+    benefit: 'Keep commitments due today, overdue follow-ups and saved task notes visible across your team, with a separate private Personal workspace.',
+    statusBadge: 'Available in a demo · Business & Personal CRM',
+    whatYouCanTry: 'Available in a demo: review commitments due today and overdue in a follow-up briefing, open the original task with its saved notes, and switch to Personal CRM for private relationship circles and reconnect reminders.',
     ctaLabel: 'Discuss your CRM needs',
     problemsSolved: [
-      'Customer history is scattered across personal inboxes, spreadsheets and notebooks.',
-      'Follow-ups slip when no one clearly owns the next step.',
+      'Customer history and saved task notes are scattered across personal inboxes and spreadsheets.',
+      'Commitments due today or overdue slip when staff cannot jump straight to the original task.',
       'Team commercial records and private personal contacts end up mixed together.'
     ],
     whatWeOffer: [
-      'Business CRM: shared company and contact records, named owners, decision-makers, pipeline stages, overdue tasks and 30-day renewal review flags.',
+      'Business CRM: follow-up briefing showing commitments due today and overdue, with one-click access to the original task and its saved notes, plus 30-day renewal checks.',
       'Personal CRM: a separate private workspace with independent sign-in and row-level isolation for personal relationships and reconnect reminders.',
-      'Structured Sales export import, CSV preview, duplicate review and audited merges.'
+      'Structured Sales handover import, CSV preview, duplicate review and audited merges.'
     ],
-    exampleToShow: 'An account owner opens a customer record, checks the latest notes and activity, sees a 30-day renewal flag and sets the next dated follow-up.',
+    exampleToShow: 'A team lead opens the follow-up briefing, spots commitments due today and overdue, and clicks straight into the original task with its saved notes.',
     roles: 'Managing directors, sales leaders, branch managers, account teams and individual professionals who want clear account ownership without mixing commercial data and private contacts.',
     practicalExample: 'Business CRM: an account lead imports a reviewed Sales export via CSV/JSON preview, assigns ownership, and catches an electrical contractor renewing in 21 days with no review booked. Personal CRM: a director sets a quarterly reconnect reminder in their own private workspace with separate sign-in and records.',
     relatedIds: ['sales', 'communications'],
@@ -90,25 +90,25 @@ export const aiGroups = [
     bestFor: 'Trade Counters & Operations Teams',
     outcomeLine: 'Capture every call, enquiry, and callback in one shared workspace with a named human owner and due date.',
     short: 'Give every customer enquiry a next step.',
-    plainBenefit: 'Capture inbound branch enquiries, assign a human owner and set a dated callback so overdue messages never disappear on a trade counter notepad.',
-    cardCopy: 'Capture customer enquiries, assign a human owner and schedule dated callbacks in one shared inbox.',
-    actionSummary: 'Open an unassigned enquiry, take human ownership and assign a dated callback.',
-    description: 'Bring customer conversations into one team workspace so staff can see what needs attention, who owns it and what happens next.',
-    benefit: 'Give calls, messages, enquiries and callbacks a clear human owner and due date in one shared team workspace.',
-    statusBadge: 'Available in a demo · Live channels require configured connections',
-    whatYouCanTry: 'Available in a demo: test the shared inbox, human takeover, cases, dated callbacks, approved company knowledge and Needs Attention view (fictional enquiry sandbox). Gmail, WhatsApp, Twilio telephony and Calendar booking are available only as connection options requiring configured tenant credentials.',
+    plainBenefit: 'See reply drafts awaiting review, overdue callbacks and unassigned conversations in the staff overview, and open the relevant conversation directly for follow-up.',
+    cardCopy: 'See reply drafts awaiting review, overdue callbacks and unassigned conversations in the staff overview and open any thread directly.',
+    actionSummary: 'Review reply drafts awaiting approval, spot overdue callbacks and unassigned threads in the staff overview, and open the conversation directly.',
+    description: 'Bring customer conversations into one team workspace so staff see reply drafts awaiting review, overdue callbacks and unassigned threads and open any conversation directly.',
+    benefit: 'Give staff an overview of reply drafts awaiting review, overdue callbacks and unassigned conversations with direct follow-up.',
+    statusBadge: 'Available in a demo · Staff overview & direct follow-up',
+    whatYouCanTry: 'Available in a demo: inspect reply drafts awaiting review, overdue callbacks and unassigned conversations in the staff overview, then open the relevant conversation directly for follow-up. Gmail, WhatsApp, Twilio telephony and Calendar booking require configured tenant connections.',
     ctaLabel: 'Discuss your enquiry handling',
     problemsSolved: [
-      'Inbound calls, emails and messages sit in separate places with no single owner.',
+      'Reply drafts, overdue callbacks and unassigned enquiries sit in separate places with no single overview.',
       'Trade-counter callbacks and customer queries are missed when branches get busy.',
-      'Teams lack a consistent set of approved answers and escalation steps.'
+      'Staff waste time hunting for the original thread before following up.'
     ],
     whatWeOffer: [
-      'Shared team inbox with named ownership, priority, internal notes, cases, dated callbacks and Needs Attention tracking.',
-      'Immediate human handover controls and an approved FAQ and policy library.',
+      'Staff overview surfacing reply drafts awaiting review, overdue callbacks and unassigned conversations.',
+      'Direct one-click opening into the relevant conversation for human takeover and follow-up.',
       'AI reception, web chat, email, WhatsApp and calendar booking (available once the required external provider connection is configured for your tenant).'
     ],
-    exampleToShow: 'A new inbound enquiry enters Needs Attention, is claimed by a named team member and becomes an owned callback with a due date and time.',
+    exampleToShow: 'A branch supervisor opens the staff overview, sees an unassigned enquiry and an overdue callback alongside a reply draft awaiting review, and opens the conversation directly.',
     roles: 'Branch teams, trade counter reception staff, customer service leads and operations managers handling inbound calls and enquiries.',
     practicalExample: 'Fictional sandbox example: urgent enquiry ENQ-402 ("Need 3-phase distribution board stock check for Monday") lands unassigned in Needs Attention, is claimed by Sarah Jenkins, and gets a 14:00 dated callback using approved stock notes.',
     relatedIds: ['crm', 'sales'],
@@ -143,25 +143,25 @@ export const aiGroups = [
     bestFor: 'Commercial & Sales Directors',
     outcomeLine: 'Spot UK projects early, track competitor moves, and turn quote pipelines into owned daily actions.',
     short: 'See which opportunities deserve your next move.',
-    plainBenefit: 'Combine local public-data Market Intelligence, human-reviewed Prospect Intelligence, explainable fit scoring and disciplined quote follow-up.',
-    cardCopy: 'Spot UK projects early, review dated prospect evidence and turn quote pipelines into owned daily actions.',
-    actionSummary: 'Review dated branch-expansion evidence, accept and assign an owner, and follow up an overdue quote.',
-    description: 'Workspace for market research, prospect qualification, pipeline management and disciplined sales follow-up.',
-    benefit: 'Turn public local data and sourced company evidence into human-reviewed recommendations, owned Action Queue tasks and clean Delivery handovers.',
-    statusBadge: 'Working pilot · Tested feature-branch functionality',
-    whatYouCanTry: 'Working pilot (tested feature-branch functionality): search UK Planning Data (England participating authorities) and Find a Tender (up to 300 UK notices by delivery region) with no paid APIs or AI credits, import a mapped CSV, review dated prospect evidence separately from contactability, assign follow-ups to the Sales Action Queue, and export structured Sales handovers and Marketing outcomes.',
+    plainBenefit: 'Create a Delivery proposal for a recorded win and flag open opportunities whose record has gone 14 days without an update alongside Action Queue tasks.',
+    cardCopy: 'Create Delivery proposals for recorded wins and flag open opportunities untouched for 14 days in the Action Queue.',
+    actionSummary: 'Flag an open opportunity untouched for 14 days in the Action Queue and create a Delivery proposal for a recorded win.',
+    description: 'Workspace for market research, prospect qualification, 14-day stale-opportunity alerts, Action Queue follow-up and Delivery proposal creation.',
+    benefit: 'Spot stale 14-day opportunities early in the Action Queue and prepare structured Delivery proposals with agreed scope, owner and start date for recorded wins.',
+    statusBadge: 'Working pilot · Tested locally with synthetic data',
+    whatYouCanTry: 'Working pilot: create a Delivery proposal (agreed scope, delivery owner, start date) for a recorded win, flag open opportunities untouched for 14 days alongside Action Queue tasks, search UK Planning Data and Find a Tender notices, and review dated prospect evidence.',
     ctaLabel: 'Discuss your sales workflow',
     problemsSolved: [
-      'Sales teams waste time researching prospects without knowing which opportunities genuinely fit.',
-      'Good leads and quotes go cold when follow-up actions are not clearly owned.',
-      'Source tracking breaks down between initial outreach, quotes and won work.'
+      'Open opportunities go quiet for weeks without anyone noticing the record has gone stale.',
+      'Won deals stall when scope, delivery owner and start date are not captured in a structured Delivery proposal.',
+      'Sales teams waste time researching prospects without knowing which opportunities genuinely fit.'
     ],
     whatWeOffer: [
-      'Market Intelligence: search public UK Planning Data and Find a Tender notices by location.',
-      'Prospect Intelligence: score dated company evidence with explainable fit scoring, human review gates and reviewed outreach drafts.',
-      'Sales Action Queue: prioritise owned follow-ups, track one active quote per prospect and hand over won deals cleanly.'
+      'Delivery proposal builder for recorded wins capturing agreed scope, delivery owner and start date for Approval Studio import.',
+      'Automatic 14-day stale-opportunity flags surfaced alongside existing follow-up tasks in the Action Queue.',
+      'Market Intelligence (UK Planning Data & Find a Tender) and Prospect Intelligence with explainable fit scoring and human review gates.'
     ],
-    exampleToShow: 'A salesperson checks explainable fit evidence on a target account, assigns the next action in the Action Queue and records the quote outcome.',
+    exampleToShow: 'A salesperson sees an open opportunity flagged at 14 days without an update in the Action Queue, and creates a Delivery proposal with agreed scope, owner and start date for a recorded win.',
     roles: 'Commercial directors, business development managers, regional branch managers and external technical sales teams.',
     practicalExample: 'Branch manager example (Leeds & electrical distributor): first check Planning Data and Find a Tender within 25 miles of Leeds (30/90 days, keyword "construction"). Then import "Fixture Electrical Distribution,Electrical wholesaler,Leeds,Labelled fixture", review its dated branch-expansion Source fact and Sales interpretation, select "Accept and assign" to add an owned follow-up task in the Sales Action Queue, and track the resulting quote through to handover.',
     relatedIds: ['crm', 'delivery'],
@@ -219,25 +219,25 @@ export const aiGroups = [
     bestFor: 'Operations & Delivery Leads',
     outcomeLine: 'Turn won deals into clean customer onboarding records with agreed scope, start dates, and zero duplicate admin.',
     short: 'Start delivery with a clear brief.',
-    plainBenefit: 'Turn a won deal into one clean customer onboarding record with agreed scope, named delivery owner, start date and zero duplicate admin.',
-    cardCopy: 'Turn won deals into clean customer onboarding records with agreed scope, start dates and zero duplicate admin.',
-    actionSummary: 'Confirm a won deal from a reviewed Sales handover and lock in the delivery owner, scope and start date.',
-    description: 'Give operations the brief they need once a customer agrees to proceed, confirming ownership, scope and start date without duplicate records.',
-    benefit: 'Turn a won deal into one clean onboarding record with duplicate protection.',
-    statusBadge: 'Working pilot · Local single-operator onboarding',
-    whatYouCanTry: 'Working pilot (local, single-operator onboarding pilot): take a reviewed Sales export, confirm the opportunity was won, record the agreed scope, delivery owner and start date, and save an onboarding record with duplicate protection.',
+    plainBenefit: 'See the stable onboarding reference and which milestones are overdue, give the delivery owner a suggested next action, and show what evidence to gather before advancing.',
+    cardCopy: 'See the stable onboarding reference, overdue milestones, suggested next actions and required evidence before advancing work.',
+    actionSummary: 'Inspect the stable onboarding reference, spot overdue milestones, and review suggested next actions and required evidence.',
+    description: 'Confirm onboarding with a stable reference, track overdue milestones, give the delivery owner a suggested next action and show what evidence is needed before advancing.',
+    benefit: 'Keep every onboarding record traceable by its stable reference while guiding delivery owners on overdue milestones and required evidence.',
+    statusBadge: 'Working pilot · Stable onboarding & milestone tracking',
+    whatYouCanTry: 'Working pilot: start Delivery from an approved proposal, see the stable onboarding reference (with duplicate-safe retry), identify overdue milestones, review the suggested next action and check what evidence to gather before advancing.',
     ctaLabel: 'Discuss your onboarding process',
     problemsSolved: [
-      'Won work stalls when sales agreements are handed over informally or with missing details.',
-      'Delivery teams chase scope, start dates and account context after the deal is signed.',
-      'Repeat imports or manual re-entry create duplicate onboarding records.'
+      'Delivery teams lack a stable onboarding reference when handovers are retried after an interruption.',
+      'Overdue milestones go unnoticed until a customer chases for an update.',
+      'Owners are unsure what evidence must be gathered before moving work to the next stage.'
     ],
     whatWeOffer: [
-      'Structured won-deal handover pilot capturing won confirmation, agreed scope, named delivery owner and start date.',
-      'Duplicate prevention by handover reference on repeat imports.',
-      'Broader document checklists, scheduling, service requests and invoicing workflows are available as options to scope (Planned).'
+      'Stable onboarding reference preserved safely if staff retry the same approved proposal.',
+      'Overdue milestone indicators paired with a suggested next action for the delivery owner.',
+      'Clear evidence checklist showing what to gather before advancing the work.'
     ],
-    exampleToShow: 'An approved Sales handover is confirmed as won and becomes one owned onboarding record with agreed scope, delivery owner and start date.',
+    exampleToShow: 'A delivery owner checks an onboarding reference, spots an overdue milestone, follows the suggested next action and logs the required evidence before advancing.',
     roles: 'Operations directors, delivery managers, branch managers and onboarding coordinators taking over won accounts.',
     practicalExample: 'Operations imports reviewed handover Ref HO-2026-041 from Sales, verifies the signed agreement, assigns Tom Vance as delivery owner starting 18 November, and confirms repeat imports keep the single record intact.',
     relatedIds: ['sales', 'automation'],
@@ -272,25 +272,25 @@ export const aiGroups = [
     bestFor: 'Multi-Branch Operators',
     outcomeLine: 'Bridge sales to delivery with automated, auditable handover receipts so nothing slips through the cracks.',
     short: 'Make repeatable work easier to run and review.',
-    plainBenefit: 'Bridge sales to delivery with automated, auditable handover receipts so nothing slips through the cracks.',
-    cardCopy: 'Bridge sales to delivery with automated, auditable handover receipts so nothing slips through the cracks.',
-    actionSummary: 'Verify a sales-to-delivery handover and inspect whether the receipt is created, already_exists, or unconfirmed.',
-    description: 'Auditable handover routing between Sales, AI Team and Delivery so approved steps leave a verifiable receipt.',
-    benefit: 'Give operators a repeatable, auditable bridge from reviewed Sales handovers into Delivery with clear status receipts.',
-    statusBadge: 'Working pilot · Local operator tool (handover.js)',
-    whatYouCanTry: 'Working pilot: run the reviewed Sales-to-Delivery handover using the existing local operator tool (handover.js) and inspect a receipt distinguishing created, already_exists and unconfirmed outcomes. A visual workflow builder and broad automation integrations remain Planned.',
+    plainBenefit: 'Import Sales Growth proposals into Approval Studio, review and approve the exact scope, and see confirmed, failed or uncertain handovers with safe retry.',
+    cardCopy: 'Import Sales Growth proposals into Approval Studio, approve exact scope and check or retry confirmed, failed or uncertain handovers.',
+    actionSummary: 'Import a Sales Growth proposal into Approval Studio, approve its exact contents and inspect or retry uncertain receipts.',
+    description: 'Import Sales Growth proposals into Approval Studio, approve the exact scope before starting Delivery, and reconcile confirmed, failed or uncertain handover receipts.',
+    benefit: 'Require explicit approval on exact proposal scope and let staff check uncertain receipts or safely retry without creating duplicates.',
+    statusBadge: 'Working pilot · Approval Studio & Handover Receipts',
+    whatYouCanTry: 'Working pilot: import a Sales Growth proposal into Approval Studio, review and approve its exact contents (any change requires fresh approval), see confirmed, failed or uncertain handovers, and check uncertain receipts or retry the same approved handover.',
     ctaLabel: 'Discuss a process to automate',
     problemsSolved: [
-      'Teams repeat manual copy-and-paste handovers between sales records and delivery onboarding.',
-      'Silent background failures leave staff unsure whether a handover succeeded or stalled.',
-      'Retries risk creating duplicate customer records or leaking sensitive payloads into logs.'
+      'Scope changes slip into delivery when proposals are not approved against their exact contents.',
+      'Interrupted handovers leave staff unsure whether Delivery actually created the record.',
+      'Retrying a failed or uncertain handover risks creating a second duplicate onboarding record.'
     ],
     whatWeOffer: [
-      'Repeatable Sales-to-Delivery handovers with idempotent reference checks so nothing slips through the cracks.',
-      'Explicit run receipts distinguishing created, already_exists, rejected and unconfirmed outcomes.',
-      'Auditable handover logs; visual workflow builders and external ERP/webhook connectors are configured per client.'
+      'Approval Studio import for Sales Growth proposals where any content change requires fresh approval.',
+      'Clear handover status showing confirmed, failed or uncertain outcomes.',
+      'Receipt inspection and idempotent retry of the same approved handover without creating duplicates.'
     ],
-    exampleToShow: 'A reviewed deal moves from Sales to Delivery with an auditable receipt showing created, already_exists, rejected or unconfirmed.',
+    exampleToShow: 'An operator imports a Sales Growth proposal into Approval Studio, approves its exact contents, and safely retries an interrupted handover without creating a second record.',
     roles: 'Operations leads, commercial coordinators and multi-branch operators managing handovers between Sales and Delivery.',
     practicalExample: 'A regional branch deal moves from Sales to Business Delivery. Delivery records the onboarding item and returns a "created" receipt; retrying the same handover reference returns "already_exists" without creating a duplicate.',
     relatedIds: ['ai-team', 'delivery'],
@@ -325,25 +325,25 @@ export const aiGroups = [
     bestFor: 'Leadership Teams',
     outcomeLine: 'Turn approved company documents into fast, verifiable commercial briefs with final sign-off always in human hands.',
     short: 'Give your team more capacity for research and preparation.',
-    plainBenefit: 'Turn approved company documents into fast, verifiable commercial briefs with quoted citations and final sign-off always in human hands.',
-    cardCopy: 'Turn approved company documents into fast, verifiable commercial briefs with final sign-off always in human hands.',
-    actionSummary: 'Review an account-review brief against its quoted sources, request a revision and record human sign-off.',
-    description: 'AI Team & Power Command Centre lets your people assign scoped research against approved documents, review every revision and decide what gets accepted.',
-    benefit: 'Draft verifiable commercial briefs strictly from approved source files, keeping revisions and final sign-off in human hands.',
-    statusBadge: 'Working pilot · Local development milestone',
-    whatYouCanTry: 'Working pilot (local development milestone): give the Chief of Staff a defined assignment with approved source material, prepare an extractive brief (pulling relevant information from the approved material), review it, request revisions and record a human acceptance decision. Live generative research, autonomous computer operation and unattended execution remain Planned.',
+    plainBenefit: 'See hiring signals awaiting human review in the Research Workbench, open the saved evidence, and pick up an unresolved finding in a later session.',
+    cardCopy: 'Review hiring signals in the Research Workbench, open saved evidence and resume unresolved findings across sessions.',
+    actionSummary: 'Inspect hiring signals awaiting human review in the Research Workbench and resume an unresolved finding later.',
+    description: 'AI Team & Power Command Centre lets staff inspect hiring signals awaiting human review in the Research Workbench, open saved evidence and resume unresolved findings later.',
+    benefit: 'Keep hiring-signal reviews, saved source evidence and multi-session research findings under human judgement.',
+    statusBadge: 'Working pilot · Research Workbench & Human Review',
+    whatYouCanTry: 'Working pilot: view hiring signals awaiting human review in the Research Workbench, open the saved source evidence, and pick up an unresolved finding in a later session alongside approved-source commercial briefs.',
     ctaLabel: 'Discuss an AI Team pilot',
     problemsSolved: [
-      'Managers spend hours pulling together briefs from scattered account notes, call logs and documents.',
-      'Unconstrained AI tools guess facts that are not grounded in approved company material.',
-      'Teams need clear revision control and human sign-off before any brief or outreach moves forward.'
+      'Hiring signals and account research lose context when a reviewer has to pause mid-session.',
+      'Teams need direct access to saved source evidence before approving any outreach or brief.',
+      'Unconstrained AI tools act without human sign-off on sensitive commercial findings.'
     ],
     whatWeOffer: [
-      'Assign scoped research to the AI Team using approved source material only, returning source-cited commercial findings.',
-      'Request targeted revisions and record explicit human sign-off before passing Delivery instructions forward.',
-      'Dedicated recruitment hiring-signal and outreach approval workflow under human control.'
+      'Research Workbench displaying hiring signals awaiting human review with saved source evidence.',
+      'Persistent session state so staff can pick up an unresolved finding in a later session.',
+      'Approved-source brief preparation with explicit revision control and human sign-off.'
     ],
-    exampleToShow: 'A manager reviews an account brief, opens the quoted source evidence, requests a revision tightening margin context and records acceptance.',
+    exampleToShow: 'A manager opens the Research Workbench, inspects saved evidence on a hiring signal awaiting review, and picks up an unresolved finding in the next session.',
     roles: 'Commercial managers, branch directors, account leads and operations managers preparing account reviews and handover briefs.',
     practicalExample: 'Manager account-review briefing: ahead of a quarterly trade review, a branch manager uploads approved account notes, recent quote history and order summaries. The AI Team prepares a source-cited brief citing the exact supplied passages; the manager requests one revision tightening margin context, reviews the update, and records final sign-off.',
     relatedIds: ['automation', 'sales'],
@@ -378,25 +378,25 @@ export const aiGroups = [
     bestFor: 'MDs & Marketing Leads',
     outcomeLine: 'Connect every campaign directly to qualified meetings and won margin—eliminating wasted spend.',
     short: 'See what your marketing turns into.',
-    plainBenefit: 'Connect every campaign directly to qualified leads, attended meetings and won margin while keeping unattributed enquiries visible.',
-    cardCopy: 'Connect every campaign directly to qualified meetings and won margin—eliminating wasted spend.',
-    actionSummary: 'Compare campaign conversion rates from leads to won margin and keep unattributed enquiries visible.',
-    description: 'Connect campaign effort to commercial outcomes so teams judge marketing by qualified meetings and won margin rather than clicks alone.',
-    benefit: 'Match each source campaign to real Sales progression (qualified, attended, won) in a clean report that surfaces unattributed accounts.',
-    statusBadge: 'Available in a demo · Manual Sales export & Marketing upload',
-    whatYouCanTry: 'Available in a demo: upload a manual Sales outcomes export and compare which sources generated qualified prospects, attended meetings and wins, showing unattributed outcomes and preventing duplicate prospect IDs from inflating the report. Ad spend imports, live provider data and social publishing remain Planned.',
+    plainBenefit: 'Compare two weeks of campaign and finance imports to see changes in cost per attended meeting, cost per win and contribution while missing figures remain unknown.',
+    cardCopy: 'Compare two weeks of campaign and finance imports across cost per attended meeting, cost per win and contribution.',
+    actionSummary: 'Compare two weeks of campaign and finance imports for cost per attended meeting, cost per win and contribution.',
+    description: 'Compare two weeks of campaign and finance imports to track cost per attended meeting, cost per win and contribution without inventing missing figures.',
+    benefit: 'Track changes in cost per attended meeting, cost per win and contribution across weeks while missing figures stay clearly marked unknown.',
+    statusBadge: 'Available in a demo · Week-on-week campaign & finance comparison',
+    whatYouCanTry: 'Available in a demo: compare two weeks of campaign and finance imports to see changes in cost per attended meeting, cost per win and contribution, while keeping unattributed outcomes visible and missing figures explicitly marked unknown.',
     ctaLabel: 'Discuss your marketing workflow',
     problemsSolved: [
-      'Marketing activity is judged on clicks or impressions rather than qualified leads, meetings and wins.',
-      'Unattributed enquiries distort campaign ROI when source records are not reconciled.',
-      'Teams lack a single view connecting campaign effort to real Sales progression.'
+      'Teams cannot see week-on-week shifts in cost per attended meeting, cost per win or contribution.',
+      'Missing finance inputs get silently zeroed out or guessed instead of staying clearly marked unknown.',
+      'Unattributed enquiries and duplicate prospect IDs distort campaign reporting.'
     ],
     whatWeOffer: [
-      'Content, campaigns and outcomes hub: documented pilot reports qualified leads, attended meetings and wins from imported Sales campaign data, keeping Unattributed leads visible.',
-      'Automatic rejection of duplicate prospect IDs during manual JSON import.',
-      'Content repurposing, AI avatars, approval workflows, scheduling and social monitoring are Planned.'
+      'Two-week comparison of campaign and finance imports showing cost per attended meeting, cost per win and contribution.',
+      'Honest accounting where missing finance figures remain explicitly unknown and duplicate prospect IDs are rejected.',
+      'Unattributed row visibility alongside Planned content calendars and social publishing.'
     ],
-    exampleToShow: 'A marketer imports the Sales campaign outcomes export, compares qualified leads and wins by campaign and spots leads with no recorded attribution.',
+    exampleToShow: 'A marketer compares two weeks of campaign and finance imports, checks the change in cost per attended meeting, cost per win and contribution, and sees missing figures marked unknown.',
     roles: 'Marketing leads, commercial directors and managing directors wanting to see which campaigns produce real quotes and orders.',
     practicalExample: 'At month-end, marketing exports the Sales outcomes JSON from Sales & Intelligence and loads it in the Marketing browser view. The team compares two regional wholesale campaigns by won orders, spots 4 Unattributed deals needing source tagging, and sees an accidental duplicate prospect ID safely rejected.',
     relatedIds: ['sales', 'communications'],
@@ -455,9 +455,21 @@ const homeTrustRow = () => `<ul class="hero-trust" aria-label="Core capabilities
   ['lock', 'Synthetic sample demos']
 ].map(([i, t]) => `<li>${ico(i)}<span>${t}</span></li>`).join('')}</ul>`;
 
-export const partnershipHome = `<section class="hero offer-hero hero-handshake"><img src="assets/handshake-hero.jpg" alt="Power-Up Talent commercial team greeting" class="hero-photo-bg" width="900" height="885" fetchpriority="high"><div class="video-overlay handshake-overlay"></div><div class="hero-grid-lines" aria-hidden="true"></div><div class="wrap hero-grid hero-grid-b2b"><div>${eyebrow('POWER-UP TALENT · SEVEN CONNECTED B2B SERVICES')}<h1 style="color:#ffffff!important">Find the right opportunities.<br><em style="color:var(--gold);font-style:normal">Give every next step</em> an owner.</h1><p class="hero-copy">Power-Up Talent brings market research, prospect qualification, customer follow-up and business delivery into one suite. See what changed, check the source, and give your team a clear next action.</p><div class="actions">${button('Request a demo', enquiry('AI services walkthrough'))}${button('Explore the seven services', '#seven-services', true)}</div>${homeTrustRow()}<p class="hero-foot"><a href="#how-intelligence-works" style="color:#ffe000;text-decoration:underline;font-weight:700">How the intelligence works ↓</a> · <a href="platforms.html" style="color:#ffffff;text-decoration:underline">All 7 services</a> · <a href="dashboard.html" style="color:#ffffff;text-decoration:underline">Interactive sample demo</a> · <a href="contact.html" style="color:#ffffff;text-decoration:underline">Contact us ↗</a></p></div><div class="hero-screenshot-panel" aria-label="Sales Action Queue product screenshot"><span class="hero-panel-glow" aria-hidden="true"></span>${productScreenshot('actionQueue', { eager: true })}</div></div></section>${homeDistributorExample()}${homeSevenServices()}${decorateIntel(homeHowIntelligenceWorks())}${connectedJourneyBand()}${homeFaq()}${homeFinalAction()}`;
+const whatYouCanDoSection = () => `<section class="wrap section" id="what-you-can-do" aria-labelledby="what-you-can-do-heading"><div class="section-head"><div>${eyebrow('ACROSS ALL SEVEN SERVICES')}<h2 id="what-you-can-do-heading">What you can do with Power-Up</h2></div><p>Each of the seven separate applications gives staff clear visibility and control over their daily commercial work. Validated locally with synthetic data.</p></div><div class="service-directory-grid">${[
+  ['sales', 'sales-intelligence', 'Sales Intelligence / Sales Growth', 'Create a Delivery proposal for a recorded win and flag open opportunities untouched for 14 days in the Action Queue.'],
+  ['crm', 'crm', 'Core Business CRM / Kindred', 'Review commitments due today and overdue in a follow-up briefing and open the original task with its saved notes across Business and Personal workspaces.'],
+  ['communications', 'communications', 'Power-Up Communications', 'See reply drafts awaiting review, overdue callbacks and unassigned conversations in the staff overview and open any thread directly.'],
+  ['delivery', 'business-delivery', 'Business Delivery', 'See the stable onboarding reference, spot overdue milestones, follow suggested next actions and gather required evidence before advancing.'],
+  ['automation', 'automation', 'Power-Up Automation', 'Import Sales Growth proposals into Approval Studio, approve exact scope and check or safely retry confirmed, failed or uncertain handovers.'],
+  ['ai-team', 'ai-team', 'Power-Up AI Team', 'Review hiring signals awaiting human review in the Research Workbench, open saved evidence and resume unresolved findings later.'],
+  ['marketing', 'marketing-social-media', 'Marketing &amp; Social Media', 'Compare two weeks of campaign and finance imports for cost per attended meeting, cost per win and contribution while missing figures remain unknown.']
+].map(([id, slug, name, outcome]) => `<article class="service-directory-card"><a class="service-card-main" href="${slug}.html"><span class="service-brand-icon"><img src="assets/services-v2/${id}.svg" width="34" height="34" alt="" loading="lazy"></span><h3>${name}</h3><p>${outcome}</p><span class="service-explore">View ${name} ${arrow}</span></a></article>`).join('')}</div></section>`;
 
-export const aiServicesPage = `<section class="page-hero"><video autoplay loop muted playsinline preload="metadata" class="hero-video-bg" aria-hidden="true"><source src="assets/videos/ai-hero.mp4" type="video/mp4"></video><div class="video-overlay"></div><div class="wrap">${eyebrow('POWER-UP TALENT | SEVEN SERVICES')}<h1>Seven services for finding work,<br><em>following up and delivering it.</em></h1><p>Explore Sales &amp; Intelligence, Business &amp; Personal CRM, Communications, Business Delivery, Automation, AI Team &amp; Power Command Centre, and Marketing &amp; Social Media.</p><div class="actions">${button('Request a demo', enquiry('AI services walkthrough'))}${button('Try the guided demo', '#guided-demo', true)}</div></div></section><section class="ai-overview" aria-labelledby="ai-overview-heading"><div class="wrap"><div class="ai-centred"><h2 id="ai-overview-heading">Explore the seven services</h2></div></div></section>${connectedJourneyBand()}<section class="wrap section split"><div>${eyebrow('WALKTHROUGH &amp; DEMO SCOPE')}<h2>See how each service<br>supports your team.</h2></div><div><p class="large-copy">Every service page explains who it is for, what it does, what work it improves, a concrete example, and what runs in a demo or working pilot versus planned capabilities.</p><p>Step through the guided three-scenario demo on this page or inspect the synthetic sample-data views before requesting a walkthrough.</p><div class="actions">${button('Request a demo', enquiry('AI services walkthrough'))}${button('Interactive sample-data demo', 'dashboard.html', true)}</div></div></section>`;
+const wonDealHandoverSection = () => `<section class="wrap section editorial-centrepiece" id="won-deal-handover" aria-labelledby="won-deal-handover-heading"><div class="centrepiece-header"><div>${eyebrow('STAFF-LED HANDOVER · PROPOSAL EXPORT &amp; IMPORT')}<h2 id="won-deal-handover-heading">From won deal to confirmed onboarding</h2><p>A staff-led workflow using a proposal export and import across three separate applications. Verified locally with synthetic data; live deployment, unattended scheduling and provider activation remain outside this update.</p></div></div><ol class="intel-pipeline-grid handover-steps-3col"><li><span class="intel-step-num">STEP 01 · SALES GROWTH</span><h3>Prepare the handover.</h3><p>Record the win and create a proposal with the agreed scope, delivery owner and start date.</p><div class="intel-chip"><a href="sales-intelligence.html" style="text-decoration:underline">Sales Intelligence / Sales Growth ↗</a></div></li><li><span class="intel-step-num">STEP 02 · AUTOMATION</span><h3>Review and approve.</h3><p>Import the proposal into Approval Studio and approve its exact contents. A change requires fresh approval.</p><div class="intel-chip"><a href="automation.html" style="text-decoration:underline">Power-Up Automation ↗</a></div></li><li><span class="intel-step-num">STEP 03 · BUSINESS DELIVERY</span><h3>Confirm onboarding.</h3><p>Start Delivery and see the onboarding reference. If the response is interrupted, staff can retry the same approved proposal without creating a second record.</p><div class="intel-chip ok"><a href="business-delivery.html" style="text-decoration:underline">Business Delivery ↗</a></div></li></ol></section>`;
+
+export const partnershipHome = `<section class="hero offer-hero hero-handshake"><img src="assets/handshake-hero.jpg" alt="Power-Up Talent commercial team greeting" class="hero-photo-bg" width="900" height="885" fetchpriority="high"><div class="video-overlay handshake-overlay"></div><div class="hero-grid-lines" aria-hidden="true"></div><div class="wrap hero-grid hero-grid-b2b"><div>${eyebrow('POWER-UP TALENT · SEVEN CONNECTED B2B SERVICES')}<h1 style="color:#ffffff!important">Find the right opportunities.<br><em style="color:var(--gold);font-style:normal">Give every next step</em> an owner.</h1><p class="hero-copy">Power-Up Talent brings market research, prospect qualification, customer follow-up and business delivery into one suite. See what changed, check the source, and give your team a clear next action.</p><div class="actions">${button('Request a demo', enquiry('AI services walkthrough'))}${button('Explore the seven services', '#seven-services', true)}</div>${homeTrustRow()}<p class="hero-foot"><a href="#won-deal-handover" style="color:#ffe000;text-decoration:underline;font-weight:700">From won deal to confirmed onboarding ↓</a> · <a href="platforms.html" style="color:#ffffff;text-decoration:underline">All 7 services</a> · <a href="dashboard.html" style="color:#ffffff;text-decoration:underline">Interactive sample demo</a> · <a href="contact.html" style="color:#ffffff;text-decoration:underline">Contact us ↗</a></p></div><div class="hero-screenshot-panel" aria-label="Sales Action Queue product screenshot"><span class="hero-panel-glow" aria-hidden="true"></span>${productScreenshot('actionQueue', { eager: true })}</div></div></section>${whatYouCanDoSection()}${wonDealHandoverSection()}${homeDistributorExample()}${homeSevenServices()}${decorateIntel(homeHowIntelligenceWorks())}${connectedJourneyBand()}${homeFaq()}${homeFinalAction()}`;
+
+export const aiServicesPage = `<section class="page-hero"><video autoplay loop muted playsinline preload="metadata" class="hero-video-bg" aria-hidden="true"><source src="assets/videos/ai-hero.mp4" type="video/mp4"></video><div class="video-overlay"></div><div class="wrap">${eyebrow('POWER-UP TALENT | SEVEN SERVICES')}<h1>Seven services for finding work,<br><em>following up and delivering it.</em></h1><p>Explore Sales &amp; Intelligence, Business &amp; Personal CRM, Communications, Business Delivery, Automation, AI Team &amp; Power Command Centre, and Marketing &amp; Social Media.</p><div class="actions">${button('Request a demo', enquiry('AI services walkthrough'))}${button('Try the guided demo', '#guided-demo', true)}</div></div></section>${whatYouCanDoSection()}${wonDealHandoverSection()}<section class="ai-overview" aria-labelledby="ai-overview-heading"><div class="wrap"><div class="ai-centred"><h2 id="ai-overview-heading">Explore the seven services</h2></div></div></section>${connectedJourneyBand()}<section class="wrap section split"><div>${eyebrow('WALKTHROUGH &amp; DEMO SCOPE')}<h2>See how each service<br>supports your team.</h2></div><div><p class="large-copy">Every service page explains who it is for, what it does, what work it improves, a concrete example, and what was validated locally with synthetic data versus planned capabilities.</p><p>Step through the guided three-scenario demo on this page or inspect the synthetic sample-data views before requesting a walkthrough.</p><div class="actions">${button('Request a demo', enquiry('AI services walkthrough'))}${button('Interactive sample-data demo', 'dashboard.html', true)}</div></div></section>`;
 
 const connectedLink = id => `<section class="wrap note-band offer-link-band"><div>${eyebrow('POWER-UP TALENT | AI BUSINESS SERVICES')}<h2>${id === 'coaching' ? 'Give new commercial habits a clear workspace.' : 'Support the new appointment with coaching and practical systems.'}</h2><p>${id === 'coaching' ? 'Connect sales and branch coaching with CRM, Shared Communications and Sales & Intelligence so teams can track follow-ups and quotes every day.' : 'Combine specialist headhunting with post-appointment coaching and our seven business systems.'}</p></div><div class="actions">${button(id === 'talent' ? 'Explore coaching' : 'Explore AI Business Services', id === 'talent' ? 'coaching.html' : 'platforms.html', true)}</div></section>`;
 
