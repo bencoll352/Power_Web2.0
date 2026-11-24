@@ -68,38 +68,32 @@ try {
     if(!detailResponse.ok() || !detailResponse.headers()['content-type'].includes('image/webp')) throw Error('Broken workflow detail image on '+prod);
   }
 
-  // 3. Verify B2B homepage opening copy, CTAs, 7 services, intelligence & journey sections on mobile (390px)
+  // 3. Verify homepage follows Power-Up Talent live flow (snippet, What We Do, Strategic Pillars, brief 7 services, Why Us, no right hero screenshot box)
   await page.goto(origin + '/');
   const h1Text = await page.locator('h1').first().innerText();
-  if (!h1Text.includes('Find the right opportunities.')) {
+  if (!h1Text.includes('Elite Headhunters.')) {
     throw Error('Unexpected homepage H1: ' + h1Text);
   }
-  if (!(await page.locator('a:has-text("Request a demo")').first().isVisible())) {
-    throw Error('Request a demo CTA not visible on mobile homepage');
+  if ((await page.locator('.hero-screenshot-panel').count()) !== 0) {
+    throw Error('Hero should not contain right-side screenshot panel');
   }
-  if (!(await page.locator('a:has-text("Explore the seven services")').first().isVisible())) {
-    throw Error('Explore the seven services CTA not visible on mobile homepage');
+  if (!(await page.locator('.strategic-hero-box').first().isVisible())) {
+    throw Error('Strategic Sector Difference snippet box not visible on homepage');
+  }
+  if (!(await page.locator('a:has-text("Hire Top Talent")').first().isVisible())) {
+    throw Error('Hire Top Talent CTA not visible on mobile homepage');
   }
   for (const sec of [
+    '#what-we-do',
+    '#strategic-pillars',
     '#what-you-can-do',
-    '#won-deal-handover',
-    '#seven-services',
-    '#how-intelligence-works',
-    '#connected-journey',
+    '#value-creation',
+    '#strategic-difference',
     '#home-faq'
   ]) {
     if ((await page.locator(sec).count()) !== 1) {
       throw Error('Missing homepage section: ' + sec);
     }
-  }
-  const handoverOrder = await page.locator('#won-deal-handover ol li').allInnerTexts();
-  if (
-    handoverOrder.length !== 3 ||
-    !handoverOrder[0].includes('Prepare the handover') ||
-    !handoverOrder[1].includes('Review and approve') ||
-    !handoverOrder[2].includes('Confirm onboarding')
-  ) {
-    throw Error('Won deal handover steps order mismatch');
   }
 
   // Verify Commercial Concierge Chatbot opens, runs Path 1, and routes to contact.html
@@ -125,6 +119,15 @@ try {
   // 4. Verify Guided 3-Scenario Product Demo (complete, live feedback, reset, and Contact preselection)
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto(origin + '/platforms.html');
+  const handoverOrder = await page.locator('#won-deal-handover ol li').allInnerTexts();
+  if (
+    handoverOrder.length !== 3 ||
+    !handoverOrder[0].includes('Prepare the handover') ||
+    !handoverOrder[1].includes('Review and approve') ||
+    !handoverOrder[2].includes('Confirm onboarding')
+  ) {
+    throw Error('Won deal handover steps order mismatch on platforms.html');
+  }
   const guided = page.locator('[data-guided-demo]');
   const scenarios = [
     ['enquiry', 'AI services: Communications'],
@@ -157,6 +160,15 @@ try {
       throw Error(`Guided scenario ${scenId} did not preselect ${expectedInterest}`);
     }
     await page.goto(origin + '/platforms.html');
+  const handoverOrder = await page.locator('#won-deal-handover ol li').allInnerTexts();
+  if (
+    handoverOrder.length !== 3 ||
+    !handoverOrder[0].includes('Prepare the handover') ||
+    !handoverOrder[1].includes('Review and approve') ||
+    !handoverOrder[2].includes('Confirm onboarding')
+  ) {
+    throw Error('Won deal handover steps order mismatch on platforms.html');
+  }
   }
 
   // 5. Interactive product demo checks (7 tabs, status filter, search, empty state, reset, enquiry preselection, keyboard)
@@ -266,14 +278,13 @@ try {
     fs.mkdirSync(process.env.SCREENSHOT_DIR, { recursive: true });
     await page.setViewportSize({ width: 1440, height: 1000 });
     await page.goto(origin + '/', { waitUntil: 'networkidle' });
-    await page.locator('.hero-screenshot-panel img').evaluate(el => el.decode()).catch(() => {});
     await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/index_html-1440.png' });
-    await page.locator('#seven-services').scrollIntoViewIfNeeded();
-    await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/index-services.png' });
-    await page.locator('#how-intelligence-works').scrollIntoViewIfNeeded();
-    await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/index-intelligence.png' });
-    await page.locator('#connected-journey').scrollIntoViewIfNeeded();
-    await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/index-journey.png' });
+    await page.locator('#what-we-do').scrollIntoViewIfNeeded();
+    await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/index-what-we-do.png' });
+    await page.locator('#strategic-pillars').scrollIntoViewIfNeeded();
+    await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/index-pillars.png' });
+    await page.locator('#strategic-difference').scrollIntoViewIfNeeded();
+    await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/index-difference.png' });
     await page.goto(origin + '/platforms.html');
     await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/platforms-hub.png' });
     await page.goto(origin + '/sales-intelligence.html');
