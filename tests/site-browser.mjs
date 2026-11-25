@@ -271,8 +271,8 @@ try {
   if (!(await page.locator('#selected-intent-banner').innerText()).includes('AI services: CRM')) {
     throw Error('Selected intent banner did not reflect preselected service');
   }
-  if (!(await page.locator('#enquiry-form button[type="submit"]').innerText()).includes('Open email draft')) {
-    throw Error('Unconfigured form button must clearly state Open email draft');
+  if (!(await page.locator('#enquiry-form button[type="submit"]').innerText()).includes('Send commercial enquiry')) {
+    throw Error('Configured direct form button must state Send commercial enquiry');
   }
   await page.goto(origin + '/contact?interest=UnknownCustomService');
   if ((await page.locator('select[name="interest"]').inputValue()) !== 'Growth partnership') {

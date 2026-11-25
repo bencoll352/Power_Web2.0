@@ -1,4 +1,16 @@
 {
+  "functions": [
+    {
+      "source": "functions-intake",
+      "codebase": "public-website-intake",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log"
+      ]
+    }
+  ],
   "hosting": {
     "site": "power-up-talent",
     "public": "dist",
@@ -24,6 +36,13 @@
       { "source": "/demo", "destination": "/dashboard", "type": 301 }
     ],
     "rewrites": [
+      {
+        "source": "/api/enquiries",
+        "function": {
+          "functionId": "publicEnquiryIntake",
+          "region": "europe-west2"
+        }
+      },
       { "source": "/partnerships", "destination": "/partnerships.html" },
       { "source": "/talent", "destination": "/talent.html" },
       { "source": "/coaching", "destination": "/coaching.html" },
