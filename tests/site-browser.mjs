@@ -85,7 +85,8 @@ try {
   }
   for (const sec of [
     '#what-we-do',
-    '#strategic-pillars',
+    '#headhunting-overview',
+    '#coaching-overview',
     '#what-you-can-do',
     '#value-creation',
     '#strategic-difference',
@@ -94,6 +95,9 @@ try {
     if ((await page.locator(sec).count()) !== 1) {
       throw Error('Missing homepage section: ' + sec);
     }
+  }
+  if ((await page.locator('#strategic-pillars').count()) !== 0) {
+    throw Error('Strategic pillars duplicate section should be removed from homepage');
   }
   if ((await page.locator('#home-faq').count()) !== 0) {
     throw Error('FAQ section should be removed from homepage');
@@ -287,11 +291,13 @@ try {
     await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/index_html-1440.png' });
     await page.locator('#what-we-do').scrollIntoViewIfNeeded();
     await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/index-what-we-do.png' });
-    await page.locator('#strategic-pillars').scrollIntoViewIfNeeded();
-    await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/index-pillars.png' });
+    await page.locator('#headhunting-overview').scrollIntoViewIfNeeded();
+    await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/index-headhunting.png' });
+    await page.locator('#coaching-overview').scrollIntoViewIfNeeded();
+    await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/index-coaching.png' });
     await page.locator('#strategic-difference').scrollIntoViewIfNeeded();
     await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/index-difference.png' });
-    await page.locator('#seven-services').scrollIntoViewIfNeeded();
+    await page.locator('#what-you-can-do').scrollIntoViewIfNeeded();
     await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/index-seven-services.png' });
     await page.locator('#one-company-per-sector').scrollIntoViewIfNeeded();
     await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/index-unstoppable.png' });
