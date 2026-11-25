@@ -92,8 +92,22 @@ window.POWERUP_CHAT_CONFIG = window.POWERUP_CHAT_CONFIG || {
   };
 
   const buildContactUrl = (interest, extra = {}) => {
-    const qs = new URLSearchParams({ interest, ...extra });
-    return `contact.html?${qs.toString()}`;
+    // Keep personal contact details and candidate notes out of URLs; pass them via sessionStorage only.
+    const safeParams = new URLSearchParams();
+    if (interest) safeParams.set('interest', interest);
+    if (extra.path) safeParams.set('path', extra.path);
+    try {
+      const handoff = {};
+      if (extra.sector) handoff.sector = extra.sector;
+      if (extra.role) handoff.role = extra.role;
+      if (extra.territory) handoff.territory = extra.territory;
+      if (extra.note) handoff.note = extra.note;
+      if (Object.keys(handoff).length) {
+        sessionStorage.setItem('pu_concierge_handoff', JSON.stringify(handoff));
+      }
+    } catch {}
+    const qs = safeParams.toString();
+    return `/contact${qs ? '?' + qs : ''}${extra.path === 'candidate' ? '#candidate-path' : ''}`;
   };
 
   const submitLeadPayload = async (interest, summaryText, extraParams = {}) => {
@@ -175,13 +189,13 @@ window.POWERUP_CHAT_CONFIG = window.POWERUP_CHAT_CONFIG || {
     if (serviceKey) {
       const demoLink = document.createElement('a');
       demoLink.className = 'pu-chat-cta-btn primary';
-      demoLink.href = `dashboard.html?service=${encodeURIComponent(serviceKey)}`;
+      demoLink.href = `/dashboard?service=${encodeURIComponent(serviceKey)}`;
       demoLink.textContent = 'Open matching view ↗';
       wrap.appendChild(demoLink);
     } else {
       const coachLink = document.createElement('a');
       coachLink.className = 'pu-chat-cta-btn primary';
-      coachLink.href = 'partnerships.html';
+      coachLink.href = '/partnerships';
       coachLink.textContent = 'View Multi-Site RPO ↗';
       wrap.appendChild(coachLink);
     }

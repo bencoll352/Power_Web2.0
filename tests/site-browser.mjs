@@ -85,13 +85,18 @@ try {
     throw Error('Strategic Sector Difference snippet box not visible on homepage');
   }
   if (!(await page.locator('a:has-text("Hire Top Talent")').first().isVisible())) {
-    throw Error('Hire Top Talent CTA not visible on mobile homepage');
+    throw Error('Hire Top Talent CTA not visible on homepage');
+  }
+  if (!(await page.locator('a:has-text("Explore AI Business Services")').first().isVisible())) {
+    throw Error('Explore AI Business Services CTA not visible on homepage hero');
+  }
+  if (!(await page.locator('main a[href="/contact?path=candidate#candidate-path"]').first().isVisible())) {
+    throw Error('Confidential Candidate Register link not visible on homepage');
   }
   for (const sec of [
     '#headhunting-overview',
     '#coaching-overview',
     '#what-you-can-do',
-    '#value-creation',
     '#strategic-difference',
     '#one-company-per-sector'
   ]) {
@@ -137,15 +142,22 @@ try {
 
   // 4. Verify Guided 3-Scenario Product Demo (complete, live feedback, reset, and Contact preselection)
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.goto(origin + '/platforms.html');
+  await page.goto(origin + '/platforms');
+  if ((await page.locator('.service-directory-card .hub-card-dl').count()) !== 7) {
+    throw Error('Expected 7 four-part service cards on /platforms');
+  }
+  const guidedHeading = await page.locator('#guided-demo-heading').innerText();
+  if (!guidedHeading.includes('Try three workflows') || !guidedHeading.includes('with sample data')) {
+    throw Error('Guided demo heading mismatch: ' + guidedHeading);
+  }
   const handoverOrder = await page.locator('#won-deal-handover ol li').allInnerTexts();
   if (
     handoverOrder.length !== 3 ||
-    !handoverOrder[0].includes('Prepare the handover') ||
-    !handoverOrder[1].includes('Review and approve') ||
-    !handoverOrder[2].includes('Confirm onboarding')
+    !handoverOrder[0].includes('Sales Intelligence') ||
+    !handoverOrder[1].includes('Approval Studio') ||
+    !handoverOrder[2].includes('Business Delivery')
   ) {
-    throw Error('Won deal handover steps order mismatch on platforms.html');
+    throw Error('Won deal handover steps order mismatch on /platforms');
   }
   const guided = page.locator('[data-guided-demo]');
   const scenarios = [
@@ -172,22 +184,33 @@ try {
     if (!(await sPanel.locator('[data-scenario-before]').isVisible())) {
       throw Error('Guided scenario reset did not restore initial state: ' + scenId);
     }
-    // Check walkthrough link carries product into Contact
     const href = await sPanel.locator('.scenario-links a.button').getAttribute('href');
-    await page.goto(origin + '/' + href);
+    await page.goto(origin + (href.startsWith('/') ? href : '/' + href));
     if ((await page.locator('select[name="interest"]').inputValue()) !== expectedInterest) {
       throw Error(`Guided scenario ${scenId} did not preselect ${expectedInterest}`);
     }
-    await page.goto(origin + '/platforms.html');
-  const handoverOrder = await page.locator('#won-deal-handover ol li').allInnerTexts();
-  if (
-    handoverOrder.length !== 3 ||
-    !handoverOrder[0].includes('Prepare the handover') ||
-    !handoverOrder[1].includes('Review and approve') ||
-    !handoverOrder[2].includes('Confirm onboarding')
-  ) {
-    throw Error('Won deal handover steps order mismatch on platforms.html');
+    await page.goto(origin + '/platforms');
   }
+
+  // Verify Live in Power CRM Automation briefing, Information Hub resources, Talent deliverables & 301 redirects
+  await page.goto(origin + '/automation');
+  const briefingText = await page.locator('#live-power-crm-briefing').innerText();
+  if (!briefingText.includes('Live in Power CRM') || !briefingText.includes('Outreach Centre')) {
+    throw Error('Missing Live in Power CRM Automation briefing on /automation');
+  }
+  await page.goto(origin + '/information');
+  if ((await page.locator('#quote-followup-checklist').count()) !== 1 || (await page.locator('#handover-guide').count()) !== 1) {
+    throw Error('Missing practical resources on /information');
+  }
+  await page.goto(origin + '/talent');
+  if ((await page.locator('#recruitment-deliverables').count()) !== 1) {
+    throw Error('Missing example deliverables on /talent');
+  }
+  for (const [legacy, dest] of [['/intelligence.html', '/platforms'], ['/academy', '/coaching'], ['/demo', '/dashboard']]) {
+    const r = await page.request.get(origin + legacy, { maxRedirects: 0 });
+    if (r.status() !== 301 || r.headers()['location'] !== dest) {
+      throw Error(`Redirect check failed for ${legacy}: got ${r.status()} -> ${r.headers()['location']}`);
+    }
   }
 
   // 5. Interactive product demo checks (7 tabs, status filter, search, empty state, reset, enquiry preselection, keyboard)
@@ -221,7 +244,7 @@ try {
   if (!(await page.locator('#panel-marketing').isVisible())) throw Error('Keyboard End');
   await page.locator('.recruitment-menu summary').click();
   if (!(await page.locator('.recruitment-menu .service-menu-panel').isVisible())) throw Error('Recruitment dropdown');
-  if ((await page.locator('.recruitment-menu .service-menu-panel a[href="partnerships.html"]').count()) !== 1) throw Error('Partnerships missing under Recruitment dropdown');
+  if ((await page.locator('.recruitment-menu .service-menu-panel a[href="/partnerships"]').count()) !== 1) throw Error('Partnerships missing under Recruitment dropdown');
   await page.locator('.ai-services-menu summary').click();
   if (!(await page.locator('.ai-services-menu .service-menu-panel').isVisible())) throw Error('Services dropdown');
   await page.keyboard.press('Escape');
@@ -238,11 +261,20 @@ try {
     );
   });
 
-  await page.goto(origin + '/contact.html?service=crm');
+  await page.goto(origin + '/contact?service=crm&email=should-be-scrubbed@example.com');
+  if (page.url().includes('should-be-scrubbed')) {
+    throw Error('PII email query parameter was not scrubbed from URL');
+  }
   if ((await page.locator('select[name="interest"]').inputValue()) !== 'AI services: CRM') {
     throw Error('Service alias mapping failed');
   }
-  await page.goto(origin + '/contact.html?interest=UnknownCustomService');
+  if (!(await page.locator('#selected-intent-banner').innerText()).includes('AI services: CRM')) {
+    throw Error('Selected intent banner did not reflect preselected service');
+  }
+  if (!(await page.locator('#enquiry-form button[type="submit"]').innerText()).includes('Open email draft')) {
+    throw Error('Unconfigured form button must clearly state Open email draft');
+  }
+  await page.goto(origin + '/contact?interest=UnknownCustomService');
   if ((await page.locator('select[name="interest"]').inputValue()) !== 'Growth partnership') {
     throw Error('Unknown interest fallback failed');
   }
@@ -255,11 +287,42 @@ try {
   if ((await page.locator('#enquiry-form .field-error').count()) < 1) {
     throw Error('Client brief field-level validation did not trigger');
   }
+  if (!(await page.locator('#enquiry-form input[name="email"]').getAttribute('aria-describedby'))) {
+    throw Error('Invalid field missing programmatic aria-describedby link');
+  }
   if ((await page.locator('#enquiry-form input[name="name"]').inputValue()) !== 'Synthetic Tester') {
     throw Error('Client brief discarded entered value on validation failure');
   }
 
-  await page.goto(origin + '/contact.html?path=candidate#candidate-path');
+  // Test direct submission against local synthetic receiver (/api/test-enquiry), failure recovery, and private-channel guard
+  await page.evaluate(() => {
+    window.POWERUP_ENQUIRY_CONFIG = {
+      commercialEndpoint: '/api/test-enquiry',
+      candidateEndpoint: '/api/test-enquiry',
+      candidateChannelPrivate: false,
+      territoryEndpoint: '/api/test-enquiry',
+      timeoutMs: 5000,
+      extraHeaders: { 'X-Test-Simulate-Error': '1' }
+    };
+  });
+  await page.locator('#enquiry-form input[name="email"]').fill('synthetic@example.co.uk');
+  await page.locator('#enquiry-form textarea[name="message"]').fill('Synthetic commercial walkthrough enquiry for testing.');
+  await page.locator('#enquiry-form button[type="submit"]').click();
+  await page.locator('#enquiry-form-feedback.is-error').waitFor({ state: 'visible', timeout: 5000 });
+  if ((await page.locator('#enquiry-form textarea[name="message"]').inputValue()) !== 'Synthetic commercial walkthrough enquiry for testing.') {
+    throw Error('Form did not preserve entered values after submission error');
+  }
+  await page.evaluate(() => {
+    window.POWERUP_ENQUIRY_CONFIG.extraHeaders = {};
+  });
+  await page.locator('#enquiry-form button[type="submit"]').click();
+  await page.locator('#enquiry-form-feedback.is-success').waitFor({ state: 'visible', timeout: 5000 });
+  if (!(await page.locator('#enquiry-form-feedback').innerText()).includes('SYN-COM-')) {
+    throw Error('Direct commercial submission did not show receiver reference');
+  }
+
+  // Candidate private-channel guard & direct synthetic submission
+  await page.goto(origin + '/contact?path=candidate#candidate-path');
   if (!(await page.locator('#candidate-path').isVisible())) {
     throw Error('Candidate tab did not activate via ?path=candidate');
   }
@@ -268,18 +331,34 @@ try {
   if ((await page.locator('#candidate-form .field-error').count()) < 1) {
     throw Error('Candidate form validation did not trigger on missing contact');
   }
-  if ((await page.locator('#candidate-form input[name="cand_name"]').inputValue()) !== 'Synthetic Candidate') {
-    throw Error('Candidate form lost name on validation error');
+  await page.locator('#candidate-form input[name="cand_email"]').fill('candidate.test@example.co.uk');
+  await page.evaluate(() => {
+    window.POWERUP_ENQUIRY_CONFIG = { candidateEndpoint: '/api/test-enquiry', candidateChannelPrivate: true, timeoutMs: 5000 };
+  });
+  await page.locator('#candidate-form button[type="submit"]').click();
+  await page.locator('#candidate-form-feedback.is-success').waitFor({ state: 'visible', timeout: 5000 });
+  if (!(await page.locator('#candidate-form-feedback').innerText()).includes('SYN-CAN-')) {
+    throw Error('Direct candidate submission did not show receiver reference');
   }
 
-  await page.goto(origin + '/check.html');
+  await page.goto(origin + '/check');
   await page.locator('#territory-check-form input[name="name"]').fill('Synthetic Director');
   await page.locator('#territory-check-form button[type="submit"]').click();
   if ((await page.locator('#territory-check-form .field-error').count()) < 1) {
     throw Error('Territory form validation did not trigger');
   }
-  if ((await page.locator('#territory-check-form input[name="name"]').inputValue()) !== 'Synthetic Director') {
-    throw Error('Territory form lost input on validation failure');
+  await page.locator('#territory-check-form input[name="title"]').fill('Managing Director');
+  await page.locator('#territory-check-form input[name="company"]').fill('Synthetic UK Ltd');
+  await page.locator('#territory-check-form input[name="email"]').fill('director@example.co.uk');
+  await page.locator('#territory-check-form input[name="industry"]').fill('Commercial Services');
+  await page.locator('#territory-check-form input[name="region"]').fill('Midlands');
+  await page.evaluate(() => {
+    window.POWERUP_ENQUIRY_CONFIG = { territoryEndpoint: '/api/test-enquiry', timeoutMs: 5000 };
+  });
+  await page.locator('#territory-check-form button[type="submit"]').click();
+  await page.locator('#territory-check-form-feedback.is-success').waitFor({ state: 'visible', timeout: 5000 });
+  if (!(await page.locator('#territory-check-form-feedback').innerText()).includes('SYN-TER-')) {
+    throw Error('Direct territory submission did not show receiver reference');
   }
 
   // 7. Mobile menu & service navigation
@@ -288,8 +367,8 @@ try {
   await page.locator('.menu-toggle').click();
   if (!(await page.locator('#navigation').isVisible())) throw Error('Mobile menu');
   await page.locator('.ai-services-menu summary').click();
-  await page.locator('.ai-services-menu .service-menu-panel a[href="crm.html"]').click();
-  if (!page.url().endsWith('/crm.html')) throw Error('Mobile service navigation');
+  await page.locator('.ai-services-menu .service-menu-panel a[href="/crm"]').click();
+  if (!page.url().endsWith('/crm')) throw Error('Mobile service navigation');
 
   if (errors.length) throw Error(errors.join('\n'));
   console.log(

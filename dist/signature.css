@@ -164,6 +164,28 @@ article:hover>.icon-badge,article:hover .value-card-top .icon-badge,.sector-tile
 .cta-power .sig-ico{width:320px;height:320px;stroke-width:1.2}
 .page-hero::after,.service-page-hero::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background-image:var(--blueprint);background-size:56px 56px;mask-image:radial-gradient(ellipse at 25% 50%,#000 15%,transparent 75%)}
 .recruitment-menu .service-menu-panel{left:0;right:auto;width:260px}
+.hero-candidate-link{margin:18px 0 0;font-size:13.5px}
+.hero-candidate-link a{color:#f3d47a;text-decoration:underline;text-underline-offset:3px;font-weight:600}
+.hero-candidate-link a:hover{color:#fff}
+.hub-card-dl{margin:10px 0 0;display:grid;gap:9px}
+.hub-card-dl dt{font-size:10.5px;font-weight:800;letter-spacing:.9px;text-transform:uppercase;color:#7a6015;margin-bottom:2px}
+.hub-card-dl dd{margin:0;font-size:13px;line-height:1.5;color:var(--muted)}
+.live-briefing-card{background:linear-gradient(130deg,var(--ink-900),#142436);color:#fff;border:1px solid rgba(52,211,153,.4);border-left:4px solid #34d399;border-radius:14px;padding:34px 36px;display:grid;grid-template-columns:1.25fr 1fr;gap:36px;align-items:start}
+.live-briefing-card h2{color:#fff;font-size:clamp(1.7rem,2.4vw,2.3rem);margin:10px 0 12px}
+.live-briefing-lead{color:#e2e8f0;font-size:15.5px;line-height:1.65;margin:0}
+.live-briefing-meta{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:20px 22px;display:grid;gap:12px}
+.live-briefing-meta p{margin:0;font-size:13.5px;line-height:1.6;color:#cbd5e1}
+.live-briefing-meta strong{color:#fff}
+.live-pill{background:#064e3b!important;color:#a7f3d0!important;border-color:#10b981!important}
+.resource-guide-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px}
+.resource-guide-card{background:#fff;border:1px solid var(--line);border-top:3px solid var(--gold);border-radius:12px;padding:30px;display:flex;flex-direction:column;box-shadow:0 8px 24px rgba(16,25,32,.05)}
+.resource-guide-card h3{font-size:22px;margin:6px 0 10px;color:var(--ink)}
+.resource-ol{list-style:none;padding:0;margin:0}
+.intent-banner{padding:10px 14px;background:#fefce8;border:1px solid #e6d38a;border-radius:6px;font-size:13px;font-weight:700;color:#5c4810;margin:0 0 14px}
+.enquiry-status-box{margin-top:16px;padding:14px 16px;border-radius:8px;font-size:13.5px;line-height:1.55}
+.enquiry-status-box.is-pending{background:#eff6ff;border:1px solid #93c5fd;color:#1e3a8a}
+.enquiry-status-box.is-success{background:#ecfdf5;border:1px solid #6ee7b7;color:#065f46}
+.enquiry-status-box.is-error{background:#fef2f2;border:1px solid #fca5a5;color:#991b1b}
 footer{padding-bottom:76px}
 
 /* ---------- Service overview bands, media frames & Unstoppable exclusivity showcase ---------- */
@@ -228,6 +250,7 @@ footer{padding-bottom:76px}
   .sector-tile-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .hero-screenshot-panel .product-capture{transform:none}
   .overview-split{grid-template-columns:1fr;gap:32px}
+  .live-briefing-card,.resource-guide-grid{grid-template-columns:1fr;gap:20px}
   .unstoppable-header{grid-template-columns:1fr;gap:20px}
   .unstoppable-formula{grid-template-columns:1fr}
   .unstoppable-outcome-bar{flex-direction:column;align-items:flex-start}

@@ -85,24 +85,31 @@ document.querySelectorAll('[data-challenge]').forEach(b =>
   })
 );
 
-// Helper for field-level validation without discarding user input
+// Helper for accessible field-level validation without discarding user input
 function setFieldError(input, message) {
   if (!input) return;
   const label = input.closest('label') || input.parentElement;
+  const errId = `err-${(input.form?.id || 'form')}-${input.name || 'field'}`;
   let err = label?.querySelector('.field-error');
   if (!message) {
     input.removeAttribute('aria-invalid');
+    if (input.getAttribute('aria-describedby') === errId) input.removeAttribute('aria-describedby');
     if (err) err.remove();
     return;
   }
   input.setAttribute('aria-invalid', 'true');
   if (!err && label) {
     err = document.createElement('span');
+    err.id = errId;
     err.className = 'field-error';
     err.setAttribute('role', 'alert');
     label.appendChild(err);
   }
-  if (err) err.textContent = message;
+  if (err) {
+    err.id = errId;
+    err.textContent = message;
+    input.setAttribute('aria-describedby', errId);
+  }
 }
 
 function validateField(input) {
@@ -124,6 +131,73 @@ function validateField(input) {
   return true;
 }
 
+function isAllowedEndpoint(url, requirePrivate, isPrivateFlag) {
+  if (!url || typeof url !== 'string') return false;
+  const trimmed = url.trim();
+  if (!trimmed) return false;
+  if (requirePrivate && !isPrivateFlag) return false;
+  try {
+    const parsed = new URL(trimmed, location.origin);
+    const isLocalTest = parsed.hostname === '127.0.0.1' || parsed.hostname === 'localhost';
+    return parsed.protocol === 'https:' || (parsed.protocol === 'http:' && isLocalTest);
+  } catch {
+    return false;
+  }
+}
+
+function getEnquiryConfig() {
+  const cfg = window.POWERUP_ENQUIRY_CONFIG || {};
+  return {
+    commercialEndpoint: String(cfg.commercialEndpoint || '').trim(),
+    candidateEndpoint: String(cfg.candidateEndpoint || '').trim(),
+    candidateChannelPrivate: Boolean(cfg.candidateChannelPrivate),
+    territoryEndpoint: String(cfg.territoryEndpoint || '').trim(),
+    timeoutMs: Number(cfg.timeoutMs) > 0 ? Number(cfg.timeoutMs) : 12000,
+    extraHeaders: cfg.extraHeaders && typeof cfg.extraHeaders === 'object' ? cfg.extraHeaders : {}
+  };
+}
+
+function ensureFeedbackBox(form, id) {
+  let box = form.querySelector(`#${id}`);
+  if (!box) {
+    box = document.createElement('div');
+    box.id = id;
+    box.hidden = true;
+    box.className = 'enquiry-status-box';
+    const submitBtn = form.querySelector('button[type="submit"]');
+    if (submitBtn && submitBtn.parentElement) {
+      submitBtn.insertAdjacentElement('afterend', box);
+    } else {
+      form.appendChild(box);
+    }
+  }
+  return box;
+}
+
+function createSubmissionId(type) {
+  return `${type}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
+}
+
+async function postEnquiryPayload(endpoint, payload, timeoutMs, extraHeaders) {
+  const ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+  const timer = ctrl ? setTimeout(() => ctrl.abort(), timeoutMs) : null;
+  try {
+    const resp = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json', ...extraHeaders },
+      body: JSON.stringify(payload),
+      ...(ctrl ? { signal: ctrl.signal } : {})
+    });
+    const data = await resp.json().catch(() => ({}));
+    if (!resp.ok || !data.ok) {
+      throw new Error(data.error || `The receiving service returned HTTP ${resp.status}.`);
+    }
+    return data;
+  } finally {
+    if (timer) clearTimeout(timer);
+  }
+}
+
 function bindCopyButton(btnSelector, textareaSelector, statusSelector) {
   const btn = document.querySelector(btnSelector);
   const text = document.querySelector(textareaSelector);
@@ -141,7 +215,7 @@ function bindCopyButton(btnSelector, textareaSelector, statusSelector) {
   });
 }
 
-// Dual-path tab switcher on Contact page
+// Dual-path tab switcher on Contact page (with keyboard arrow support)
 function activateContactPath(targetId) {
   const buttons = document.querySelectorAll('[data-path-tab]');
   const panels = document.querySelectorAll('.path-panel');
@@ -150,6 +224,7 @@ function activateContactPath(targetId) {
     const isMatch = b.dataset.pathTab === targetId;
     b.classList.toggle('active', isMatch);
     b.setAttribute('aria-selected', String(isMatch));
+    b.setAttribute('tabindex', isMatch ? '0' : '-1');
   });
   panels.forEach(p => {
     const isMatch = p.id === targetId;
@@ -158,8 +233,17 @@ function activateContactPath(targetId) {
   });
 }
 
-document.querySelectorAll('[data-path-tab]').forEach(btn => {
+const pathTabButtons = Array.from(document.querySelectorAll('[data-path-tab]'));
+pathTabButtons.forEach((btn, idx) => {
   btn.addEventListener('click', () => activateContactPath(btn.dataset.pathTab));
+  btn.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+      e.preventDefault();
+      const next = pathTabButtons[(idx + (e.key === 'ArrowRight' ? 1 : -1) + pathTabButtons.length) % pathTabButtons.length];
+      activateContactPath(next.dataset.pathTab);
+      next.focus();
+    }
+  });
 });
 
 // Interest normalization map for incoming product/service CTAs
@@ -192,10 +276,187 @@ const interestAliases = {
   exclusivity: 'Territory exclusivity audit'
 };
 
+function consumeSessionHandoff() {
+  try {
+    const raw = sessionStorage.getItem('pu_concierge_handoff');
+    if (!raw) return {};
+    sessionStorage.removeItem('pu_concierge_handoff');
+    return JSON.parse(raw) || {};
+  } catch {
+    return {};
+  }
+}
+
+// Scrub any accidental personal contact query params from the address bar immediately
+(function scrubPiiQueryParams() {
+  const sp = new URLSearchParams(location.search);
+  const piiKeys = ['name', 'email', 'phone', 'mobile', 'cand_name', 'cand_email', 'cand_notes'];
+  let changed = false;
+  piiKeys.forEach(k => {
+    if (sp.has(k)) {
+      sp.delete(k);
+      changed = true;
+    }
+  });
+  if (changed && typeof history !== 'undefined' && history.replaceState) {
+    const qs = sp.toString();
+    history.replaceState(null, '', location.pathname + (qs ? '?' + qs : '') + location.hash);
+  }
+})();
+
+function wireDirectOrDraftForm({
+  form,
+  type,
+  getEndpoint,
+  requirePrivate = false,
+  getIsPrivate = () => false,
+  buildPayload,
+  buildDraft,
+  copySelector,
+  resultSelector,
+  statusTextSelector,
+  statusCopyBtn,
+  directLabel,
+  draftLabel
+}) {
+  if (!form) return;
+  const inputs = Array.from(form.querySelectorAll('input, select, textarea'));
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const feedbackBox = ensureFeedbackBox(form, `${form.id}-feedback`);
+
+  const syncButtonLabel = () => {
+    const cfg = getEnquiryConfig();
+    const canDirect = isAllowedEndpoint(getEndpoint(cfg), requirePrivate, getIsPrivate(cfg));
+    if (submitBtn) {
+      submitBtn.innerHTML = `${canDirect ? directLabel : draftLabel} <span aria-hidden="true">↗</span>`;
+      submitBtn.dataset.mode = canDirect ? 'direct' : 'draft';
+    }
+  };
+  syncButtonLabel();
+
+  let submissionId = createSubmissionId(type);
+  let lastAcceptedId = null;
+  let isSubmitting = false;
+
+  inputs.forEach(inp => {
+    inp.addEventListener('input', () => {
+      validateField(inp);
+      if (lastAcceptedId) {
+        submissionId = createSubmissionId(type);
+        lastAcceptedId = null;
+      }
+    });
+  });
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    if (isSubmitting) return;
+
+    let allValid = true;
+    inputs.forEach(inp => {
+      if (!validateField(inp)) allValid = false;
+    });
+    if (!allValid) {
+      const firstInvalid = inputs.find(inp => inp.getAttribute('aria-invalid') === 'true');
+      firstInvalid?.focus();
+      return;
+    }
+
+    const cfg = getEnquiryConfig();
+    const endpoint = getEndpoint(cfg);
+    const canDirect = isAllowedEndpoint(endpoint, requirePrivate, getIsPrivate(cfg));
+    const draft = buildDraft();
+    const copyEl = document.querySelector(copySelector);
+    const resultEl = document.querySelector(resultSelector);
+    if (copyEl) copyEl.value = draft.body;
+
+    if (!canDirect) {
+      // Honest fallback mode: never show a "sent" confirmation when only opening an email draft
+      isSubmitting = true;
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.setAttribute('aria-busy', 'true');
+        submitBtn.textContent = 'Opening email draft…';
+      }
+      if (statusTextSelector) {
+        const st = document.querySelector(statusTextSelector);
+        if (st && draft.statusNote) st.textContent = draft.statusNote;
+      }
+      feedbackBox.hidden = true;
+      if (resultEl) {
+        resultEl.hidden = false;
+        resultEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+      setTimeout(() => {
+        isSubmitting = false;
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.removeAttribute('aria-busy');
+          syncButtonLabel();
+        }
+      }, 600);
+      location.href = `mailto:info@power-uptalent.co.uk?subject=${encodeURIComponent(draft.subject)}&body=${encodeURIComponent(draft.body)}`;
+      return;
+    }
+
+    if (lastAcceptedId === submissionId) {
+      feedbackBox.hidden = false;
+      feedbackBox.setAttribute('role', 'status');
+      feedbackBox.className = 'enquiry-status-box is-success';
+      feedbackBox.innerHTML = '<strong>Already received.</strong> Edit any field above if you need to send a separate enquiry.';
+      return;
+    }
+
+    isSubmitting = true;
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.setAttribute('aria-busy', 'true');
+      submitBtn.textContent = 'Submitting enquiry…';
+    }
+    feedbackBox.hidden = false;
+    feedbackBox.setAttribute('role', 'status');
+    feedbackBox.className = 'enquiry-status-box is-pending';
+    feedbackBox.textContent = 'Sending your enquiry securely…';
+
+    try {
+      const payload = { ...buildPayload(), type, submissionId };
+      const receipt = await postEnquiryPayload(endpoint, payload, cfg.timeoutMs, cfg.extraHeaders);
+      lastAcceptedId = submissionId;
+      if (resultEl) resultEl.hidden = true;
+      feedbackBox.hidden = false;
+      feedbackBox.setAttribute('role', 'status');
+      feedbackBox.className = 'enquiry-status-box is-success';
+      feedbackBox.innerHTML = `<strong>Enquiry received${receipt.reference ? ` (Ref: ${receipt.reference})` : ''}.</strong> Thank you — our team will review your details and respond within one working day.`;
+      feedbackBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } catch (err) {
+      // Preserve every entered field value and offer both retry and clearly labelled email draft fallback
+      feedbackBox.hidden = false;
+      feedbackBox.setAttribute('role', 'alert');
+      feedbackBox.className = 'enquiry-status-box is-error';
+      const msg = err?.name === 'AbortError'
+        ? 'The request timed out before confirmation was received.'
+        : (err?.message || 'Unable to reach the enquiry service right now.');
+      feedbackBox.innerHTML = `<strong>We could not confirm delivery yet.</strong> ${msg} Your details are still preserved above — you can try submitting again, or open an email draft below.`;
+      if (resultEl) resultEl.hidden = false;
+      feedbackBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } finally {
+      isSubmitting = false;
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.removeAttribute('aria-busy');
+        syncButtonLabel();
+      }
+    }
+  });
+
+  if (statusCopyBtn) bindCopyButton(statusCopyBtn, copySelector, `${statusCopyBtn}-status`.replace('#copy-', '#copy-'));
+}
+
 // 1. Client Commercial Brief Form
 const form = document.querySelector('#enquiry-form');
 if (form) {
   const sp = new URLSearchParams(location.search);
+  const handoff = consumeSessionHandoff();
   const rawInterest = (sp.get('interest') || sp.get('service') || sp.get('platform') || '').trim();
   const pathParam = (sp.get('path') || '').trim().toLowerCase();
 
@@ -213,6 +474,13 @@ if (form) {
 
   const interestSelect = form.elements.interest;
   const fallbackNote = document.querySelector('#interest-fallback-note');
+  const intentBanner = document.querySelector('#selected-intent-banner');
+  const syncIntentBanner = () => {
+    if (intentBanner && interestSelect) {
+      intentBanner.textContent = `Selected enquiry topic: ${interestSelect.value}`;
+    }
+  };
+
   if (rawInterest && interestSelect && rawInterest.toLowerCase() !== 'career conversation') {
     const options = Array.from(interestSelect.options);
     const aliasTarget = interestAliases[rawInterest.toLowerCase()] || rawInterest;
@@ -228,19 +496,14 @@ if (form) {
       }
     }
   }
+  syncIntentBanner();
+  interestSelect?.addEventListener('change', syncIntentBanner);
 
   const programme = (sp.get('programme') || '').trim();
-  const qSector = (sp.get('sector') || '').trim();
-  const qRole = (sp.get('role') || '').trim();
-  const qTerritory = (sp.get('territory') || '').trim();
-  const qName = (sp.get('name') || '').trim();
-  const qEmail = (sp.get('email') || '').trim();
-  const qCompany = (sp.get('company') || '').trim();
-  const qNote = (sp.get('note') || '').trim();
-
-  if (qName && form.elements.name && !form.elements.name.value) form.elements.name.value = qName;
-  if (qEmail && form.elements.email && !form.elements.email.value) form.elements.email.value = qEmail;
-  if (qCompany && form.elements.company && !form.elements.company.value) form.elements.company.value = qCompany;
+  const qSector = (sp.get('sector') || handoff.sector || '').trim();
+  const qRole = (sp.get('role') || handoff.role || '').trim();
+  const qTerritory = (sp.get('territory') || handoff.territory || '').trim();
+  const qNote = (handoff.note || '').trim();
 
   if (programme && form.elements.message && !form.elements.message.value) {
     form.elements.message.value = `I would like to discuss the ${programme} coaching programme for our team.`;
@@ -253,69 +516,43 @@ if (form) {
     form.elements.message.value = parts.join('\n');
   }
 
-  const candFormEl = document.querySelector('#candidate-form');
-  if (candFormEl) {
-    if (qName && candFormEl.elements.cand_name && !candFormEl.elements.cand_name.value) candFormEl.elements.cand_name.value = qName;
-    if (qRole && candFormEl.elements.cand_role && !candFormEl.elements.cand_role.value) candFormEl.elements.cand_role.value = qRole;
-    if (qEmail && candFormEl.elements.cand_email && !candFormEl.elements.cand_email.value) candFormEl.elements.cand_email.value = qEmail;
-    if ((qSector || qNote) && candFormEl.elements.cand_notes && !candFormEl.elements.cand_notes.value) {
-      candFormEl.elements.cand_notes.value = [qSector ? `Sector: ${qSector}` : '', qNote].filter(Boolean).join('\n');
-    }
-  }
-
-  const inputs = Array.from(form.querySelectorAll('input, select, textarea'));
-  inputs.forEach(inp => inp.addEventListener('input', () => validateField(inp)));
-
-  let isSubmitting = false;
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    if (isSubmitting) return;
-
-    let allValid = true;
-    inputs.forEach(inp => {
-      if (!validateField(inp)) allValid = false;
-    });
-    if (!allValid) {
-      const firstInvalid = inputs.find(inp => inp.getAttribute('aria-invalid') === 'true');
-      firstInvalid?.focus();
-      return;
-    }
-
-    isSubmitting = true;
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const originalBtnHtml = submitBtn?.innerHTML;
-    if (submitBtn) {
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Preparing email draft…';
-    }
-
-    const d = new FormData(form);
-    const body =
-      `Hello Power-Up Talent,\n\n` +
-      `I would like to discuss: ${d.get('interest')}\n\n` +
-      `Name: ${(d.get('name') || '').toString().trim()}\n` +
-      `Business: ${(d.get('company') || '').toString().trim() || 'Not specified'}\n` +
-      `Email: ${(d.get('email') || '').toString().trim()}\n\n` +
-      `Summary of need:\n${(d.get('message') || '').toString().trim()}\n\n` +
-      `Kind regards,\n${(d.get('name') || '').toString().trim()}`;
-
-    const copyEl = document.querySelector('#email-copy');
-    const resultEl = document.querySelector('#email-result');
-    if (copyEl) copyEl.value = body;
-    if (resultEl) {
-      resultEl.hidden = false;
-      resultEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-
-    setTimeout(() => {
-      isSubmitting = false;
-      if (submitBtn && originalBtnHtml) {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalBtnHtml;
-      }
-    }, 800);
-
-    location.href = `mailto:info@power-uptalent.co.uk?subject=${encodeURIComponent('Website enquiry — ' + d.get('interest'))}&body=${encodeURIComponent(body)}`;
+  wireDirectOrDraftForm({
+    form,
+    type: 'commercial',
+    getEndpoint: cfg => cfg.commercialEndpoint,
+    buildPayload: () => {
+      const d = new FormData(form);
+      return {
+        interest: String(d.get('interest') || '').trim(),
+        name: String(d.get('name') || '').trim(),
+        company: String(d.get('company') || '').trim(),
+        email: String(d.get('email') || '').trim(),
+        message: String(d.get('message') || '').trim()
+      };
+    },
+    buildDraft: () => {
+      const d = new FormData(form);
+      const interest = String(d.get('interest') || '').trim();
+      const name = String(d.get('name') || '').trim();
+      const company = String(d.get('company') || '').trim() || 'Not specified';
+      const email = String(d.get('email') || '').trim();
+      const message = String(d.get('message') || '').trim();
+      return {
+        subject: `Website enquiry — ${interest}`,
+        body:
+          `Hello Power-Up Talent,\n\n` +
+          `I would like to discuss: ${interest}\n\n` +
+          `Name: ${name}\n` +
+          `Business: ${company}\n` +
+          `Email: ${email}\n\n` +
+          `Summary of need:\n${message}\n\n` +
+          `Kind regards,\n${name}`
+      };
+    },
+    copySelector: '#email-copy',
+    resultSelector: '#email-result',
+    directLabel: 'Send commercial enquiry',
+    draftLabel: 'Open email draft'
   });
 
   bindCopyButton('#copy-brief', '#email-copy', '#copy-status');
@@ -324,65 +561,44 @@ if (form) {
 // 2. Confidential Candidate Enquiry Form
 const candForm = document.querySelector('#candidate-form');
 if (candForm) {
-  const inputs = Array.from(candForm.querySelectorAll('input, textarea'));
-  inputs.forEach(inp => inp.addEventListener('input', () => validateField(inp)));
-
-  let isSubmittingCand = false;
-  candForm.addEventListener('submit', e => {
-    e.preventDefault();
-    if (isSubmittingCand) return;
-
-    let allValid = true;
-    inputs.forEach(inp => {
-      if (!validateField(inp)) allValid = false;
-    });
-    if (!allValid) {
-      const firstInvalid = inputs.find(inp => inp.getAttribute('aria-invalid') === 'true');
-      firstInvalid?.focus();
-      return;
-    }
-
-    isSubmittingCand = true;
-    const submitBtn = candForm.querySelector('button[type="submit"]');
-    const originalHtml = submitBtn?.innerHTML;
-    if (submitBtn) {
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Opening email draft…';
-    }
-
-    const d = new FormData(candForm);
-    const name = (d.get('cand_name') || '').toString().trim();
-    const role = (d.get('cand_role') || '').toString().trim() || 'Not specified';
-    const contact = (d.get('cand_email') || '').toString().trim();
-    const notes = (d.get('cand_notes') || '').toString().trim() || 'Confidential career discussion requested.';
-
-    const body =
-      `Hello Power-Up Talent Search Team,\n\n` +
-      `I would like to arrange a confidential candidate conversation.\n\n` +
-      `Name: ${name}\n` +
-      `Current / target role: ${role}\n` +
-      `Preferred confidential contact: ${contact}\n\n` +
-      `Sector, region & notes:\n${notes}\n\n` +
-      `Please do not contact my current employer without my express written consent.\n\n` +
-      `Kind regards,\n${name}`;
-
-    const copyEl = document.querySelector('#candidate-email-copy');
-    const resultEl = document.querySelector('#candidate-email-result');
-    if (copyEl) copyEl.value = body;
-    if (resultEl) {
-      resultEl.hidden = false;
-      resultEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-
-    setTimeout(() => {
-      isSubmittingCand = false;
-      if (submitBtn && originalHtml) {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalHtml;
-      }
-    }, 800);
-
-    location.href = `mailto:info@power-uptalent.co.uk?subject=${encodeURIComponent('Confidential Candidate Enquiry — ' + name)}&body=${encodeURIComponent(body)}`;
+  wireDirectOrDraftForm({
+    form: candForm,
+    type: 'candidate',
+    getEndpoint: cfg => cfg.candidateEndpoint,
+    requirePrivate: true,
+    getIsPrivate: cfg => cfg.candidateChannelPrivate,
+    buildPayload: () => {
+      const d = new FormData(candForm);
+      return {
+        name: String(d.get('cand_name') || '').trim(),
+        role: String(d.get('cand_role') || '').trim(),
+        contact: String(d.get('cand_email') || '').trim(),
+        notes: String(d.get('cand_notes') || '').trim()
+      };
+    },
+    buildDraft: () => {
+      const d = new FormData(candForm);
+      const name = String(d.get('cand_name') || '').trim();
+      const role = String(d.get('cand_role') || '').trim() || 'Not specified';
+      const contact = String(d.get('cand_email') || '').trim();
+      const notes = String(d.get('cand_notes') || '').trim() || 'Confidential career discussion requested.';
+      return {
+        subject: `Confidential Candidate Enquiry — ${name}`,
+        body:
+          `Hello Power-Up Talent Search Team,\n\n` +
+          `I would like to arrange a confidential candidate conversation.\n\n` +
+          `Name: ${name}\n` +
+          `Current / target role: ${role}\n` +
+          `Preferred confidential contact: ${contact}\n\n` +
+          `Sector, region & notes:\n${notes}\n\n` +
+          `Please do not contact my current employer without my express written consent.\n\n` +
+          `Kind regards,\n${name}`
+      };
+    },
+    copySelector: '#candidate-email-copy',
+    resultSelector: '#candidate-email-result',
+    directLabel: 'Send confidential enquiry',
+    draftLabel: 'Open email draft'
   });
 
   bindCopyButton('#copy-candidate-brief', '#candidate-email-copy', '#copy-candidate-status');
@@ -391,74 +607,53 @@ if (candForm) {
 // 3. Territory Exclusivity Review Request Form
 const checkForm = document.querySelector('#territory-check-form');
 if (checkForm) {
-  const inputs = Array.from(checkForm.querySelectorAll('input, select, textarea'));
-  inputs.forEach(inp => inp.addEventListener('input', () => validateField(inp)));
-
-  let isSubmittingCheck = false;
-  checkForm.addEventListener('submit', e => {
-    e.preventDefault();
-    if (isSubmittingCheck) return;
-
-    let allValid = true;
-    inputs.forEach(inp => {
-      if (!validateField(inp)) allValid = false;
-    });
-    if (!allValid) {
-      const firstInvalid = inputs.find(inp => inp.getAttribute('aria-invalid') === 'true');
-      firstInvalid?.focus();
-      return;
-    }
-
-    isSubmittingCheck = true;
-    const submitBtn = checkForm.querySelector('button[type="submit"]');
-    const originalHtml = submitBtn?.innerHTML;
-    if (submitBtn) {
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Preparing review email…';
-    }
-
-    const d = new FormData(checkForm);
-    const company = (d.get('company') || '').toString().trim();
-    const region = (d.get('region') || '').toString().trim();
-    const industry = (d.get('industry') || '').toString().trim();
-    const name = (d.get('name') || '').toString().trim();
-    const title = (d.get('title') || '').toString().trim() || 'Director';
-    const email = (d.get('email') || '').toString().trim();
-    const priority = (d.get('priority') || '').toString().trim();
-    const plan = (d.get('plan') || '').toString().trim() || 'Please review sector and territory availability.';
-
-    const body =
-      `Territory Exclusivity Review Request\n\n` +
-      `Name: ${name}\n` +
-      `Job Title: ${title}\n` +
-      `Company: ${company}\n` +
-      `Email: ${email}\n` +
-      `Industry Sector: ${industry}\n` +
-      `Geographic Territory: ${region}\n` +
-      `Primary Scope: ${priority}\n\n` +
-      `Commercial Context:\n${plan}`;
-
-    const resultBox = document.querySelector('#territory-result');
-    const st = document.querySelector('#territory-status-text');
-    const copyEl = document.querySelector('#territory-email-copy');
-    if (copyEl) copyEl.value = body;
-    if (st) {
-      st.textContent = `Review request prepared for ${company} (${region} · ${industry}). This page does not confirm live territory availability automatically — please send the draft in your email app (or copy the request below and email info@power-uptalent.co.uk) so a director can check active client mandates and reply within one working day.`;
-    }
-    if (resultBox) {
-      resultBox.hidden = false;
-      resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-
-    setTimeout(() => {
-      isSubmittingCheck = false;
-      if (submitBtn && originalHtml) {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalHtml;
-      }
-    }, 800);
-
-    location.href = `mailto:info@power-uptalent.co.uk?subject=${encodeURIComponent('Territory Exclusivity Review Request — ' + company)}&body=${encodeURIComponent(body)}`;
+  wireDirectOrDraftForm({
+    form: checkForm,
+    type: 'territory',
+    getEndpoint: cfg => cfg.territoryEndpoint,
+    buildPayload: () => {
+      const d = new FormData(checkForm);
+      return {
+        name: String(d.get('name') || '').trim(),
+        title: String(d.get('title') || '').trim(),
+        company: String(d.get('company') || '').trim(),
+        email: String(d.get('email') || '').trim(),
+        industry: String(d.get('industry') || '').trim(),
+        region: String(d.get('region') || '').trim(),
+        priority: String(d.get('priority') || '').trim(),
+        plan: String(d.get('plan') || '').trim()
+      };
+    },
+    buildDraft: () => {
+      const d = new FormData(checkForm);
+      const company = String(d.get('company') || '').trim();
+      const region = String(d.get('region') || '').trim();
+      const industry = String(d.get('industry') || '').trim();
+      const name = String(d.get('name') || '').trim();
+      const title = String(d.get('title') || '').trim() || 'Director';
+      const email = String(d.get('email') || '').trim();
+      const priority = String(d.get('priority') || '').trim();
+      const plan = String(d.get('plan') || '').trim() || 'Please review sector and territory availability.';
+      return {
+        subject: `Territory Exclusivity Review Request — ${company}`,
+        statusNote: `Email draft opened for ${company} (${region} · ${industry}). Nothing has been sent yet — review and press Send in your email app (or copy the request below and email info@power-uptalent.co.uk) so a director can check active client mandates and reply within one working day.`,
+        body:
+          `Territory Exclusivity Review Request\n\n` +
+          `Name: ${name}\n` +
+          `Job Title: ${title}\n` +
+          `Company: ${company}\n` +
+          `Email: ${email}\n` +
+          `Industry Sector: ${industry}\n` +
+          `Geographic Territory: ${region}\n` +
+          `Primary Scope: ${priority}\n\n` +
+          `Commercial Context:\n${plan}`
+      };
+    },
+    copySelector: '#territory-email-copy',
+    resultSelector: '#territory-result',
+    statusTextSelector: '#territory-status-text',
+    directLabel: 'Submit territory review request',
+    draftLabel: 'Open email draft'
   });
 
   bindCopyButton('#copy-territory-brief', '#territory-email-copy', '#copy-territory-status');

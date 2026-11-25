@@ -22,15 +22,25 @@ for (const page of pages) {
     seenMeta.set(key, page);
   }
 
+  const resolveLocalFile = rawPath => {
+    const clean = rawPath.split(/[?#]/)[0];
+    if (!clean || clean === '/') return path.join('dist', 'index.html');
+    const rel = clean.replace(/^\/+/, '');
+    const direct = path.join('dist', rel);
+    if (fs.existsSync(direct)) return direct;
+    if (!path.extname(rel) && fs.existsSync(direct + '.html')) return direct + '.html';
+    return direct;
+  };
+
   for (const [, url] of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
     if (/^(https?:|mailto:|#)/.test(url)) continue;
-    const target = url.split(/[?#]/)[0];
-    if (!fs.existsSync(path.join('dist', target))) failures.push(page + ': missing ' + target);
+    const resolved = resolveLocalFile(url);
+    if (!fs.existsSync(resolved)) failures.push(page + ': missing ' + url);
   }
   for (const [, href] of html.matchAll(/href="([^"]*#[^"]+)"/g)) {
     if (/^(https?:|mailto:)/.test(href)) continue;
     const [file, fragment] = href.split('#');
-    const target = path.join('dist', file.split('?')[0] || page);
+    const target = file ? resolveLocalFile(file) : path.join('dist', page);
     if (fs.existsSync(target) && !fs.readFileSync(target, 'utf8').includes(`id="${fragment}"`)) {
       failures.push(page + ': missing anchor ' + href);
     }
