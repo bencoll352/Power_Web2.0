@@ -89,11 +89,17 @@ try {
     '#what-you-can-do',
     '#value-creation',
     '#strategic-difference',
-    '#home-faq'
+    '#one-company-per-sector'
   ]) {
     if ((await page.locator(sec).count()) !== 1) {
       throw Error('Missing homepage section: ' + sec);
     }
+  }
+  if ((await page.locator('#home-faq').count()) !== 0) {
+    throw Error('FAQ section should be removed from homepage');
+  }
+  if ((await page.locator('#what-you-can-do .service-directory-cta').count()) !== 0) {
+    throw Error('Staff-led handover CTA card should be removed from homepage');
   }
 
   // Verify Commercial Concierge Chatbot opens, runs Path 1, and routes to contact.html
@@ -285,6 +291,10 @@ try {
     await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/index-pillars.png' });
     await page.locator('#strategic-difference').scrollIntoViewIfNeeded();
     await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/index-difference.png' });
+    await page.locator('#seven-services').scrollIntoViewIfNeeded();
+    await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/index-seven-services.png' });
+    await page.locator('#one-company-per-sector').scrollIntoViewIfNeeded();
+    await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/index-unstoppable.png' });
     await page.goto(origin + '/platforms.html');
     await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/platforms-hub.png' });
     await page.goto(origin + '/sales-intelligence.html');
@@ -299,6 +309,8 @@ try {
     await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/information-final.png' });
     await page.goto(origin + '/about.html');
     await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/about-final.png' });
+    await page.locator('#one-company-per-sector').scrollIntoViewIfNeeded();
+    await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/about-unstoppable.png' });
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto(origin + '/');
     await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/index_html-390.png' });

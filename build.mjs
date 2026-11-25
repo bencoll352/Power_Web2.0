@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import { partnershipHome, aiServicesPage, refreshPage, refreshShared } from './site-offer.mjs';
+import { partnershipHome, aiServicesPage, unstoppableSection, refreshPage, refreshShared } from './site-offer.mjs';
 import { servicePages, dashboardPage, professionalPage, professionalShell } from './professional-site.mjs';
 import { ico, iconBadge } from './icons.mjs';
 
@@ -311,36 +311,13 @@ const about =
     `${button('Explore Our Core Offers', 'index.html#what-we-do')}${button('Hire Top Talent', 'contact.html?interest=Critical%20hire', true)}`
   ) +
   `<section class="wrap section split"><div>${tag('WHAT WE DO')}<h2>A specialist partner,<br>never a CV agency.</h2></div><div><p class="large-copy">We know that every career move or leadership hire is more than a transaction. That is why we take the time to listen, map markets discreetly, and advise both clients and candidates across UK commercial, operational, industrial, distribution, technology and leadership sectors.</p><p>Combining cross-sector commercial depth with disciplined research, we deliver the search rigour of an international executive firm alongside the personal accountability of a dedicated partner working exclusively for one organisation per sector at a time.</p><p>Where agreed, we connect that appointment to workplace coaching and seven human-controlled business platforms so new hires and regional teams sustain margin, follow-up speed and clear customer ownership.</p></div></section>` +
+  unstoppableSection('about') +
   `<section class="pillars-dark-section" aria-labelledby="hybrid-heading"><div class="wrap"><div class="pillars-head"><p class="eyebrow" style="justify-content:center;color:var(--gold)"><span></span>OUR METHODOLOGY<span></span></p><h2 id="hybrid-heading">Our Approach: <em>The Hybrid Advantage.</em></h2><p>We blend direct human headhunting judgement with transparent market research, coaching habits and seven practical software workflows.</p></div><div class="pillars-grid">${[
     ['01 / DISCOVERY & STRATEGY', 'Commercial Role Blueprint', 'We partner with directors up front to define what the person must achieve in the branch or division before approaching passive competitor talent.', ['Clear scope & P&L objectives', 'Named competitor boundaries']],
     ['02 / PASSIVE MAPPING', 'Discreet Direct Headhunting', 'Using structured market mapping and human networks, we identify and confidentially approach proven performers who do not apply to job boards.', ['NDA-protected outreach', 'One organisation per sector']],
     ['03 / COACHING & 7 PLATFORMS', 'Commercial Habits & Tools', 'Reinforce appointments with six practical coaching programmes and our seven B2B platforms (Market/Prospect Intelligence, CRM, Comms, Delivery, Automation & Marketing).', ['Quote follow-up & margin discipline', 'Human-reviewed evidence & handovers']],
     ['04 / WRITTEN EXCLUSIVITY', 'Zero Conflict of Interest', 'Where single-client exclusivity is agreed in writing for your mandate, we block out named direct competitors across the agreed territory and timeframe.', ['Written scope & competitors', 'Dedicated partner accountability']]
   ].map(([num, title, desc, pts], idx) => `<article class="pillar-white-card">${iconBadge(['compass', 'radar', 'users', 'shield'][idx], 'gold')}<span class="card-num">${num}</span><h3>${title}</h3><p>${desc}</p><ul class="workspace-feature-list">${pts.map(p => `<li>${p}</li>`).join('')}</ul></article>`).join('')}</div></div></section>` +
-  `<section class="wrap section">${sectionHead(
-    'WHY HEADHUNTING, COACHING &amp; PLATFORMS SIT TOGETHER',
-    'One joined-up approach<br>to commercial growth.',
-    'Each pillar solves a distinct commercial problem, and they reinforce one another when connected around your business.'
-  )}${cards([
-    [
-      '01 / HEADHUNTING (CORE SERVICE)',
-      'Secure the right people',
-      'We work with one organisation per sector at a time to appoint leadership, branch managers and technical sales specialists.',
-      ['Commercial brief agreed before mapping starts', 'Discreet approach to proven passive performers', 'Structured assessment against real job requirements']
-    ],
-    [
-      '02 / COACHING & DEVELOPMENT',
-      'Build consistent everyday habits',
-      'Appointing a leader is only step one. Practical coaching builds discovery, quote follow-up and margin habits across the team.',
-      ['Workshops tied to live branch accounts and quotes', 'Clear weekly operating rhythms for branch managers', 'Trackable operational indicators agreed up front']
-    ],
-    [
-      '03 / AI & BUSINESS SERVICES (7 PLATFORMS)',
-      'Give teams clear ownership & visibility',
-      'Seven platforms give staff public UK market intel, human-reviewed prospect evidence, CRM separation, enquiries, delivery handovers and campaign reporting.',
-      ['Human-reviewed workflows & auditable handovers', 'Separate Business CRM and Personal CRM boundaries', 'Clear deployment scope and human sign-off']
-    ]
-  ])}</section>` +
   `<section class="partnership-section"><div class="wrap"><div class="section-head"><div>${tag('HOW WE OPERATE')}<h2>Clear standards.<br>Human judgement first.</h2></div><p>The principles governing every headhunting mandate, coaching sprint and platform walkthrough.</p></div><div class="cards"><article><span class="card-num">01 / COMMERCIAL CLARITY</span><h3>Direct, honest advice</h3><p>We state clearly what a candidate has delivered, what a coaching sprint tracks, and how each system is configured for your business.</p></article><article><span class="card-num">02 / HUMAN IN CONTROL</span><h3>Technology supports; people decide</h3><p>Prospect evidence acceptance, source-cited AI Team briefs, and Sales-to-Delivery handovers remain under explicit human sign-off.</p></article><article><span class="card-num">03 / SECTOR EXCLUSIVITY</span><h3>Defined in writing</h3><p>We sign bilateral NDAs, protect candidate discretion and define single-client sector exclusivity in written agreements.</p></article></div></div></section>${cta('Growth partnership')}`;
 
 // Information Hub Page (Restored Sector Briefings & Technical Guidance)
