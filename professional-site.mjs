@@ -271,13 +271,19 @@ export function professionalPage(id, html) {
 
 export function professionalShell(html, id) {
   const isPlatformRoute = ['platforms', 'intelligence', ...Object.values(serviceSlugs)].includes(id);
-  const serviceNavigation = `<details class="service-menu"><summary${isPlatformRoute ? ' aria-current="page"' : ''}>AI Business Services <span aria-hidden="true" class="chev">⌄</span></summary><div class="service-menu-panel"><a class="service-menu-overview" href="platforms.html">AI Business Services hub (all 7) ↗</a>${aiGroups.map(g => `<a href="${serviceSlugs[g.id]}.html"${id === serviceSlugs[g.id] ? ' aria-current="page"' : ''}>${icon(g)}<span>${esc(g.title)}</span></a>`).join('')}<a class="service-menu-overview" href="dashboard.html">Interactive sample-data demo ↗</a></div></details>`;
+  const isRecruitmentRoute = ['talent', 'partnerships'].includes(id);
+  const recruitmentNavigation = `<details class="service-menu recruitment-menu"><summary${isRecruitmentRoute ? ' aria-current="page"' : ''}>Recruitment &amp; Headhunting <span aria-hidden="true" class="chev">⌄</span></summary><div class="service-menu-panel"><a href="talent.html"${id === 'talent' ? ' aria-current="page"' : ''}><span>Recruitment &amp; Headhunting</span></a><a href="partnerships.html"${id === 'partnerships' ? ' aria-current="page"' : ''}><span>Partnerships</span></a></div></details>`;
+  const serviceNavigation = `<details class="service-menu ai-services-menu"><summary${isPlatformRoute ? ' aria-current="page"' : ''}>AI Business Services <span aria-hidden="true" class="chev">⌄</span></summary><div class="service-menu-panel"><a class="service-menu-overview" href="platforms.html">AI Business Services hub (all 7) ↗</a>${aiGroups.map(g => `<a href="${serviceSlugs[g.id]}.html"${id === serviceSlugs[g.id] ? ' aria-current="page"' : ''}>${icon(g)}<span>${esc(g.title)}</span></a>`).join('')}<a class="service-menu-overview" href="dashboard.html">Interactive sample-data demo ↗</a></div></details>`;
   const footerPlatforms = `<div><h3>AI Business Services</h3><a href="platforms.html">AI Business Services hub</a>${aiGroups.map(g => `<a href="${serviceSlugs[g.id]}.html">${esc(g.title)}</a>`).join('')}<a href="dashboard.html">Interactive sample-data demo</a></div>`;
   if (id === 'platforms' || id === 'intelligence') html = html.replace('</main>', selectedProductScreens() + '</main>');
-  return html.replace(/(<nav id="navigation"[^>]*>)([\s\S]*?)(<\/nav>)/, (_, start, links, end) => start + links.replace(/<a\s+(?:aria-current="page" )?href="(?:intelligence|platforms)\.html">AI (?:Business Services|&amp; Business Platforms)<\/a>/, serviceNavigation) + end)
+  return html.replace(/(<nav id="navigation"[^>]*>)([\s\S]*?)(<\/nav>)/, (_, start, links, end) => start + links
+    .replace(/<a\s+(?:aria-current="page" )?href="partnerships\.html">Partnerships<\/a>/, '')
+    .replace(/<a\s+(?:aria-current="page" )?href="talent\.html">Recruitment &amp; Headhunting<\/a>/, recruitmentNavigation)
+    .replace(/<a\s+(?:aria-current="page" )?href="(?:intelligence|platforms)\.html">AI (?:Business Services|&amp; Business Platforms)<\/a>/, serviceNavigation) + end)
     .replace('</head>', '<link rel="stylesheet" href="product-screenshots.css?v=1"><link rel="stylesheet" href="professional.css?v=14.0"><script src="dashboard-preview.js?v=14.0" defer></script></head>')
     .replace(/href="styles\.css\?v=[\d.]+"/, 'href="styles.css?v=14.0"')
     .replace(/href="ai-services\.css\?v=[\d.]+"/, 'href="ai-services.css?v=14.0"')
+    .replace('src="app.js"', 'src="app.js?v=2"')
     .replace('<h3>Explore</h3>', '<h3>Explore</h3><a href="check.html">Territory exclusivity review</a>')
     .replace('<div><h3>Start a conversation</h3>', footerPlatforms + '<div><h3>Start a conversation</h3>');
 }

@@ -27,8 +27,8 @@ try {
       if (await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)) {
         throw Error('Page overflow ' + route + ' @ ' + width);
       }
-      if ((await page.locator('#navigation .service-menu').count()) !== 1) {
-        throw Error('Missing header services menu ' + route);
+      if ((await page.locator('#navigation .service-menu').count()) !== 2) {
+        throw Error('Expected 2 header dropdown menus ' + route);
       }
       if (await page.locator('footer .service-menu,.breadcrumb .service-menu').count()) {
         throw Error('Menu outside header ' + route);
@@ -219,8 +219,11 @@ try {
   if (!(await page.locator('#panel-crm').isVisible())) throw Error('Keyboard tabs');
   await page.keyboard.press('End');
   if (!(await page.locator('#panel-marketing').isVisible())) throw Error('Keyboard End');
-  await page.locator('.service-menu summary').click();
-  if (!(await page.locator('.service-menu-panel').isVisible())) throw Error('Services dropdown');
+  await page.locator('.recruitment-menu summary').click();
+  if (!(await page.locator('.recruitment-menu .service-menu-panel').isVisible())) throw Error('Recruitment dropdown');
+  if ((await page.locator('.recruitment-menu .service-menu-panel a[href="partnerships.html"]').count()) !== 1) throw Error('Partnerships missing under Recruitment dropdown');
+  await page.locator('.ai-services-menu summary').click();
+  if (!(await page.locator('.ai-services-menu .service-menu-panel').isVisible())) throw Error('Services dropdown');
   await page.keyboard.press('Escape');
 
   // 6. Enquiry flow verification (Client Commercial Brief, Candidate Enquiry, Territory Review)
@@ -284,8 +287,8 @@ try {
   await page.goto(origin + '/');
   await page.locator('.menu-toggle').click();
   if (!(await page.locator('#navigation').isVisible())) throw Error('Mobile menu');
-  await page.locator('.service-menu summary').click();
-  await page.locator('.service-menu-panel a[href="crm.html"]').click();
+  await page.locator('.ai-services-menu summary').click();
+  await page.locator('.ai-services-menu .service-menu-panel a[href="crm.html"]').click();
   if (!page.url().endsWith('/crm.html')) throw Error('Mobile service navigation');
 
   if (errors.length) throw Error(errors.join('\n'));

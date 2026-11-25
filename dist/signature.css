@@ -163,6 +163,7 @@ article:hover>.icon-badge,article:hover .value-card-top .icon-badge,.sector-tile
 .cta-power{position:absolute;right:-40px;bottom:-60px;color:rgba(237,199,82,.10);pointer-events:none}
 .cta-power .sig-ico{width:320px;height:320px;stroke-width:1.2}
 .page-hero::after,.service-page-hero::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background-image:var(--blueprint);background-size:56px 56px;mask-image:radial-gradient(ellipse at 25% 50%,#000 15%,transparent 75%)}
+.recruitment-menu .service-menu-panel{left:0;right:auto;width:260px}
 footer{padding-bottom:76px}
 
 /* ---------- Service overview bands, media frames & Unstoppable exclusivity showcase ---------- */

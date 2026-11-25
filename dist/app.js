@@ -1,6 +1,6 @@
 const toggle = document.querySelector('.menu-toggle');
 const nav = document.querySelector('#navigation');
-const serviceMenu = document.querySelector('.service-menu');
+const serviceMenus = [...document.querySelectorAll('.service-menu')];
 
 toggle?.addEventListener('click', () => {
   const open = toggle.getAttribute('aria-expanded') !== 'true';
@@ -8,21 +8,35 @@ toggle?.addEventListener('click', () => {
   nav?.classList.toggle('open', open);
 });
 
+serviceMenus.forEach(menu => {
+  menu.addEventListener('toggle', () => {
+    if (menu.open) {
+      serviceMenus.forEach(other => {
+        if (other !== menu && other.open) other.removeAttribute('open');
+      });
+    }
+  });
+});
+
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
     nav?.classList.remove('open');
     toggle?.setAttribute('aria-expanded', 'false');
-    if (serviceMenu?.hasAttribute('open')) {
-      serviceMenu.removeAttribute('open');
-      serviceMenu.querySelector('summary')?.focus();
-    }
+    serviceMenus.forEach(menu => {
+      if (menu.hasAttribute('open')) {
+        menu.removeAttribute('open');
+        menu.querySelector('summary')?.focus();
+      }
+    });
   }
 });
 
 document.addEventListener('click', e => {
-  if (serviceMenu?.hasAttribute('open') && !serviceMenu.contains(e.target)) {
-    serviceMenu.removeAttribute('open');
-  }
+  serviceMenus.forEach(menu => {
+    if (menu.hasAttribute('open') && !menu.contains(e.target)) {
+      menu.removeAttribute('open');
+    }
+  });
 });
 
 // Challenge finder on legacy/interactive blocks
@@ -35,7 +49,7 @@ const challenges = {
   ],
   team: [
     'Practical coaching.<br>Stronger everyday habits.',
-    'Identify where your people need support, then build a programme around sales, branch performance or leadership.',
+    'Identify where your people need support, then build a programme around sales, operational performance or leadership.',
     'coaching.html',
     'Explore coaching'
   ],
