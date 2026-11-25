@@ -84,7 +84,6 @@ try {
     throw Error('Hire Top Talent CTA not visible on mobile homepage');
   }
   for (const sec of [
-    '#what-we-do',
     '#headhunting-overview',
     '#coaching-overview',
     '#what-you-can-do',
@@ -95,6 +94,12 @@ try {
     if ((await page.locator(sec).count()) !== 1) {
       throw Error('Missing homepage section: ' + sec);
     }
+  }
+  if ((await page.locator('.hero-foot').count()) !== 0) {
+    throw Error('Hero foot link strip should be removed from homepage');
+  }
+  if ((await page.locator('#what-we-do').count()) !== 0) {
+    throw Error('Redundant #what-we-do section should be removed from homepage');
   }
   if ((await page.locator('#strategic-pillars').count()) !== 0) {
     throw Error('Strategic pillars duplicate section should be removed from homepage');
@@ -289,8 +294,6 @@ try {
     await page.setViewportSize({ width: 1440, height: 1000 });
     await page.goto(origin + '/', { waitUntil: 'networkidle' });
     await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/index_html-1440.png' });
-    await page.locator('#what-we-do').scrollIntoViewIfNeeded();
-    await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/index-what-we-do.png' });
     await page.locator('#headhunting-overview').scrollIntoViewIfNeeded();
     await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/index-headhunting.png' });
     await page.locator('#coaching-overview').scrollIntoViewIfNeeded();

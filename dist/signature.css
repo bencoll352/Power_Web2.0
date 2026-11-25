@@ -172,7 +172,11 @@ footer{padding-bottom:76px}
 .service-overview-dark h2{color:#fff;margin-bottom:16px}
 .service-overview-dark h2 em{color:var(--gold)}
 .overview-dark-copy{color:#d3dde6;font-size:16px;line-height:1.7;margin:0 0 20px}
+.overview-light-copy{color:var(--muted);font-size:16px;line-height:1.7;margin:0 0 24px}
 .overview-split{display:grid;grid-template-columns:1.08fr 1fr;gap:56px;align-items:center;position:relative;z-index:1}
+.candidate-dark-strip{margin-top:42px;padding:24px 28px;background:rgba(255,255,255,.04);border:1px solid rgba(237,199,82,.26);border-radius:14px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px;position:relative;z-index:1}
+.candidate-dark-strip strong{display:block;font-size:16px;color:#fff;margin-bottom:4px}
+.candidate-dark-strip p{margin:0;font-size:14px;color:#cbd5e1}
 .overview-bullets{list-style:none;padding:0;margin:0 0 28px;display:grid;gap:12px}
 .overview-bullets li{position:relative;padding-left:24px;font-size:14.5px;line-height:1.6;color:#cbd5e1}
 .overview-bullets li::before{content:'✓';position:absolute;left:0;top:0;color:var(--gold);font-weight:800}
