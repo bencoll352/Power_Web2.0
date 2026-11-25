@@ -160,8 +160,8 @@ window.POWERUP_CHAT_CONFIG = window.POWERUP_CHAT_CONFIG || {
         onClick: () => finishPath2('Sales-to-Delivery Handovers', 'delivery', 'AI services: Business Delivery')
       },
       {
-        label: 'Multi-Branch RPO',
-        onClick: () => finishPath2('Multi-Branch RPO', null, 'Embedded hiring')
+        label: 'Multi-Site Embedded RPO',
+        onClick: () => finishPath2('Multi-Site Embedded RPO', null, 'Embedded hiring')
       }
     ]);
   };
@@ -182,7 +182,7 @@ window.POWERUP_CHAT_CONFIG = window.POWERUP_CHAT_CONFIG || {
       const coachLink = document.createElement('a');
       coachLink.className = 'pu-chat-cta-btn primary';
       coachLink.href = 'partnerships.html';
-      coachLink.textContent = 'View Multi-Branch RPO ↗';
+      coachLink.textContent = 'View Multi-Site RPO ↗';
       wrap.appendChild(coachLink);
     }
     const briefLink = document.createElement('a');

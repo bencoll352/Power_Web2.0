@@ -33,8 +33,12 @@ try {
       if (await page.locator('footer .service-menu,.breadcrumb .service-menu').count()) {
         throw Error('Menu outside header ' + route);
       }
-      if (/â€™|â†|Â©|Â£/.test(await page.locator('body').innerText())) {
+      const bodyText = await page.locator('body').innerText();
+      if (/â€™|â†|Â©|Â£/.test(bodyText)) {
         throw Error('Broken punctuation ' + route);
+      }
+      if (/\bbranch(es)?\b/i.test(bodyText)) {
+        throw Error('Unexpected "branch" copy on ' + route);
       }
       const ids = await page.locator('[id]').evaluateAll(nodes => nodes.map(n => n.id));
       if (new Set(ids).size !== ids.length) throw Error('Duplicate IDs ' + route);
@@ -317,7 +321,12 @@ try {
     await page.goto(origin + '/information.html');
     await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/information-final.png' });
     await page.goto(origin + '/about.html');
+    if ((await page.locator('#about-faq').count()) !== 1) {
+      throw Error('Missing #about-faq section on about.html');
+    }
     await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/about-final.png' });
+    await page.locator('#about-faq').scrollIntoViewIfNeeded();
+    await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/about-faq.png' });
     await page.locator('#one-company-per-sector').scrollIntoViewIfNeeded();
     await page.screenshot({ path: process.env.SCREENSHOT_DIR + '/about-unstoppable.png' });
     await page.setViewportSize({ width: 390, height: 844 });
