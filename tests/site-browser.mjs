@@ -140,21 +140,21 @@ try {
     throw Error('Concierge chatbot did not close on Escape');
   }
 
-  // 4. Verify Guided 3-Scenario Product Demo (complete, live feedback, reset, and Contact preselection)
+  // 4. Verify guided product demos (complete, live feedback, reset, and Contact preselection)
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto(origin + '/platforms');
   if ((await page.locator('.service-directory-card .hub-card-dl').count()) !== 7) {
     throw Error('Expected 7 four-part service cards on /platforms');
   }
   const guidedHeading = await page.locator('#guided-demo-heading').innerText();
-  if (!guidedHeading.includes('Try three workflows') || !guidedHeading.includes('with sample data')) {
+  if (!guidedHeading.includes('Try four workflows') || !guidedHeading.includes('with sample data')) {
     throw Error('Guided demo heading mismatch: ' + guidedHeading);
   }
   const handoverOrder = await page.locator('#won-deal-handover ol li').allInnerTexts();
   if (
     handoverOrder.length !== 3 ||
     !handoverOrder[0].includes('Sales Intelligence') ||
-    !handoverOrder[1].includes('Approval Studio') ||
+    !handoverOrder[1].includes('Automation Studio') ||
     !handoverOrder[2].includes('Business Delivery')
   ) {
     throw Error('Won deal handover steps order mismatch on /platforms');
@@ -192,7 +192,50 @@ try {
     await page.goto(origin + '/platforms');
   }
 
-  // Verify Live in Power CRM Automation briefing, Information Hub resources, Talent deliverables & 301 redirects
+  for (const width of [390, 1440]) {
+    await page.setViewportSize({ width, height: 1000 });
+    await page.goto(origin + '/dashboard?service=delivery&scenario=invoice#guided-demo');
+    const panel = page.locator('[data-scenario-panel="invoice"]');
+    if (!(await panel.isVisible())) throw Error('Invoice scenario deep link did not open');
+    const choices = ['Open sample case', 'Record sample evidence', 'Send draft for review', 'Approve sample follow-up'];
+    for (const [index, choice] of choices.entries()) {
+      await panel.getByRole('button', { name: choice, exact: true }).press('Enter');
+      const activeStep = panel.locator('[data-invoice-step]').nth(index + 1);
+      if (!(await activeStep.isVisible()) || !(await activeStep.evaluate(el => document.activeElement === el))) {
+        throw Error('Invoice step is missing or did not receive keyboard focus: ' + choice);
+      }
+    }
+    await panel.getByRole('heading', { name: 'Sample follow-up approved' }).waitFor();
+    await panel.getByRole('button', { name: 'Reset invoice scenario' }).click();
+    await panel.getByRole('heading', { name: 'Owner briefing' }).waitFor();
+    await panel.getByRole('link', { name: /Request a Business Delivery walkthrough/ }).click();
+    if ((await page.locator('select[name="interest"]').inputValue()) !== 'AI services: Business Delivery') {
+      throw Error('Invoice scenario did not preselect Business Delivery');
+    }
+  }
+
+  // Verify Live in Power CRM briefings, Evidence-to-Action walkthrough, Opportunity Radar, Before->Workflow->Result, Information Hub, Talent deliverables & 301 redirects
+  await page.goto(origin + '/platforms');
+  if ((await page.locator('#evidence-to-action').count()) !== 1) {
+    throw Error('Missing #evidence-to-action walkthrough on /platforms');
+  }
+  await page.goto(origin + '/sales-intelligence');
+  if ((await page.locator('#opportunity-radar').count()) !== 1) {
+    throw Error('Missing #opportunity-radar section on /sales-intelligence');
+  }
+  for (const liveRoute of ['/crm', '/business-delivery', '/automation']) {
+    await page.goto(origin + liveRoute);
+    const liveText = await page.locator('#live-power-crm-briefing').innerText();
+    if (!liveText.includes('Live in Power CRM')) {
+      throw Error('Missing Live in Power CRM briefing callout on ' + liveRoute);
+    }
+  }
+  for (const prod of productPages) {
+    await page.goto(origin + '/' + prod);
+    if ((await page.locator('.bwr-section').count()) !== 1) {
+      throw Error('Missing Before -> Workflow -> Result section on ' + prod);
+    }
+  }
   await page.goto(origin + '/automation');
   const briefingText = await page.locator('#live-power-crm-briefing').innerText();
   if (!briefingText.includes('Live in Power CRM') || !briefingText.includes('Outreach Centre')) {
@@ -229,9 +272,8 @@ try {
     await panel.locator('[data-workspace-filter]').selectOption('all');
     if ((await panel.locator('[data-preview-row]:visible').count()) !== 4) throw Error('Filter reset ' + id);
     await panel.locator('.workspace-bottom a').click();
-    if (!(await page.locator('select[name="interest"]').inputValue()).startsWith('AI services:')) {
-      throw Error('Enquiry preselection ' + id);
-    }
+    const expected = new URL(page.url()).searchParams.get('interest');
+    await page.waitForFunction(interest => document.querySelector('select[name="interest"]')?.value === interest, expected);
     await page.goto(origin + '/dashboard.html');
   }
 
@@ -372,7 +414,7 @@ try {
 
   if (errors.length) throw Error(errors.join('\n'));
   console.log(
-    `PASS: ${checked} responsive page checks; 7 responsive product captures; 3 guided scenarios (complete/feedback/reset/CTA); 7 demo tabs; client/candidate/territory enquiry checks; keyboard & mobile menu. No browser errors.`
+    `PASS: ${checked} responsive page checks; 7 responsive product captures; 4 guided scenarios (complete/feedback/reset/CTA); 7 demo tabs; client/candidate/territory enquiry checks; keyboard & mobile menu. No browser errors.`
   );
 
   if (process.env.SCREENSHOT_DIR) {

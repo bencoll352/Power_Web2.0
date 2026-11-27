@@ -68,7 +68,7 @@ document.querySelectorAll('[data-workspace]').forEach(workspace => {
   });
 });
 
-// 2. Guided 3-Scenario Product Demo (Monkeytype-inspired single clear action + immediate feedback + reset)
+// 2. Guided sample-data workflows
 document.querySelectorAll('[data-guided-demo]').forEach(demo => {
   const scenarioTabs = [...demo.querySelectorAll('[data-scenario-tab]')];
   const scenarioPanels = [...demo.querySelectorAll('[data-scenario-panel]')];
@@ -108,6 +108,67 @@ document.querySelectorAll('[data-guided-demo]').forEach(demo => {
   });
 
   scenarioPanels.forEach(panel => {
+    if (panel.dataset.multiStepScenario) {
+      const stepPanels = [...panel.querySelectorAll('[data-step-panel]')];
+      const dots = [...panel.querySelectorAll('[data-step-dot]')];
+      const badge = panel.querySelector('[data-step-badge]');
+      const counter = panel.querySelector('[data-step-counter]');
+      const live = panel.querySelector('[data-step-live]');
+      const approveBtn = panel.querySelector('[data-step-approve]');
+      const step4Flag = panel.querySelector('[data-step4-flag]');
+      const step4State = panel.querySelector('[data-step4-state]');
+      const stepLabels = {
+        1: ['Step 1 of 4 · Rules-based alert (Sample-data demo)', '1 overdue invoice flagged', 'Step 1 ready: overdue sample invoice INV-2026-108 is flagged in the owner briefing.'],
+        2: ['Step 2 of 4 · Staff-entered evidence (Sample-data demo)', 'Source case INV-2026-108 open', 'Step 2: opened case INV-2026-108 with prior check history ready for a portal observation.'],
+        3: ['Step 3 of 4 · Evidence saved · AI-assisted draft ready', 'Evidence card logged (2 checks)', 'Step 3: fictional portal observation saved to evidence card; ready to queue sample draft.'],
+        4: ['Step 4 of 4 · Separate human approval required', 'Draft in Personal AI Team queue', 'Step 4: sample draft queued in Personal AI Team awaiting separate human approval.']
+      };
+
+      const showStep = (stepNum, focusTarget = true) => {
+        const s = String(stepNum);
+        stepPanels.forEach(sp => { sp.hidden = sp.dataset.stepPanel !== s; });
+        dots.forEach(d => {
+          const n = Number(d.dataset.stepDot);
+          d.classList.toggle('is-active', n === Number(stepNum));
+          d.classList.toggle('is-done', n < Number(stepNum));
+        });
+        const meta = stepLabels[Number(stepNum)];
+        if (meta) {
+          if (badge) { badge.textContent = meta[0]; badge.className = 'scenario-step-badge'; }
+          if (counter) counter.textContent = meta[1];
+          if (live) live.textContent = meta[2];
+        }
+        if (Number(stepNum) === 1) {
+          if (approveBtn) approveBtn.hidden = false;
+          if (step4Flag) { step4Flag.textContent = 'Separate human approval required · Draft awaiting sign-off'; step4Flag.className = 'sig-flag warn'; }
+          if (step4State) step4State.innerHTML = '<strong>Queue state:</strong> Awaiting approval';
+        }
+        if (focusTarget) {
+          const activePanel = stepPanels.find(sp => sp.dataset.stepPanel === s);
+          const firstBtn = activePanel?.querySelector('button:not([hidden])');
+          firstBtn?.focus();
+        }
+      };
+
+      panel.querySelectorAll('[data-step-next]').forEach(btn => {
+        btn.addEventListener('click', () => showStep(btn.dataset.stepNext, true));
+      });
+      panel.querySelectorAll('[data-step-reset]').forEach(btn => {
+        btn.addEventListener('click', () => showStep(1, true));
+      });
+      approveBtn?.addEventListener('click', () => {
+        approveBtn.hidden = true;
+        if (badge) { badge.textContent = 'Completed · Human approval recorded (Sample-data demo)'; badge.className = 'scenario-step-badge completed'; }
+        if (counter) counter.textContent = 'Approved by owner (sample state)';
+        if (step4Flag) { step4Flag.textContent = 'Approved by human reviewer · Sample state only'; step4Flag.className = 'sig-flag ok'; }
+        if (step4State) step4State.innerHTML = '<strong>Queue state:</strong> Approved (sample only — no message sent)';
+        if (live) live.textContent = 'Step 4 completed: separate human approval recorded in local sample state. No live CRM record was changed.';
+        dots.forEach(d => { d.classList.remove('is-active'); d.classList.add('is-done'); });
+        panel.querySelector('[data-step-panel="4"] [data-step-reset]')?.focus();
+      });
+      return;
+    }
+
     const actionBtn = panel.querySelector('[data-scenario-action]');
     const resetBtn = panel.querySelector('[data-scenario-reset]');
     const beforeBlock = panel.querySelector('[data-scenario-before]');
@@ -164,4 +225,19 @@ document.addEventListener('keydown', e => {
       menu.querySelector('summary')?.focus();
     });
   }
+});
+
+// Invoice actions only move between sample steps in the page.
+document.querySelectorAll('[data-invoice-demo]').forEach(panel => {
+  const steps = [...panel.querySelectorAll('[data-invoice-step]')];
+  const reset = panel.querySelector('[data-invoice-reset]');
+  const status = panel.querySelector('[data-invoice-status]');
+  function showStep(index) {
+    steps.forEach((step, position) => { step.hidden = position !== index; });
+    reset.hidden = index === 0;
+    status.textContent = steps[index].querySelector('h4').textContent;
+    steps[index].focus();
+  }
+  steps.forEach((step, index) => step.querySelector('[data-invoice-next]')?.addEventListener('click', () => showStep(index + 1)));
+  reset.addEventListener('click', () => showStep(0));
 });
