@@ -333,7 +333,7 @@ export function professionalShell(html, id) {
     .replace(/<a\s+(?:aria-current="page" )?href="\/?partnerships(?:\.html)?">Partnerships<\/a>/, '')
     .replace(/<a\s+(?:aria-current="page" )?href="\/?talent(?:\.html)?">Recruitment &amp; Headhunting<\/a>/, recruitmentNavigation)
     .replace(/<a\s+(?:aria-current="page" )?href="\/?(?:intelligence|platforms)(?:\.html)?">AI (?:Business Services|&amp; Business Platforms)<\/a>/, serviceNavigation) + end)
-    .replace('</head>', '<link rel="stylesheet" href="product-screenshots.css?v=1"><link rel="stylesheet" href="professional.css?v=14.1"><script src="dashboard-preview.js?v=15.0" defer></script></head>')
+    .replace('</head>', '<link rel="stylesheet" href="product-screenshots.css?v=1"><link rel="stylesheet" href="professional.css?v=14.1"><script src="dashboard-preview.js?v=15.1" defer></script></head>')
     .replace(/href="styles\.css\?v=[\d.]+"/, 'href="styles.css?v=14.0"')
     .replace(/href="ai-services\.css\?v=[\d.]+"/, 'href="ai-services.css?v=14.0"')
     .replace('src="app.js"', 'src="enquiry-config.js?v=1" defer></script><script src="app.js?v=3"')
