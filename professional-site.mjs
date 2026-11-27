@@ -218,16 +218,17 @@ export function guidedScenarioDemo() {
               <button type="button" class="button" data-invoice-next>Open sample case</button>
             </section>
             <section data-invoice-step tabindex="-1" hidden>
-              <h4>Case evidence</h4><p>The fictional portal shows the invoice as part paid. Record this sample observation with its source and check time.</p>
+              <h4>Case evidence</h4><p>Choose the status you observed in the fictional portal. The demo records it with the source and check time.</p>
+              <p><label>Observed status <select data-invoice-observation><option>Part paid</option><option>Paid</option><option>Disputed</option></select></label></p>
               <button type="button" class="button" data-invoice-next>Record sample evidence</button>
             </section>
             <section data-invoice-step tabindex="-1" hidden>
-              <h4>Invoice evidence recorded</h4><p>INV-DEMO-42 · Part paid · Source: Sample billing portal · Checked today (demo)</p>
-              <p>Suggested next action: ask for an update on the remaining balance.</p>
+              <h4>Invoice evidence recorded</h4><p>INV-DEMO-42 · <strong data-invoice-observed>Part paid</strong> · Source: Sample billing portal · Checked today (demo)</p>
+              <p>Suggested next action: <span data-invoice-suggestion>Ask for an update on the remaining balance.</span></p>
               <button type="button" class="button" data-invoice-next>Send draft for review</button>
             </section>
             <section data-invoice-step tabindex="-1" hidden>
-              <h4>Personal AI Team review</h4><p>Sample draft: “Could you confirm when we can expect payment of the remaining balance on INV-DEMO-42?”</p>
+              <h4>Personal AI Team review</h4><p>Sample draft: <span data-invoice-draft>Could you confirm when we can expect payment of the remaining balance on INV-DEMO-42?</span></p>
               <button type="button" class="button" data-invoice-next>Approve sample follow-up</button>
             </section>
             <section data-invoice-step tabindex="-1" hidden>

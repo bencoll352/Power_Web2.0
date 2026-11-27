@@ -199,10 +199,14 @@ try {
     if (!(await panel.isVisible())) throw Error('Invoice scenario deep link did not open');
     const choices = ['Open sample case', 'Record sample evidence', 'Send draft for review', 'Approve sample follow-up'];
     for (const [index, choice] of choices.entries()) {
+      if (index === 1) await panel.getByLabel('Observed status').selectOption(width === 390 ? 'Disputed' : 'Paid');
       await panel.getByRole('button', { name: choice, exact: true }).press('Enter');
       const activeStep = panel.locator('[data-invoice-step]').nth(index + 1);
       if (!(await activeStep.isVisible()) || !(await activeStep.evaluate(el => document.activeElement === el))) {
         throw Error('Invoice step is missing or did not receive keyboard focus: ' + choice);
+      }
+      if (index === 2 && !(await activeStep.innerText()).includes(width === 390 ? 'review the dispute' : 'reconcile the payment')) {
+        throw Error('Invoice draft did not reflect the observation');
       }
     }
     await panel.getByRole('heading', { name: 'Sample follow-up approved' }).waitFor();

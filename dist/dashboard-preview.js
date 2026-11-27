@@ -238,6 +238,25 @@ document.querySelectorAll('[data-invoice-demo]').forEach(panel => {
     status.textContent = steps[index].querySelector('h4').textContent;
     steps[index].focus();
   }
-  steps.forEach((step, index) => step.querySelector('[data-invoice-next]')?.addEventListener('click', () => showStep(index + 1)));
-  reset.addEventListener('click', () => showStep(0));
+  const observation = panel.querySelector('[data-invoice-observation]');
+  const responses = {
+    'Part paid': ['Ask for an update on the remaining balance.', 'Could you confirm when we can expect payment of the remaining balance on INV-DEMO-42?'],
+    Paid: ['Ask finance to reconcile the payment.', 'Please reconcile the payment recorded for INV-DEMO-42 against our ledger.'],
+    Disputed: ['Ask the case owner to review the dispute.', 'Please review the dispute on INV-DEMO-42 and confirm the next agreed action.']
+  };
+  steps.forEach((step, index) => {
+    step.querySelector('[data-invoice-next]')?.addEventListener('click', () => {
+      if (step.contains(observation)) {
+        const [suggestion, draft] = responses[observation.value];
+        panel.querySelector('[data-invoice-observed]').textContent = observation.value;
+        panel.querySelector('[data-invoice-suggestion]').textContent = suggestion;
+        panel.querySelector('[data-invoice-draft]').textContent = draft;
+      }
+      showStep(index + 1);
+    });
+  });
+  reset.addEventListener('click', () => {
+    observation.selectedIndex = 0;
+    showStep(0);
+  });
 });
